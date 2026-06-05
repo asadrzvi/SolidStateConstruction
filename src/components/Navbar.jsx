@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { Sun, Moon, Menu, X, Phone } from 'lucide-react'
+import logoLight from '../../public/logo.png'
+import logoDark from '../../public/logo_dark.png'
 import './Navbar.css'
 
 function Navbar() {
@@ -21,7 +23,7 @@ function Navbar() {
       <div className="container">
         <div className="nav-brand">
           <img 
-            src={isDark ? "/logo_dark.png" : "/logo.png"} 
+            src={isDark ? logoDark : logoLight} 
             alt="Solid State Construction Logo" 
             className="logo" 
           />

@@ -15,9 +15,9 @@ function Hero() {
           <h1>Solid State Construction</h1>
           <p className="hero-subtitle">Leander's Choice for Quality Remodeling, Foundation Repair & Emergency Services</p>
           <div className="hero-cta">
-            <a href="tel:207-482-9763" className="btn btn-primary">
+            <a href="tel:512-595-2332" className="btn btn-primary">
               <Phone size={20} />
-              Call Now: (207) 482-9763
+              Call Now: (512) 595-2332
             </a>
             <a href="#contact" className="btn btn-secondary">Get a Quote Online</a>
           </div>

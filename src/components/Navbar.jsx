@@ -32,11 +32,12 @@ function Navbar() {
         <div className="nav-right">
           <div className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
             <a href="#about" onClick={() => setIsMenuOpen(false)}>About</a>
+            <a href="#gallery" onClick={() => setIsMenuOpen(false)}>Gallery</a>
             <a href="#services" onClick={() => setIsMenuOpen(false)}>Services</a>
             <a href="#contact" onClick={() => setIsMenuOpen(false)}>Contact</a>
-            <a href="tel:207-482-9763" className="nav-phone">
+            <a href="tel:512-595-2332" className="nav-phone">
               <Phone size={18} />
-              (207) 482-9763
+              (512) 595-2332
             </a>
           </div>
           

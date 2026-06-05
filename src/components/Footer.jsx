@@ -15,7 +15,7 @@ function Footer() {
             <h4>Contact Us</h4>
             <ul>
               <li><MapPin size={18} /> 1101 Halsey Drive, Leander, TX 78641</li>
-              <li><Phone size={18} /> (207) 482-9763</li>
+              <li><Phone size={18} /> (512) 595-2332</li>
               <li><Mail size={18} /> contact@solidstateconstruction.com</li>
             </ul>
           </div>

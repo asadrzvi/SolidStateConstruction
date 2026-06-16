@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, CheckCircle2, FileText, Trash2, Phone, Mail, User, Maximize, Ruler, Droplets, HardHat, Wrench } from 'lucide-react';
+import { X, CheckCircle2, FileText, Trash2, Phone, Mail, User, Maximize, Ruler, Droplets, HardHat, Wrench, Info } from 'lucide-react';
 
 export default function QuoteModal({ isOpen, onClose, initialService }) {
   const [step, setStep] = useState(1);
@@ -31,10 +31,26 @@ export default function QuoteModal({ isOpen, onClose, initialService }) {
   const profitFactor = 0.15; // 15%
 
   const pricingData = {
-    'water-remediation': { label: 'Water Remediation', icon: Droplets },
-    'concrete': { label: 'Concrete & Foundation', icon: HardHat },
-    'roofing': { label: 'Roofing Services', icon: Ruler },
-    'plumbing': { label: 'Plumbing Services', icon: Wrench },
+    'water-remediation': { 
+      label: 'Water Remediation', 
+      icon: Droplets,
+      description: 'We calculate your quote by measuring the affected square footage, the water’s contamination level, and how deeply materials absorbed moisture.'
+    },
+    'concrete': { 
+      label: 'Concrete & Foundation', 
+      icon: HardHat,
+      description: 'Calculation: Multiply Length times Width times Thickness (in feet). Divide that total number by 27. Add 10% extra for waste.'
+    },
+    'roofing': { 
+      label: 'Roofing Services', 
+      icon: Ruler,
+      description: 'Calculation: Multiply house length by house width. Divide that number by 100. Multiply by 1.25 (this safely adds extra for the slant and waste).'
+    },
+    'plumbing': { 
+      label: 'Plumbing Services', 
+      icon: Wrench,
+      description: 'We calculate based on Materials (pipes, valves, fixtures), Labor (hourly rate), Overhead (gas, insurance, tools), and Profit.'
+    },
   };
 
   // Sync initial service
@@ -63,17 +79,14 @@ export default function QuoteModal({ isOpen, onClose, initialService }) {
   const computeEstimate = () => {
     switch (projectType) {
       case 'water-remediation':
-        // Base $5/sqft * contamination * moisture
         return Math.floor(sqFt * 5 * contamination * moistureDepth);
       
       case 'concrete':
-        // (L * W * T) / 27 * 1.1 (waste) * $150 (avg cost per yard installed)
         const yards = (length * width * thickness) / 27;
         const withWaste = yards * 1.1;
         return Math.floor(withWaste * 150);
 
       case 'roofing':
-        // (L * W / 100) * 1.25 (slant/waste) * $450 (avg cost per square)
         const squares = (length * width) / 100;
         const totalSquares = squares * 1.25;
         return Math.floor(totalSquares * 450);
@@ -163,7 +176,6 @@ export default function QuoteModal({ isOpen, onClose, initialService }) {
                   ))
                 )}
               </div>
-              <p className="text-[10px] text-slate-400 mt-6 font-medium uppercase tracking-tighter">Real-time local labor rates</p>
             </div>
 
             {/* Main Content */}
@@ -189,7 +201,7 @@ export default function QuoteModal({ isOpen, onClose, initialService }) {
               ) : (
                 <>
                   {step === 1 && (
-                    <div className="space-y-10">
+                    <div className="space-y-8">
                       {/* Service Selection */}
                       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                         {Object.keys(pricingData).map((key) => {
@@ -211,6 +223,14 @@ export default function QuoteModal({ isOpen, onClose, initialService }) {
                         })}
                       </div>
 
+                      {/* Calculation Method Description */}
+                      <div className="bg-[#004aad]/5 border border-[#004aad]/10 p-5 rounded-2xl flex items-start gap-4">
+                        <Info className="text-[#004aad] shrink-0 mt-0.5" size={20} />
+                        <p className="text-sm text-slate-600 font-medium leading-relaxed">
+                          {pricingData[projectType].description}
+                        </p>
+                      </div>
+
                       {/* Dynamic Inputs */}
                       <div className="bg-slate-50 rounded-[2.5rem] p-8 md:p-10 border border-slate-100">
                         {projectType === 'water-remediation' && (
@@ -220,7 +240,7 @@ export default function QuoteModal({ isOpen, onClose, initialService }) {
                                 <span>Affected Area</span>
                                 <span>{sqFt} Sq Ft</span>
                               </div>
-                              <input type="range" min="50" max="5000" step="50" value={sqFt} onChange={(e) => setSqFt(Number(e.target.value))} className="w-full" />
+                              <input type="range" min="1" max="5000" step="1" value={sqFt} onChange={(e) => setSqFt(Number(e.target.value))} className="w-full" />
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                               <div className="space-y-3">
@@ -248,11 +268,11 @@ export default function QuoteModal({ isOpen, onClose, initialService }) {
                             <div className="space-y-8">
                               <div className="space-y-4">
                                 <div className="flex justify-between font-bold text-xs uppercase text-[#004aad]"><span>Length</span><span>{length} Ft</span></div>
-                                <input type="range" min="1" max="200" value={length} onChange={(e) => setLength(Number(e.target.value))} className="w-full" />
+                                <input type="range" min="1" max="5000" step="1" value={length} onChange={(e) => setLength(Number(e.target.value))} className="w-full" />
                               </div>
                               <div className="space-y-4">
                                 <div className="flex justify-between font-bold text-xs uppercase text-[#004aad]"><span>Width</span><span>{width} Ft</span></div>
-                                <input type="range" min="1" max="200" value={width} onChange={(e) => setWidth(Number(e.target.value))} className="w-full" />
+                                <input type="range" min="1" max="5000" step="1" value={width} onChange={(e) => setWidth(Number(e.target.value))} className="w-full" />
                               </div>
                             </div>
                             <div className="flex flex-col justify-center bg-white border border-slate-100 rounded-3xl p-6 text-center">
@@ -264,10 +284,10 @@ export default function QuoteModal({ isOpen, onClose, initialService }) {
                               </div>
                               {projectType === 'concrete' && (
                                 <div className="mt-4 pt-4 border-t border-slate-50 space-y-3">
-                                  <label className="text-[10px] font-black uppercase text-slate-400">Thickness</label>
+                                  <label className="text-[10px] font-black uppercase text-slate-400">Thickness (Inches)</label>
                                   <div className="flex gap-2">
                                     {[0.33, 0.5, 0.66].map((val) => (
-                                      <button key={val} onClick={() => setThickness(val)} className={`flex-1 py-2 text-[10px] font-bold rounded-lg border-2 ${thickness === val ? 'bg-[#004aad] border-[#004aad] text-white' : 'bg-white border-slate-200'}`}>{val * 12}"</button>
+                                      <button key={val} onClick={() => setThickness(val)} className={`flex-1 py-2 text-[10px] font-bold rounded-lg border-2 ${thickness === val ? 'bg-[#004aad] border-[#004aad] text-white' : 'bg-white border-slate-200'}`}>{Math.round(val * 12)}"</button>
                                     ))}
                                   </div>
                                 </div>
@@ -285,13 +305,13 @@ export default function QuoteModal({ isOpen, onClose, initialService }) {
                               </div>
                               <div className="space-y-4">
                                 <div className="flex justify-between font-bold text-xs uppercase text-[#004aad]"><span>Labor Hours</span><span>{laborHours} HRS</span></div>
-                                <input type="range" min="1" max="40" value={laborHours} onChange={(e) => setLaborHours(Number(e.target.value))} className="w-full" />
+                                <input type="range" min="1" max="5000" step="1" value={laborHours} onChange={(e) => setLaborHours(Number(e.target.value))} className="w-full" />
                               </div>
                             </div>
                             <div className="bg-white border border-slate-100 rounded-3xl p-6 space-y-3">
                               <div className="flex justify-between text-xs font-bold text-slate-500"><span>Overhead (20%)</span><span>+${((materialCost + laborHours * laborRate) * overheadFactor).toLocaleString()}</span></div>
                               <div className="flex justify-between text-xs font-bold text-slate-500"><span>Profit (15%)</span><span>+${((materialCost + laborHours * laborRate) * 1.2 * profitFactor).toLocaleString()}</span></div>
-                              <div className="pt-3 border-t border-slate-50 text-[10px] text-slate-400 italic">Includes gas, tools, and insurance.</div>
+                              <div className="pt-3 border-t border-slate-50 text-[10px] text-slate-400 italic">Includes gas, insurance, and tools.</div>
                             </div>
                           </div>
                         )}

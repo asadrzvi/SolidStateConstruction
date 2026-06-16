@@ -146,13 +146,13 @@ export default function QuoteModal({ isOpen, onClose, initialService }) {
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
-            className="relative w-full max-w-5xl bg-white text-slate-900 rounded-[2rem] shadow-2xl overflow-hidden flex flex-col md:flex-row max-h-[90vh]"
+            className="relative w-full max-w-7xl bg-white text-slate-900 rounded-[3rem] shadow-2xl overflow-hidden flex flex-col md:flex-row max-h-[95vh]"
           >
             {/* Sidebar / History */}
-            <div className="hidden md:flex w-72 bg-slate-50 border-r border-slate-100 p-8 flex-col">
-              <div className="flex items-center gap-3 text-[#004aad] mb-8">
-                <FileText size={24} />
-                <h3 className="font-bold uppercase tracking-widest text-xs">Recent Quotes</h3>
+            <div className="hidden md:flex w-96 bg-slate-50 border-r border-slate-100 p-10 flex-col">
+              <div className="flex items-center gap-3 text-[#004aad] mb-10">
+                <FileText size={28} />
+                <h3 className="font-bold uppercase tracking-widest text-sm">Quote History</h3>
               </div>
               
               <div className="flex-1 overflow-y-auto space-y-4 pr-2 custom-scrollbar">
@@ -160,17 +160,17 @@ export default function QuoteModal({ isOpen, onClose, initialService }) {
                   <p className="text-slate-400 text-xs italic">No history yet</p>
                 ) : (
                   quoteHistory.map((q) => (
-                    <div key={q.id} className="bg-white border border-slate-200 p-4 rounded-2xl group relative shadow-sm">
+                    <div key={q.id} className="bg-white border border-slate-200 p-5 rounded-3xl group relative shadow-sm hover:border-[#004aad]/20 transition-all">
                       <div className="flex justify-between items-start">
                         <span className="text-[10px] font-bold text-[#004aad]">{q.id}</span>
                         <button onClick={(e) => handleDeleteHistoryItem(q.id, e)} className="text-slate-300 hover:text-[#dc3545]">
-                          <Trash2 size={14} />
+                          <Trash2 size={16} />
                         </button>
                       </div>
-                      <div className="font-bold text-sm mt-1">{q.clientName}</div>
-                      <div className="flex justify-between items-end mt-2">
+                      <div className="font-bold text-base mt-2">{q.clientName}</div>
+                      <div className="flex justify-between items-end mt-3">
                         <span className="text-[10px] text-slate-400">{q.date}</span>
-                        <span className="text-[#dc3545] font-black">${q.estimatedCost.toLocaleString()}</span>
+                        <span className="text-[#dc3545] font-black text-lg">${q.estimatedCost.toLocaleString()}</span>
                       </div>
                     </div>
                   ))
@@ -179,83 +179,85 @@ export default function QuoteModal({ isOpen, onClose, initialService }) {
             </div>
 
             {/* Main Content */}
-            <div className="flex-1 p-8 md:p-12 overflow-y-auto">
-              <div className="flex justify-between items-start mb-10">
+            <div className="flex-1 p-10 md:p-16 overflow-y-auto">
+              <div className="flex justify-between items-start mb-14">
                 <div>
-                  <h2 className="text-4xl font-black text-[#004aad] uppercase tracking-tighter leading-none">Instant Quote</h2>
-                  <p className="text-slate-500 font-medium mt-2">Professional Grade Estimation Tool</p>
+                  <h2 className="text-6xl font-black text-[#004aad] uppercase tracking-tighter leading-none">Instant Quote</h2>
+                  <p className="text-slate-500 text-lg font-medium mt-4">Professional Grade Estimation Tool</p>
                 </div>
-                <button onClick={onClose} className="p-3 hover:bg-slate-100 rounded-full transition-colors text-slate-400 hover:text-[#004aad]">
-                  <X size={28} />
+                <button onClick={onClose} className="p-4 hover:bg-slate-100 rounded-full transition-colors text-slate-400 hover:text-[#004aad]">
+                  <X size={36} />
                 </button>
               </div>
 
               {savedSuccess ? (
-                <div className="py-20 text-center flex flex-col items-center">
-                  <div className="h-24 w-24 bg-[#004aad]/10 text-[#004aad] rounded-full flex items-center justify-center mb-6">
-                    <CheckCircle2 size={48} />
+                <div className="py-24 text-center flex flex-col items-center">
+                  <div className="h-28 w-28 bg-[#004aad]/10 text-[#004aad] rounded-full flex items-center justify-center mb-8">
+                    <CheckCircle2 size={56} />
                   </div>
-                  <h3 className="text-3xl font-black uppercase text-[#004aad]">Details Saved!</h3>
-                  <p className="text-slate-500 mt-2">We will contact you within 24 hours.</p>
+                  <h3 className="text-4xl font-black uppercase text-[#004aad]">Details Saved!</h3>
+                  <p className="text-slate-500 text-lg mt-4">We will contact you within 24 hours.</p>
                 </div>
               ) : (
                 <>
                   {step === 1 && (
-                    <div className="space-y-8">
+                    <div className="space-y-12">
                       {/* Service Selection */}
-                      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                      <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
                         {Object.keys(pricingData).map((key) => {
                           const Icon = pricingData[key].icon;
                           return (
                             <button
                               key={key}
                               onClick={() => setProjectType(key)}
-                              className={`p-4 rounded-2xl border-2 flex flex-col items-center gap-3 transition-all ${
+                              className={`p-8 rounded-[2rem] border-2 flex flex-col items-center gap-4 transition-all ${
                                 projectType === key 
-                                  ? 'bg-[#004aad] border-[#004aad] text-white shadow-xl shadow-blue-200 -translate-y-1' 
+                                  ? 'bg-[#004aad] border-[#004aad] text-white shadow-2xl shadow-blue-200 -translate-y-2' 
                                   : 'bg-white border-slate-100 text-slate-400 hover:border-slate-200'
                               }`}
                             >
-                              <Icon size={24} />
-                              <span className="text-[10px] font-black uppercase tracking-tight">{pricingData[key].label}</span>
+                              <Icon size={32} />
+                              <span className="text-xs font-black uppercase tracking-widest text-center">{pricingData[key].label}</span>
                             </button>
                           );
                         })}
                       </div>
 
                       {/* Calculation Method Description */}
-                      <div className="bg-[#004aad]/5 border border-[#004aad]/10 p-5 rounded-2xl flex items-start gap-4">
-                        <Info className="text-[#004aad] shrink-0 mt-0.5" size={20} />
-                        <p className="text-sm text-slate-600 font-medium leading-relaxed">
+                      <div className="bg-[#004aad]/5 border border-[#004aad]/10 p-8 rounded-[2rem] flex items-start gap-6">
+                        <div className="bg-[#004aad] text-white p-3 rounded-2xl shadow-lg shadow-blue-100">
+                          <Info size={28} />
+                        </div>
+                        <p className="text-xl text-slate-700 font-bold leading-relaxed">
                           {pricingData[projectType].description}
                         </p>
                       </div>
 
                       {/* Dynamic Inputs */}
-                      <div className="bg-slate-50 rounded-[2.5rem] p-8 md:p-10 border border-slate-100">
+                      <div className="bg-slate-50 rounded-[3rem] p-10 md:p-14 border border-slate-100 shadow-inner">
                         {projectType === 'water-remediation' && (
-                          <div className="space-y-8">
-                            <div className="space-y-4">
-                              <div className="flex justify-between font-bold text-xs uppercase text-[#004aad]">
+                          <div className="space-y-12">
+                            <div className="space-y-6">
+                              <div className="flex justify-between font-bold text-sm uppercase text-[#004aad]">
                                 <span>Affected Area</span>
-                                <span>{sqFt} Sq Ft</span>
+                                <span className="text-3xl">{sqFt} Sq Ft</span>
                               </div>
-                              <input type="range" min="1" max="5000" step="1" value={sqFt} onChange={(e) => setSqFt(Number(e.target.value))} className="w-full" />
+                              <input type="range" min="1" max="5000" step="1" value={sqFt} onChange={(e) => setSqFt(Number(e.target.value))} className="w-full h-4" />
                             </div>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                              <div className="space-y-3">
-                                <label className="text-[10px] font-black uppercase text-slate-400">Contamination Level</label>
-                                <div className="flex gap-2">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                              <div className="space-y-4">
+                                <label className="text-xs font-black uppercase text-slate-400">Contamination Level</label>
+                                <div className="flex gap-4">
                                   {['Clean', 'Grey', 'Black'].map((label, i) => (
-                                    <button key={label} onClick={() => setContamination(i + 1)} className={`flex-1 py-2 text-[10px] font-bold uppercase rounded-lg border-2 transition-all ${contamination === i + 1 ? 'bg-[#004aad] border-[#004aad] text-white' : 'bg-white border-slate-200 text-slate-500'}`}>{label}</button>
+                                    <button key={label} onClick={() => setContamination(i + 1)} className={`flex-1 py-5 text-sm font-black uppercase rounded-2xl border-2 transition-all ${contamination === i + 1 ? 'bg-[#004aad] border-[#004aad] text-white shadow-lg' : 'bg-white border-slate-200 text-slate-500'}`}>{label}</button>
                                   ))}
                                 </div>
                               </div>
-                              <div className="space-y-3">
-                                <label className="text-[10px] font-black uppercase text-slate-400">Moisture Depth</label>
-                                <div className="flex gap-2">
+                              <div className="space-y-4">
+                                <label className="text-xs font-black uppercase text-slate-400">Moisture Depth</label>
+                                <div className="flex gap-4">
                                   {['Surface', 'Deep'].map((label, i) => (
-                                    <button key={label} onClick={() => setMoistureDepth(i + 1)} className={`flex-1 py-2 text-[10px] font-bold uppercase rounded-lg border-2 transition-all ${moistureDepth === i + 1 ? 'bg-[#004aad] border-[#004aad] text-white' : 'bg-white border-slate-200 text-slate-500'}`}>{label}</button>
+                                    <button key={label} onClick={() => setMoistureDepth(i + 1)} className={`flex-1 py-5 text-sm font-black uppercase rounded-2xl border-2 transition-all ${moistureDepth === i + 1 ? 'bg-[#004aad] border-[#004aad] text-white shadow-lg' : 'bg-white border-slate-200 text-slate-500'}`}>{label}</button>
                                   ))}
                                 </div>
                               </div>
@@ -264,30 +266,30 @@ export default function QuoteModal({ isOpen, onClose, initialService }) {
                         )}
 
                         {(projectType === 'concrete' || projectType === 'roofing') && (
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                            <div className="space-y-8">
-                              <div className="space-y-4">
-                                <div className="flex justify-between font-bold text-xs uppercase text-[#004aad]"><span>Length</span><span>{length} Ft</span></div>
-                                <input type="range" min="1" max="5000" step="1" value={length} onChange={(e) => setLength(Number(e.target.value))} className="w-full" />
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+                            <div className="space-y-12">
+                              <div className="space-y-6">
+                                <div className="flex justify-between font-bold text-sm uppercase text-[#004aad]"><span>Length</span><span className="text-3xl">{length} Ft</span></div>
+                                <input type="range" min="1" max="5000" step="1" value={length} onChange={(e) => setLength(Number(e.target.value))} className="w-full h-4" />
                               </div>
-                              <div className="space-y-4">
-                                <div className="flex justify-between font-bold text-xs uppercase text-[#004aad]"><span>Width</span><span>{width} Ft</span></div>
-                                <input type="range" min="1" max="5000" step="1" value={width} onChange={(e) => setWidth(Number(e.target.value))} className="w-full" />
+                              <div className="space-y-6">
+                                <div className="flex justify-between font-bold text-sm uppercase text-[#004aad]"><span>Width</span><span className="text-3xl">{width} Ft</span></div>
+                                <input type="range" min="1" max="5000" step="1" value={width} onChange={(e) => setWidth(Number(e.target.value))} className="w-full h-4" />
                               </div>
                             </div>
-                            <div className="flex flex-col justify-center bg-white border border-slate-100 rounded-3xl p-6 text-center">
-                              <div className="text-slate-400 text-[10px] font-black uppercase mb-1">{projectType === 'concrete' ? 'Total Volume' : 'Total Squares'}</div>
-                              <div className="text-3xl font-black text-[#004aad]">
+                            <div className="flex flex-col justify-center bg-white border border-slate-100 rounded-[3rem] p-12 text-center shadow-md">
+                              <div className="text-slate-400 text-xs font-black uppercase mb-3">{projectType === 'concrete' ? 'Total Volume' : 'Total Squares'}</div>
+                              <div className="text-6xl font-black text-[#004aad] tracking-tighter">
                                 {projectType === 'concrete' 
                                   ? `${((length * width * thickness) / 27).toFixed(1)} CU YD` 
                                   : `${((length * width) / 100).toFixed(1)} SQ`}
                               </div>
                               {projectType === 'concrete' && (
-                                <div className="mt-4 pt-4 border-t border-slate-50 space-y-3">
-                                  <label className="text-[10px] font-black uppercase text-slate-400">Thickness (Inches)</label>
-                                  <div className="flex gap-2">
+                                <div className="mt-10 pt-10 border-t border-slate-50 space-y-5">
+                                  <label className="text-xs font-black uppercase text-slate-400">Thickness (Inches)</label>
+                                  <div className="flex gap-4">
                                     {[0.33, 0.5, 0.66].map((val) => (
-                                      <button key={val} onClick={() => setThickness(val)} className={`flex-1 py-2 text-[10px] font-bold rounded-lg border-2 ${thickness === val ? 'bg-[#004aad] border-[#004aad] text-white' : 'bg-white border-slate-200'}`}>{Math.round(val * 12)}"</button>
+                                      <button key={val} onClick={() => setThickness(val)} className={`flex-1 py-5 text-sm font-black rounded-2xl border-2 ${thickness === val ? 'bg-[#004aad] border-[#004aad] text-white shadow-lg' : 'bg-white border-slate-200'}`}>{Math.round(val * 12)}"</button>
                                     ))}
                                   </div>
                                 </div>
@@ -297,32 +299,32 @@ export default function QuoteModal({ isOpen, onClose, initialService }) {
                         )}
 
                         {projectType === 'plumbing' && (
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div className="space-y-6">
-                              <div className="space-y-3">
-                                <label className="text-[10px] font-black uppercase text-slate-400">Materials Cost ($)</label>
-                                <input type="number" value={materialCost} onChange={(e) => setMaterialCost(Number(e.target.value))} className="w-full p-4 rounded-xl border-2 border-slate-200 focus:border-[#004aad] outline-none font-bold" />
-                              </div>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                            <div className="space-y-10">
                               <div className="space-y-4">
-                                <div className="flex justify-between font-bold text-xs uppercase text-[#004aad]"><span>Labor Hours</span><span>{laborHours} HRS</span></div>
-                                <input type="range" min="1" max="5000" step="1" value={laborHours} onChange={(e) => setLaborHours(Number(e.target.value))} className="w-full" />
+                                <label className="text-xs font-black uppercase text-slate-400 ml-2">Materials Cost ($)</label>
+                                <input type="number" value={materialCost} onChange={(e) => setMaterialCost(Number(e.target.value))} className="w-full p-8 rounded-[2rem] border-2 border-slate-200 focus:border-[#004aad] outline-none font-black text-3xl shadow-sm" />
+                              </div>
+                              <div className="space-y-6">
+                                <div className="flex justify-between font-bold text-sm uppercase text-[#004aad]"><span>Labor Hours</span><span className="text-3xl">{laborHours} HRS</span></div>
+                                <input type="range" min="1" max="5000" step="1" value={laborHours} onChange={(e) => setLaborHours(Number(e.target.value))} className="w-full h-4" />
                               </div>
                             </div>
-                            <div className="bg-white border border-slate-100 rounded-3xl p-6 space-y-3">
-                              <div className="flex justify-between text-xs font-bold text-slate-500"><span>Overhead (20%)</span><span>+${((materialCost + laborHours * laborRate) * overheadFactor).toLocaleString()}</span></div>
-                              <div className="flex justify-between text-xs font-bold text-slate-500"><span>Profit (15%)</span><span>+${((materialCost + laborHours * laborRate) * 1.2 * profitFactor).toLocaleString()}</span></div>
-                              <div className="pt-3 border-t border-slate-50 text-[10px] text-slate-400 italic">Includes gas, insurance, and tools.</div>
+                            <div className="bg-white border border-slate-100 rounded-[3rem] p-12 space-y-8 shadow-md">
+                              <div className="flex justify-between text-xl font-bold text-slate-500"><span>Overhead (20%)</span><span className="text-[#004aad]">+${((materialCost + laborHours * laborRate) * overheadFactor).toLocaleString()}</span></div>
+                              <div className="flex justify-between text-xl font-bold text-slate-500"><span>Profit (15%)</span><span className="text-[#004aad]">+${((materialCost + laborHours * laborRate) * 1.2 * profitFactor).toLocaleString()}</span></div>
+                              <div className="pt-8 border-t border-slate-50 text-sm text-slate-400 italic">Includes gas, insurance, and professional-grade tools.</div>
                             </div>
                           </div>
                         )}
                       </div>
 
-                      <div className="flex flex-col md:flex-row justify-between items-center gap-6 pt-6 border-t border-slate-100">
-                        <div className="text-center md:text-left">
-                          <span className="text-[10px] text-slate-400 uppercase font-black tracking-widest block mb-1">Estimated Project Budget</span>
-                          <span className="text-5xl font-black text-[#dc3545]">${activeEstimate.toLocaleString()}*</span>
+                      <div className="flex flex-col lg:flex-row justify-between items-center gap-12 pt-12 border-t border-slate-100">
+                        <div className="text-center lg:text-left">
+                          <span className="text-sm text-slate-400 uppercase font-black tracking-[0.3em] block mb-3">Estimated Project Budget</span>
+                          <span className="text-8xl font-black text-[#dc3545] tracking-tighter">${activeEstimate.toLocaleString()}*</span>
                         </div>
-                        <button onClick={() => setStep(2)} className="w-full md:w-auto bg-[#004aad] hover:bg-[#003882] text-white px-12 py-5 rounded-2xl font-black uppercase tracking-widest text-sm transition-all shadow-xl shadow-blue-200">
+                        <button onClick={() => setStep(2)} className="w-full lg:w-auto bg-[#004aad] hover:bg-[#003882] text-white px-20 py-8 rounded-[2.5rem] font-black uppercase tracking-widest text-xl transition-all shadow-2xl shadow-blue-100 scale-105 hover:scale-110">
                           Next: Client Details &rarr;
                         </button>
                       </div>
@@ -330,59 +332,59 @@ export default function QuoteModal({ isOpen, onClose, initialService }) {
                   )}
 
                   {step === 2 && (
-                    <form onSubmit={handleSaveQuote} className="space-y-8">
-                      <div className="grid grid-cols-1 gap-6">
-                        <div className="space-y-2">
-                          <label className="text-[10px] font-black uppercase text-slate-400 ml-1">Full Name</label>
+                    <form onSubmit={handleSaveQuote} className="space-y-12">
+                      <div className="grid grid-cols-1 gap-10">
+                        <div className="space-y-4">
+                          <label className="text-xs font-black uppercase text-slate-400 ml-4">Full Name</label>
                           <div className="relative">
-                            <User className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300" />
-                            <input type="text" required placeholder="John Doe" value={clientName} onChange={(e) => setClientName(e.target.value)} className="w-full p-5 pl-12 rounded-2xl border-2 border-slate-100 focus:border-[#004aad] outline-none font-bold" />
+                            <User className="absolute left-8 top-1/2 -translate-y-1/2 text-slate-300" size={32} />
+                            <input type="text" required placeholder="John Doe" value={clientName} onChange={(e) => setClientName(e.target.value)} className="w-full p-8 pl-20 rounded-[2.5rem] border-2 border-slate-100 focus:border-[#004aad] outline-none font-bold text-xl shadow-sm" />
                           </div>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          <div className="space-y-2">
-                            <label className="text-[10px] font-black uppercase text-slate-400 ml-1">Phone Number</label>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                          <div className="space-y-4">
+                            <label className="text-xs font-black uppercase text-slate-400 ml-4">Phone Number</label>
                             <div className="relative">
-                              <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300" />
-                              <input type="tel" required placeholder="(512) 000-0000" value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full p-5 pl-12 rounded-2xl border-2 border-slate-100 focus:border-[#004aad] outline-none font-bold" />
+                              <Phone className="absolute left-8 top-1/2 -translate-y-1/2 text-slate-300" size={32} />
+                              <input type="tel" required placeholder="(512) 000-0000" value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full p-8 pl-20 rounded-[2.5rem] border-2 border-slate-100 focus:border-[#004aad] outline-none font-bold text-xl shadow-sm" />
                             </div>
                           </div>
-                          <div className="space-y-2">
-                            <label className="text-[10px] font-black uppercase text-slate-400 ml-1">Email (Optional)</label>
+                          <div className="space-y-4">
+                            <label className="text-xs font-black uppercase text-slate-400 ml-4">Email Address</label>
                             <div className="relative">
-                              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300" />
-                              <input type="email" placeholder="john@example.com" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full p-5 pl-12 rounded-2xl border-2 border-slate-100 focus:border-[#004aad] outline-none font-bold" />
+                              <Mail className="absolute left-8 top-1/2 -translate-y-1/2 text-slate-300" size={32} />
+                              <input type="email" placeholder="john@example.com" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full p-8 pl-20 rounded-[2.5rem] border-2 border-slate-100 focus:border-[#004aad] outline-none font-bold text-xl shadow-sm" />
                             </div>
                           </div>
                         </div>
-                        <div className="space-y-2">
-                          <label className="text-[10px] font-black uppercase text-slate-400 ml-1">Additional Project Notes</label>
-                          <textarea rows={4} placeholder="Describe any specific requirements..." value={notes} onChange={(e) => setNotes(e.target.value)} className="w-full p-5 rounded-2xl border-2 border-slate-100 focus:border-[#004aad] outline-none font-bold resize-none" />
+                        <div className="space-y-4">
+                          <label className="text-xs font-black uppercase text-slate-400 ml-4">Project Details & Requirements</label>
+                          <textarea rows={6} placeholder="Describe any specific requirements or property details..." value={notes} onChange={(e) => setNotes(e.target.value)} className="w-full p-10 rounded-[3rem] border-2 border-slate-100 focus:border-[#004aad] outline-none font-bold text-xl shadow-sm resize-none" />
                         </div>
                       </div>
 
-                      <div className="flex gap-4 pt-4">
-                        <button type="button" onClick={() => setStep(1)} className="flex-1 bg-slate-100 text-slate-500 py-5 rounded-2xl font-black uppercase tracking-widest text-sm hover:bg-slate-200 transition-all">Back</button>
-                        <button type="submit" className="flex-[2] bg-[#004aad] text-white py-5 rounded-2xl font-black uppercase tracking-widest text-sm shadow-xl shadow-blue-100 hover:bg-[#003882] transition-all">Generate & Save Quote</button>
+                      <div className="flex gap-8 pt-8">
+                        <button type="button" onClick={() => setStep(1)} className="flex-1 bg-slate-100 text-slate-500 py-8 rounded-[2.5rem] font-black uppercase tracking-widest text-sm hover:bg-slate-200 transition-all">Back to calculation</button>
+                        <button type="submit" className="flex-[2] bg-[#004aad] text-white py-8 rounded-[2.5rem] font-black uppercase tracking-widest text-xl shadow-2xl shadow-blue-100 hover:bg-[#003882] transition-all">Submit Quote Request</button>
                       </div>
                     </form>
                   )}
 
                   {step === 3 && (
-                    <div className="space-y-10">
-                      <div className="bg-[#004aad]/5 border-2 border-[#004aad]/10 p-10 rounded-[3rem] text-center space-y-6">
-                        <div className="text-[10px] font-black uppercase tracking-[0.2em] text-[#004aad]">Official Estimate Summary</div>
-                        <div className="text-6xl font-black text-[#dc3545]">${activeEstimate.toLocaleString()}</div>
-                        <div className="flex justify-center gap-8 text-xs font-bold text-slate-500 uppercase">
+                    <div className="space-y-16">
+                      <div className="bg-[#004aad]/5 border-2 border-[#004aad]/10 p-20 rounded-[5rem] text-center space-y-10 shadow-inner">
+                        <div className="text-sm font-black uppercase tracking-[0.4em] text-[#004aad]">Official Estimate Summary</div>
+                        <div className="text-[10rem] font-black text-[#dc3545] tracking-tighter leading-none">${activeEstimate.toLocaleString()}</div>
+                        <div className="flex justify-center gap-12 text-lg font-black text-slate-500 uppercase">
                           <span>Service: {pricingData[projectType].label}</span>
-                          <span>|</span>
+                          <span className="text-slate-200">|</span>
                           <span>Ref: {Math.floor(10000 + Math.random() * 90000)}</span>
                         </div>
-                        <p className="max-w-lg mx-auto text-sm text-slate-500 font-medium leading-relaxed italic pt-4">
-                          This budget estimate is for planning purposes. A final binding quote will be issued after a structural inspection by our site engineers.
+                        <p className="max-w-3xl mx-auto text-xl text-slate-600 font-bold leading-relaxed italic pt-10">
+                          This estimate is based on current material and labor rates. A final binding quote will be issued following a comprehensive structural evaluation by our specialized engineering team.
                         </p>
                       </div>
-                      <button onClick={onClose} className="w-full bg-[#004aad] text-white py-6 rounded-3xl font-black uppercase tracking-[0.2em] text-sm shadow-2xl hover:bg-[#003882] transition-all">Complete Quote Request</button>
+                      <button onClick={onClose} className="w-full bg-[#004aad] text-white py-10 rounded-[3rem] font-black uppercase tracking-[0.3em] text-xl shadow-2xl hover:bg-[#003882] transition-all">Return to Website</button>
                     </div>
                   )}
                 </>

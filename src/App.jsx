@@ -7,20 +7,30 @@ import Testimonials from './components/Testimonials'
 import Services from './components/Services'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import QuoteModal from './components/QuoteModal'
 
 function App() {
   const [selectedService, setSelectedService] = useState('')
+  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false)
 
   return (
     <div className="app">
-      <Navbar />
-      <Hero />
+      <Navbar onOpenQuote={() => setIsQuoteModalOpen(true)} />
+      <Hero onOpenQuote={() => setIsQuoteModalOpen(true)} />
       <About />
       <Gallery />
       <Testimonials />
-      <Services onServiceSelect={setSelectedService} />
+      <Services 
+        onServiceSelect={setSelectedService} 
+        onOpenQuote={() => setIsQuoteModalOpen(true)}
+      />
       <Contact initialService={selectedService} />
       <Footer />
+      
+      <QuoteModal 
+        isOpen={isQuoteModalOpen} 
+        onClose={() => setIsQuoteModalOpen(false)} 
+      />
     </div>
   )
 }

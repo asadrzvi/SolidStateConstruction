@@ -47,13 +47,10 @@ const services = [
   }
 ]
 
-function Services({ onServiceSelect }) {
+function Services({ onServiceSelect, onOpenQuote }) {
   const handleServiceClick = (serviceTitle) => {
+    onOpenQuote();
     onServiceSelect(serviceTitle);
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
   };
 
   return (

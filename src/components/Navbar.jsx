@@ -4,7 +4,7 @@ import logoLight from '../../public/logo.png'
 import logoDark from '../../public/logo_dark.png'
 import './Navbar.css'
 
-function Navbar() {
+function Navbar({ onOpenQuote }) {
   const [isDark, setIsDark] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -35,6 +35,15 @@ function Navbar() {
             <a href="#gallery" onClick={() => setIsMenuOpen(false)}>Gallery</a>
             <a href="#services" onClick={() => setIsMenuOpen(false)}>Services</a>
             <a href="#contact" onClick={() => setIsMenuOpen(false)}>Contact</a>
+            <button 
+              className="btn btn-primary quote-btn" 
+              onClick={() => {
+                onOpenQuote();
+                setIsMenuOpen(false);
+              }}
+            >
+              Get Free Quote
+            </button>
             <a href="tel:512-595-2332" className="nav-phone">
               <Phone size={18} />
               (512) 595-2332

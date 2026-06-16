@@ -2,7 +2,7 @@ import React from 'react'
 import { Phone, Droplets } from 'lucide-react'
 import './Hero.css'
 
-function Hero() {
+function Hero({ onOpenQuote }) {
   return (
     <section className="hero">
       <div className="hero-overlay"></div>
@@ -19,7 +19,9 @@ function Hero() {
               <Phone size={20} />
               Call Now: (512) 595-2332
             </a>
-            <a href="#contact" className="btn btn-secondary">Get a Quote Online</a>
+            <button onClick={onOpenQuote} className="btn btn-secondary">
+              Get a Quote Online
+            </button>
           </div>
         </div>
       </div>

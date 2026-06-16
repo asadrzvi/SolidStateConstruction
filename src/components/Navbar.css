@@ -61,6 +61,18 @@
   gap: 0.5rem;
 }
 
+.quote-btn {
+  padding: 0.6rem 1.2rem !important;
+  font-size: 0.9rem !important;
+  background-color: var(--accent) !important;
+  border: none !important;
+  color: white !important;
+}
+
+.quote-btn:hover {
+  background-color: #bd2130 !important;
+}
+
 .theme-toggle, .menu-toggle {
   background: none;
   border: none;

@@ -30,6 +30,7 @@ function App() {
       <QuoteModal 
         isOpen={isQuoteModalOpen} 
         onClose={() => setIsQuoteModalOpen(false)} 
+        initialService={selectedService}
       />
     </div>
   )

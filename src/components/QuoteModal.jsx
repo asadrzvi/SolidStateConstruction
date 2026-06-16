@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, CheckCircle2, FileText, Trash2, Phone, Mail, User, Maximize } from 'lucide-react';
 
-export default function QuoteModal({ isOpen, onClose }) {
+export default function QuoteModal({ isOpen, onClose, initialService }) {
   const [step, setStep] = useState(1);
   const [clientName, setClientName] = useState('');
   const [phone, setPhone] = useState('');
@@ -12,6 +12,37 @@ export default function QuoteModal({ isOpen, onClose }) {
   const [notes, setNotes] = useState('');
   const [quoteHistory, setQuoteHistory] = useState([]);
   const [savedSuccess, setSavedSuccess] = useState(false);
+
+  // PRICING FRAMEWORK
+  const pricingData = {
+    'water-remediation': { min: 2500, max: 250000, label: 'Water Remediation', baseSqFt: 500 },
+    'foundation-repair': { min: 5000, max: 500000, label: 'Foundation Repair', baseSqFt: 1000 },
+    'remodeling': { min: 10000, max: 750000, label: 'Home Remodeling', baseSqFt: 1500 },
+    'painting': { min: 1500, max: 50000, label: 'Painting & Drywall', baseSqFt: 500 },
+    'roofing': { min: 4000, max: 300000, label: 'Roofing Services', baseSqFt: 2000 },
+    'flooring': { min: 2000, max: 150000, label: 'Flooring & Tile', baseSqFt: 500 },
+    'plumbing': { min: 2000, max: 150000, label: 'Concrete Plumbing', baseSqFt: 500 }
+  };
+
+  // Sync initial service when modal opens
+  useEffect(() => {
+    if (isOpen && initialService) {
+      const serviceMap = {
+        'Water Remediation': 'water-remediation',
+        'Foundation Repair': 'foundation-repair',
+        'Full Home Remodeling': 'remodeling',
+        'Painting & Drywall': 'painting',
+        'Roofing Services': 'roofing',
+        'Flooring & Tile': 'flooring'
+      };
+      
+      const mapped = serviceMap[initialService];
+      if (mapped) {
+        setProjectType(mapped);
+      }
+      setStep(1); // Reset to step 1 when opening
+    }
+  }, [isOpen, initialService]);
 
   useEffect(() => {
     const stored = localStorage.getItem('solid_state_construction_quotes');
@@ -24,21 +55,10 @@ export default function QuoteModal({ isOpen, onClose }) {
     }
   }, []);
 
-  // PRICING FRAMEWORK
-  const pricingData = {
-    'water-remediation': { min: 2500, max: 250000, label: 'Water Remediation', baseSqFt: 500 },
-    'roofing': { min: 4000, max: 300000, label: 'Roofing Services', baseSqFt: 2000 },
-    'concrete': { min: 5000, max: 500000, label: 'Concrete & Foundation', baseSqFt: 1000 },
-    'plumbing': { min: 2000, max: 150000, label: 'Concrete Plumbing', baseSqFt: 500 }
-  };
-
   const computeEstimate = () => {
     const range = pricingData[projectType] || { min: 0, max: 0, baseSqFt: 1000 };
-    
-    // Scale pricing based on SqFt (Max is reached at 10,000 SqFt for this model)
     const scaleFactor = Math.min(sqFt / 10000, 1.0);
     const computed = range.min + (range.max - range.min) * scaleFactor;
-    
     return Math.floor(computed);
   };
 
@@ -86,12 +106,12 @@ export default function QuoteModal({ isOpen, onClose }) {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/90 backdrop-blur-sm p-4">
+        <div className="fixed inset-0 z-[10001] flex items-center justify-center bg-slate-950/90 backdrop-blur-sm p-4">
           <motion.div
             initial={{ scale: 0.95, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.95, opacity: 0, y: 20 }}
-            className="relative w-full max-w-2xl border border-slate-800 bg-slate-900 p-6 sm:p-10 shadow-2xl text-slate-100 rounded-3xl overflow-hidden"
+            className="relative w-full max-w-4xl border border-slate-800 bg-slate-900 p-6 sm:p-10 shadow-2xl text-slate-100 rounded-3xl overflow-hidden"
           >
             {/* Header */}
             <div className="flex justify-between items-center mb-8">
@@ -100,7 +120,7 @@ export default function QuoteModal({ isOpen, onClose }) {
                   Free Estimate
                 </h2>
                 <p className="text-emerald-500 font-mono text-[10px] uppercase tracking-widest font-bold mt-1">
-                  Drag to Adjust Square Footage
+                  Drag the slider to adjust Square Footage
                 </p>
               </div>
               <button onClick={onClose} className="p-2 hover:bg-slate-800 rounded-full transition-colors text-slate-500 hover:text-emerald-500">
@@ -123,12 +143,12 @@ export default function QuoteModal({ isOpen, onClose }) {
                     <div className="space-y-8">
                       <div>
                         <label className="text-slate-500 text-[10px] font-black uppercase tracking-widest block mb-4">1. Select Service</label>
-                        <div className="grid grid-cols-2 gap-3">
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                           {Object.keys(pricingData).map((key) => (
                             <button
                               key={key}
                               onClick={() => setProjectType(key)}
-                              className={`py-3.5 px-4 rounded-2xl border-2 text-[11px] font-black uppercase tracking-tight transition-all text-left ${
+                              className={`py-3 px-3 rounded-xl border-2 text-[10px] font-black uppercase tracking-tight transition-all text-center ${
                                 projectType === key 
                                   ? 'bg-emerald-600 border-emerald-500 text-white shadow-lg shadow-emerald-900/40 translate-y-[-2px]' 
                                   : 'bg-slate-800/50 border-slate-800 text-slate-500 hover:border-slate-700'
@@ -157,7 +177,7 @@ export default function QuoteModal({ isOpen, onClose }) {
                             step="50"
                             value={sqFt}
                             onChange={(e) => setSqFt(Number(e.target.value))}
-                            className="w-full h-3 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500"
+                            className="w-full cursor-pointer"
                           />
                           <div className="flex justify-between mt-2 font-mono text-[9px] text-slate-600 uppercase font-bold">
                             <span>0 FT</span>

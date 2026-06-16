@@ -146,7 +146,7 @@ export default function QuoteModal({ isOpen, onClose, initialService }) {
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
-            className="relative w-full max-w-7xl bg-white text-slate-900 rounded-[3rem] shadow-2xl overflow-hidden flex flex-col md:flex-row max-h-[95vh]"
+            className="relative w-full max-w-[98vw] h-[98vh] bg-white text-slate-900 rounded-[3.5rem] shadow-2xl overflow-hidden flex flex-col md:flex-row"
           >
             {/* Sidebar / History */}
             <div className="hidden md:flex w-96 bg-slate-50 border-r border-slate-100 p-10 flex-col">

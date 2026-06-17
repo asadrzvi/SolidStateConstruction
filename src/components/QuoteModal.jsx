@@ -141,12 +141,12 @@ export default function QuoteModal({ isOpen, onClose, initialService }) {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[10001] flex items-center justify-center bg-black/70 backdrop-blur-md p-2 md:p-4">
+        <div className="fixed inset-0 z-[10001] flex items-center justify-center bg-black/60 backdrop-blur-sm p-6 md:p-12">
           <motion.div
-            initial={{ scale: 0.95, opacity: 0, y: 20 }}
+            initial={{ scale: 0.9, opacity: 0, y: 30 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.95, opacity: 0, y: 20 }}
-            className="relative w-full max-w-5xl h-[85vh] max-h-[850px] bg-white text-slate-900 rounded-3xl border border-[#004aad]/10 shadow-2xl overflow-hidden flex flex-col md:flex-row"
+            exit={{ scale: 0.9, opacity: 0, y: 30 }}
+            className="relative w-[95%] max-w-4xl h-[80vh] max-h-[750px] bg-white text-slate-900 rounded-[2rem] border border-[#004aad]/10 shadow-2xl overflow-hidden flex flex-col md:flex-row"
           >
             {/* Sidebar / History */}
             <div className="hidden lg:flex w-52 bg-slate-50 border-r border-slate-100 p-6 flex-col overflow-hidden shrink-0">

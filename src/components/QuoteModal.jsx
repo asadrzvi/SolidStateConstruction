@@ -149,33 +149,34 @@ export default function QuoteModal({ isOpen, onClose, initialService }) {
             className="relative w-full max-w-[99vw] h-[99vh] max-h-[99vh] bg-white text-slate-900 rounded-[2.5rem] border-2 md:border-4 border-[#004aad]/10 shadow-2xl overflow-hidden flex flex-col md:flex-row"
           >
             {/* Sidebar / History */}
-            <div className="hidden lg:flex w-80 xl:w-96 bg-slate-50 border-r-2 border-slate-100 p-8 xl:p-12 flex-col overflow-hidden shrink-0">
-              <div className="flex items-center gap-4 text-[#004aad] mb-10 shrink-0">
-                <FileText size={28} />
-                <h3 className="font-bold uppercase tracking-widest text-base">Quote History</h3>
+            <div className="hidden lg:flex w-56 xl:w-60 bg-slate-50 border-r border-slate-100 p-4 flex-col overflow-hidden shrink-0">
+              <div className="flex items-center gap-2 text-[#004aad]/70 mb-6 shrink-0">
+                <FileText size={16} />
+                <h3 className="font-bold uppercase tracking-widest text-[10px]">Quote History</h3>
               </div>
               
-              <div className="flex-1 overflow-y-auto space-y-4 pr-2 custom-scrollbar">
+              <div className="flex-1 overflow-y-auto space-y-2 pr-1 custom-scrollbar">
                 {quoteHistory.length === 0 ? (
-                  <p className="text-slate-400 text-xs italic">No history yet</p>
+                  <p className="text-slate-400 text-[9px] italic text-center mt-10">No history yet</p>
                 ) : (
                   quoteHistory.map((q) => (
-                    <div key={q.id} className="bg-white border-2 border-slate-100 p-5 rounded-2xl group relative shadow-sm hover:border-[#004aad]/30 transition-all shrink-0">
-                      <div className="flex justify-between items-start">
-                        <span className="text-[10px] font-black text-[#004aad]">{q.id}</span>
-                        <button onClick={(e) => handleDeleteHistoryItem(q.id, e)} className="text-slate-300 hover:text-[#dc3545]">
-                          <Trash2 size={16} />
+                    <div key={q.id} className="bg-white border border-slate-100 p-3 rounded-lg group relative shadow-sm hover:border-[#004aad]/20 transition-all shrink-0">
+                      <div className="flex justify-between items-start mb-1">
+                        <span className="text-[8px] font-bold text-[#004aad]/50 uppercase tracking-tighter">{q.id}</span>
+                        <button onClick={(e) => handleDeleteHistoryItem(q.id, e)} className="text-slate-200 hover:text-[#dc3545] transition-colors">
+                          <Trash2 size={12} />
                         </button>
                       </div>
-                      <div className="font-black text-lg mt-2 leading-tight">{q.clientName}</div>
-                      <div className="flex justify-between items-end mt-3">
-                        <span className="text-[10px] text-slate-400 font-bold">{q.date}</span>
-                        <span className="text-[#dc3545] font-black text-xl">${q.estimatedCost.toLocaleString()}</span>
+                      <div className="font-bold text-xs text-slate-700 leading-tight truncate" title={q.clientName}>{q.clientName}</div>
+                      <div className="flex justify-between items-end mt-1.5">
+                        <span className="text-[8px] text-slate-400 font-medium">{q.date}</span>
+                        <span className="text-[#dc3545] font-black text-sm">${q.estimatedCost.toLocaleString()}</span>
                       </div>
                     </div>
                   ))
                 )}
               </div>
+              <p className="text-[8px] text-slate-400 mt-4 text-center">Local rates applied</p>
             </div>
 
             {/* Main Content */}

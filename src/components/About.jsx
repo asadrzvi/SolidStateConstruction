@@ -1,5 +1,4 @@
 import React from 'react'
-import MapSection from './MapSection'
 import './About.css'
 
 function About() {
@@ -27,10 +26,6 @@ function About() {
             <p>Based at 1101 Halsey Drive, we pride ourselves on being a local business that understands the unique construction needs of our Leander and North Austin neighbors.</p>
           </div>
           
-          <div className="about-map-integration">
-            <MapSection />
-          </div>
-
           <div className="about-stats">
             <div className="stat-item">
               <span className="stat-number">100%</span>

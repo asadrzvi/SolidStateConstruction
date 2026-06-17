@@ -6,6 +6,7 @@ import Gallery from './components/Gallery'
 import Testimonials from './components/Testimonials'
 import Services from './components/Services'
 import Contact from './components/Contact'
+import MapSection from './components/MapSection'
 import Footer from './components/Footer'
 import QuoteModal from './components/QuoteModal'
 
@@ -25,6 +26,8 @@ function App() {
         onOpenQuote={() => setIsQuoteModalOpen(true)}
       />
       <Contact initialService={selectedService} />
+      {/* MapSection moved to the end per user request */}
+      <MapSection />
       <Footer />
       
       <QuoteModal 

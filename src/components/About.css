@@ -102,3 +102,83 @@
     gap: 2rem;
   }
 }
+
+.founder-spotlight {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  background-color: var(--card-bg);
+  padding: 3rem;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  margin-top: 4rem;
+  text-align: left;
+  border: 1px solid var(--secondary);
+}
+
+.founder-image-container {
+  flex-shrink: 0;
+  width: 220px;
+  height: 220px;
+  border-radius: 16px; /* Smooth rounded square instead of boring circle */
+  overflow: hidden;
+  border: 3px solid var(--primary);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.founder-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.founder-image-container:hover .founder-image {
+  transform: scale(1.05);
+}
+
+.founder-info {
+  flex-grow: 1;
+}
+
+.founder-info h3 {
+  font-size: 1.6rem;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+  font-weight: 700;
+  text-align: left !important;
+}
+
+.founder-info p {
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-light);
+  margin-bottom: 1.2rem;
+}
+
+.founder-signature {
+  font-weight: 700;
+  font-style: normal !important;
+  color: var(--primary) !important;
+  font-size: 0.95rem !important;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+  .founder-spotlight {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+    padding: 2rem;
+  }
+  
+  .founder-image-container {
+    width: 180px;
+    height: 180px;
+  }
+
+  .founder-info h3 {
+    text-align: center !important;
+  }
+}

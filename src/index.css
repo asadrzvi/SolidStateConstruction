@@ -8,32 +8,32 @@
 }
 
 :root {
-  --primary: #004aad;
-  --secondary: #f0f4f8;
-  --accent: #dc3545;
-  --text-dark: #1a202c;
-  --text-light: #4a5568;
+  --primary: #3a3f47; /* Sleek Chrome Steel / Gunmetal */
+  --secondary: #eef1f6; /* Soft Silver Mist */
+  --accent: #00e676; /* Electric Chrome Green */
+  --text-dark: #1b1d20; /* Slate Dark */
+  --text-light: #525a66; /* Slate Medium */
   --white: #ffffff;
   --bg-color: #ffffff;
   --card-bg: #ffffff;
-  --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
 
   /* Theme variables from original site */
-  --bg-base: #1a1a1a;
-  --bg-surface: #262626;
-  --brand-color: #10b981; /* emerald-500 */
+  --bg-base: #121417;
+  --bg-surface: #1b1d20;
+  --brand-color: #00e676; /* Electric Chrome Green */
   
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   line-height: 1.6;
 }
 
 [data-theme='dark'] {
-  --text-dark: #f7fafc;
-  --text-light: #cbd5e0;
-  --white: #1a202c;
-  --bg-color: #121212;
-  --card-bg: #1e1e1e;
-  --secondary: #2d3748;
+  --text-dark: #f0f3f8;
+  --text-light: #9ea8b6;
+  --white: #1b1d20;
+  --bg-color: #121417;
+  --card-bg: #1b1d20;
+  --secondary: #2a2f38;
   --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
 }
 
@@ -119,13 +119,13 @@ h1, h2, h3 {
 .btn-primary {
   background-color: var(--primary);
   color: var(--white);
-  box-shadow: 0 4px 6px rgba(0, 74, 173, 0.2);
+  box-shadow: 0 4px 6px rgba(58, 63, 71, 0.2);
 }
 
 .btn-primary:hover {
   transform: translateY(-3px);
-  background-color: #003a8c;
-  box-shadow: 0 12px 20px rgba(0, 74, 173, 0.3);
+  background-color: #272a2f; /* Darker metallic grey */
+  box-shadow: 0 12px 20px rgba(58, 63, 71, 0.3);
 }
 
 .btn-secondary {
@@ -138,7 +138,7 @@ h1, h2, h3 {
   background-color: var(--primary);
   color: var(--white);
   transform: translateY(-3px);
-  box-shadow: 0 12px 20px rgba(0, 74, 173, 0.15);
+  box-shadow: 0 12px 20px rgba(58, 63, 71, 0.15);
 }
 
 .section-title {

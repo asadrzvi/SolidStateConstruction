@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, FileText, CheckCircle2, User, Phone, Mail, Info, Droplets, Home, Hammer, Wrench, Trash2 } from 'lucide-react';
+import './QuoteModal.css';
 
 const pricingData = {
   'water-remediation': { 
@@ -133,36 +134,36 @@ export default function QuoteModal({ isOpen, onClose, initialService }) {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[10001] flex items-center justify-center bg-black/50 backdrop-blur-sm p-6 md:p-12 lg:p-20">
+        <div className="quote-modal-overlay">
           <motion.div
             initial={{ scale: 0.9, opacity: 0, y: 40 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 40 }}
-            className="relative w-full max-w-4xl h-[70vh] max-h-[700px] bg-white text-slate-900 rounded-[2rem] border border-[#004aad]/10 shadow-[0_20px_50px_rgba(0,0,0,0.3)] overflow-hidden flex flex-col md:flex-row"
+            className="quote-modal-container"
           >
             {/* Sidebar / History */}
-            <div className="hidden lg:flex w-60 bg-slate-50 border-r border-slate-100 p-6 flex-col overflow-hidden shrink-0">
-              <div className="flex items-center gap-3 text-[#004aad]/60 mb-6 shrink-0">
+            <div className="quote-modal-sidebar">
+              <div className="quote-modal-sidebar-header">
                 <FileText size={16} />
-                <h3 className="font-bold uppercase tracking-widest text-[10px]">Quote History</h3>
+                <h3 className="quote-modal-sidebar-title">Quote History</h3>
               </div>
               
-              <div className="flex-1 overflow-y-auto space-y-3 pr-1 custom-scrollbar">
+              <div className="quote-modal-history-list">
                 {quoteHistory.length === 0 ? (
-                  <p className="text-slate-400 text-xs italic text-center mt-10">No history</p>
+                  <p style={{ color: 'var(--text-light)', fontSize: '0.75rem', fontStyle: 'italic', textAlign: 'center', marginTop: '2.5rem' }}>No history</p>
                 ) : (
                   quoteHistory.map((q) => (
-                    <div key={q.id} className="bg-white border border-slate-100 p-3 rounded-xl group relative shadow-sm hover:border-[#004aad]/20 transition-all shrink-0">
-                      <div className="flex justify-between items-start mb-1">
-                        <span className="text-[8px] font-bold text-[#004aad]/40 uppercase tracking-tighter">{q.id}</span>
-                        <button onClick={(e) => handleDeleteHistoryItem(q.id, e)} className="text-slate-200 hover:text-[#dc3545] transition-colors">
+                    <div key={q.id} className="quote-history-card">
+                      <div className="quote-history-meta">
+                        <span className="quote-history-id">{q.id}</span>
+                        <button onClick={(e) => handleDeleteHistoryItem(q.id, e)} className="quote-history-delete-btn" title="Delete Quote">
                           <Trash2 size={14} />
                         </button>
                       </div>
-                      <div className="font-bold text-sm text-slate-700 leading-tight truncate" title={q.clientName}>{q.clientName}</div>
-                      <div className="flex justify-between items-end mt-2">
-                        <span className="text-[9px] text-slate-400 font-medium">{q.date}</span>
-                        <span className="text-[#dc3545] font-black text-xs">${q.estimatedCost.toLocaleString()}</span>
+                      <div className="quote-history-name" title={q.clientName}>{q.clientName}</div>
+                      <div className="quote-history-footer">
+                        <span className="quote-history-date">{q.date}</span>
+                        <span className="quote-history-cost">${q.estimatedCost.toLocaleString()}</span>
                       </div>
                     </div>
                   ))
@@ -171,86 +172,104 @@ export default function QuoteModal({ isOpen, onClose, initialService }) {
             </div>
 
             {/* Main Content */}
-            <div className="flex-1 p-6 md:p-10 overflow-y-auto flex flex-col">
-              <div className="flex justify-between items-start mb-8 shrink-0">
-                <div>
-                  <h2 className="text-2xl md:text-3xl font-black text-[#004aad] uppercase tracking-tighter leading-none">Instant Quote</h2>
-                  <p className="text-slate-500 text-sm font-medium mt-1">Professional Estimation Tool</p>
+            <div className="quote-modal-main">
+              <div className="quote-modal-header">
+                <div className="quote-modal-title-group">
+                  <h2>Instant Quote</h2>
+                  <p>Professional Estimation Tool</p>
                 </div>
-                <button onClick={onClose} className="p-2 hover:bg-slate-50 rounded-full transition-colors text-slate-400 hover:text-[#004aad]">
-                  <X size={28} />
+                <button onClick={onClose} className="quote-modal-close-btn" title="Close Modal">
+                  <X size={24} />
                 </button>
               </div>
 
-              <div className="flex-1">
+              <div className="quote-modal-step-content">
                 {savedSuccess ? (
-                  <div className="py-16 text-center flex flex-col items-center">
-                    <div className="h-16 w-16 bg-[#004aad]/10 text-[#004aad] rounded-full flex items-center justify-center mb-6">
+                  <div className="quote-modal-success">
+                    <div className="quote-modal-success-icon">
                       <CheckCircle2 size={32} />
                     </div>
-                    <h3 className="text-2xl font-black uppercase text-[#004aad]">Details Saved!</h3>
-                    <p className="text-slate-500 text-lg mt-2">We will contact you within 24 hours.</p>
+                    <h3>Details Saved!</h3>
+                    <p>We will contact you within 24 hours.</p>
                   </div>
                 ) : (
                   <>
                     {step === 1 && (
-                      <div className="space-y-8 pb-4">
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', flex: 1 }}>
                         {/* Service Selection */}
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 shrink-0">
+                        <div className="quote-service-grid">
                           {Object.keys(pricingData).map((key) => {
                             const Icon = pricingData[key].icon;
                             return (
                               <button
                                 key={key}
                                 onClick={() => setProjectType(key)}
-                                className={`p-4 rounded-xl border flex flex-col items-center gap-2 transition-all ${
-                                  projectType === key 
-                                    ? 'bg-[#004aad] border-[#004aad] text-white shadow-lg -translate-y-1' 
-                                    : 'bg-white border-slate-100 text-slate-400 hover:border-slate-200'
-                                }`}
+                                className={`quote-service-btn ${projectType === key ? 'active' : ''}`}
                               >
-                                <Icon size={24} />
-                                <span className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-center leading-tight">{pricingData[key].label}</span>
+                                <Icon size={20} />
+                                <span className="quote-service-btn-label">{pricingData[key].label}</span>
                               </button>
                             );
                           })}
                         </div>
 
                         {/* Calculation Method Description */}
-                        <div className="bg-[#004aad]/5 border border-[#004aad]/10 p-5 rounded-2xl flex items-start gap-4 shrink-0">
-                          <div className="bg-[#004aad] text-white p-3 rounded-xl shadow-lg shrink-0">
+                        <div className="quote-info-box">
+                          <div className="quote-info-icon-wrapper">
                             <Info size={16} />
                           </div>
-                          <p className="text-sm md:text-base text-slate-700 font-bold leading-relaxed">
+                          <p className="quote-info-text">
                             {pricingData[projectType].description}
                           </p>
                         </div>
 
                         {/* Dynamic Inputs */}
-                        <div className="bg-slate-50 rounded-2xl p-6 md:p-8 border border-slate-100 shadow-inner">
+                        <div className="quote-inputs-container">
                           {projectType === 'water-remediation' && (
-                            <div className="space-y-8">
-                              <div className="space-y-4">
-                                <div className="flex justify-between font-black text-xs uppercase text-[#004aad]">
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                              <div className="quote-input-group">
+                                <div className="quote-input-label-row">
                                   <span>Affected Area</span>
-                                  <span className="text-3xl">{sqFt.toLocaleString()} Sq Ft</span>
+                                  <span className="quote-value-display">{sqFt.toLocaleString()} Sq Ft</span>
                                 </div>
-                                <input type="range" min="1" max="5000" step="1" value={sqFt} onChange={(e) => setSqFt(Number(e.target.value))} className="w-full h-2" />
+                                <input 
+                                  type="range" 
+                                  min="1" 
+                                  max="5000" 
+                                  step="1" 
+                                  value={sqFt} 
+                                  onChange={(e) => setSqFt(Number(e.target.value))} 
+                                  className="quote-slider" 
+                                />
                               </div>
-                              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div className="space-y-3">
-                                  <label className="text-[10px] font-black uppercase text-slate-400 tracking-widest">Contamination Level</label>
-                                  <div className="flex gap-2">
+                              <div className="quote-grid-2">
+                                <div className="quote-input-group">
+                                  <label className="quote-input-label-row" style={{ marginBottom: '0.35rem', display: 'block' }}>Contamination Level</label>
+                                  <div className="quote-choices-grid">
                                     {['Clean', 'Grey', 'Black'].map((label, i) => (
-                                      <button key={label} onClick={() => setContamination(i + 1)} className={`flex-1 py-2 text-sm font-black uppercase rounded-lg border transition-all ${contamination === i + 1 ? 'bg-[#004aad] border-[#004aad] text-white shadow-md' : 'bg-white border-slate-200 text-slate-500'}`}>{label}</button>
+                                      <button 
+                                        key={label} 
+                                        type="button"
+                                        onClick={() => setContamination(i + 1)} 
+                                        className={`quote-choice-btn ${contamination === i + 1 ? 'active' : ''}`}
+                                      >
+                                        {label}
+                                      </button>
                                     ))}
                                   </div>
                                 </div>
-                                <div className="space-y-3">
-                                  <label className="text-[10px] font-black uppercase text-slate-400 tracking-widest">Moisture Depth</label>
-                                  <div className="flex gap-2">
+                                <div className="quote-input-group">
+                                  <label className="quote-input-label-row" style={{ marginBottom: '0.35rem', display: 'block' }}>Moisture Depth</label>
+                                  <div className="quote-choices-grid">
                                     {['Surface', 'Deep'].map((label, i) => (
-                                      <button key={label} onClick={() => setMoistureDepth(i + 1)} className={`flex-1 py-2 text-sm font-black uppercase rounded-lg border transition-all ${moistureDepth === i + 1 ? 'bg-[#004aad] border-[#004aad] text-white shadow-md' : 'bg-white border-slate-200 text-slate-500'}`}>{label}</button>
+                                      <button 
+                                        key={label} 
+                                        type="button"
+                                        onClick={() => setMoistureDepth(i + 1)} 
+                                        className={`quote-choice-btn ${moistureDepth === i + 1 ? 'active' : ''}`}
+                                      >
+                                        {label}
+                                      </button>
                                     ))}
                                   </div>
                                 </div>
@@ -259,30 +278,63 @@ export default function QuoteModal({ isOpen, onClose, initialService }) {
                           )}
 
                           {(projectType === 'concrete' || projectType === 'roofing') && (
-                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                              <div className="space-y-8">
-                                <div className="space-y-4">
-                                  <div className="flex justify-between font-black text-xs uppercase text-[#004aad]"><span>Length</span><span className="text-3xl">{length.toLocaleString()} Ft</span></div>
-                                  <input type="range" min="1" max="5000" step="1" value={length} onChange={(e) => setLength(Number(e.target.value))} className="w-full h-2" />
+                            <div className="quote-grid-2">
+                              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                                <div className="quote-input-group">
+                                  <div className="quote-input-label-row">
+                                    <span>Length</span>
+                                    <span className="quote-value-display">{length.toLocaleString()} Ft</span>
+                                  </div>
+                                  <input 
+                                    type="range" 
+                                    min="1" 
+                                    max="5000" 
+                                    step="1" 
+                                    value={length} 
+                                    onChange={(e) => setLength(Number(e.target.value))} 
+                                    className="quote-slider" 
+                                  />
                                 </div>
-                                <div className="space-y-4">
-                                  <div className="flex justify-between font-black text-xs uppercase text-[#004aad]"><span>Width</span><span className="text-3xl">{width.toLocaleString()} Ft</span></div>
-                                  <input type="range" min="1" max="5000" step="1" value={width} onChange={(e) => setWidth(Number(e.target.value))} className="w-full h-2" />
+                                <div className="quote-input-group">
+                                  <div className="quote-input-label-row">
+                                    <span>Width</span>
+                                    <span className="quote-value-display">{width.toLocaleString()} Ft</span>
+                                  </div>
+                                  <input 
+                                    type="range" 
+                                    min="1" 
+                                    max="5000" 
+                                    step="1" 
+                                    value={width} 
+                                    onChange={(e) => setWidth(Number(e.target.value))} 
+                                    className="quote-slider" 
+                                  />
                                 </div>
                               </div>
-                              <div className="flex flex-col justify-center bg-white border border-slate-100 rounded-2xl p-6 text-center shadow-lg">
-                                <div className="text-slate-400 text-[10px] font-black uppercase mb-2 tracking-[0.2em]">{projectType === 'concrete' ? 'Total Volume' : 'Total Squares'}</div>
-                                <div className="text-4xl font-black text-[#004aad] tracking-tighter leading-none">
+                              
+                              <div className="quote-side-card">
+                                <span className="quote-side-card-title">
+                                  {projectType === 'concrete' ? 'Total Volume' : 'Total Squares'}
+                                </span>
+                                <div className="quote-side-card-value">
                                   {projectType === 'concrete' 
                                     ? `${((length * width * thickness) / 27).toFixed(1)} CU YD` 
                                     : `${((length * width) / 100).toFixed(1)} SQ`}
                                 </div>
+                                
                                 {projectType === 'concrete' && (
-                                  <div className="mt-4 pt-4 border-t border-slate-50 space-y-4">
-                                    <label className="text-[10px] font-black uppercase text-slate-400 tracking-widest">Thickness (Inches)</label>
-                                    <div className="flex gap-2">
+                                  <div style={{ marginTop: '1rem', width: '100%' }}>
+                                    <label className="quote-input-label-row" style={{ display: 'block', textAlign: 'center', marginBottom: '0.5rem' }}>Thickness (Inches)</label>
+                                    <div className="quote-choices-grid">
                                       {[0.33, 0.5, 0.66].map((val) => (
-                                        <button key={val} onClick={() => setThickness(val)} className={`flex-1 py-2 text-sm font-black rounded-lg border ${thickness === val ? 'bg-[#004aad] border-[#004aad] text-white shadow-md' : 'bg-white border-slate-200'}`}>{Math.round(val * 12)}"</button>
+                                        <button 
+                                          key={val} 
+                                          type="button"
+                                          onClick={() => setThickness(val)} 
+                                          className={`quote-choice-btn ${thickness === val ? 'active' : ''}`}
+                                        >
+                                          {Math.round(val * 12)}"
+                                        </button>
                                       ))}
                                     </div>
                                   </div>
@@ -292,32 +344,60 @@ export default function QuoteModal({ isOpen, onClose, initialService }) {
                           )}
 
                           {projectType === 'plumbing' && (
-                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                              <div className="space-y-6">
-                                <div className="space-y-3">
-                                  <label className="text-[10px] font-black uppercase text-slate-400 ml-2 tracking-widest">Materials Cost ($)</label>
-                                  <input type="number" value={materialCost} onChange={(e) => setMaterialCost(Number(e.target.value))} className="w-full p-4 rounded-xl border border-slate-200 focus:border-[#004aad] outline-none font-black text-2xl shadow-inner" />
+                            <div className="quote-grid-2">
+                              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                                <div className="quote-input-group">
+                                  <label className="quote-input-label-row" style={{ marginBottom: '0.25rem', display: 'block' }}>Materials Cost ($)</label>
+                                  <div className="quote-input-icon-wrapper">
+                                    <input 
+                                      type="number" 
+                                      value={materialCost} 
+                                      onChange={(e) => setMaterialCost(Number(e.target.value))} 
+                                      className="quote-text-input" 
+                                      style={{ paddingLeft: '2.5rem' }}
+                                    />
+                                    <span className="quote-input-icon" style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>$</span>
+                                  </div>
                                 </div>
-                                <div className="space-y-4">
-                                  <div className="flex justify-between font-black text-xs uppercase text-[#004aad]"><span>Labor Hours</span><span className="text-3xl">{laborHours.toLocaleString()} HRS</span></div>
-                                  <input type="range" min="1" max="5000" step="1" value={laborHours} onChange={(e) => setLaborHours(Number(e.target.value))} className="w-full h-2" />
+                                <div className="quote-input-group">
+                                  <div className="quote-input-label-row">
+                                    <span>Labor Hours</span>
+                                    <span className="quote-value-display">{laborHours.toLocaleString()} HRS</span>
+                                  </div>
+                                  <input 
+                                    type="range" 
+                                    min="1" 
+                                    max="500" 
+                                    step="1" 
+                                    value={laborHours} 
+                                    onChange={(e) => setLaborHours(Number(e.target.value))} 
+                                    className="quote-slider" 
+                                  />
                                 </div>
                               </div>
-                              <div className="bg-white border border-slate-100 rounded-2xl p-6 space-y-4 shadow-lg flex flex-col justify-center">
-                                <div className="flex justify-between text-base font-black text-slate-500 leading-tight"><span>Overhead (20%)</span><span className="text-[#004aad]">+${((materialCost + laborHours * laborRate) * overheadFactor).toLocaleString()}</span></div>
-                                <div className="flex justify-between text-base font-black text-slate-500 leading-tight"><span>Profit (15%)</span><span className="text-[#004aad]">+${((materialCost + laborHours * laborRate) * 1.2 * profitFactor).toLocaleString()}</span></div>
-                                <div className="pt-4 border-t border-slate-50 text-xs text-slate-400 font-bold italic leading-relaxed">Includes professional-grade specialized tools.</div>
+                              <div className="quote-side-card" style={{ padding: '1.25rem', justifyContent: 'center', alignItems: 'stretch' }}>
+                                <div className="quote-side-card-detail-row">
+                                  <span>Overhead (20%)</span>
+                                  <span>+${((materialCost + laborHours * laborRate) * overheadFactor).toLocaleString()}</span>
+                                </div>
+                                <div className="quote-side-card-detail-row">
+                                  <span>Profit (15%)</span>
+                                  <span>+${((materialCost + laborHours * laborRate) * 1.2 * profitFactor).toLocaleString()}</span>
+                                </div>
+                                <div style={{ borderTop: '1px solid var(--modal-border)', marginTop: '0.75rem', paddingTop: '0.75rem', fontSize: '0.75rem', color: 'var(--text-light)', fontStyle: 'italic', textAlign: 'left', lineHeight: '1.4' }}>
+                                  Includes professional-grade specialized tools.
+                                </div>
                               </div>
                             </div>
                           )}
                         </div>
 
-                        <div className="flex flex-col sm:flex-row justify-between items-center gap-6 pt-6 border-t border-slate-100 shrink-0">
-                          <div className="text-center sm:text-left">
-                            <span className="text-[10px] text-slate-400 uppercase font-black tracking-[0.4em] block mb-2">Final Estimated Project Budget</span>
-                            <span className="text-5xl font-black text-[#dc3545] tracking-tighter leading-none">${activeEstimate.toLocaleString()}*</span>
+                        <div className="quote-modal-footer">
+                          <div className="quote-modal-price-display-wrapper">
+                            <span className="quote-modal-price-label">Final Estimated Project Budget</span>
+                            <span className="quote-modal-price-value">${activeEstimate.toLocaleString()}*</span>
                           </div>
-                          <button onClick={() => setStep(2)} className="w-full sm:w-auto bg-[#004aad] hover:bg-[#003882] text-white px-10 py-5 rounded-xl font-black uppercase tracking-widest text-sm transition-all shadow-lg hover:scale-105">
+                          <button onClick={() => setStep(2)} className="quote-btn-primary">
                             Proceed to Details &rarr;
                           </button>
                         </div>
@@ -325,59 +405,87 @@ export default function QuoteModal({ isOpen, onClose, initialService }) {
                     )}
 
                     {step === 2 && (
-                      <form onSubmit={handleSaveQuote} className="space-y-8 pb-4 flex-1">
-                        <div className="grid grid-cols-1 gap-6">
-                          <div className="space-y-3">
-                            <label className="text-[12px] font-black uppercase text-slate-400 ml-4 tracking-widest">Full Client Name</label>
-                            <div className="relative">
-                              <User className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-300 w-5 h-5" />
-                              <input type="text" required placeholder="John Doe" value={clientName} onChange={(e) => setClientName(e.target.value)} className="w-full p-4 pl-14 rounded-xl border border-slate-100 focus:border-[#004aad] outline-none font-black text-lg shadow-inner" />
+                      <form onSubmit={handleSaveQuote} className="quote-modal-step-content" style={{ gap: '1.25rem' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', flex: 1 }}>
+                          <div className="quote-input-group">
+                            <label className="quote-input-label-row" style={{ marginBottom: '0.25rem', display: 'block' }}>Full Client Name</label>
+                            <div className="quote-input-icon-wrapper">
+                              <input 
+                                type="text" 
+                                required 
+                                placeholder="John Doe" 
+                                value={clientName} 
+                                onChange={(e) => setClientName(e.target.value)} 
+                                className="quote-text-input" 
+                              />
+                              <User className="quote-input-icon" size={18} />
                             </div>
                           </div>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="space-y-3">
-                              <label className="text-[12px] font-black uppercase text-slate-400 ml-4 tracking-widest">Phone Number</label>
-                              <div className="relative">
-                                <Phone className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-300 w-5 h-5" />
-                                <input type="tel" required placeholder="(512) 000-0000" value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full p-4 pl-14 rounded-xl border border-slate-100 focus:border-[#004aad] outline-none font-black text-lg shadow-inner" />
+                          <div className="quote-grid-2">
+                            <div className="quote-input-group">
+                              <label className="quote-input-label-row" style={{ marginBottom: '0.25rem', display: 'block' }}>Phone Number</label>
+                              <div className="quote-input-icon-wrapper">
+                                <input 
+                                  type="tel" 
+                                  required 
+                                  placeholder="(512) 000-0000" 
+                                  value={phone} 
+                                  onChange={(e) => setPhone(e.target.value)} 
+                                  className="quote-text-input" 
+                                />
+                                <Phone className="quote-input-icon" size={18} />
                               </div>
                             </div>
-                            <div className="space-y-3">
-                              <label className="text-[12px] font-black uppercase text-slate-400 ml-4 tracking-widest">Email Address</label>
-                              <div className="relative">
-                                <Mail className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-300 w-5 h-5" />
-                                <input type="email" placeholder="john@example.com" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full p-4 pl-14 rounded-xl border border-slate-100 focus:border-[#004aad] outline-none font-black text-lg shadow-inner" />
+                            <div className="quote-input-group">
+                              <label className="quote-input-label-row" style={{ marginBottom: '0.25rem', display: 'block' }}>Email Address</label>
+                              <div className="quote-input-icon-wrapper">
+                                <input 
+                                  type="email" 
+                                  placeholder="john@example.com" 
+                                  value={email} 
+                                  onChange={(e) => setEmail(e.target.value)} 
+                                  className="quote-text-input" 
+                                />
+                                <Mail className="quote-input-icon" size={18} />
                               </div>
                             </div>
                           </div>
-                          <div className="space-y-3">
-                            <label className="text-[12px] font-black uppercase text-slate-400 ml-4 tracking-widest">Project Requirements</label>
-                            <textarea rows={3} placeholder="Describe details, access, or timing..." value={notes} onChange={(e) => setNotes(e.target.value)} className="w-full p-4 rounded-2xl border border-slate-100 focus:border-[#004aad] outline-none font-black text-lg shadow-inner resize-none" />
+                          <div className="quote-input-group">
+                            <label className="quote-input-label-row" style={{ marginBottom: '0.25rem', display: 'block' }}>Project Requirements</label>
+                            <textarea 
+                              rows={3} 
+                              placeholder="Describe details, access, or timing..." 
+                              value={notes} 
+                              onChange={(e) => setNotes(e.target.value)} 
+                              className="quote-textarea" 
+                            />
                           </div>
                         </div>
 
-                        <div className="flex flex-col sm:flex-row gap-4 pt-6 shrink-0">
-                          <button type="button" onClick={() => setStep(1)} className="flex-1 bg-slate-100 text-slate-500 py-4 rounded-xl font-black uppercase tracking-widest text-sm hover:bg-slate-200 transition-all">Back</button>
-                          <button type="submit" className="flex-[2] bg-[#004aad] text-white py-4 rounded-xl font-black uppercase tracking-widest text-base shadow-lg hover:bg-[#003882] transition-all">Submit Request</button>
+                        <div className="quote-btn-group" style={{ marginTop: '1rem' }}>
+                          <button type="button" onClick={() => setStep(1)} className="quote-btn-secondary">Back</button>
+                          <button type="submit" className="quote-btn-submit">Submit Request</button>
                         </div>
                       </form>
                     )}
 
                     {step === 3 && (
-                      <div className="space-y-10 pb-4 text-center flex-1 flex flex-col justify-center items-center">
-                        <div className="bg-[#004aad]/5 border border-[#004aad]/10 p-10 md:p-14 rounded-[2.5rem] space-y-6 shadow-inner w-full">
-                          <div className="text-[12px] font-black uppercase tracking-[0.5em] text-[#004aad]">Official Project Estimate Summary</div>
-                          <div className="text-6xl md:text-7xl font-black text-[#dc3545] tracking-tighter leading-none">${activeEstimate.toLocaleString()}</div>
-                          <div className="flex flex-wrap justify-center gap-6 text-base md:text-lg font-black text-slate-500 uppercase">
+                      <div className="quote-modal-step-content" style={{ justifyContent: 'center', alignItems: 'center', gap: '1.5rem' }}>
+                        <div className="quote-summary-sheet">
+                          <div className="quote-summary-tag">Official Project Estimate Summary</div>
+                          <div className="quote-summary-value">${activeEstimate.toLocaleString()}</div>
+                          <div className="quote-summary-meta-row">
                             <span>Service: {pricingData[projectType].label}</span>
-                            <span className="hidden sm:inline text-slate-200">|</span>
+                            <span className="quote-summary-divider">|</span>
                             <span>Ref: {Math.floor(10000 + Math.random() * 90000)}</span>
                           </div>
-                          <p className="max-w-2xl mx-auto text-base md:text-lg text-slate-600 font-bold leading-relaxed italic pt-4">
+                          <p className="quote-summary-disclaimer">
                             This preliminary estimate is based on regional averages. A final binding quote will be issued following a comprehensive evaluation.
                           </p>
                         </div>
-                        <button onClick={onClose} className="w-full max-w-md bg-[#004aad] text-white py-5 rounded-xl font-black uppercase tracking-widest text-base shadow-lg hover:bg-[#003882] transition-all mt-6">Return to Website Home</button>
+                        <button onClick={onClose} className="quote-btn-primary" style={{ marginTop: '1.5rem', width: '100%', maxWidth: '360px' }}>
+                          Return to Website Home
+                        </button>
                       </div>
                     )}
                   </>
@@ -390,3 +498,5 @@ export default function QuoteModal({ isOpen, onClose, initialService }) {
     </AnimatePresence>
   );
 }
+
+

@@ -94,11 +94,9 @@ function Contact({ initialService }) {
                   onChange={handleChange}
                 >
                   <option>Water Remediation</option>
-                  <option>Foundation Repair</option>
-                  <option>Full Home Remodeling</option>
-                  <option>Painting & Drywall</option>
+                  <option>Concrete & Foundation</option>
                   <option>Roofing Services</option>
-                  <option>Flooring & Tile</option>
+                  <option>Plumbing Services</option>
                 </select>
               </div>
               <div className="form-group full-width">

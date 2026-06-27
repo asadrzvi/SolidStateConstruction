@@ -1,11 +1,9 @@
 import React from 'react'
-import { Droplets, ShieldCheck, Home, Paintbrush, Layers, Hammer } from 'lucide-react'
+import { Droplets, Home, Hammer, Wrench } from 'lucide-react'
 import waterImg from '../../public/images/water.jpg'
 import foundationImg from '../../public/images/foundation.jpg'
-import remodelImg from '../../public/images/remodel.jpg'
-import paintImg from '../../public/images/paint.jpg'
 import roofImg from '../../public/images/roof.jpg'
-import floorImg from '../../public/images/floor.jpg'
+import plumbingImg from '../../public/images/plumbing.jpg'
 import './Services.css'
 
 const services = [
@@ -16,34 +14,22 @@ const services = [
     description: "Rapid response for water damage. We dry, clean, and restore your home to its original state."
   },
   {
-    icon: <ShieldCheck size={24} />,
-    title: "Foundation Repair",
+    icon: <Hammer size={24} />,
+    title: "Concrete & Foundation",
     image: foundationImg,
-    description: "Structural integrity is our priority. Expert foundation leveling and crack repair in Leander."
+    description: "Structural integrity is our priority. Expert concrete installation, foundation leveling, and crack repair."
   },
   {
     icon: <Home size={24} />,
-    title: "Full Home Remodeling",
-    image: remodelImg,
-    description: "Transform your living space with our expert design-build remodeling services."
-  },
-  {
-    icon: <Paintbrush size={24} />,
-    title: "Painting & Drywall",
-    image: paintImg,
-    description: "Professional interior and exterior painting with flawless drywall finishing."
-  },
-  {
-    icon: <Hammer size={24} />,
     title: "Roofing Services",
     image: roofImg,
     description: "Reliable roof repairs and full replacements using top-tier materials."
   },
   {
-    icon: <Layers size={24} />,
-    title: "Flooring & Tile",
-    image: floorImg,
-    description: "Custom tile work and flooring installations that elevate your home's aesthetic."
+    icon: <Wrench size={24} />,
+    title: "Plumbing Services",
+    image: plumbingImg,
+    description: "Professional leak detection, pipe replacement, fixtures installation, and emergency plumbing."
   }
 ]
 

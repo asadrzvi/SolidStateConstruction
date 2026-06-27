@@ -737,7 +737,7 @@
 .quote-btn-primary:hover {
   transform: translateY(-2px);
   background-color: #2b3326; /* Darker metallic olive */
-  box-shadow: 0 8px 20px rgba(60, 71, 53, 0.3);
+  box-shadow: 0 0 15px 4px rgba(255, 255, 255, 0.4);
 }
 
 .quote-btn-primary:active {
@@ -798,7 +798,7 @@
 .quote-btn-submit:hover {
   background-color: #2b3326;
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(60, 71, 53, 0.3);
+  box-shadow: 0 0 15px 4px rgba(255, 255, 255, 0.4);
 }
 
 /* Grid Utilities */

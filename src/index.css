@@ -125,7 +125,7 @@ h1, h2, h3 {
 .btn-primary:hover {
   transform: translateY(-3px);
   background-color: #2b3326; /* Darker metallic olive */
-  box-shadow: 0 12px 20px rgba(60, 71, 53, 0.3);
+  box-shadow: 0 0 15px 4px rgba(255, 255, 255, 0.4);
 }
 
 .btn-secondary {
@@ -138,7 +138,7 @@ h1, h2, h3 {
   background-color: var(--primary);
   color: var(--white);
   transform: translateY(-3px);
-  box-shadow: 0 12px 20px rgba(60, 71, 53, 0.15);
+  box-shadow: 0 0 15px 4px rgba(255, 255, 255, 0.4);
 }
 
 .section-title {

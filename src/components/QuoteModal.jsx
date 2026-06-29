@@ -35,6 +35,7 @@ export default function QuoteModal({ isOpen, onClose, initialService }) {
   const [length, setLength] = useState(20);
   const [width, setWidth] = useState(20);
   const [thickness, setThickness] = useState(0.33); // 4 inches in feet
+  const [roofMaterial, setRoofMaterial] = useState('architectural');
   const [materialCost, setMaterialCost] = useState(1200);
   const [laborHours, setLaborHours] = useState(16);
   const laborRate = 85;
@@ -74,17 +75,23 @@ export default function QuoteModal({ isOpen, onClose, initialService }) {
   const computeEstimate = () => {
     switch (projectType) {
       case 'water-remediation':
-        return Math.floor(sqFt * 5 * contamination * moistureDepth);
+        // Base mobilization fee of $250 + realistic mitigation sqft cost * depth multiplier
+        const baseWaterPrice = contamination === 1 ? 3.50 : contamination === 2 ? 5.50 : 9.00;
+        const waterDepthMult = moistureDepth === 1 ? 1.0 : 1.4;
+        return Math.floor(250 + sqFt * baseWaterPrice * waterDepthMult);
       
       case 'concrete':
         const yards = (length * width * thickness) / 27;
         const withWaste = yards * 1.1;
-        return Math.floor(withWaste * 150);
+        // Installed concrete: $750/cu yd including excavation, framing, rebar, labor, and concrete material
+        return Math.floor(withWaste * 750);
 
       case 'roofing':
         const squares = (length * width) / 100;
-        const totalSquares = squares * 1.25;
-        return Math.floor(totalSquares * 450);
+        const totalSquares = squares * 1.25; // waste factor
+        // Asphalt shingle standard: $480/sq, Premium architectural: $620/sq, Metal: $1150/sq (labor + materials)
+        const pricePerSquare = roofMaterial === 'standard' ? 480 : roofMaterial === 'architectural' ? 620 : 1150;
+        return Math.floor(totalSquares * pricePerSquare);
 
       case 'plumbing':
         const labor = laborHours * laborRate;
@@ -335,6 +342,27 @@ export default function QuoteModal({ isOpen, onClose, initialService }) {
                                           {Math.round(val * 12)}"
                                         </button>
                                       ))}
+                                    </div>
+                                  </div>
+                                )}
+
+                                {projectType === 'roofing' && (
+                                  <div style={{ marginTop: '1rem', width: '100%' }}>
+                                    <label className="quote-input-label-row" style={{ display: 'block', textAlign: 'center', marginBottom: '0.5rem' }}>Material Grade</label>
+                                    <div className="quote-choices-grid">
+                                      {['Standard Shingle', 'Architectural', 'Metal'].map((label, i) => {
+                                        const keys = ['standard', 'architectural', 'metal'];
+                                        return (
+                                          <button 
+                                            key={label} 
+                                            type="button"
+                                            onClick={() => setRoofMaterial(keys[i])} 
+                                            className={`quote-choice-btn ${roofMaterial === keys[i] ? 'active' : ''}`}
+                                          >
+                                            {label.split(' ')[0]}
+                                          </button>
+                                        );
+                                      })}
                                     </div>
                                   </div>
                                 )}

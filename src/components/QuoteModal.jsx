@@ -89,8 +89,7 @@ export default function QuoteModal({ isOpen, onClose, initialService }) {
       case 'plumbing':
         const labor = laborHours * laborRate;
         const overhead = (materialCost + labor) * overheadFactor;
-        const profit = (materialCost + labor + overhead) * profitFactor;
-        return Math.floor(materialCost + labor + overhead + profit);
+        return Math.floor(materialCost + labor + overhead);
 
       default:
         return 0;
@@ -379,10 +378,6 @@ export default function QuoteModal({ isOpen, onClose, initialService }) {
                                 <div className="quote-side-card-detail-row">
                                   <span>Overhead (20%)</span>
                                   <span>+${((materialCost + laborHours * laborRate) * overheadFactor).toLocaleString()}</span>
-                                </div>
-                                <div className="quote-side-card-detail-row">
-                                  <span>Profit (15%)</span>
-                                  <span>+${((materialCost + laborHours * laborRate) * 1.2 * profitFactor).toLocaleString()}</span>
                                 </div>
                                 <div style={{ borderTop: '1px solid var(--modal-border)', marginTop: '0.75rem', paddingTop: '0.75rem', fontSize: '0.75rem', color: 'var(--text-light)', fontStyle: 'italic', textAlign: 'left', lineHeight: '1.4' }}>
                                   Includes professional-grade specialized tools.

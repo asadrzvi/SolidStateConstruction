@@ -426,7 +426,7 @@ export default function QuoteModal({ isOpen, onClose, initialService }) {
                               className="quote-btn-secondary"
                               style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', whiteSpace: 'nowrap' }}
                             >
-                              Email Us Directly
+                              Get a more detailed estimate
                             </a>
                             <button onClick={() => setStep(2)} className="quote-btn-primary" style={{ flex: 1.2 }}>
                               Proceed to Details &rarr;

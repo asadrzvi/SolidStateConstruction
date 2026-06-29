@@ -44,7 +44,7 @@ function About() {
 
         <div className="founder-spotlight">
           <div className="founder-image-container">
-            <img src="/images/shaan.png" alt="Shaan - Founder of Solid State Construction" className="founder-image" />
+            <img src="/images/shaan_the_dawn.jpg?v=1" alt="Shaan - Founder of Solid State Construction" className="founder-image" />
           </div>
           <div className="founder-info">
             <h3>Meet Our Founder, Shaan</h3>

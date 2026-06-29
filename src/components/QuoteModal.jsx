@@ -420,9 +420,18 @@ export default function QuoteModal({ isOpen, onClose, initialService }) {
                             <span className="quote-modal-price-label">Final Estimated Project Budget</span>
                             <span className="quote-modal-price-value">${activeEstimate.toLocaleString()}*</span>
                           </div>
-                          <button onClick={() => setStep(2)} className="quote-btn-primary">
-                            Proceed to Details &rarr;
-                          </button>
+                          <div className="quote-btn-group" style={{ maxWidth: '440px' }}>
+                            <a 
+                              href={`mailto:contact@solidstateconstruction.com?subject=Detailed Custom Quote Request - ${pricingData[projectType]?.label || 'Service'}&body=Hello Solid State Construction Team,%0A%0AI would like to request a detailed custom quote for the following project:%0A%0A- Service: ${pricingData[projectType]?.label || 'N/A'}%0A- Size: ${projectType === 'water-remediation' ? `${sqFt} sq ft` : (projectType === 'plumbing' ? 'Plumbing Job' : `${length}x${width} (${length * width} sq ft)`)}%0A%0APlease let me know what details you need from me to provide a binding proposal.%0A%0ABest regards,%0A[Your Name]`}
+                              className="quote-btn-secondary"
+                              style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', whiteSpace: 'nowrap' }}
+                            >
+                              Email Us Directly
+                            </a>
+                            <button onClick={() => setStep(2)} className="quote-btn-primary" style={{ flex: 1.2 }}>
+                              Proceed to Details &rarr;
+                            </button>
+                          </div>
                         </div>
                       </div>
                     )}

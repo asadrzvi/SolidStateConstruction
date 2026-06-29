@@ -43,10 +43,8 @@ function About() {
         </div>
 
         <div className="founder-spotlight">
-          <div className="founder-image-container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--primary)', color: '#ffffff', padding: '1.5rem', textAlign: 'center', boxSizing: 'border-box' }}>
-            <span style={{ fontSize: '1.4rem', fontWeight: '900', textTransform: 'uppercase', letterSpacing: '1px', lineHeight: '1.3' }}>
-              Solid State Construction
-            </span>
+          <div className="founder-image-container">
+            <img src="/images/shaan.png" alt="Shaan - Founder of Solid State Construction" className="founder-image" />
           </div>
           <div className="founder-info">
             <h3>Meet Our Founder, Shaan</h3>

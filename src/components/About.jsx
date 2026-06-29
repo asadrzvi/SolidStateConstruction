@@ -49,7 +49,7 @@ function About() {
           <div className="founder-info">
             <h3>Meet Our Founder, Shaan</h3>
             <p>
-              "Solid State Construction was founded with a single mission: to provide Leander families with premium, legacy-grade contracting they can trust unconditionally. Under Shaan's leadership, we bring absolute engineering perfection to every project—ensuring structural integrity and master-class craftsmanship on every single job."
+              "Solid State Construction was founded with a single mission: to provide Austin families with premium, legacy-grade contracting they can trust unconditionally. Under Shaan's leadership, we bring absolute engineering perfection to every project—ensuring structural integrity and master-class craftsmanship on every single job."
             </p>
             <p className="founder-signature">— Shaan, Founder & Chief Engineer</p>
           </div>

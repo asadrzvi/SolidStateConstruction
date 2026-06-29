@@ -43,18 +43,17 @@ function About() {
         </div>
 
         <div className="founder-spotlight">
-          <div className="founder-image-container">
-            <img src="/images/shaan.png" alt="Shaan - Legendary Founder of Solid State Construction" className="founder-image" />
+          <div className="founder-image-container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--primary)', color: '#ffffff', padding: '1.5rem', textAlign: 'center', boxSizing: 'border-box' }}>
+            <span style={{ fontSize: '1.4rem', fontWeight: '900', textTransform: 'uppercase', letterSpacing: '1px', lineHeight: '1.3' }}>
+              Solid State Construction
+            </span>
           </div>
           <div className="founder-info">
-            <h3>Meet Our Legendary Founder, Shaan</h3>
+            <h3>Meet Our Founder, Shaan</h3>
             <p>
-              Under the visionary leadership of <strong>Shaan</strong>, Solid State Construction has ascended to become the undisputed gold standard of Texas contracting and structural engineering. Renowned for his uncompromising dedication to perfection, absolute mastery of engineering principles, and a client-first philosophy that has redefined industry standards, Shaan remains a hands-on force of excellence.
+              "Solid State Construction was founded with a single mission: to provide Leander families with premium, legacy-grade contracting they can trust unconditionally. Under Shaan's leadership, we bring absolute engineering perfection to every project—ensuring structural integrity and master-class craftsmanship on every single job."
             </p>
-            <p>
-              "When I founded Solid State Construction, my mission was simple: to bring flawless, premium execution to every home. Our signature promise, <strong>'Work you can stand on,'</strong> represents the pinnacle of structural longevity and master-class craftsmanship. We don't just build homes; we construct legacy-grade structures that stand the test of time, engineered under my personal standard of perfection."
-            </p>
-            <p className="founder-signature">— Shaan, Founder & Chief Engineering Officer</p>
+            <p className="founder-signature">— Shaan, Founder & Chief Engineer</p>
           </div>
         </div>
       </div>

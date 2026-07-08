@@ -46,7 +46,7 @@ function Services({ onServiceSelect, onOpenQuote, onPrefillMessage }) {
     if (service.directEmail) {
       onServiceSelect(service.title);
       if (onPrefillMessage) {
-        onPrefillMessage(`I would like to inquire about your ${service.title} for my property.\n\nPlease contact me back to discuss details.`);
+        onPrefillMessage('');
       }
       
       // Scroll to contact form

@@ -816,20 +816,21 @@
 /* Mobile responsive scaling overrides */
 @media (max-width: 768px) {
   .quote-modal-overlay {
-    padding: 0 !important;
+    padding: 1rem !important;
   }
   
   .quote-modal-container {
-    width: 100vw !important;
-    max-width: 100vw !important;
-    height: 100vh !important;
-    max-height: 100vh !important;
-    border-radius: 0 !important;
-    border: none !important;
+    width: 100% !important;
+    max-width: 580px !important;
+    height: 85vh !important;
+    max-height: 680px !important;
+    border-radius: 24px !important;
+    border: 1px solid rgba(112, 130, 105, 0.15) !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4) !important;
   }
   
   .quote-modal-main {
-    padding: 1.25rem 1rem !important;
+    padding: 1.5rem !important;
   }
   
   .quote-modal-title-group h2 {
@@ -841,7 +842,48 @@
   }
   
   .quote-inputs-container {
-    padding: 1.25rem 1rem;
+    padding: 1rem 0.75rem !important;
+  }
+  
+  .quote-side-card {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    text-align: left !important;
+  }
+  
+  .quote-side-card-title {
+    display: block !important;
+    font-weight: 700 !important;
+    font-size: 0.75rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.10em !important;
+    color: var(--text-light) !important;
+    margin-bottom: 0.35rem !important;
+    text-align: left !important;
+  }
+
+  .quote-side-card-value {
+    display: block !important;
+    font-family: var(--font-display) !important;
+    font-size: 1.5rem !important;
+    font-weight: 800 !important;
+    color: var(--primary) !important;
+    letter-spacing: -0.02em !important;
+    margin-bottom: 1rem !important;
+    text-align: left !important;
+  }
+  
+  [data-theme='dark'] .quote-side-card-value {
+    color: var(--text-dark) !important;
+  }
+
+  .quote-side-card label {
+    text-align: left !important;
   }
   
   .quote-service-grid {
@@ -874,6 +916,32 @@
   .quote-grid-2 {
     grid-template-columns: 1fr !important;
     gap: 1.25rem !important;
+  }
+
+  .quote-btn-group {
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+    max-width: 100% !important;
+  }
+
+  .quote-btn-secondary,
+  .quote-btn-primary,
+  .quote-btn-submit {
+    width: 100% !important;
+    flex: none !important;
+    white-space: normal !important;
+    text-align: center !important;
+  }
+
+  @media (max-width: 580px) {
+    .quote-choices-grid {
+      flex-direction: column !important;
+      gap: 0.4rem !important;
+    }
+    .quote-choice-btn {
+      flex: none !important;
+      width: 100% !important;
+    }
   }
 }
 

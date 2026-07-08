@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import './Contact.css'
 
+// CONFIGURATION FOR LEAD EMAILS:
+// 1. Go to https://web3forms.com
+// 2. Enter your business email: info@solidstatesconstruction.com
+// 3. You will immediately receive a free Access Key in your inbox.
+// 4. Paste that Access Key in the variable below:
+const WEB3FORMS_ACCESS_KEY = "YOUR_ACCESS_KEY_HERE";
+
 function Contact({ initialService, initialMessage }) {
   const [formData, setFormData] = useState({
     name: '',
@@ -37,11 +44,6 @@ function Contact({ initialService, initialMessage }) {
     e.preventDefault();
     setStatus('sending');
 
-    // We use Web3Forms to email the submission directly to the site owner.
-    // Replace 'YOUR_ACCESS_KEY_HERE' with your Web3Forms Access Key.
-    // Get a free key instantly by entering your email at: https://web3forms.com
-    const accessKey = "YOUR_ACCESS_KEY_HERE"; 
-
     fetch("https://api.web3forms.com/submit", {
       method: "POST",
       headers: {
@@ -49,7 +51,7 @@ function Contact({ initialService, initialMessage }) {
         Accept: "application/json"
       },
       body: JSON.stringify({
-        access_key: accessKey,
+        access_key: WEB3FORMS_ACCESS_KEY,
         name: formData.name,
         phone: formData.phone,
         email: formData.email,

@@ -13,7 +13,7 @@ function Contact({ initialService, initialMessage }) {
   useEffect(() => {
     if (initialService) {
       // Map service name to standard options if needed
-      const standardServices = ["Concrete & Foundation", "Plumbing Services", "Excavation Services"];
+      const standardServices = ["Water Remediation", "Concrete & Foundation", "Roofing Services", "Plumbing Services", "Excavation Services"];
       if (standardServices.includes(initialService)) {
         setFormData(prev => ({ ...prev, service: initialService }));
       }
@@ -112,7 +112,9 @@ function Contact({ initialService, initialMessage }) {
                   value={formData.service}
                   onChange={handleChange}
                 >
+                  <option>Water Remediation</option>
                   <option>Concrete & Foundation</option>
+                  <option>Roofing Services</option>
                   <option>Plumbing Services</option>
                   <option>Excavation Services</option>
                 </select>

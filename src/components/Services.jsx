@@ -1,15 +1,31 @@
 import React from 'react'
-import { Hammer, Wrench, Shovel } from 'lucide-react'
+import { Hammer, Wrench, Shovel, Droplets, Home } from 'lucide-react'
 import foundationImg from '../../public/images/foundation.jpg'
 import plumbingImg from '../../public/images/plumbing.jpg'
+import waterImg from '../../public/images/water.jpg'
+import roofImg from '../../public/images/roof.jpg'
 import './Services.css'
 
 const services = [
+  {
+    icon: <Droplets size={24} />,
+    title: "Water Remediation",
+    image: waterImg,
+    description: "Rapid response for water damage. We dry, clean, and restore your home to its original state.",
+    directEmail: true
+  },
   {
     icon: <Hammer size={24} />,
     title: "Concrete & Foundation",
     image: foundationImg,
     description: "Structural integrity is our priority. Expert concrete installation, foundation leveling, and crack repair."
+  },
+  {
+    icon: <Home size={24} />,
+    title: "Roofing Services",
+    image: roofImg,
+    description: "Reliable roof repairs and full replacements using top-tier materials.",
+    directEmail: true
   },
   {
     icon: <Wrench size={24} />,
@@ -26,9 +42,13 @@ const services = [
 ]
 
 function Services({ onServiceSelect, onOpenQuote }) {
-  const handleServiceClick = (serviceTitle) => {
-    onOpenQuote();
-    onServiceSelect(serviceTitle);
+  const handleServiceClick = (service) => {
+    if (service.directEmail) {
+      window.location.href = `mailto:contact@solidstateconstruction.com?subject=Inquiry: ${service.title}&body=Hello Solid State Construction Team,%0A%0AI would like to inquire about your ${service.title} for my property.%0A%0APlease contact me back to discuss details.%0A%0ABest regards,%0A[Your Name]`;
+    } else {
+      onOpenQuote();
+      onServiceSelect(service.title);
+    }
   };
 
   return (
@@ -41,7 +61,7 @@ function Services({ onServiceSelect, onOpenQuote }) {
             <div 
               className="service-card" 
               key={index}
-              onClick={() => handleServiceClick(service.title)}
+              onClick={() => handleServiceClick(service)}
               style={{ cursor: 'pointer' }}
             >
               <div className="service-image">

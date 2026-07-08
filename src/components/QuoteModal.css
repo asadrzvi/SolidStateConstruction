@@ -814,19 +814,22 @@
 }
 
 /* Mobile responsive scaling overrides */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .quote-modal-overlay {
-    padding: 0.5rem;
+    padding: 0 !important;
   }
   
   .quote-modal-container {
-    height: 90vh;
-    max-height: 90vh;
-    border-radius: 16px;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    border-radius: 0 !important;
+    border: none !important;
   }
   
   .quote-modal-main {
-    padding: 1.25rem 1rem;
+    padding: 1.25rem 1rem !important;
   }
   
   .quote-modal-title-group h2 {
@@ -866,6 +869,11 @@
   
   .quote-btn-primary {
     padding: 0.9rem 1.5rem;
+  }
+
+  .quote-grid-2 {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
   }
 }
 

@@ -5,7 +5,7 @@ function Contact({ initialService, initialMessage }) {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
-    service: 'Water Remediation',
+    service: 'Concrete & Foundation',
     message: ''
   })
   const [status, setStatus] = useState('')
@@ -13,7 +13,7 @@ function Contact({ initialService, initialMessage }) {
   useEffect(() => {
     if (initialService) {
       // Map service name to standard options if needed
-      const standardServices = ["Water Remediation", "Concrete & Foundation", "Roofing Services", "Plumbing Services"];
+      const standardServices = ["Concrete & Foundation", "Plumbing Services", "Excavation Services"];
       if (standardServices.includes(initialService)) {
         setFormData(prev => ({ ...prev, service: initialService }));
       }
@@ -112,10 +112,9 @@ function Contact({ initialService, initialMessage }) {
                   value={formData.service}
                   onChange={handleChange}
                 >
-                  <option>Water Remediation</option>
                   <option>Concrete & Foundation</option>
-                  <option>Roofing Services</option>
                   <option>Plumbing Services</option>
+                  <option>Excavation Services</option>
                 </select>
               </div>
               <div className="form-group full-width">

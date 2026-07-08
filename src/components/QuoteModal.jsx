@@ -1,19 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, FileText, CheckCircle2, User, Phone, Mail, Info, Droplets, Home, Hammer, Wrench, Trash2 } from 'lucide-react';
+import { X, FileText, CheckCircle2, User, Phone, Mail, Info, Hammer, Wrench, Trash2, Shovel } from 'lucide-react';
 import './QuoteModal.css';
 
 const pricingData = {
-  'water-remediation': { 
-    label: 'Water Remediation', 
-    icon: Droplets,
-    description: 'We calculate based on Square Footage, Contamination Class (1-3), and Moisture Depth Factor.'
-  },
-  'roofing': { 
-    label: 'Roofing Services', 
-    icon: Home,
-    description: 'We calculate based on Total Squares (100 sq ft units), Material Grade, and Waste Factor (typically 25%).'
-  },
   'concrete': { 
     label: 'Concrete & Foundation', 
     icon: Hammer,
@@ -24,11 +14,18 @@ const pricingData = {
     icon: Wrench,
     description: 'We calculate based on Materials (pipes, valves, fixtures), Labor (hourly rate), Overhead (gas, insurance, tools), and Profit.'
   },
+  'excavation': { 
+    label: 'Excavation Services', 
+    icon: Shovel,
+    description: 'We calculate based on linear footage, excavation type (Trenching vs. Tunneling), and depth requirements.'
+  },
 };
 
 export default function QuoteModal({ isOpen, onClose, initialService, onDetailedEstimate }) {
   const [step, setStep] = useState(1);
-  const [projectType, setProjectType] = useState('water-remediation');
+  const [projectType, setProjectType] = useState('concrete');
+  const [excavationType, setExcavationType] = useState('trenching'); // 'trenching' or 'tunneling'
+  const [trenchDepth, setTrenchDepth] = useState(2); // 2, 4, or 6 feet
   const [sqFt, setSqFt] = useState(500);
   const [contamination, setContamination] = useState(1);
   const [moistureDepth, setMoistureDepth] = useState(1);
@@ -53,10 +50,9 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
   useEffect(() => {
     if (isOpen && initialService) {
       const serviceMap = {
-        'Water Remediation': 'water-remediation',
-        'Foundation Repair': 'concrete',
-        'Roofing Services': 'roofing',
-        'Concrete Plumbing': 'plumbing'
+        'Concrete & Foundation': 'concrete',
+        'Plumbing Services': 'plumbing',
+        'Excavation Services': 'excavation'
       };
       const mapped = serviceMap[initialService];
       if (mapped) setProjectType(mapped);
@@ -74,29 +70,27 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
   // --- CALCULATION LOGIC ---
   const computeEstimate = () => {
     switch (projectType) {
-      case 'water-remediation':
-        // Base mobilization fee of $250 + realistic mitigation sqft cost * depth multiplier
-        const baseWaterPrice = contamination === 1 ? 3.50 : contamination === 2 ? 5.50 : 9.00;
-        const waterDepthMult = moistureDepth === 1 ? 1.0 : 1.4;
-        return Math.floor(250 + sqFt * baseWaterPrice * waterDepthMult);
-      
       case 'concrete':
         const yards = (length * width * thickness) / 27;
         const withWaste = yards * 1.1;
         // Installed concrete: $750/cu yd including excavation, framing, rebar, labor, and concrete material
         return Math.floor(withWaste * 750);
 
-      case 'roofing':
-        const squares = (length * width) / 100;
-        const totalSquares = squares * 1.25; // waste factor
-        // Asphalt shingle standard: $480/sq, Premium architectural: $620/sq, Metal: $1150/sq (labor + materials)
-        const pricePerSquare = roofMaterial === 'standard' ? 480 : roofMaterial === 'architectural' ? 620 : 1150;
-        return Math.floor(totalSquares * pricePerSquare);
-
       case 'plumbing':
         const labor = laborHours * laborRate;
         const overhead = (materialCost + labor) * overheadFactor;
         return Math.floor(materialCost + labor + overhead);
+
+      case 'excavation':
+        const isTrenching = excavationType === 'trenching';
+        if (isTrenching) {
+          // Trenching: length * depth factor * base rate ($35/linear foot)
+          const depthMultiplier = trenchDepth === 2 ? 1.0 : trenchDepth === 4 ? 1.5 : 2.2;
+          return Math.floor(length * 35 * depthMultiplier);
+        } else {
+          // Tunneling: length * base rate ($180/linear foot)
+          return Math.floor(length * 180);
+        }
 
       default:
         return 0;
@@ -203,59 +197,7 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
 
                         {/* Dynamic Inputs */}
                         <div className="quote-inputs-container">
-                          {projectType === 'water-remediation' && (
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                              <div className="quote-input-group">
-                                <div className="quote-input-label-row">
-                                  <span>Affected Area</span>
-                                  <span className="quote-value-display">{sqFt.toLocaleString()} Sq Ft</span>
-                                </div>
-                                <input 
-                                  type="range" 
-                                  min="1" 
-                                  max="5000" 
-                                  step="1" 
-                                  value={sqFt} 
-                                  onChange={(e) => setSqFt(Number(e.target.value))} 
-                                  className="quote-slider" 
-                                />
-                              </div>
-                              <div className="quote-grid-2">
-                                <div className="quote-input-group">
-                                  <label className="quote-input-label-row" style={{ marginBottom: '0.35rem', display: 'block' }}>Contamination Level</label>
-                                  <div className="quote-choices-grid">
-                                    {['Clean', 'Grey', 'Black'].map((label, i) => (
-                                      <button 
-                                        key={label} 
-                                        type="button"
-                                        onClick={() => setContamination(i + 1)} 
-                                        className={`quote-choice-btn ${contamination === i + 1 ? 'active' : ''}`}
-                                      >
-                                        {label}
-                                      </button>
-                                    ))}
-                                  </div>
-                                </div>
-                                <div className="quote-input-group">
-                                  <label className="quote-input-label-row" style={{ marginBottom: '0.35rem', display: 'block' }}>Moisture Depth</label>
-                                  <div className="quote-choices-grid">
-                                    {['Surface', 'Deep'].map((label, i) => (
-                                      <button 
-                                        key={label} 
-                                        type="button"
-                                        onClick={() => setMoistureDepth(i + 1)} 
-                                        className={`quote-choice-btn ${moistureDepth === i + 1 ? 'active' : ''}`}
-                                      >
-                                        {label}
-                                      </button>
-                                    ))}
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          )}
-
-                          {(projectType === 'concrete' || projectType === 'roofing') && (
+                          {projectType === 'concrete' && (
                             <div className="quote-grid-2">
                               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                                 <div className="quote-input-group">
@@ -291,50 +233,79 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
                               </div>
                               
                               <div className="quote-side-card">
-                                <span className="quote-side-card-title">
-                                  {projectType === 'concrete' ? 'Total Volume' : 'Total Squares'}
-                                </span>
+                                <span className="quote-side-card-title">Total Volume</span>
                                 <div className="quote-side-card-value">
-                                  {projectType === 'concrete' 
-                                    ? `${((length * width * thickness) / 27).toFixed(1)} CU YD` 
-                                    : `${((length * width) / 100).toFixed(1)} SQ`}
+                                  {`${((length * width * thickness) / 27).toFixed(1)} CU YD`}
                                 </div>
                                 
-                                {projectType === 'concrete' && (
-                                  <div style={{ marginTop: '1rem', width: '100%' }}>
-                                    <label className="quote-input-label-row" style={{ display: 'block', textAlign: 'center', marginBottom: '0.5rem' }}>Thickness (Inches)</label>
+                                <div style={{ marginTop: '1rem', width: '100%' }}>
+                                  <label className="quote-input-label-row" style={{ display: 'block', textAlign: 'center', marginBottom: '0.5rem' }}>Thickness (Inches)</label>
+                                  <div className="quote-choices-grid">
+                                    {[0.33, 0.5, 0.66].map((val) => (
+                                      <button 
+                                        key={val} 
+                                        type="button"
+                                        onClick={() => setThickness(val)} 
+                                        className={`quote-choice-btn ${thickness === val ? 'active' : ''}`}
+                                      >
+                                        {Math.round(val * 12)}"
+                                      </button>
+                                    ))}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+
+                          {projectType === 'excavation' && (
+                            <div className="quote-grid-2">
+                              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                                <div className="quote-input-group">
+                                  <div className="quote-input-label-row">
+                                    <span>Linear Length</span>
+                                    <span className="quote-value-display">{length.toLocaleString()} Ft</span>
+                                  </div>
+                                  <input 
+                                    type="range" 
+                                    min="1" 
+                                    max="1000" 
+                                    step="1" 
+                                    value={length} 
+                                    onChange={(e) => setLength(Number(e.target.value))} 
+                                    className="quote-slider" 
+                                  />
+                                </div>
+                              </div>
+                              
+                              <div className="quote-side-card">
+                                <span className="quote-side-card-title">Excavation Type</span>
+                                <div className="quote-choices-grid" style={{ marginBottom: '1rem', width: '100%' }}>
+                                  {['trenching', 'tunneling'].map((type) => (
+                                    <button
+                                      key={type}
+                                      type="button"
+                                      onClick={() => setExcavationType(type)}
+                                      className={`quote-choice-btn ${excavationType === type ? 'active' : ''}`}
+                                    >
+                                      {type.charAt(0).toUpperCase() + type.slice(1)}
+                                    </button>
+                                  ))}
+                                </div>
+
+                                {excavationType === 'trenching' && (
+                                  <div style={{ width: '100%' }}>
+                                    <label className="quote-input-label-row" style={{ display: 'block', textAlign: 'center', marginBottom: '0.5rem' }}>Trench Depth</label>
                                     <div className="quote-choices-grid">
-                                      {[0.33, 0.5, 0.66].map((val) => (
+                                      {[2, 4, 6].map((depth) => (
                                         <button 
-                                          key={val} 
+                                          key={depth} 
                                           type="button"
-                                          onClick={() => setThickness(val)} 
-                                          className={`quote-choice-btn ${thickness === val ? 'active' : ''}`}
+                                          onClick={() => setTrenchDepth(depth)} 
+                                          className={`quote-choice-btn ${trenchDepth === depth ? 'active' : ''}`}
                                         >
-                                          {Math.round(val * 12)}"
+                                          {depth} Ft
                                         </button>
                                       ))}
-                                    </div>
-                                  </div>
-                                )}
-
-                                {projectType === 'roofing' && (
-                                  <div style={{ marginTop: '1rem', width: '100%' }}>
-                                    <label className="quote-input-label-row" style={{ display: 'block', textAlign: 'center', marginBottom: '0.5rem' }}>Material Grade</label>
-                                    <div className="quote-choices-grid">
-                                      {['Standard Shingle', 'Architectural', 'Metal'].map((label, i) => {
-                                        const keys = ['standard', 'architectural', 'metal'];
-                                        return (
-                                          <button 
-                                            key={label} 
-                                            type="button"
-                                            onClick={() => setRoofMaterial(keys[i])} 
-                                            className={`quote-choice-btn ${roofMaterial === keys[i] ? 'active' : ''}`}
-                                          >
-                                            {label.split(' ')[0]}
-                                          </button>
-                                        );
-                                      })}
                                     </div>
                                   </div>
                                 )}
@@ -398,24 +369,21 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
                               onClick={() => {
                                 let details = `Detailed Custom Estimate Request for ${pricingData[projectType].label}.\n\n`;
                                 details += `Project Specifications:\n`;
-                                if (projectType === 'water-remediation') {
-                                  details += `- Affected Area: ${sqFt.toLocaleString()} Sq Ft\n`;
-                                  details += `- Contamination Level: ${contamination === 1 ? 'Clean' : contamination === 2 ? 'Grey' : 'Black'}\n`;
-                                  details += `- Moisture Depth: ${moistureDepth === 1 ? 'Surface' : 'Deep'}\n`;
-                                } else if (projectType === 'concrete') {
+                                if (projectType === 'concrete') {
                                   details += `- Length: ${length.toLocaleString()} Ft\n`;
                                   details += `- Width: ${width.toLocaleString()} Ft\n`;
                                   details += `- Thickness: ${Math.round(thickness * 12)} inches\n`;
                                   details += `- Calculated Volume: ${((length * width * thickness) / 27).toFixed(1)} CU YD\n`;
-                                } else if (projectType === 'roofing') {
-                                  details += `- Length: ${length.toLocaleString()} Ft\n`;
-                                  details += `- Width: ${width.toLocaleString()} Ft\n`;
-                                  details += `- Calculated Area: ${((length * width) / 100).toFixed(1)} SQ\n`;
-                                  details += `- Material Grade: ${roofMaterial.charAt(0).toUpperCase() + roofMaterial.slice(1)}\n`;
                                 } else if (projectType === 'plumbing') {
                                   details += `- Materials Cost: $${materialCost.toLocaleString()}\n`;
                                   details += `- Labor Hours: ${laborHours} HRS\n`;
                                   details += `- Estimated Overhead (20%): $${((materialCost + laborHours * laborRate) * overheadFactor).toLocaleString()}\n`;
+                                } else if (projectType === 'excavation') {
+                                  details += `- Excavation Type: ${excavationType.charAt(0).toUpperCase() + excavationType.slice(1)}\n`;
+                                  details += `- Linear Length: ${length.toLocaleString()} Ft\n`;
+                                  if (excavationType === 'trenching') {
+                                    details += `- Trench Depth: ${trenchDepth} Ft\n`;
+                                  }
                                 }
                                 details += `\nPreliminary Estimated Budget: $${activeEstimate.toLocaleString()}*\n\n`;
                                 details += `Please contact me to finalize this estimate.`;

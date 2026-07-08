@@ -1,18 +1,10 @@
 import React from 'react'
-import { Droplets, Home, Hammer, Wrench } from 'lucide-react'
-import waterImg from '../../public/images/water.jpg'
+import { Hammer, Wrench, Shovel } from 'lucide-react'
 import foundationImg from '../../public/images/foundation.jpg'
-import roofImg from '../../public/images/roof.jpg'
 import plumbingImg from '../../public/images/plumbing.jpg'
 import './Services.css'
 
 const services = [
-  {
-    icon: <Droplets size={24} />,
-    title: "Water Remediation",
-    image: waterImg,
-    description: "Rapid response for water damage. We dry, clean, and restore your home to its original state."
-  },
   {
     icon: <Hammer size={24} />,
     title: "Concrete & Foundation",
@@ -20,16 +12,16 @@ const services = [
     description: "Structural integrity is our priority. Expert concrete installation, foundation leveling, and crack repair."
   },
   {
-    icon: <Home size={24} />,
-    title: "Roofing Services",
-    image: roofImg,
-    description: "Reliable roof repairs and full replacements using top-tier materials."
-  },
-  {
     icon: <Wrench size={24} />,
     title: "Plumbing Services",
     image: plumbingImg,
     description: "Professional leak detection, pipe replacement, fixtures installation, and emergency plumbing."
+  },
+  {
+    icon: <Shovel size={24} />,
+    title: "Excavation Services",
+    image: "https://images.unsplash.com/photo-1579294800821-694d95e86143?auto=format&fit=crop&w=800&q=80",
+    description: "Precision site preparation, trenching, and tunneling. We lay utility conduits, excavate foundations, and carve tunnels."
   }
 ]
 

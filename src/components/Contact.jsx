@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './Contact.css'
 
-function Contact({ initialService }) {
+function Contact({ initialService, initialMessage }) {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -12,9 +12,19 @@ function Contact({ initialService }) {
 
   useEffect(() => {
     if (initialService) {
-      setFormData(prev => ({ ...prev, service: initialService }));
+      // Map service name to standard options if needed
+      const standardServices = ["Water Remediation", "Concrete & Foundation", "Roofing Services", "Plumbing Services"];
+      if (standardServices.includes(initialService)) {
+        setFormData(prev => ({ ...prev, service: initialService }));
+      }
     }
   }, [initialService]);
+
+  useEffect(() => {
+    if (initialMessage) {
+      setFormData(prev => ({ ...prev, message: initialMessage }));
+    }
+  }, [initialMessage]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,27 +35,36 @@ function Contact({ initialService }) {
     e.preventDefault();
     setStatus('sending');
 
-    // GOOGLE FORMS INTEGRATION INSTRUCTIONS:
-    // 1. Create a Google Form with fields: Name, Phone, Service, Message.
-    // 2. Get the form's "Pre-filled link" to find the entry IDs.
-    // 3. Replace the URL and entry IDs below.
-    
-    const googleFormUrl = "YOUR_GOOGLE_FORM_POST_URL"; // Ends in /formResponse
-    
-    const formDataBody = new FormData();
-    formDataBody.append("entry.XXXXXX", formData.name);    // Replace with Name ID
-    formDataBody.append("entry.XXXXXX", formData.phone);   // Replace with Phone ID
-    formDataBody.append("entry.XXXXXX", formData.service); // Replace with Service ID
-    formDataBody.append("entry.XXXXXX", formData.message); // Replace with Message ID
+    // We use Web3Forms to email the submission directly to the site owner.
+    // Replace 'YOUR_ACCESS_KEY_HERE' with your Web3Forms Access Key.
+    // Get a free key instantly by entering your email at: https://web3forms.com
+    const accessKey = "YOUR_ACCESS_KEY_HERE"; 
 
-    fetch(googleFormUrl, {
+    fetch("https://api.web3forms.com/submit", {
       method: "POST",
-      mode: "no-cors",
-      body: formDataBody
-    }).then(() => {
-      setStatus('success');
-      setFormData({ name: '', phone: '', service: 'Water Remediation', message: '' });
-    }).catch(() => {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        access_key: accessKey,
+        name: formData.name,
+        phone: formData.phone,
+        service: formData.service,
+        message: formData.message,
+        subject: `New Lead: ${formData.service} from Shaans Website`
+      })
+    })
+    .then(async (res) => {
+      const data = await res.json();
+      if (data.success) {
+        setStatus('success');
+        setFormData({ name: '', phone: '', service: 'Water Remediation', message: '' });
+      } else {
+        setStatus('error');
+      }
+    })
+    .catch(() => {
       setStatus('error');
     });
   };

@@ -13,6 +13,7 @@ import QuoteModal from './components/QuoteModal'
 function App() {
   const [selectedService, setSelectedService] = useState('')
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false)
+  const [prefilledMessage, setPrefilledMessage] = useState('')
 
   return (
     <div className="app">
@@ -25,7 +26,7 @@ function App() {
         onServiceSelect={setSelectedService} 
         onOpenQuote={() => setIsQuoteModalOpen(true)}
       />
-      <Contact initialService={selectedService} />
+      <Contact initialService={selectedService} initialMessage={prefilledMessage} />
       {/* MapSection moved to the end per user request */}
       <MapSection />
       <Footer />
@@ -34,6 +35,18 @@ function App() {
         isOpen={isQuoteModalOpen} 
         onClose={() => setIsQuoteModalOpen(false)} 
         initialService={selectedService}
+        onDetailedEstimate={(service, message) => {
+          setSelectedService(service);
+          setPrefilledMessage(message);
+          setIsQuoteModalOpen(false);
+          // Scroll to contact form
+          setTimeout(() => {
+            const contactSection = document.getElementById('contact');
+            if (contactSection) {
+              contactSection.scrollIntoView({ behavior: 'smooth' });
+            }
+          }, 100);
+        }}
       />
     </div>
   )

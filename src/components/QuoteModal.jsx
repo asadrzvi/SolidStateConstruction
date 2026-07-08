@@ -26,7 +26,7 @@ const pricingData = {
   },
 };
 
-export default function QuoteModal({ isOpen, onClose, initialService }) {
+export default function QuoteModal({ isOpen, onClose, initialService, onDetailedEstimate }) {
   const [step, setStep] = useState(1);
   const [projectType, setProjectType] = useState('water-remediation');
   const [sqFt, setSqFt] = useState(500);
@@ -393,13 +393,40 @@ export default function QuoteModal({ isOpen, onClose, initialService }) {
                             <span className="quote-modal-price-value">${activeEstimate.toLocaleString()}*</span>
                           </div>
                           <div className="quote-btn-group" style={{ maxWidth: '440px' }}>
-                            <a 
-                              href={`mailto:contact@solidstateconstruction.com?subject=Detailed Custom Quote Request - ${pricingData[projectType]?.label || 'Service'}&body=Hello Solid State Construction Team,%0A%0AI would like to request a detailed custom quote for the following project:%0A%0A- Service: ${pricingData[projectType]?.label || 'N/A'}%0A- Size: ${projectType === 'water-remediation' ? `${sqFt} sq ft` : (projectType === 'plumbing' ? 'Plumbing Job' : `${length}x${width} (${length * width} sq ft)`)}%0A%0APlease let me know what details you need from me to provide a binding proposal.%0A%0ABest regards,%0A[Your Name]`}
+                            <button 
+                              type="button"
+                              onClick={() => {
+                                let details = `Detailed Custom Estimate Request for ${pricingData[projectType].label}.\n\n`;
+                                details += `Project Specifications:\n`;
+                                if (projectType === 'water-remediation') {
+                                  details += `- Affected Area: ${sqFt.toLocaleString()} Sq Ft\n`;
+                                  details += `- Contamination Level: ${contamination === 1 ? 'Clean' : contamination === 2 ? 'Grey' : 'Black'}\n`;
+                                  details += `- Moisture Depth: ${moistureDepth === 1 ? 'Surface' : 'Deep'}\n`;
+                                } else if (projectType === 'concrete') {
+                                  details += `- Length: ${length.toLocaleString()} Ft\n`;
+                                  details += `- Width: ${width.toLocaleString()} Ft\n`;
+                                  details += `- Thickness: ${Math.round(thickness * 12)} inches\n`;
+                                  details += `- Calculated Volume: ${((length * width * thickness) / 27).toFixed(1)} CU YD\n`;
+                                } else if (projectType === 'roofing') {
+                                  details += `- Length: ${length.toLocaleString()} Ft\n`;
+                                  details += `- Width: ${width.toLocaleString()} Ft\n`;
+                                  details += `- Calculated Area: ${((length * width) / 100).toFixed(1)} SQ\n`;
+                                  details += `- Material Grade: ${roofMaterial.charAt(0).toUpperCase() + roofMaterial.slice(1)}\n`;
+                                } else if (projectType === 'plumbing') {
+                                  details += `- Materials Cost: $${materialCost.toLocaleString()}\n`;
+                                  details += `- Labor Hours: ${laborHours} HRS\n`;
+                                  details += `- Estimated Overhead (20%): $${((materialCost + laborHours * laborRate) * overheadFactor).toLocaleString()}\n`;
+                                }
+                                details += `\nPreliminary Estimated Budget: $${activeEstimate.toLocaleString()}*\n\n`;
+                                details += `Please contact me to finalize this estimate.`;
+                                
+                                onDetailedEstimate(pricingData[projectType].label, details);
+                              }}
                               className="quote-btn-secondary"
-                              style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', whiteSpace: 'nowrap' }}
+                              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}
                             >
                               Get a more detailed estimate
-                            </a>
+                            </button>
                             <button onClick={() => setStep(2)} className="quote-btn-primary" style={{ flex: 1.2 }}>
                               Proceed to Details &rarr;
                             </button>

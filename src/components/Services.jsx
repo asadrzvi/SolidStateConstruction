@@ -41,11 +41,25 @@ const services = [
   }
 ]
 
-function Services({ onServiceSelect, onOpenQuote }) {
+function Services({ onServiceSelect, onOpenQuote, onPrefillMessage }) {
   const handleServiceClick = (service) => {
     if (service.directEmail) {
-      window.location.href = `mailto:contact@solidstateconstruction.com?subject=Inquiry: ${service.title}&body=Hello Solid State Construction Team,%0A%0AI would like to inquire about your ${service.title} for my property.%0A%0APlease contact me back to discuss details.%0A%0ABest regards,%0A[Your Name]`;
+      onServiceSelect(service.title);
+      if (onPrefillMessage) {
+        onPrefillMessage(`I would like to inquire about your ${service.title} for my property.\n\nPlease contact me back to discuss details.`);
+      }
+      
+      // Scroll to contact form
+      setTimeout(() => {
+        const contactSection = document.getElementById('contact');
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
     } else {
+      if (onPrefillMessage) {
+        onPrefillMessage(''); // Clear prefilled message when opening calculator
+      }
       onOpenQuote();
       onServiceSelect(service.title);
     }

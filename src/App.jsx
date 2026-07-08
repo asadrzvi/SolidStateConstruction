@@ -24,6 +24,7 @@ function App() {
       <Testimonials />
       <Services 
         onServiceSelect={setSelectedService} 
+        onPrefillMessage={setPrefilledMessage}
         onOpenQuote={() => setIsQuoteModalOpen(true)}
       />
       <Contact initialService={selectedService} initialMessage={prefilledMessage} />

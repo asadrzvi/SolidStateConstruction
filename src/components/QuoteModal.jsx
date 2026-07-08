@@ -275,25 +275,31 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
                                     className="quote-slider" 
                                   />
                                 </div>
+                                <div className="quote-input-group">
+                                  <label className="quote-input-label-row" style={{ marginBottom: '0.25rem', display: 'block' }}>Excavation Type</label>
+                                  <div className="quote-choices-grid">
+                                    {['trenching', 'tunneling'].map((type) => (
+                                      <button
+                                        key={type}
+                                        type="button"
+                                        onClick={() => setExcavationType(type)}
+                                        className={`quote-choice-btn ${excavationType === type ? 'active' : ''}`}
+                                      >
+                                        {type.charAt(0).toUpperCase() + type.slice(1)}
+                                      </button>
+                                    ))}
+                                  </div>
+                                </div>
                               </div>
                               
                               <div className="quote-side-card">
-                                <span className="quote-side-card-title">Excavation Type</span>
-                                <div className="quote-choices-grid" style={{ marginBottom: '1rem', width: '100%' }}>
-                                  {['trenching', 'tunneling'].map((type) => (
-                                    <button
-                                      key={type}
-                                      type="button"
-                                      onClick={() => setExcavationType(type)}
-                                      className={`quote-choice-btn ${excavationType === type ? 'active' : ''}`}
-                                    >
-                                      {type.charAt(0).toUpperCase() + type.slice(1)}
-                                    </button>
-                                  ))}
+                                <span className="quote-side-card-title">Linear Footage</span>
+                                <div className="quote-side-card-value">
+                                  {`${length} LF`}
                                 </div>
 
                                 {excavationType === 'trenching' && (
-                                  <div style={{ width: '100%' }}>
+                                  <div style={{ marginTop: '1rem', width: '100%' }}>
                                     <label className="quote-input-label-row" style={{ display: 'block', textAlign: 'center', marginBottom: '0.5rem' }}>Trench Depth</label>
                                     <div className="quote-choices-grid">
                                       {[2, 4, 6].map((depth) => (

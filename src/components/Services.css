@@ -4,22 +4,11 @@
 }
 
 .services-grid {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 2rem;
   margin-top: 2.5rem;
-}
-
-@media (min-width: 640px) {
-  .services-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .services-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
 }
 
 .service-card {
@@ -30,6 +19,19 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .service-card {
+    width: calc(50% - 1rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .service-card {
+    width: calc(33.333% - 1.34rem);
+  }
 }
 
 .service-card:hover {

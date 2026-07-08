@@ -147,35 +147,7 @@ export default function QuoteModal({ isOpen, onClose, initialService }) {
             exit={{ scale: 0.9, opacity: 0, y: 40 }}
             className="quote-modal-container"
           >
-            {/* Sidebar / History */}
-            <div className="quote-modal-sidebar">
-              <div className="quote-modal-sidebar-header">
-                <FileText size={16} />
-                <h3 className="quote-modal-sidebar-title">Quote History</h3>
-              </div>
-              
-              <div className="quote-modal-history-list">
-                {quoteHistory.length === 0 ? (
-                  <p style={{ color: 'var(--text-light)', fontSize: '0.75rem', fontStyle: 'italic', textAlign: 'center', marginTop: '2.5rem' }}>No history</p>
-                ) : (
-                  quoteHistory.map((q) => (
-                    <div key={q.id} className="quote-history-card">
-                      <div className="quote-history-meta">
-                        <span className="quote-history-id">{q.id}</span>
-                        <button onClick={(e) => handleDeleteHistoryItem(q.id, e)} className="quote-history-delete-btn" title="Delete Quote">
-                          <Trash2 size={14} />
-                        </button>
-                      </div>
-                      <div className="quote-history-name" title={q.clientName}>{q.clientName}</div>
-                      <div className="quote-history-footer">
-                        <span className="quote-history-date">{q.date}</span>
-                        <span className="quote-history-cost">${q.estimatedCost.toLocaleString()}</span>
-                      </div>
-                    </div>
-                  ))
-                )}
-              </div>
-            </div>
+
 
             {/* Main Content */}
             <div className="quote-modal-main">

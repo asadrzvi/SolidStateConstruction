@@ -813,3 +813,59 @@
   }
 }
 
+/* Mobile responsive scaling overrides */
+@media (max-width: 640px) {
+  .quote-modal-overlay {
+    padding: 0.5rem;
+  }
+  
+  .quote-modal-container {
+    height: 90vh;
+    max-height: 90vh;
+    border-radius: 16px;
+  }
+  
+  .quote-modal-main {
+    padding: 1.25rem 1rem;
+  }
+  
+  .quote-modal-title-group h2 {
+    font-size: 1.35rem;
+  }
+  
+  .quote-modal-header {
+    margin-bottom: 1.25rem;
+  }
+  
+  .quote-inputs-container {
+    padding: 1.25rem 1rem;
+  }
+  
+  .quote-service-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .quote-service-btn {
+    padding: 1rem 0.5rem;
+    border-radius: 10px;
+  }
+  
+  .quote-service-btn-label {
+    font-size: 0.6rem;
+  }
+  
+  .quote-summary-value {
+    font-size: 2.5rem;
+  }
+  
+  .quote-modal-price-value {
+    font-size: 2rem;
+  }
+  
+  .quote-btn-primary {
+    padding: 0.9rem 1.5rem;
+  }
+}
+

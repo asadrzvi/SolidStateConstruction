@@ -5,6 +5,8 @@ function Contact({ initialService, initialMessage }) {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
+    email: '',
+    address: '',
     service: 'Concrete & Foundation',
     message: ''
   })
@@ -50,6 +52,8 @@ function Contact({ initialService, initialMessage }) {
         access_key: accessKey,
         name: formData.name,
         phone: formData.phone,
+        email: formData.email,
+        address: formData.address,
         service: formData.service,
         message: formData.message,
         subject: `New Lead: ${formData.service} from Shaans Website`
@@ -59,7 +63,7 @@ function Contact({ initialService, initialMessage }) {
       const data = await res.json();
       if (data.success) {
         setStatus('success');
-        setFormData({ name: '', phone: '', service: 'Water Remediation', message: '' });
+        setFormData({ name: '', phone: '', email: '', address: '', service: 'Concrete & Foundation', message: '' });
       } else {
         setStatus('error');
       }
@@ -102,6 +106,28 @@ function Contact({ initialService, initialMessage }) {
                   value={formData.phone}
                   onChange={handleChange}
                   placeholder="(512) 000-0000" 
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label>Email Address</label>
+                <input 
+                  type="email" 
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="name@email.com" 
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label>Project Address</label>
+                <input 
+                  type="text" 
+                  name="address"
+                  value={formData.address}
+                  onChange={handleChange}
+                  placeholder="123 Main St, Austin, TX" 
                   required
                 />
               </div>

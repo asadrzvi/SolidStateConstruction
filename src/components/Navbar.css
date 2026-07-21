@@ -51,6 +51,11 @@
   font-size: 0.95rem;
 }
 
+.nav-links a.active-tab {
+  color: var(--accent, #708269);
+  font-weight: 700;
+}
+
 .nav-phone {
   background: var(--primary);
   color: white !important;

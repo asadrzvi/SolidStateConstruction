@@ -1,0 +1,137 @@
+.process-section {
+  padding: 5rem 0;
+  background-color: var(--bg-alt, #fafaf9);
+  position: relative;
+  overflow: hidden;
+}
+
+.timeline-container {
+  position: relative;
+  max-width: 1000px;
+  margin: 3rem auto 0;
+  padding: 1rem 0;
+}
+
+/* Central vertical line */
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--modal-border, #e5e5e0);
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.timeline-item {
+  position: relative;
+  width: 50%;
+  padding: 1.5rem 3rem;
+  box-sizing: border-box;
+  z-index: 2;
+}
+
+.timeline-item.left {
+  left: 0;
+  text-align: right;
+}
+
+.timeline-item.right {
+  left: 50%;
+  text-align: left;
+}
+
+/* Timeline dot */
+.timeline-dot {
+  position: absolute;
+  top: 2rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--accent, #708269);
+  color: white;
+  border: 4px solid var(--bg-alt, #fafaf9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(112, 130, 105, 0.2);
+  z-index: 3;
+}
+
+.timeline-item.left .timeline-dot {
+  right: -25px;
+}
+
+.timeline-item.right .timeline-dot {
+  left: -25px;
+}
+
+/* Timeline card */
+.timeline-card {
+  background: var(--bg-card, #ffffff);
+  border: 1px solid var(--modal-border, #e5e5e0);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+}
+
+.timeline-card h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  color: var(--text-color, #1f2124);
+}
+
+.timeline-card h4 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent, #708269);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 1rem;
+}
+
+.timeline-card p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-light, #5c5c5c);
+  margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .timeline-line {
+    left: 30px;
+  }
+  
+  .timeline-item {
+    width: 100%;
+    padding: 1.5rem 1.5rem 1.5rem 5rem;
+  }
+  
+  .timeline-item.left {
+    left: 0;
+    text-align: left;
+  }
+  
+  .timeline-item.right {
+    left: 0;
+    text-align: left;
+  }
+  
+  .timeline-item.left .timeline-dot {
+    left: 5px;
+    right: auto;
+  }
+  
+  .timeline-item.right .timeline-dot {
+    left: 5px;
+  }
+}

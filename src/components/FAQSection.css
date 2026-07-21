@@ -1,0 +1,81 @@
+.faq-section {
+  padding: 5rem 0;
+  background-color: var(--bg-card, #ffffff);
+  border-top: 1px solid var(--modal-border, #e5e5e0);
+  border-bottom: 1px solid var(--modal-border, #e5e5e0);
+}
+
+.faq-accordion-container {
+  max-width: 800px;
+  margin: 3rem auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.faq-accordion-item {
+  border: 1px solid var(--modal-border, #e5e5e0);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  background: var(--bg-card, #ffffff);
+}
+
+.faq-accordion-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  border-color: var(--accent, #708269);
+}
+
+.faq-accordion-header {
+  width: 100%;
+  padding: 1.5rem;
+  background: none;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+  cursor: pointer;
+  color: var(--text-color, #1f2124);
+  outline: none;
+  gap: 1rem;
+}
+
+.faq-accordion-header h3 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin: 0;
+  color: var(--text-color, #1f2124);
+  line-height: 1.4;
+}
+
+.faq-accordion-icon {
+  color: var(--accent, #708269);
+  flex-shrink: 0;
+}
+
+.faq-accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  padding: 0 1.5rem;
+  background-color: var(--bg-alt, #fafaf9);
+}
+
+.faq-accordion-item.open {
+  border-color: var(--accent, #708269);
+  box-shadow: 0 4px 15px rgba(112, 130, 105, 0.08);
+}
+
+.faq-accordion-item.open .faq-accordion-body {
+  max-height: 200px; /* Adjust dynamically or standard safe height */
+  padding: 1.5rem;
+  border-top: 1px solid var(--modal-border, #e5e5e0);
+}
+
+.faq-accordion-body p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-light, #5c5c5c);
+}

@@ -1,0 +1,25 @@
+.gallery-page {
+  padding-top: 80px; /* Offset for sticky navbar */
+  background-color: var(--bg-color, #ffffff);
+}
+
+.gallery-page-hero {
+  background: linear-gradient(135deg, var(--accent, #708269) 0%, #4a5745 100%);
+  color: white;
+  padding: 5rem 0;
+  text-align: center;
+}
+
+.gallery-page-hero h1 {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 900;
+  margin: 0 0 1rem 0;
+}
+
+.gallery-page-hero .subtitle {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  max-width: 700px;
+  margin: 0 auto;
+  opacity: 0.9;
+  line-height: 1.5;
+}

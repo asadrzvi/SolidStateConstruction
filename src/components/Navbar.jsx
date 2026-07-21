@@ -4,7 +4,7 @@ import logoLight from '../../public/logo.png'
 import logoDark from '../../public/logo_dark.png'
 import './Navbar.css'
 
-function Navbar({ onOpenQuote }) {
+function Navbar({ onOpenQuote, currentPage, onPageChange }) {
   const [isDark, setIsDark] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -18,10 +18,31 @@ function Navbar({ onOpenQuote }) {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const handleBrandClick = () => {
+    onPageChange('home');
+    setIsMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleLinkClick = (e, targetPage, targetId) => {
+    e.preventDefault();
+    setIsMenuOpen(false);
+    onPageChange(targetPage);
+    
+    if (targetPage === 'home' && targetId) {
+      setTimeout(() => {
+        const el = document.getElementById(targetId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 80);
+    }
+  };
+
   return (
     <nav className="navbar">
       <div className="container">
-        <div className="nav-brand">
+        <div className="nav-brand" onClick={handleBrandClick} style={{ cursor: 'pointer' }}>
           <img 
             src={isDark ? logoDark : logoLight} 
             alt="Solid State Construction Logo" 
@@ -31,10 +52,10 @@ function Navbar({ onOpenQuote }) {
         
         <div className="nav-right">
           <div className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
-            <a href="#about" onClick={() => setIsMenuOpen(false)}>About</a>
-            <a href="#gallery" onClick={() => setIsMenuOpen(false)}>Gallery</a>
-            <a href="#services" onClick={() => setIsMenuOpen(false)}>Services</a>
-            <a href="#contact" onClick={() => setIsMenuOpen(false)}>Contact</a>
+            <a href="#about" onClick={(e) => handleLinkClick(e, 'home', 'about')} className={currentPage === 'home' ? 'active-tab' : ''}>About</a>
+            <a href="#services" onClick={(e) => handleLinkClick(e, 'home', 'services')}>Services</a>
+            <a href="#gallery" onClick={(e) => handleLinkClick(e, 'gallery', 'gallery')} className={currentPage === 'gallery' ? 'active-tab' : ''}>Gallery</a>
+            <a href="#contact" onClick={(e) => handleLinkClick(e, 'home', 'contact')}>Contact</a>
             <button 
               className="btn btn-primary quote-btn" 
               onClick={() => {

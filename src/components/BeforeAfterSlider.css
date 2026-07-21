@@ -1,0 +1,140 @@
+.ba-slider-section {
+  width: 100%;
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.ba-slider-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  user-select: none;
+}
+
+.ba-image-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.before-image-wrapper {
+  z-index: 1;
+}
+
+.after-image-wrapper {
+  z-index: 2;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.ba-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* Ensure the overlay image is sized relative to the parent container, not the clipped width */
+.after-image-wrapper .ba-image {
+  width: 100vw;
+  max-width: 900px;
+}
+
+@media (max-width: 932px) {
+  .after-image-wrapper .ba-image {
+    width: calc(100vw - 2rem);
+  }
+}
+
+.ba-label {
+  position: absolute;
+  bottom: 1.5rem;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
+  pointer-events: none;
+  z-index: 4;
+}
+
+.ba-label-before {
+  left: 1.5rem;
+}
+
+.ba-label-after {
+  right: 1.5rem;
+}
+
+.ba-slider-handle-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: #fff;
+  z-index: 3;
+  pointer-events: none;
+  transform: translateX(-50%);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.ba-slider-handle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 48px;
+  height: 48px;
+  background-color: var(--accent, #708269);
+  color: #fff;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
+.ba-handle-arrows {
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: -2px;
+}
+
+.ba-slider-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: ew-resize;
+  z-index: 5;
+  -webkit-appearance: none;
+}
+
+.ba-slider-input::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 100%;
+}
+
+.ba-slider-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 48px;
+  height: 100%;
+}

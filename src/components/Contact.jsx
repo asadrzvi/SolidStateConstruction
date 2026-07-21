@@ -163,6 +163,20 @@ function Contact({ initialService, initialMessage }) {
               {status === 'error' && <p className="error-text">Something went wrong. Please call us directly.</p>}
             </form>
           )}
+
+          {status !== 'success' && (
+            <>
+              <div className="scheduler-separator">
+                <span>OR</span>
+              </div>
+              <div className="scheduler-cta">
+                <p>Prefer to pick your own time? Skip the form and book a walkthrough instantly.</p>
+                <a href="https://calendly.com" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
+                  Book Walkthrough Inspection
+                </a>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </section>

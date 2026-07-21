@@ -1,10 +1,18 @@
 import React, { useState } from 'react'
 import { Hammer, Wrench, Shovel, Droplets, Home } from 'lucide-react'
+
+// Residential service images
 import foundationImg from '../../public/images/foundation_service.png'
 import plumbingImg from '../../public/images/plumbing_service.png'
 import waterImg from '../../public/images/water_service.png'
 import roofImg from '../../public/images/roofing_service.png'
-import excavationImg from '../../public/images/excavation_service.png'
+
+// Commercial service images
+import commWaterImg from '../../public/images/comm_water_service.jpg'
+import commConcreteImg from '../../public/images/comm_concrete_service.jpg'
+import commRoofImg from '../../public/images/comm_roofing_service.jpg'
+import commExcavationImg from '../../public/images/comm_excavation_service.jpg'
+
 import './Services.css'
 
 const residentialServices = [
@@ -13,7 +21,7 @@ const residentialServices = [
     title: "Residential Water Mitigation",
     quoteKey: "Water Remediation",
     image: waterImg,
-    description: "Rapid response for residential leaks, pipe bursts, and flooding. We dry, sanitize, and restore your home.",
+    description: "Rapid response for residential leaks, pipe bursts, and flooding. We dry, sanitize, and restore your home to safety.",
     directEmail: true
   },
   {
@@ -45,31 +53,31 @@ const commercialServices = [
     icon: <Droplets size={24} />,
     title: "Commercial Water Restoration",
     quoteKey: "Water Remediation",
-    image: waterImg,
-    description: "Large-scale drying and extraction for offices, retail spaces, and warehouses. Minimal operational downtime guaranteed.",
+    image: commWaterImg,
+    description: "Large-scale drying, sanitization, and moisture extraction for offices, retail, and warehouses. Minimal downtime guaranteed.",
     directEmail: true
   },
   {
     icon: <Hammer size={24} />,
     title: "Commercial Concrete & Foundations",
     quoteKey: "Concrete & Foundation",
-    image: foundationImg,
-    description: "Heavy-duty concrete slab installations, commercial foundation underpinning, engineering design, and structural concrete repair."
+    image: commConcreteImg,
+    description: "Heavy-duty slab pouring, commercial foundation reinforcement, site engineering, and structural concrete repair."
   },
   {
     icon: <Home size={24} />,
     title: "Commercial Roofing",
     quoteKey: "Roofing Services",
-    image: roofImg,
-    description: "Flat roof coatings, commercial metal roofing, TPO replacements, and scheduled industrial roof maintenance programs.",
+    image: commRoofImg,
+    description: "Flat roof coatings, premium TPO replacement, commercial metal roofing, and industrial preventative roof maintenance.",
     directEmail: true
   },
   {
     icon: <Shovel size={24} />,
     title: "Site Prep & Heavy Excavation",
     quoteKey: "Excavation Services",
-    image: excavationImg,
-    description: "Precision commercial site grading, utility trenching, under-slab tunneling, and commercial foundation excavations."
+    image: commExcavationImg,
+    description: "Industrial grading, civil earthmoving, site drainage prep, trenching, and commercial foundation excavation."
   }
 ];
 

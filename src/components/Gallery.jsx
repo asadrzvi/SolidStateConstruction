@@ -3,11 +3,11 @@ import { X, ChevronLeft, ChevronRight, Play, Video } from 'lucide-react'
 import './Gallery.css'
 
 const media = [
-  { type: 'image', src: '/images/gallery/job1.jpg', alt: 'Kitchen Remodeling Project' },
-  { type: 'image', src: '/images/gallery/job2.jpg', alt: 'Bathroom Tiling Detail' },
-  { type: 'image', src: '/images/gallery/job3.jpg', alt: 'Custom Remodel In Progress' },
-  { type: 'image', src: '/images/gallery/job4.jpg', alt: 'Professional Paint & Trim' },
-  { type: 'image', src: '/images/gallery/job5.jpg', alt: 'Exterior Painting Project' },
+  { type: 'image', src: '/images/gallery/water1.png', alt: 'Commercial Water Damage Restoration' },
+  { type: 'image', src: '/images/gallery/water2.png', alt: 'Emergency Water Extraction & Cleanup' },
+  { type: 'image', src: '/images/gallery/water3.png', alt: 'High-Capacity Structural Drying Setup' },
+  { type: 'image', src: '/images/gallery/water4.png', alt: 'Dehumidifier & Air Mover Installation' },
+  { type: 'image', src: '/images/gallery/water5.jpg', alt: '24/7 Rapid Response Site Remediation' },
   { type: 'image', src: '/images/gallery/7e6da58d-6958-47f1-a51b-eacbdb61c97b.JPG', alt: 'Precision Concrete Formwork Detail' },
   { type: 'image', src: '/images/gallery/5c7e3f06-c5d5-4305-943c-21da6bd90e65.JPG', alt: 'Finished Reinforced Concrete Slab' },
   { type: 'video', src: '/images/gallery/1355c929-7170-4657-976e-dc071c72978f.MOV', alt: 'Active Concrete Pouring and Distribution' },

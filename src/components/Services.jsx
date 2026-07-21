@@ -1,9 +1,10 @@
 import React from 'react'
 import { Hammer, Wrench, Shovel, Droplets, Home } from 'lucide-react'
-import foundationImg from '../../public/images/foundation.jpg'
-import plumbingImg from '../../public/images/plumbing.jpg'
-import waterImg from '../../public/images/water.jpg'
-import roofImg from '../../public/images/roof.jpg'
+import foundationImg from '../../public/images/foundation_service.png'
+import plumbingImg from '../../public/images/plumbing_service.png'
+import waterImg from '../../public/images/water_service.png'
+import roofImg from '../../public/images/roofing_service.png'
+import excavationImg from '../../public/images/excavation_service.png'
 import './Services.css'
 
 const services = [
@@ -36,7 +37,7 @@ const services = [
   {
     icon: <Shovel size={24} />,
     title: "Excavation Services",
-    image: "https://images.unsplash.com/photo-1579294800821-694d95e86143?auto=format&fit=crop&w=800&q=80",
+    image: excavationImg,
     description: "Precision site preparation, trenching, and tunneling. We lay utility conduits, excavate foundations, and carve tunnels."
   }
 ]

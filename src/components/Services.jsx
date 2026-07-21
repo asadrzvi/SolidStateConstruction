@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Hammer, Wrench, Shovel, Droplets, Home } from 'lucide-react'
 import foundationImg from '../../public/images/foundation_service.png'
 import plumbingImg from '../../public/images/plumbing_service.png'
@@ -7,42 +7,77 @@ import roofImg from '../../public/images/roofing_service.png'
 import excavationImg from '../../public/images/excavation_service.png'
 import './Services.css'
 
-const services = [
+const residentialServices = [
   {
     icon: <Droplets size={24} />,
-    title: "Water Remediation",
+    title: "Residential Water Mitigation",
+    quoteKey: "Water Remediation",
     image: waterImg,
-    description: "Rapid response for water damage. We dry, clean, and restore your home to its original state.",
-    directEmail: true
-  },
-  {
-    icon: <Hammer size={24} />,
-    title: "Concrete & Foundation",
-    image: foundationImg,
-    description: "Structural integrity is our priority. Expert concrete installation, foundation leveling, and crack repair."
-  },
-  {
-    icon: <Home size={24} />,
-    title: "Roofing Services",
-    image: roofImg,
-    description: "Reliable roof repairs and full replacements using top-tier materials.",
+    description: "Rapid response for residential leaks, pipe bursts, and flooding. We dry, sanitize, and restore your home.",
     directEmail: true
   },
   {
     icon: <Wrench size={24} />,
-    title: "Plumbing Services",
+    title: "Home Plumbing Services",
+    quoteKey: "Plumbing Services",
     image: plumbingImg,
-    description: "Professional leak detection, pipe replacement, fixtures installation, and emergency plumbing."
+    description: "Professional leak detection, custom fixtures, whole-house repiping, and emergency residential plumbing."
+  },
+  {
+    icon: <Home size={24} />,
+    title: "Residential Roofing",
+    quoteKey: "Roofing Services",
+    image: roofImg,
+    description: "Expert roof repairs, storm-damage tarping, and complete residential roof replacements.",
+    directEmail: true
+  },
+  {
+    icon: <Hammer size={24} />,
+    title: "Driveways & Patios",
+    quoteKey: "Concrete & Foundation",
+    image: foundationImg,
+    description: "Custom concrete installations including patios, driveways, sidewalks, and residential foundation leveling."
+  }
+];
+
+const commercialServices = [
+  {
+    icon: <Droplets size={24} />,
+    title: "Commercial Water Restoration",
+    quoteKey: "Water Remediation",
+    image: waterImg,
+    description: "Large-scale drying and extraction for offices, retail spaces, and warehouses. Minimal operational downtime guaranteed.",
+    directEmail: true
+  },
+  {
+    icon: <Hammer size={24} />,
+    title: "Commercial Concrete & Foundations",
+    quoteKey: "Concrete & Foundation",
+    image: foundationImg,
+    description: "Heavy-duty concrete slab installations, commercial foundation underpinning, engineering design, and structural concrete repair."
+  },
+  {
+    icon: <Home size={24} />,
+    title: "Commercial Roofing",
+    quoteKey: "Roofing Services",
+    image: roofImg,
+    description: "Flat roof coatings, commercial metal roofing, TPO replacements, and scheduled industrial roof maintenance programs.",
+    directEmail: true
   },
   {
     icon: <Shovel size={24} />,
-    title: "Excavation Services",
+    title: "Site Prep & Heavy Excavation",
+    quoteKey: "Excavation Services",
     image: excavationImg,
-    description: "Precision site preparation, trenching, and tunneling. We lay utility conduits, excavate foundations, and carve tunnels."
+    description: "Precision commercial site grading, utility trenching, under-slab tunneling, and commercial foundation excavations."
   }
-]
+];
 
 function Services({ onServiceSelect, onOpenQuote, onPrefillMessage }) {
+  const [activeCategory, setActiveCategory] = useState('residential');
+  
+  const services = activeCategory === 'residential' ? residentialServices : commercialServices;
+
   const handleServiceClick = (service) => {
     if (service.directEmail) {
       onServiceSelect(service.title);
@@ -59,10 +94,10 @@ function Services({ onServiceSelect, onOpenQuote, onPrefillMessage }) {
       }, 100);
     } else {
       if (onPrefillMessage) {
-        onPrefillMessage(''); // Clear prefilled message when opening calculator
+        onPrefillMessage('');
       }
       onOpenQuote();
-      onServiceSelect(service.title);
+      onServiceSelect(service.quoteKey);
     }
   };
 
@@ -70,7 +105,26 @@ function Services({ onServiceSelect, onOpenQuote, onPrefillMessage }) {
     <section className="services" id="services">
       <div className="container">
         <h2 className="section-title">Our Specialized Services</h2>
-        <p className="section-subtitle">From emergency water restoration to custom home remodeling, we provide top-tier craftsmanship for every corner of your home.</p>
+        <p className="section-subtitle">Select between our residential and commercial solutions for tailored, legacy-grade craftsmanship.</p>
+        
+        {/* Category Tab Switcher */}
+        <div className="services-tabs">
+          <button 
+            type="button"
+            className={`services-tab-btn ${activeCategory === 'residential' ? 'active' : ''}`}
+            onClick={() => setActiveCategory('residential')}
+          >
+            Residential Services
+          </button>
+          <button 
+            type="button"
+            className={`services-tab-btn ${activeCategory === 'commercial' ? 'active' : ''}`}
+            onClick={() => setActiveCategory('commercial')}
+          >
+            Commercial Services
+          </button>
+        </div>
+
         <div className="services-grid">
           {services.map((service, index) => (
             <div 

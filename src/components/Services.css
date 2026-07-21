@@ -103,3 +103,37 @@
 .service-card:hover .service-link {
   transform: translateX(5px);
 }
+
+.services-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.services-tab-btn {
+  background: var(--card-bg, #ffffff);
+  border: 2px solid var(--secondary, #f1f3f1);
+  color: var(--text-dark, #1c201a);
+  padding: 0.8rem 2rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.services-tab-btn:hover {
+  border-color: var(--accent, #708269);
+  background-color: var(--secondary, #f1f3f1);
+}
+
+.services-tab-btn.active {
+  background-color: var(--accent, #708269);
+  color: white;
+  border-color: var(--accent, #708269);
+  box-shadow: 0 4px 15px rgba(112, 130, 105, 0.25);
+}

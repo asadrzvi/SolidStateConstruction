@@ -67,6 +67,16 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
     }
   }, []);
 
+  // Clamp slider values when project type changes to prevent out-of-bounds inputs
+  useEffect(() => {
+    if (projectType === 'concrete') {
+      if (length > 150) setLength(150);
+      if (width > 100) setWidth(100);
+    } else if (projectType === 'excavation') {
+      if (length > 300) setLength(300);
+    }
+  }, [projectType, length, width]);
+
   // --- CALCULATION LOGIC ---
   const computeEstimate = () => {
     switch (projectType) {
@@ -207,8 +217,8 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
                                   </div>
                                   <input 
                                     type="range" 
-                                    min="1" 
-                                    max="5000" 
+                                    min="5" 
+                                    max="150" 
                                     step="1" 
                                     value={length} 
                                     onChange={(e) => setLength(Number(e.target.value))} 
@@ -222,8 +232,8 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
                                   </div>
                                   <input 
                                     type="range" 
-                                    min="1" 
-                                    max="5000" 
+                                    min="5" 
+                                    max="100" 
                                     step="1" 
                                     value={width} 
                                     onChange={(e) => setWidth(Number(e.target.value))} 
@@ -267,8 +277,8 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
                                   </div>
                                   <input 
                                     type="range" 
-                                    min="1" 
-                                    max="1000" 
+                                    min="5" 
+                                    max="300" 
                                     step="1" 
                                     value={length} 
                                     onChange={(e) => setLength(Number(e.target.value))} 
@@ -343,7 +353,7 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
                                   <input 
                                     type="range" 
                                     min="1" 
-                                    max="500" 
+                                    max="80" 
                                     step="1" 
                                     value={laborHours} 
                                     onChange={(e) => setLaborHours(Number(e.target.value))} 

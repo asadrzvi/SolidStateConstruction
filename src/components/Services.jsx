@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Hammer, Wrench, Shovel, Droplets, Home } from 'lucide-react'
+import { useLanguage } from '../context/LanguageContext'
 
 // Residential service images
 import foundationImg from '../../public/images/foundation_service.png'
@@ -19,32 +20,36 @@ const residentialServices = [
   {
     icon: <Droplets size={24} />,
     title: "Residential Water Mitigation",
+    titleKey: "resWaterTitle",
+    descKey: "resWaterDesc",
     quoteKey: "Water Remediation",
     image: waterImg,
-    description: "Rapid response for residential leaks, pipe bursts, and flooding. We dry, sanitize, and restore your home to safety.",
     directEmail: true
   },
   {
     icon: <Wrench size={24} />,
     title: "Home Plumbing Services",
+    titleKey: "resPlumbingTitle",
+    descKey: "resPlumbingDesc",
     quoteKey: "Plumbing Services",
-    image: plumbingImg,
-    description: "Professional leak detection, custom fixtures, whole-house repiping, and emergency residential plumbing."
+    image: plumbingImg
   },
   {
     icon: <Home size={24} />,
     title: "Residential Roofing",
+    titleKey: "resRoofingTitle",
+    descKey: "resRoofingDesc",
     quoteKey: "Roofing Services",
     image: roofImg,
-    description: "Expert roof repairs, storm-damage tarping, and complete residential roof replacements.",
     directEmail: true
   },
   {
     icon: <Hammer size={24} />,
     title: "Driveways & Patios",
+    titleKey: "resConcreteTitle",
+    descKey: "resConcreteDesc",
     quoteKey: "Concrete & Foundation",
-    image: foundationImg,
-    description: "Custom concrete installations including patios, driveways, sidewalks, and residential foundation leveling."
+    image: foundationImg
   }
 ];
 
@@ -52,37 +57,42 @@ const commercialServices = [
   {
     icon: <Droplets size={24} />,
     title: "Commercial Water Restoration",
+    titleKey: "commWaterTitle",
+    descKey: "commWaterDesc",
     quoteKey: "Water Remediation",
     image: commWaterImg,
-    description: "Large-scale drying, sanitization, and moisture extraction for offices, retail, and warehouses. Minimal downtime guaranteed.",
     directEmail: true
   },
   {
     icon: <Hammer size={24} />,
     title: "Commercial Concrete & Foundations",
+    titleKey: "commConcreteTitle",
+    descKey: "commConcreteDesc",
     quoteKey: "Concrete & Foundation",
-    image: commConcreteImg,
-    description: "Heavy-duty slab pouring, commercial foundation reinforcement, site engineering, and structural concrete repair."
+    image: commConcreteImg
   },
   {
     icon: <Home size={24} />,
     title: "Commercial Roofing",
+    titleKey: "commRoofingTitle",
+    descKey: "commRoofingDesc",
     quoteKey: "Roofing Services",
     image: commRoofImg,
-    description: "Flat roof coatings, premium TPO replacement, commercial metal roofing, and industrial preventative roof maintenance.",
     directEmail: true
   },
   {
     icon: <Shovel size={24} />,
     title: "Site Prep & Heavy Excavation",
+    titleKey: "commExcavationTitle",
+    descKey: "commExcavationDesc",
     quoteKey: "Excavation Services",
-    image: commExcavationImg,
-    description: "Industrial grading, civil earthmoving, site drainage prep, trenching, and commercial foundation excavation."
+    image: commExcavationImg
   }
 ];
 
 function Services({ onServiceSelect, onOpenQuote, onPrefillMessage }) {
   const [activeCategory, setActiveCategory] = useState('residential');
+  const { t } = useLanguage();
   
   const services = activeCategory === 'residential' ? residentialServices : commercialServices;
 
@@ -112,8 +122,8 @@ function Services({ onServiceSelect, onOpenQuote, onPrefillMessage }) {
   return (
     <section className="services" id="services">
       <div className="container">
-        <h2 className="section-title">Our Specialized Services</h2>
-        <p className="section-subtitle">Select between our residential and commercial solutions for tailored, legacy-grade craftsmanship.</p>
+        <h2 className="section-title">{t('servicesTitle')}</h2>
+        <p className="section-subtitle">{t('servicesSubtitle')}</p>
         
         {/* Category Tab Switcher */}
         <div className="services-tabs">
@@ -122,14 +132,14 @@ function Services({ onServiceSelect, onOpenQuote, onPrefillMessage }) {
             className={`services-tab-btn ${activeCategory === 'residential' ? 'active' : ''}`}
             onClick={() => setActiveCategory('residential')}
           >
-            Residential Services
+            {t('servicesTabRes')}
           </button>
           <button 
             type="button"
             className={`services-tab-btn ${activeCategory === 'commercial' ? 'active' : ''}`}
             onClick={() => setActiveCategory('commercial')}
           >
-            Commercial Services
+            {t('servicesTabComm')}
           </button>
         </div>
 
@@ -144,7 +154,7 @@ function Services({ onServiceSelect, onOpenQuote, onPrefillMessage }) {
               <div className="service-image">
                 <img 
                   src={service.image} 
-                  alt={service.title}
+                  alt={t(service.titleKey)}
                   loading="lazy"
                   onError={(e) => {
                     e.target.onerror = null; 
@@ -154,9 +164,9 @@ function Services({ onServiceSelect, onOpenQuote, onPrefillMessage }) {
                 <div className="service-icon-overlay">{service.icon}</div>
               </div>
               <div className="service-card-content">
-                <h3>{service.title}</h3>
-                <p>{service.description}</p>
-                <span className="service-link">Inquire Now &rarr;</span>
+                <h3>{t(service.titleKey)}</h3>
+                <p>{t(service.descKey)}</p>
+                <span className="service-link">{t('servicesInquireBtn')} &rarr;</span>
               </div>
             </div>
           ))}

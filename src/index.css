@@ -9,14 +9,14 @@
 
 :root {
   --primary: #3c4735; /* Deep Metallic Olive */
-  --secondary: #f1f3f1; /* Soft Silver Mist with a touch of sage */
   --accent: #708269; /* Muted Sage Green / Concrete Sage */
-  --text-dark: #1c201a; /* Slate Dark Olive */
-  --text-light: #515a4f; /* Slate Medium Olive */
-  --white: #ffffff;
-  --bg-color: #ffffff;
-  --card-bg: #ffffff;
-  --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+  --text-dark: #ebedea; /* Light concrete gray */
+  --text-light: #959e92; /* Medium concrete gray */
+  --white: #1a1f18;
+  --bg-color: #111410; /* Dark background */
+  --card-bg: #1a1f18; /* Surface card */
+  --secondary: #262d24; /* Border/secondary color */
+  --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
 
   /* Theme variables from original site */
   --bg-base: #111410;
@@ -27,14 +27,14 @@
   line-height: 1.6;
 }
 
-[data-theme='dark'] {
-  --text-dark: #ebedea;
-  --text-light: #959e92;
-  --white: #1a1f18;
-  --bg-color: #111410;
-  --card-bg: #1a1f18;
-  --secondary: #262d24;
-  --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+[data-theme='light'] {
+  --text-dark: #1c201a; /* Slate Dark Olive */
+  --text-light: #515a4f; /* Slate Medium Olive */
+  --white: #ffffff;
+  --bg-color: #ffffff;
+  --card-bg: #ffffff;
+  --secondary: #f1f3f1; /* Soft Silver Mist with a touch of sage */
+  --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
 }
 
 * {

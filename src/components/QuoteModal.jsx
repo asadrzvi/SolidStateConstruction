@@ -1,43 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, FileText, CheckCircle2, User, Phone, Mail, Info, Hammer, Wrench, Trash2, Shovel } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 import './QuoteModal.css';
-
-const pricingData = {
-  'concrete': { 
-    label: 'Concrete & Foundation', 
-    icon: Hammer,
-    description: 'We calculate based on Cubic Yardage (Length x Width x Thickness / 27) plus Rebar & Finishing labor.'
-  },
-  'plumbing': { 
-    label: 'Plumbing Services', 
-    icon: Wrench,
-    description: 'We calculate based on Materials (pipes, valves, fixtures), Labor (hourly rate), Overhead (gas, insurance, tools), and Profit.'
-  },
-  'excavation': { 
-    label: 'Excavation Services', 
-    icon: Shovel,
-    description: 'We calculate based on linear footage, excavation type (Trenching vs. Tunneling), and depth requirements.'
-  },
-};
 
 export default function QuoteModal({ isOpen, onClose, initialService, onDetailedEstimate }) {
   const [step, setStep] = useState(1);
   const [projectType, setProjectType] = useState('concrete');
   const [excavationType, setExcavationType] = useState('trenching'); // 'trenching' or 'tunneling'
   const [trenchDepth, setTrenchDepth] = useState(2); // 2, 4, or 6 feet
-  const [sqFt, setSqFt] = useState(500);
-  const [contamination, setContamination] = useState(1);
-  const [moistureDepth, setMoistureDepth] = useState(1);
   const [length, setLength] = useState(20);
   const [width, setWidth] = useState(20);
   const [thickness, setThickness] = useState(0.33); // 4 inches in feet
-  const [roofMaterial, setRoofMaterial] = useState('architectural');
   const [materialCost, setMaterialCost] = useState(1200);
   const [laborHours, setLaborHours] = useState(16);
+  const { t } = useLanguage();
+
   const laborRate = 85;
   const overheadFactor = 0.20;
-  const profitFactor = 0.15;
 
   const [clientName, setClientName] = useState('');
   const [phone, setPhone] = useState('');
@@ -46,13 +26,35 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
   const [savedSuccess, setSavedSuccess] = useState(false);
   const [quoteHistory, setQuoteHistory] = useState([]);
 
+  const pricingData = {
+    'concrete': { 
+      label: t('navAbout') === 'About' ? 'Concrete & Foundation' : 'Concreto y Cimientos', 
+      icon: Hammer,
+      description: t('quoteConcreteDesc')
+    },
+    'plumbing': { 
+      label: t('navAbout') === 'About' ? 'Plumbing Services' : 'Servicios de Plomería', 
+      icon: Wrench,
+      description: t('quotePlumbingDesc')
+    },
+    'excavation': { 
+      label: t('navAbout') === 'About' ? 'Excavation Services' : 'Servicios de Excavación', 
+      icon: Shovel,
+      description: t('quoteExcavationDesc')
+    },
+  };
+
   // Sync initial service
   useEffect(() => {
     if (isOpen && initialService) {
       const serviceMap = {
         'Concrete & Foundation': 'concrete',
+        'Driveways & Patios': 'concrete',
+        'Commercial Concrete & Foundations': 'concrete',
         'Plumbing Services': 'plumbing',
-        'Excavation Services': 'excavation'
+        'Home Plumbing Services': 'plumbing',
+        'Excavation Services': 'excavation',
+        'Site Prep & Heavy Excavation': 'excavation'
       };
       const mapped = serviceMap[initialService];
       if (mapped) setProjectType(mapped);
@@ -83,7 +85,6 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
       case 'concrete':
         const yards = (length * width * thickness) / 27;
         const withWaste = yards * 1.1;
-        // Installed concrete: $750/cu yd including excavation, framing, rebar, labor, and concrete material
         return Math.floor(withWaste * 750);
 
       case 'plumbing':
@@ -94,11 +95,9 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
       case 'excavation':
         const isTrenching = excavationType === 'trenching';
         if (isTrenching) {
-          // Trenching: length * depth factor * base rate ($35/linear foot)
           const depthMultiplier = trenchDepth === 2 ? 1.0 : trenchDepth === 4 ? 1.5 : 2.2;
           return Math.floor(length * 35 * depthMultiplier);
         } else {
-          // Tunneling: length * base rate ($180/linear foot)
           return Math.floor(length * 180);
         }
 
@@ -136,42 +135,42 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
           <div class="header">
             <div>
               <h1 class="title">Solid State Construction</h1>
-              <div class="meta">Date: ${new Date().toLocaleDateString()} | Reference: EST-${Math.floor(10000 + Math.random() * 90000)}</div>
+              <div class="meta">${t('navAbout') === 'About' ? 'Date' : 'Fecha'}: ${new Date().toLocaleDateString()} | Reference: EST-${Math.floor(10000 + Math.random() * 90000)}</div>
             </div>
             <div class="logo">Solid State</div>
           </div>
           
-          <h2>Preliminary Estimate Summary</h2>
-          <p>Thank you for requesting an estimate from Solid State Construction. Below are the preliminary specifications and budget generated by our estimation tool.</p>
+          <h2>${t('quoteSummaryTitle')}</h2>
+          <p>${t('navAbout') === 'About' ? 'Thank you for requesting an estimate from Solid State Construction. Below are the preliminary specifications and budget generated by our estimation tool.' : 'Gracias por solicitar un presupuesto de Solid State Construction. A continuación se presentan las especificaciones preliminares y el presupuesto generado por nuestra herramienta.'}</p>
           
           <div class="estimate-box">
-            <div style="font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #708269; font-weight: bold;">Estimated Project Budget</div>
+            <div style="font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #708269; font-weight: bold;">${t('quoteFinalEstimate')}</div>
             <div class="price-val">$${activeEstimate.toLocaleString()}*</div>
-            <div style="font-size: 14px; color: #5c5c5c;">Service: ${pricingData[projectType].label}</div>
+            <div style="font-size: 14px; color: #5c5c5c;">${t('formService')}: ${pricingData[projectType].label}</div>
           </div>
           
-          <h3>Project Specifications:</h3>
+          <h3>${t('navAbout') === 'About' ? 'Project Specifications:' : 'Especificaciones del Proyecto:'}</h3>
           <ul class="specs-list">
             ${projectType === 'concrete' ? `
-              <li><strong>Length:</strong> ${length.toLocaleString()} FT</li>
-              <li><strong>Width:</strong> ${width.toLocaleString()} FT</li>
-              <li><strong>Thickness:</strong> ${Math.round(thickness * 12)} Inches</li>
-              <li><strong>Calculated Volume:</strong> ${((length * width * thickness) / 27).toFixed(1)} CU YD</li>
+              <li><strong>${t('quoteLength')}:</strong> ${length.toLocaleString()} FT</li>
+              <li><strong>${t('quoteWidth')}:</strong> ${width.toLocaleString()} FT</li>
+              <li><strong>${t('quoteThickness')}:</strong> ${Math.round(thickness * 12)} Inches</li>
+              <li><strong>${t('quoteTotalVolume')}:</strong> ${((length * width * thickness) / 27).toFixed(1)} CU YD</li>
             ` : ''}
             ${projectType === 'plumbing' ? `
-              <li><strong>Estimated Materials Cost:</strong> $${materialCost.toLocaleString()}</li>
-              <li><strong>Estimated Labor Hours:</strong> ${laborHours} HRS</li>
-              <li><strong>Overhead Factor (20%):</strong> Included</li>
+              <li><strong>${t('quoteMaterialsCost')}:</strong> $${materialCost.toLocaleString()}</li>
+              <li><strong>${t('quoteLaborHours')}:</strong> ${laborHours} HRS</li>
+              <li><strong>${t('quoteOverhead')}:</strong> Included</li>
             ` : ''}
             ${projectType === 'excavation' ? `
-              <li><strong>Excavation Type:</strong> ${excavationType.charAt(0).toUpperCase() + excavationType.slice(1)}</li>
-              <li><strong>Linear Footage:</strong> ${length} LF</li>
-              ${excavationType === 'trenching' ? `<li><strong>Trench Depth:</strong> ${trenchDepth} FT</li>` : ''}
+              <li><strong>${t('quoteExcType')}:</strong> ${excavationType.charAt(0).toUpperCase() + excavationType.slice(1)}</li>
+              <li><strong>${t('quoteLinearFootage')}:</strong> ${length} LF</li>
+              ${excavationType === 'trenching' ? `<li><strong>${t('quoteTrenchDepth')}:</strong> ${trenchDepth} FT</li>` : ''}
             ` : ''}
           </ul>
           
           <div class="disclaimer">
-            *This estimate is a preliminary rough calculation based on standard regional rates. A final binding quote will be issued following a comprehensive on-site evaluation by our engineering team.
+            *${t('quoteSummaryDesc')}
           </div>
           
           <script>
@@ -212,13 +211,6 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
     }, 2000);
   };
 
-  const handleDeleteHistoryItem = (id, e) => {
-    e.stopPropagation();
-    const updated = quoteHistory.filter(q => q.id !== id);
-    setQuoteHistory(updated);
-    localStorage.setItem('shaans_website_quotes', JSON.stringify(updated));
-  };
-
   return (
     <AnimatePresence>
       {isOpen && (
@@ -229,14 +221,12 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
             exit={{ scale: 0.9, opacity: 0, y: 40 }}
             className="quote-modal-container"
           >
-
-
             {/* Main Content */}
             <div className="quote-modal-main">
               <div className="quote-modal-header">
                 <div className="quote-modal-title-group">
-                  <h2>Instant Quote</h2>
-                  <p>Professional Estimation Tool</p>
+                  <h2>{t('quoteTitle')}</h2>
+                  <p>{t('quoteSub')}</p>
                 </div>
                 <button onClick={onClose} className="quote-modal-close-btn" title="Close Modal">
                   <X size={24} />
@@ -249,8 +239,8 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
                     <div className="quote-modal-success-icon">
                       <CheckCircle2 size={32} />
                     </div>
-                    <h3>Details Saved!</h3>
-                    <p>We will contact you within 24 hours.</p>
+                    <h3>{t('quoteSuccessTitle')}</h3>
+                    <p>{t('quoteSuccessDesc')}</p>
                   </div>
                 ) : (
                   <>
@@ -290,7 +280,7 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
                               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                                 <div className="quote-input-group">
                                   <div className="quote-input-label-row">
-                                    <span>Length</span>
+                                    <span>{t('quoteLength')}</span>
                                     <span className="quote-value-display">{length.toLocaleString()} Ft</span>
                                   </div>
                                   <input 
@@ -305,7 +295,7 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
                                 </div>
                                 <div className="quote-input-group">
                                   <div className="quote-input-label-row">
-                                    <span>Width</span>
+                                    <span>{t('quoteWidth')}</span>
                                     <span className="quote-value-display">{width.toLocaleString()} Ft</span>
                                   </div>
                                   <input 
@@ -321,13 +311,13 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
                               </div>
                               
                               <div className="quote-side-card">
-                                <span className="quote-side-card-title">Total Volume</span>
+                                <span className="quote-side-card-title">{t('quoteTotalVolume')}</span>
                                 <div className="quote-side-card-value">
                                   {`${((length * width * thickness) / 27).toFixed(1)} CU YD`}
                                 </div>
                                 
                                 <div style={{ marginTop: '1rem', width: '100%' }}>
-                                  <label className="quote-input-label-row" style={{ display: 'block', textAlign: 'center', marginBottom: '0.5rem' }}>Thickness (Inches)</label>
+                                  <label className="quote-input-label-row" style={{ display: 'block', textAlign: 'center', marginBottom: '0.5rem' }}>{t('quoteThickness')}</label>
                                   <div className="quote-choices-grid">
                                     {[0.33, 0.5, 0.66].map((val) => (
                                       <button 
@@ -350,7 +340,7 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
                               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                                 <div className="quote-input-group">
                                   <div className="quote-input-label-row">
-                                    <span>Linear Length</span>
+                                    <span>{t('quoteLinearLength')}</span>
                                     <span className="quote-value-display">{length.toLocaleString()} Ft</span>
                                   </div>
                                   <input 
@@ -364,7 +354,7 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
                                   />
                                 </div>
                                 <div className="quote-input-group">
-                                  <label className="quote-input-label-row" style={{ marginBottom: '0.25rem', display: 'block' }}>Excavation Type</label>
+                                  <label className="quote-input-label-row" style={{ marginBottom: '0.25rem', display: 'block' }}>{t('quoteExcType')}</label>
                                   <div className="quote-choices-grid">
                                     {['trenching', 'tunneling'].map((type) => (
                                       <button
@@ -373,7 +363,7 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
                                         onClick={() => setExcavationType(type)}
                                         className={`quote-choice-btn ${excavationType === type ? 'active' : ''}`}
                                       >
-                                        {type.charAt(0).toUpperCase() + type.slice(1)}
+                                        {t('navAbout') === 'About' ? (type === 'trenching' ? 'Trenching' : 'Tunneling') : (type === 'trenching' ? 'Zanjas' : 'Túneles')}
                                       </button>
                                     ))}
                                   </div>
@@ -381,14 +371,14 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
                               </div>
                               
                               <div className="quote-side-card">
-                                <span className="quote-side-card-title">Linear Footage</span>
+                                <span className="quote-side-card-title">{t('quoteLinearFootage')}</span>
                                 <div className="quote-side-card-value">
                                   {`${length} LF`}
                                 </div>
 
                                 {excavationType === 'trenching' && (
                                   <div style={{ marginTop: '1rem', width: '100%' }}>
-                                    <label className="quote-input-label-row" style={{ display: 'block', textAlign: 'center', marginBottom: '0.5rem' }}>Trench Depth</label>
+                                    <label className="quote-input-label-row" style={{ display: 'block', textAlign: 'center', marginBottom: '0.5rem' }}>{t('quoteTrenchDepth')}</label>
                                     <div className="quote-choices-grid">
                                       {[2, 4, 6].map((depth) => (
                                         <button 
@@ -411,7 +401,7 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
                             <div className="quote-grid-2">
                               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                                 <div className="quote-input-group">
-                                  <label className="quote-input-label-row" style={{ marginBottom: '0.25rem', display: 'block' }}>Materials Cost ($)</label>
+                                  <label className="quote-input-label-row" style={{ marginBottom: '0.25rem', display: 'block' }}>{t('quoteMaterialsCost')}</label>
                                   <div className="quote-input-icon-wrapper">
                                     <input 
                                       type="number" 
@@ -425,7 +415,7 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
                                 </div>
                                 <div className="quote-input-group">
                                   <div className="quote-input-label-row">
-                                    <span>Labor Hours</span>
+                                    <span>{t('quoteLaborHours')}</span>
                                     <span className="quote-value-display">{laborHours.toLocaleString()} HRS</span>
                                   </div>
                                   <input 
@@ -441,11 +431,11 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
                               </div>
                               <div className="quote-side-card" style={{ padding: '1.25rem', justifyContent: 'center', alignItems: 'stretch' }}>
                                 <div className="quote-side-card-detail-row">
-                                  <span>Overhead (20%)</span>
+                                  <span>{t('quoteOverhead')}</span>
                                   <span>+${((materialCost + laborHours * laborRate) * overheadFactor).toLocaleString()}</span>
                                 </div>
                                 <div style={{ borderTop: '1px solid var(--modal-border)', marginTop: '0.75rem', paddingTop: '0.75rem', fontSize: '0.75rem', color: 'var(--text-light)', fontStyle: 'italic', textAlign: 'left', lineHeight: '1.4' }}>
-                                  Includes professional-grade specialized tools.
+                                  {t('navAbout') === 'About' ? 'Includes professional-grade specialized tools.' : 'Incluye herramientas especializadas de grado profesional.'}
                                 </div>
                               </div>
                             </div>
@@ -454,7 +444,7 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
 
                         <div className="quote-modal-footer">
                           <div className="quote-modal-price-display-wrapper">
-                            <span className="quote-modal-price-label">Final Estimated Project Budget</span>
+                            <span className="quote-modal-price-label">{t('quoteFinalEstimate')}</span>
                             <span className="quote-modal-price-value">${activeEstimate.toLocaleString()}*</span>
                           </div>
                           <div className="quote-btn-group" style={{ maxWidth: '440px', gap: '0.75rem' }}>
@@ -464,7 +454,7 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
                               className="quote-btn-secondary"
                               style={{ flex: 0.8 }}
                             >
-                              Print / PDF
+                              {t('quoteBtnPrint')}
                             </button>
                             <button 
                               type="button"
@@ -495,10 +485,10 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
                               className="quote-btn-secondary"
                               style={{ flex: 1.2, display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}
                             >
-                              Get Detailed Quote
+                              {t('quoteBtnGetDetailed')}
                             </button>
                             <button onClick={() => setStep(2)} className="quote-btn-primary" style={{ flex: 1.5 }}>
-                              Proceed &rarr;
+                              {t('quoteBtnNext')} &rarr;
                             </button>
                           </div>
                         </div>
@@ -509,7 +499,7 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
                       <form onSubmit={handleSaveQuote} className="quote-modal-step-content" style={{ gap: '1.25rem' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', flex: 1 }}>
                           <div className="quote-input-group">
-                            <label className="quote-input-label-row" style={{ marginBottom: '0.25rem', display: 'block' }}>Full Client Name</label>
+                            <label className="quote-input-label-row" style={{ marginBottom: '0.25rem', display: 'block' }}>{t('formName')}</label>
                             <div className="quote-input-icon-wrapper">
                               <input 
                                 type="text" 
@@ -524,7 +514,7 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
                           </div>
                           <div className="quote-grid-2">
                             <div className="quote-input-group">
-                              <label className="quote-input-label-row" style={{ marginBottom: '0.25rem', display: 'block' }}>Phone Number</label>
+                              <label className="quote-input-label-row" style={{ marginBottom: '0.25rem', display: 'block' }}>{t('formPhone')}</label>
                               <div className="quote-input-icon-wrapper">
                                 <input 
                                   type="tel" 
@@ -538,7 +528,7 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
                               </div>
                             </div>
                             <div className="quote-input-group">
-                              <label className="quote-input-label-row" style={{ marginBottom: '0.25rem', display: 'block' }}>Email Address</label>
+                              <label className="quote-input-label-row" style={{ marginBottom: '0.25rem', display: 'block' }}>{t('formEmail')}</label>
                               <div className="quote-input-icon-wrapper">
                                 <input 
                                   type="email" 
@@ -552,10 +542,10 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
                             </div>
                           </div>
                           <div className="quote-input-group">
-                            <label className="quote-input-label-row" style={{ marginBottom: '0.25rem', display: 'block' }}>Project Requirements</label>
+                            <label className="quote-input-label-row" style={{ marginBottom: '0.25rem', display: 'block' }}>{t('formMsgPlaceholder')}</label>
                             <textarea 
                               rows={3} 
-                              placeholder="Describe details, access, or timing..." 
+                              placeholder={t('formMsgPlaceholder')} 
                               value={notes} 
                               onChange={(e) => setNotes(e.target.value)} 
                               className="quote-textarea" 
@@ -564,8 +554,8 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
                         </div>
 
                         <div className="quote-btn-group" style={{ marginTop: '1rem' }}>
-                          <button type="button" onClick={() => setStep(1)} className="quote-btn-secondary">Back</button>
-                          <button type="submit" className="quote-btn-submit">Submit Request</button>
+                          <button type="button" onClick={() => setStep(1)} className="quote-btn-secondary">{t('quoteBtnBack')}</button>
+                          <button type="submit" className="quote-btn-submit">{t('quoteBtnSubmit')}</button>
                         </div>
                       </form>
                     )}
@@ -573,23 +563,23 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
                     {step === 3 && (
                       <div className="quote-modal-step-content" style={{ justifyContent: 'center', alignItems: 'center', gap: '1.5rem' }}>
                         <div className="quote-summary-sheet">
-                          <div className="quote-summary-tag">Official Project Estimate Summary</div>
+                          <div className="quote-summary-tag">{t('quoteSummaryTitle')}</div>
                           <div className="quote-summary-value">${activeEstimate.toLocaleString()}</div>
                           <div className="quote-summary-meta-row">
-                            <span>Service: {pricingData[projectType].label}</span>
+                            <span>{t('formService')}: {pricingData[projectType].label}</span>
                             <span className="quote-summary-divider">|</span>
                             <span>Ref: {Math.floor(10000 + Math.random() * 90000)}</span>
                           </div>
                           <p className="quote-summary-disclaimer">
-                            This preliminary estimate is based on regional averages. A final binding quote will be issued following a comprehensive evaluation.
+                            {t('quoteSummaryDesc')}
                           </p>
                         </div>
                         <div className="quote-summary-actions" style={{ display: 'flex', gap: '1rem', width: '100%', maxWidth: '360px', marginTop: '1.5rem' }}>
                           <button onClick={handlePrintQuote} className="quote-btn-secondary" style={{ flex: 1 }}>
-                            Print / Save PDF
+                            {t('quoteBtnPrint')}
                           </button>
                           <button onClick={onClose} className="quote-btn-primary" style={{ flex: 1.2 }}>
-                            Return Home
+                            {t('quoteBtnReturn')}
                           </button>
                         </div>
                       </div>
@@ -604,5 +594,3 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
     </AnimatePresence>
   );
 }
-
-

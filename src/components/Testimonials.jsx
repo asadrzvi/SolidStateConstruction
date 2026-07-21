@@ -1,38 +1,41 @@
 import React from 'react'
 import { Star } from 'lucide-react'
+import { useLanguage } from '../context/LanguageContext'
 import './Testimonials.css'
 
-const testimonials = [
-  {
-    name: "Sarah M.",
-    location: "Leander, TX",
-    text: "Solid State saved us when our pipes burst. They were here in 30 minutes for the water remediation and handled everything with the insurance. Truly the best in Leander!",
-    rating: 5,
-    image: "/images/sarah.jpg"
-  },
-  {
-    name: "James R.",
-    location: "Crystal Falls",
-    text: "Extremely professional foundation repair. I was worried about the Texas soil shifts, but these guys explained the whole process and did a flawless job. Highly recommend.",
-    rating: 5,
-    image: "/images/james.jpg"
-  },
-  {
-    name: "Elena G.",
-    location: "Cedar Park, TX",
-    text: "We used them for a full kitchen remodel and flooring. The attention to detail in the tile work is incredible. Our home looks brand new!",
-    rating: 5,
-    image: "/images/elena.jpg"
-  }
-]
-
 function Testimonials() {
+  const { t } = useLanguage();
+
+  const testimonials = [
+    {
+      name: "Sarah M.",
+      location: "Leander, TX",
+      text: t('test1Text'),
+      rating: 5,
+      image: "/images/sarah.jpg"
+    },
+    {
+      name: "James R.",
+      location: "Crystal Falls",
+      text: t('test2Text'),
+      rating: 5,
+      image: "/images/james.jpg"
+    },
+    {
+      name: "Elena G.",
+      location: "Cedar Park, TX",
+      text: t('test3Text'),
+      rating: 5,
+      image: "/images/elena.jpg"
+    }
+  ];
+
   return (
     <section className="testimonials" id="testimonials">
       <div className="container">
         <div className="trust-header">
-          <span className="top-rated-badge">Top Rated in Leander</span>
-          <h2 className="section-title">What Our Neighbors Say</h2>
+          <span className="top-rated-badge">{t('navAbout') === 'About' ? 'Top Rated in Leander' : 'Mejor Valorado en Leander'}</span>
+          <h2 className="section-title">{t('testTitle')}</h2>
           <div className="overall-rating">
             <div className="stars">
               <Star size={20} fill="#ffc107" color="#ffc107" />
@@ -41,7 +44,7 @@ function Testimonials() {
               <Star size={20} fill="#ffc107" color="#ffc107" />
               <Star size={20} fill="#ffc107" color="#ffc107" />
             </div>
-            <span>5.0/5.0 Based on 50+ Local Reviews</span>
+            <span>{t('navAbout') === 'About' ? '5.0/5.0 Based on 50+ Local Reviews' : '5.0/5.0 Basado en más de 50 opiniones locales'}</span>
           </div>
         </div>
         

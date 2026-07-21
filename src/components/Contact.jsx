@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react'
+import { useLanguage } from '../context/LanguageContext'
 import './Contact.css'
 
-// CONFIGURATION FOR LEAD EMAILS:
-// 1. Go to https://web3forms.com
-// 2. Enter your business email: info@solidstatesconstruction.com
-// 3. You will immediately receive a free Access Key in your inbox.
-// 4. Paste that Access Key in the variable below:
 const WEB3FORMS_ACCESS_KEY = "700a045a-9c7d-409d-ba90-8133f2c3b3a1";
 
 function Contact({ initialService, initialMessage }) {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -21,8 +18,11 @@ function Contact({ initialService, initialMessage }) {
 
   useEffect(() => {
     if (initialService) {
-      // Map service name to standard options if needed
-      const standardServices = ["Water Remediation", "Concrete & Foundation", "Roofing Services", "Plumbing Services", "Excavation Services"];
+      const standardServices = [
+        "Water Remediation", "Concrete & Foundation", "Roofing Services", "Plumbing Services", "Excavation Services",
+        "Residential Water Mitigation", "Home Plumbing Services", "Residential Roofing", "Driveways & Patios",
+        "Commercial Water Restoration", "Commercial Concrete & Foundations", "Commercial Roofing", "Site Prep & Heavy Excavation"
+      ];
       if (standardServices.includes(initialService)) {
         setFormData(prev => ({ ...prev, service: initialService }));
       }
@@ -78,19 +78,19 @@ function Contact({ initialService, initialMessage }) {
   return (
     <section className="contact" id="contact">
       <div className="container">
-        <h2 className="section-title">Get a Free Estimate</h2>
-        <p className="section-subtitle">Ready to start your project? Fill out the form below and our team will get back to you within 24 hours.</p>
+        <h2 className="section-title">{t('contactTitle')}</h2>
+        <p className="section-subtitle">{t('contactSubtitle')}</p>
         <div className="contact-card">
           {status === 'success' ? (
             <div className="success-message">
-              <h3>Thank You!</h3>
-              <p>Your request has been sent. Our team will contact you shortly.</p>
-              <button className="btn btn-primary" onClick={() => setStatus('')}>Send Another Request</button>
+              <h3>{t('formSuccessTitle')}</h3>
+              <p>{t('formSuccessMsg')}</p>
+              <button className="btn btn-primary" onClick={() => setStatus('')}>{t('formSuccessBtn')}</button>
             </div>
           ) : (
             <form className="contact-form" onSubmit={handleSubmit}>
               <div className="form-group">
-                <label>Full Name</label>
+                <label>{t('formName')}</label>
                 <input 
                   type="text" 
                   name="name"
@@ -101,7 +101,7 @@ function Contact({ initialService, initialMessage }) {
                 />
               </div>
               <div className="form-group">
-                <label>Phone Number</label>
+                <label>{t('formPhone')}</label>
                 <input 
                   type="tel" 
                   name="phone"
@@ -112,7 +112,7 @@ function Contact({ initialService, initialMessage }) {
                 />
               </div>
               <div className="form-group">
-                <label>Email Address</label>
+                <label>{t('formEmail')}</label>
                 <input 
                   type="email" 
                   name="email"
@@ -123,7 +123,7 @@ function Contact({ initialService, initialMessage }) {
                 />
               </div>
               <div className="form-group">
-                <label>Project Address</label>
+                <label>{t('formAddress')}</label>
                 <input 
                   type="text" 
                   name="address"
@@ -134,7 +134,7 @@ function Contact({ initialService, initialMessage }) {
                 />
               </div>
               <div className="form-group full-width">
-                <label>Service Needed</label>
+                <label>{t('formService')}</label>
                 <select 
                   name="service"
                   value={formData.service}
@@ -148,31 +148,31 @@ function Contact({ initialService, initialMessage }) {
                 </select>
               </div>
               <div className="form-group full-width">
-                <label>Message</label>
+                <label>{t('formMsg')}</label>
                 <textarea 
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
-                  placeholder="Tell us about your project or emergency..."
+                  placeholder={t('formMsgPlaceholder')}
                   required
                 ></textarea>
               </div>
               <button type="submit" className="btn btn-primary" disabled={status === 'sending'}>
-                {status === 'sending' ? 'Sending...' : 'Submit Request'}
+                {status === 'sending' ? t('formSending') : t('formSubmit')}
               </button>
-              {status === 'error' && <p className="error-text">Something went wrong. Please call us directly.</p>}
+              {status === 'error' && <p className="error-text">{t('formError')}</p>}
             </form>
           )}
 
           {status !== 'success' && (
             <>
               <div className="scheduler-separator">
-                <span>OR</span>
+                <span>{t('schedSeparator')}</span>
               </div>
               <div className="scheduler-cta">
-                <p>Prefer to pick your own time? Skip the form and book a walkthrough instantly.</p>
+                <p>{t('schedCtaText')}</p>
                 <a href="https://calendly.com" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
-                  Book Walkthrough Inspection
+                  {t('schedCtaBtn')}
                 </a>
               </div>
             </>

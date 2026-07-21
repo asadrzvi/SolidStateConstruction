@@ -1,22 +1,25 @@
 import React from 'react';
 import { MapPin } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 import './ServiceAreas.css';
 
-const cities = [
-  { name: "Leander", label: "HQ / Central Hub" },
-  { name: "Cedar Park", label: "Immediate Dispatch" },
-  { name: "Liberty Hill", label: "Northern Service Loop" },
-  { name: "Georgetown", label: "Eastern Service Loop" },
-  { name: "Round Rock", label: "Rapid Emergency Response" },
-  { name: "North Austin", label: "Metro Coverage" }
-];
-
 export default function ServiceAreas() {
+  const { t } = useLanguage();
+
+  const cities = [
+    { name: "Leander", label: t('areaHq') },
+    { name: "Cedar Park", label: t('areaDispatch') },
+    { name: "Liberty Hill", label: t('areaNorth') },
+    { name: "Georgetown", label: t('areaEast') },
+    { name: "Round Rock", label: t('areaRapid') },
+    { name: "North Austin", label: t('areaMetro') }
+  ];
+
   return (
     <section className="service-areas-section" id="areas">
       <div className="container">
-        <h2 className="section-title">Our Service Areas</h2>
-        <p className="section-subtitle">We proudly serve Leander and surrounding North Austin communities with 24/7 emergency response.</p>
+        <h2 className="section-title">{t('areasTitle')}</h2>
+        <p className="section-subtitle">{t('areasSubtitle')}</p>
         
         <div className="areas-grid">
           {cities.map((city, idx) => (

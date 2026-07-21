@@ -1,9 +1,12 @@
 import React from 'react'
 import { Phone, Droplets } from 'lucide-react'
 import heroBg from '../../public/images/hero_bg.jpg'
+import { useLanguage } from '../context/LanguageContext'
 import './Hero.css'
 
 function Hero({ onOpenQuote }) {
+  const { t } = useLanguage();
+
   return (
     <section 
       className="hero"
@@ -14,17 +17,17 @@ function Hero({ onOpenQuote }) {
         <div className="hero-content">
           <div className="emergency-badge">
             <Droplets className="emergency-icon" />
-            <span>24/7 Water Remediation Service</span>
+            <span>{t('heroBadge')}</span>
           </div>
-          <h1>Solid State Construction</h1>
-          <p className="hero-subtitle">Leander's Choice for Quality Remodeling, Foundation Repair & Emergency Services</p>
+          <h1>{t('heroTitle')}</h1>
+          <p className="hero-subtitle">{t('heroSubtitle')}</p>
           <div className="hero-cta">
             <a href="tel:512-595-2332" className="btn btn-primary">
               <Phone size={20} />
-              Call Now: (512) 595-2332
+              {t('heroCallCta')}
             </a>
             <button onClick={onOpenQuote} className="btn btn-secondary">
-              Get a Quote Online
+              {t('heroQuoteCta')}
             </button>
           </div>
         </div>

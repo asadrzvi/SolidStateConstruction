@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
 import BeforeAfterSlider from './BeforeAfterSlider';
 import Gallery from './Gallery';
+import { useLanguage } from '../context/LanguageContext';
 import './GalleryPage.css';
 
 export default function GalleryPage() {
+  const { t } = useLanguage();
+
   // Scroll to top when loading this page
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
@@ -13,16 +16,19 @@ export default function GalleryPage() {
     <div className="gallery-page">
       <div className="gallery-page-hero">
         <div className="container">
-          <h1>Our Project Gallery</h1>
-          <p className="subtitle">Explore our legacy-grade craftsmanship across Leander and North Austin—from emergency restoration to luxury custom remodeling.</p>
+          <h1>{t('galPageTitle')}</h1>
+          <p className="subtitle">{t('galPageSub')}</p>
         </div>
       </div>
 
       <div className="container" style={{ padding: '3rem 0 1rem' }}>
-        <h2 className="section-title">Interactive Before & After Showcase</h2>
-        <p className="section-subtitle" style={{ marginBottom: '2rem' }}>Drag the slider handle to see the transition from water damage to structural perfection.</p>
+        <h2 className="section-title">{t('galSliderTitle')}</h2>
+        <p className="section-subtitle" style={{ marginBottom: '2rem' }}>{t('galSliderSub')}</p>
         
-        <BeforeAfterSlider />
+        <BeforeAfterSlider 
+          beforeLabel={t('galBeforeLabel')}
+          afterLabel={t('galAfterLabel')}
+        />
       </div>
 
       {/* Embedded Photo & Video Gallery Grid */}

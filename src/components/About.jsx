@@ -1,43 +1,46 @@
 import React from 'react'
+import { useLanguage } from '../context/LanguageContext'
 import './About.css'
 
 function About() {
+  const { t } = useLanguage();
+
   return (
     <section className="about" id="about">
       <div className="container">
-        <h2 className="section-title">About Solid State Construction</h2>
+        <h2 className="section-title">{t('aboutTitle')}</h2>
         <div className="about-content">
           <div className="about-text">
-            <h3>Who We Are & What We Do</h3>
-            <p>Solid State Construction is Leander's premier partner for comprehensive home restoration and improvement. We specialize in a wide range of essential services designed to keep your home safe, beautiful, and structurally sound.</p>
+            <h3>{t('aboutSubtitle')}</h3>
+            <p>{t('aboutP1')}</p>
             
             <div className="work-summary">
-              <h4>Our Core Expertise:</h4>
+              <h4>{t('aboutCoreTitle')}</h4>
               <ul className="work-list">
-                <li><strong>Drywall & Paint:</strong> Flawless finishing and professional interior/exterior painting.</li>
-                <li><strong>Full Remodeling:</strong> Complete kitchen, bathroom, and home transformations.</li>
-                <li><strong>Roofing:</strong> Expert repairs and full replacements for long-lasting protection.</li>
-                <li><strong>Foundation:</strong> Critical structural repairs and leveling for Texas soil.</li>
-                <li><strong>Water Remediation:</strong> 24/7 emergency response to dry and restore your home.</li>
-                <li><strong>Flooring & Tile:</strong> Custom installations including hardwood, laminate, and intricate tile work.</li>
+                <li>{t('aboutCoreItem1')}</li>
+                <li>{t('aboutCoreItem2')}</li>
+                <li>{t('aboutCoreItem3')}</li>
+                <li>{t('aboutCoreItem4')}</li>
+                <li>{t('aboutCoreItem5')}</li>
+                <li>{t('aboutCoreItem6')}</li>
               </ul>
             </div>
 
-            <p>Based at 1101 Halsey Drive, we pride ourselves on being a local business that understands the unique construction needs of our Leander and North Austin neighbors.</p>
+            <p>{t('aboutLocation')}</p>
           </div>
           
           <div className="about-stats">
             <div className="stat-item">
-              <span className="stat-number">100%</span>
-              <span className="stat-label">Local Focus</span>
+              <span className="stat-number">{t('aboutStat1Num')}</span>
+              <span className="stat-label">{t('aboutStat1Lbl')}</span>
             </div>
             <div className="stat-item">
-              <span className="stat-number">24/7</span>
-              <span className="stat-label">Emergency Support</span>
+              <span className="stat-number">{t('aboutStat2Num')}</span>
+              <span className="stat-label">{t('aboutStat2Lbl')}</span>
             </div>
             <div className="stat-item">
-              <span className="stat-number">Quality</span>
-              <span className="stat-label">Guaranteed</span>
+              <span className="stat-number">{t('aboutStat3Num')}</span>
+              <span className="stat-label">{t('aboutStat3Lbl')}</span>
             </div>
           </div>
         </div>
@@ -47,11 +50,11 @@ function About() {
             <img src="/images/shaan_the_dawn.jpg?v=1" alt="Shaan - Founder of Solid State Construction" className="founder-image" />
           </div>
           <div className="founder-info">
-            <h3>Meet Our Founder, Shaan</h3>
+            <h3>{t('aboutFounderTitle')}</h3>
             <p>
-              "Solid State Construction was founded with a single mission: to provide Austin families with premium, legacy-grade contracting they can trust unconditionally. Under Shaan's leadership, we bring absolute engineering perfection to every project—ensuring structural integrity and master-class craftsmanship on every single job."
+              "{t('aboutFounderQuote')}"
             </p>
-            <p className="founder-signature">— Shaan, Founder & Chief Engineer</p>
+            <p className="founder-signature">{t('aboutFounderSignature')}</p>
           </div>
         </div>
       </div>

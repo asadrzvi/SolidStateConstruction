@@ -1,17 +1,26 @@
-import React, { useState } from 'react'
-import { Sun, Moon, Menu, X, Phone } from 'lucide-react'
+import React, { useState, useEffect } from 'react'
+import { Sun, Moon, Menu, X, Phone, Globe } from 'lucide-react'
 import logoLight from '../../public/logo.png'
 import logoDark from '../../public/logo_dark.png'
+import { useLanguage } from '../context/LanguageContext'
 import './Navbar.css'
 
 function Navbar({ onOpenQuote, currentPage, onPageChange }) {
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { language, toggleLanguage, t } = useLanguage();
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    setIsDark(savedTheme === 'dark');
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  }, []);
 
   const toggleTheme = () => {
-    const newTheme = !isDark;
-    setIsDark(newTheme);
-    document.documentElement.setAttribute('data-theme', newTheme ? 'dark' : 'light');
+    const newTheme = !isDark ? 'dark' : 'light';
+    setIsDark(!isDark);
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
   };
 
   const toggleMenu = () => {
@@ -52,10 +61,18 @@ function Navbar({ onOpenQuote, currentPage, onPageChange }) {
         
         <div className="nav-right">
           <div className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
-            <a href="#about" onClick={(e) => handleLinkClick(e, 'home', 'about')} className={currentPage === 'home' ? 'active-tab' : ''}>About</a>
-            <a href="#services" onClick={(e) => handleLinkClick(e, 'home', 'services')}>Services</a>
-            <a href="#gallery" onClick={(e) => handleLinkClick(e, 'gallery', 'gallery')} className={currentPage === 'gallery' ? 'active-tab' : ''}>Gallery</a>
-            <a href="#contact" onClick={(e) => handleLinkClick(e, 'home', 'contact')}>Contact</a>
+            <a href="#about" onClick={(e) => handleLinkClick(e, 'home', 'about')} className={currentPage === 'home' ? 'active-tab' : ''}>
+              {t('navAbout')}
+            </a>
+            <a href="#services" onClick={(e) => handleLinkClick(e, 'home', 'services')}>
+              {t('navServices')}
+            </a>
+            <a href="#gallery" onClick={(e) => handleLinkClick(e, 'gallery', 'gallery')} className={currentPage === 'gallery' ? 'active-tab' : ''}>
+              {t('navGallery')}
+            </a>
+            <a href="#contact" onClick={(e) => handleLinkClick(e, 'home', 'contact')}>
+              {t('navContact')}
+            </a>
             <button 
               className="btn btn-primary quote-btn" 
               onClick={() => {
@@ -63,15 +80,21 @@ function Navbar({ onOpenQuote, currentPage, onPageChange }) {
                 setIsMenuOpen(false);
               }}
             >
-              Get Free Quote
+              {t('navQuoteBtn')}
             </button>
             <a href="tel:512-595-2332" className="nav-phone">
               <Phone size={18} />
-              (512) 595-2332
+              {t('navPhone')}
             </a>
           </div>
           
           <div className="nav-actions">
+            {/* Language Switcher */}
+            <button className="lang-toggle-btn" onClick={toggleLanguage} title={language === 'en' ? 'Cambiar a Español' : 'Switch to English'}>
+              <Globe size={18} />
+              <span>{language === 'en' ? 'ESP' : 'ENG'}</span>
+            </button>
+            
             <button className="theme-toggle" onClick={toggleTheme} title="Toggle Dark Mode">
               {isDark ? <Sun size={20} /> : <Moon size={20} />}
             </button>

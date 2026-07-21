@@ -1,10 +1,14 @@
 import React from 'react'
 import { Phone, Droplets } from 'lucide-react'
+import heroBg from '../../public/images/hero_bg.jpg'
 import './Hero.css'
 
 function Hero({ onOpenQuote }) {
   return (
-    <section className="hero">
+    <section 
+      className="hero"
+      style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${heroBg})` }}
+    >
       <div className="hero-overlay"></div>
       <div className="container">
         <div className="hero-content">

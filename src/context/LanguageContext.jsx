@@ -177,8 +177,8 @@ const translations = {
     galPageSub: "Explore our legacy-grade craftsmanship across Leander and North Austin—from emergency restoration to luxury custom remodeling.",
     galSliderTitle: "Interactive Before & After Showcase",
     galSliderSub: "Drag the slider handle to see the transition from water damage to structural perfection.",
-    galBeforeLabel: "Before: Water Damage",
-    galAfterLabel: "After: Solid State Restoration"
+    galBeforeLabel: "Before: Water Loss & Demolition",
+    galAfterLabel: "After: Completed Reconstruction"
   },
   es: {
     // Navbar
@@ -354,8 +354,8 @@ const translations = {
     galPageSub: "Explore nuestra artesanía de grado legado en Leander y el norte de Austin, desde restauración de emergencia hasta remodelaciones personalizadas de lujo.",
     galSliderTitle: "Presentación Interactiva de Antes y Después",
     galSliderSub: "Arrastre el controlador para ver la transición desde el daño por agua hasta la perfección estructural.",
-    galBeforeLabel: "Antes: Daño por Agua",
-    galAfterLabel: "Después: Restauración de Solid State"
+    galBeforeLabel: "Antes: Daño y Demolición",
+    galAfterLabel: "Después: Reconstrucción Completa"
   }
 };
 

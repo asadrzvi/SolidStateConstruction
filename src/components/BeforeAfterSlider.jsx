@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import beforeBg from '../../public/images/before_water.jpg';
+import afterBg from '../../public/images/after_remodel.jpg';
 import './BeforeAfterSlider.css';
 
 export default function BeforeAfterSlider({ 
-  beforeImage = '/images/before_water.jpg', 
-  afterImage = '/images/after_remodel.jpg', 
+  beforeImage = beforeBg, 
+  afterImage = afterBg, 
   beforeLabel = 'Before: Water Damage', 
   afterLabel = 'After: Solid State Restoration' 
 }) {

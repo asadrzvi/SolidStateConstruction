@@ -4,7 +4,7 @@ import { X, FileText, CheckCircle2, User, Phone, Mail, Info, Hammer, Wrench, Tra
 import { useLanguage } from '../context/LanguageContext';
 import './QuoteModal.css';
 
-export default function QuoteModal({ isOpen, onClose, initialService, onDetailedEstimate }) {
+export default function QuoteModal({ isOpen, onClose, initialService, onDetailedEstimate, onInquirySubmitted }) {
   const [step, setStep] = useState(1);
   const [projectType, setProjectType] = useState('concrete');
   const [excavationType, setExcavationType] = useState('trenching'); // 'trenching' or 'tunneling'
@@ -49,16 +49,12 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
     if (isOpen && initialService) {
       const serviceMap = {
         'Concrete & Foundation': 'concrete',
-        'Driveways & Patios': 'concrete',
-        'Commercial Concrete & Foundations': 'concrete',
         'Plumbing Services': 'plumbing',
-        'Home Plumbing Services': 'plumbing',
-        'Excavation Services': 'excavation',
-        'Site Prep & Heavy Excavation': 'excavation'
+        'Excavation Services': 'excavation'
       };
-      const mapped = serviceMap[initialService];
-      if (mapped) setProjectType(mapped);
-      setStep(1);
+      if (serviceMap[initialService]) {
+        setProjectType(serviceMap[initialService]);
+      }
     }
   }, [isOpen, initialService]);
 
@@ -83,19 +79,21 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
   const computeEstimate = () => {
     switch (projectType) {
       case 'concrete':
-        const yards = (length * width * thickness) / 27;
-        const withWaste = yards * 1.1;
-        return Math.floor(withWaste * 750);
+        const cuYards = (length * width * thickness) / 27;
+        const baseConcreteCost = cuYards * 165;
+        const rebarMeshCost = (length * width) * 1.75;
+        const laborCost = cuYards * 190;
+        return Math.round(baseConcreteCost + rebarMeshCost + laborCost);
 
       case 'plumbing':
-        const labor = laborHours * laborRate;
-        const overhead = (materialCost + labor) * overheadFactor;
-        return Math.floor(materialCost + labor + overhead);
+        const rawLabor = laborHours * laborRate;
+        const subtotal = materialCost + rawLabor;
+        const overhead = subtotal * overheadFactor;
+        return Math.round(subtotal + overhead);
 
       case 'excavation':
-        const isTrenching = excavationType === 'trenching';
-        if (isTrenching) {
-          const depthMultiplier = trenchDepth === 2 ? 1.0 : trenchDepth === 4 ? 1.5 : 2.2;
+        if (excavationType === 'trenching') {
+          const depthMultiplier = trenchDepth === 2 ? 1 : trenchDepth === 4 ? 1.4 : 1.8;
           return Math.floor(length * 35 * depthMultiplier);
         } else {
           return Math.floor(length * 180);
@@ -193,22 +191,34 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
       return;
     }
 
-    const newQuote = {
-      id: `Q-${Math.floor(1000 + Math.random() * 9000)}`,
-      clientName,
-      date: new Date().toLocaleDateString(),
-      estimatedCost: activeEstimate,
-      service: pricingData[projectType].label
-    };
+    const serviceName = pricingData[projectType].label;
 
-    const updatedHistory = [newQuote, ...quoteHistory];
-    setQuoteHistory(updatedHistory);
-    localStorage.setItem('shaans_website_quotes', JSON.stringify(updatedHistory));
-    setSavedSuccess(true);
-    setTimeout(() => {
-      setSavedSuccess(false);
-      setStep(3);
-    }, 2000);
+    fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        access_key: "700a045a-9c7d-409d-ba90-8133f2c3b3a1",
+        name: clientName,
+        phone: phone,
+        email: email,
+        service: serviceName,
+        message: `Calculator Estimate: $${activeEstimate.toLocaleString()}\nNotes: ${notes}`,
+        subject: `New Lead: ${serviceName} ($${activeEstimate.toLocaleString()})`
+      })
+    }).catch(() => {});
+
+    if (onInquirySubmitted) {
+      onInquirySubmitted(serviceName, clientName);
+    } else {
+      setSavedSuccess(true);
+      setTimeout(() => {
+        setSavedSuccess(false);
+        setStep(3);
+      }, 1000);
+    }
   };
 
   return (

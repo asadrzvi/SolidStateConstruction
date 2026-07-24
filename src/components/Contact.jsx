@@ -4,7 +4,7 @@ import './Contact.css'
 
 const WEB3FORMS_ACCESS_KEY = "700a045a-9c7d-409d-ba90-8133f2c3b3a1";
 
-function Contact({ initialService, initialMessage }) {
+function Contact({ initialService, initialMessage, onInquirySubmitted }) {
   const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
@@ -65,6 +65,9 @@ function Contact({ initialService, initialMessage }) {
       const data = await res.json();
       if (data.success) {
         setStatus('success');
+        if (onInquirySubmitted) {
+          onInquirySubmitted(formData.service, formData.name);
+        }
         setFormData({ name: '', phone: '', email: '', address: '', service: 'Concrete & Foundation', message: '' });
       } else {
         setStatus('error');

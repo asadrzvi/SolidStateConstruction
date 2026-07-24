@@ -1,0 +1,159 @@
+.thank-you-page {
+  padding: 120px 0 80px 0;
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-color);
+}
+
+.thank-you-card {
+  max-width: 750px;
+  margin: 0 auto;
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  padding: 3.5rem 2.5rem;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  text-align: center;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.thank-you-icon-wrapper {
+  width: 96px;
+  height: 96px;
+  background: rgba(72, 89, 66, 0.12);
+  color: var(--primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem auto;
+  border: 2px solid var(--primary);
+}
+
+.thank-you-badge {
+  display: inline-block;
+  background-color: var(--primary);
+  color: #ffffff !important;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 0.4rem 1.2rem;
+  border-radius: 30px;
+  margin-bottom: 1.5rem;
+}
+
+.thank-you-title {
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  font-weight: 900;
+  color: var(--text-dark) !important;
+  margin-bottom: 1.2rem;
+}
+
+.thank-you-subtitle {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--text-light) !important;
+  max-width: 620px;
+  margin: 0 auto 2rem auto;
+}
+
+.submitted-details-box {
+  background-color: var(--bg-alt);
+  border: 1px solid var(--card-border);
+  padding: 1.2rem 1.8rem;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.details-label {
+  font-size: 0.9rem;
+  color: var(--text-light) !important;
+  font-weight: 600;
+}
+
+.details-value {
+  font-size: 1rem;
+  color: var(--text-dark) !important;
+  font-weight: 800;
+}
+
+.emergency-callout-box {
+  background: linear-gradient(135deg, var(--primary) 0%, #1e261a 100%);
+  color: #ffffff !important;
+  padding: 2rem;
+  border-radius: 16px;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.callout-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.callout-header h3 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #ffffff !important;
+  margin: 0;
+}
+
+.emergency-callout-box p {
+  color: #e2e8df !important;
+  font-size: 0.95rem;
+  margin-bottom: 1.25rem;
+}
+
+.btn-emergency-call {
+  background-color: #ffffff !important;
+  color: #1a2217 !important;
+  font-weight: 800 !important;
+  padding: 0.9rem 2rem !important;
+  border-radius: 8px !important;
+  border: none !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.btn-emergency-call:hover {
+  background-color: #f0f5ee !important;
+  transform: translateY(-2px);
+}
+
+.thank-you-actions {
+  display: flex;
+  gap: 1.2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 600px) {
+  .thank-you-card {
+    padding: 2rem 1.5rem;
+  }
+  .thank-you-actions {
+    flex-direction: column;
+  }
+  .thank-you-actions .btn {
+    width: 100%;
+  }
+}

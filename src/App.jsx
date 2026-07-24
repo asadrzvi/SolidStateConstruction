@@ -12,12 +12,23 @@ import Contact from './components/Contact'
 import MapSection from './components/MapSection'
 import Footer from './components/Footer'
 import QuoteModal from './components/QuoteModal'
+import ThankYouPage from './components/ThankYouPage'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home')
   const [selectedService, setSelectedService] = useState('')
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false)
   const [prefilledMessage, setPrefilledMessage] = useState('')
+  const [submittedService, setSubmittedService] = useState('')
+  const [submittedName, setSubmittedName] = useState('')
+
+  const handleInquirySubmitted = (service, name) => {
+    setSubmittedService(service || '');
+    setSubmittedName(name || '');
+    setIsQuoteModalOpen(false);
+    setCurrentPage('thank-you');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <div className="app">
@@ -40,12 +51,23 @@ function App() {
           <ServiceAreas />
           <Testimonials />
           <FAQSection />
-          <Contact initialService={selectedService} initialMessage={prefilledMessage} />
+          <Contact 
+            initialService={selectedService} 
+            initialMessage={prefilledMessage} 
+            onInquirySubmitted={handleInquirySubmitted}
+          />
           {/* MapSection moved to the end per user request */}
           <MapSection />
         </>
-      ) : (
+      ) : currentPage === 'gallery' ? (
         <GalleryPage />
+      ) : (
+        <ThankYouPage 
+          submittedService={submittedService}
+          submittedName={submittedName}
+          onReturnHome={() => setCurrentPage('home')}
+          onGoGallery={() => setCurrentPage('gallery')}
+        />
       )}
       
       <Footer />
@@ -54,6 +76,7 @@ function App() {
         isOpen={isQuoteModalOpen} 
         onClose={() => setIsQuoteModalOpen(false)} 
         initialService={selectedService}
+        onInquirySubmitted={handleInquirySubmitted}
         onDetailedEstimate={(service, message) => {
           setSelectedService(service);
           setPrefilledMessage(message);

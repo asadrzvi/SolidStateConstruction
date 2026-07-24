@@ -15,7 +15,9 @@ export default function GalleryPage() {
   return (
     <div className="gallery-page">
       <div className="gallery-page-hero">
-        <div className="container">
+        <div className="gallery-hero-logo-bg"></div>
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+          <span className="gallery-hero-badge">Verified Construction Showcase &bull; Leander &amp; Austin TX</span>
           <h1>{t('galPageTitle')}</h1>
           <p className="subtitle">{t('galPageSub')}</p>
         </div>

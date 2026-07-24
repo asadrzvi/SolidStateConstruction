@@ -14,6 +14,7 @@ function ThankYouPage({ submittedService, submittedName, onReturnHome, onGoGalle
     <div className="thank-you-page">
       <div className="container">
         <div className="thank-you-card">
+          <div className="thank-you-card-logo-bg"></div>
           <div className="thank-you-icon-wrapper">
             <CheckCircle2 size={72} className="check-icon" />
           </div>

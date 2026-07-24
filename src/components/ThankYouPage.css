@@ -8,6 +8,8 @@
 }
 
 .thank-you-card {
+  position: relative;
+  overflow: hidden;
   max-width: 750px;
   margin: 0 auto;
   background-color: var(--card-bg);
@@ -17,6 +19,22 @@
   box-shadow: var(--shadow);
   text-align: center;
   animation: fadeInUp 0.6s ease-out;
+}
+
+.thank-you-card-logo-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 380px;
+  height: 380px;
+  background-image: url('/logo.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.06;
+  pointer-events: none;
+  z-index: 0;
 }
 
 @keyframes fadeInUp {

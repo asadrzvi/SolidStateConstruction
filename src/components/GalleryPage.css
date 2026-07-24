@@ -1,25 +1,65 @@
 .gallery-page {
   padding-top: 80px; /* Offset for sticky navbar */
-  background-color: var(--bg-color, #ffffff);
+  background-color: var(--bg-color);
 }
 
 .gallery-page-hero {
-  background: linear-gradient(135deg, var(--accent, #708269) 0%, #4a5745 100%);
-  color: white;
-  padding: 5rem 0;
+  position: relative;
+  background: linear-gradient(135deg, #1d251a 0%, #2a3628 50%, #172016 100%);
+  color: #ffffff !important;
+  padding: 5.5rem 0;
   text-align: center;
+  overflow: hidden;
+  border-bottom: 2px solid var(--card-border);
+}
+
+.gallery-hero-logo-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 450px;
+  height: 450px;
+  background-image: url('/logo.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.14;
+  filter: brightness(0) invert(1);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.gallery-hero-badge {
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #ffffff !important;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 0.4rem 1.2rem;
+  border-radius: 30px;
+  margin-bottom: 1.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(4px);
 }
 
 .gallery-page-hero h1 {
   font-size: clamp(2.5rem, 5vw, 3.5rem);
   font-weight: 900;
   margin: 0 0 1rem 0;
+  color: #ffffff !important;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
 }
 
 .gallery-page-hero .subtitle {
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  max-width: 700px;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  max-width: 720px;
   margin: 0 auto;
-  opacity: 0.9;
-  line-height: 1.5;
+  color: #e2e8df !important;
+  opacity: 1 !important;
+  line-height: 1.6;
+  font-weight: 600;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
 }

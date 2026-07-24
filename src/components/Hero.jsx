@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 import { Phone, Droplets } from 'lucide-react'
 import heroBg from '../../public/images/hero_bg.jpg'
+import headerVid from '../../public/images/gallery/e72b06a0-2677-4b84-a035-bb064c9061eb.MOV'
 import { useLanguage } from '../context/LanguageContext'
 import './Hero.css'
 
@@ -25,8 +26,10 @@ function Hero({ onOpenQuote }) {
         poster={heroBg}
         className="hero-bg-video"
       >
+        <source src={headerVid} type="video/quicktime" />
+        <source src={headerVid} type="video/mp4" />
+        <source src="/images/gallery/e72b06a0-2677-4b84-a035-bb064c9061eb.MOV" type="video/quicktime" />
         <source src="/images/gallery/e72b06a0-2677-4b84-a035-bb064c9061eb.MOV" type="video/mp4" />
-        <source src="/images/gallery/1355c929-7170-4657-976e-dc071c72978f.MOV" type="video/mp4" />
       </video>
       <div className="hero-overlay"></div>
       <div className="container">

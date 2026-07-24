@@ -49,6 +49,14 @@ function App() {
     setSubmittedName(name || '');
     setIsQuoteModalOpen(false);
     setCurrentPage('thank-you');
+    
+    // Trigger Google Ads Conversion Event
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'conversion', {
+        'send_to': 'AW-18245643754'
+      });
+    }
+
     try {
       window.history.pushState({}, '', '/thank-you');
     } catch (e) {

@@ -18,8 +18,16 @@ function Footer() {
             <h4>{t('navAbout') === 'About' ? 'Contact Us' : 'Contáctenos'}</h4>
             <ul>
               <li><MapPin size={18} /> 1101 Halsey Drive, Leander, TX 78641</li>
-              <li><Phone size={18} /> (512) 595-2332</li>
-              <li><Mail size={18} /> contact@solidstateconstruction.com</li>
+              <li>
+                <a href="tel:512-595-2332" style={{ color: 'inherit', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <Phone size={18} /> (512) 595-2332
+                </a>
+              </li>
+              <li>
+                <a href="mailto:contact@solidstatesconstruction.com" style={{ color: 'inherit', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <Mail size={18} /> contact@solidstatesconstruction.com
+                </a>
+              </li>
             </ul>
           </div>
         </div>

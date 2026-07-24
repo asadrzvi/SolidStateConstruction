@@ -22,12 +22,43 @@ function App() {
   const [submittedService, setSubmittedService] = useState('')
   const [submittedName, setSubmittedName] = useState('')
 
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      if (hash.includes('thank-you')) {
+        setCurrentPage('thank-you');
+      } else if (hash.includes('gallery')) {
+        setCurrentPage('gallery');
+      } else if (hash.includes('home') || hash === '' || hash === '#') {
+        setCurrentPage('home');
+      }
+    };
+
+    handleHashChange();
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
   const handleInquirySubmitted = (service, name) => {
     setSubmittedService(service || '');
     setSubmittedName(name || '');
     setIsQuoteModalOpen(false);
     setCurrentPage('thank-you');
+    window.location.hash = '#/thank-you';
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    if (page === 'thank-you') {
+      window.location.hash = '#/thank-you';
+    } else if (page === 'gallery') {
+      window.location.hash = '#/gallery';
+    } else {
+      if (window.location.hash.includes('thank-you') || window.location.hash.includes('gallery')) {
+        window.location.hash = '#/';
+      }
+    }
   };
 
   return (
@@ -35,7 +66,7 @@ function App() {
       <Navbar 
         onOpenQuote={() => setIsQuoteModalOpen(true)} 
         currentPage={currentPage}
-        onPageChange={setCurrentPage}
+        onPageChange={handlePageChange}
       />
       
       {currentPage === 'home' ? (
@@ -65,8 +96,8 @@ function App() {
         <ThankYouPage 
           submittedService={submittedService}
           submittedName={submittedName}
-          onReturnHome={() => setCurrentPage('home')}
-          onGoGallery={() => setCurrentPage('gallery')}
+          onReturnHome={() => handlePageChange('home')}
+          onGoGallery={() => handlePageChange('gallery')}
         />
       )}
       

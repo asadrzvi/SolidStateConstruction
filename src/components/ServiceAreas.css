@@ -53,3 +53,22 @@
   letter-spacing: 0.5px;
   font-weight: 600;
 }
+
+/* Explicit Dark Mode Overrides */
+[data-theme='dark'] .service-areas-section {
+  background-color: #0c0e0b !important;
+  border-color: #2c3629 !important;
+}
+
+[data-theme='dark'] .area-card {
+  background-color: #181e17 !important;
+  border-color: #2c3629 !important;
+}
+
+[data-theme='dark'] .area-info h3 {
+  color: #ffffff !important;
+}
+
+[data-theme='dark'] .area-tag {
+  color: #e2e8df !important;
+}

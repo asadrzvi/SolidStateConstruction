@@ -51,8 +51,8 @@ const translations = {
     // Services - Residential
     resWaterTitle: "Residential Water Mitigation",
     resWaterDesc: "Rapid response for residential leaks, pipe bursts, and flooding. We dry, sanitize, and restore your home to safety.",
-    resPlumbingTitle: "Home Plumbing Services",
-    resPlumbingDesc: "Professional leak detection, custom fixtures, whole-house repiping, and emergency residential plumbing.",
+    resPlumbingTitle: "24/7 Emergency Plumbing & Drain",
+    resPlumbingDesc: "Same-day plumbing repair, electronic leak detection, slab leak repair, hydro-jetting drain cleaning, tankless water heaters, & whole-house repiping.",
     resRoofingTitle: "Residential Roofing",
     resRoofingDesc: "Expert roof repairs, storm-damage tarping, and complete residential roof replacements.",
     resConcreteTitle: "Driveways & Patios",
@@ -228,8 +228,8 @@ const translations = {
     // Services - Residential
     resWaterTitle: "Mitigación de Agua Residencial",
     resWaterDesc: "Respuesta rápida para fugas residenciales, roturas de tuberías e inundaciones. Secamos, desinfectamos y restauramos su hogar para su seguridad.",
-    resPlumbingTitle: "Servicios de Plomería del Hogar",
-    resPlumbingDesc: "Detección profesional de fugas, accesorios personalizados, reemplazo de tuberías en toda la casa y plomería residencial de emergencia.",
+    resPlumbingTitle: "Plomería de Emergencia 24/7 y Drenaje",
+    resPlumbingDesc: "Reparación de plomería el mismo día, detección de fugas electrónicas, reparación de fugas en losas, limpieza de drenajes con hidro-jetting, calentadores de agua sin tanque y repipeado de casas.",
     resRoofingTitle: "Techos Residenciales",
     resRoofingDesc: "Reparación experta de techos, colocación de lonas por daños de tormentas y reemplazos completos de techos residenciales.",
     resConcreteTitle: "Caminos y Patios",

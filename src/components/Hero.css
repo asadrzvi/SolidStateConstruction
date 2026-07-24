@@ -1,29 +1,35 @@
 .hero {
   position: relative;
-  min-height: 80vh; /* More compact */
+  min-height: 85vh; /* More compact */
   display: flex;
   align-items: center;
   justify-content: center;
-  background-size: cover;
-  background-position: center;
   color: #ffffff !important;
   text-align: center;
   padding-top: 100px;
   overflow: hidden;
 }
 
-.hero-bg-video {
+.hero-bg-img {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  transform: translate(-50%, -50%);
-  object-fit: cover;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
   z-index: 0;
-  filter: brightness(0.85);
+  animation: kenBurnsZoom 25s infinite alternate ease-in-out;
+  transform-origin: center center;
+}
+
+@keyframes kenBurnsZoom {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.12);
+  }
 }
 
 .hero-overlay {
@@ -32,7 +38,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.75) 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.72) 100%);
   z-index: 1;
 }
 

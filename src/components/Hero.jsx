@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useEffect } from 'react'
 import { Phone, Droplets } from 'lucide-react'
 import heroBg from '../../public/images/hero_bg.jpg'
 import { useLanguage } from '../context/LanguageContext'
@@ -6,10 +6,18 @@ import './Hero.css'
 
 function Hero({ onOpenQuote }) {
   const { t } = useLanguage();
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 1.35; // Sped up 1.35x for active motion
+    }
+  }, []);
 
   return (
     <section className="hero">
       <video 
+        ref={videoRef}
         autoPlay 
         loop 
         muted 
@@ -17,8 +25,7 @@ function Hero({ onOpenQuote }) {
         poster={heroBg}
         className="hero-bg-video"
       >
-        <source src="https://cdn.coverr.co/videos/coverr-construction-workers-at-work-2357/1080p.mp4" type="video/mp4" />
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-heavy-machinery-and-workers-at-a-construction-site-41551-large.mp4" type="video/mp4" />
+        <source src="/images/gallery/e72b06a0-2677-4b84-a035-bb064c9061eb.MOV" type="video/mp4" />
         <source src="/images/gallery/1355c929-7170-4657-976e-dc071c72978f.MOV" type="video/mp4" />
       </video>
       <div className="hero-overlay"></div>

@@ -11,7 +11,7 @@ const media = [
   { type: 'image', src: '/images/gallery/7e6da58d-6958-47f1-a51b-eacbdb61c97b.JPG', alt: 'Precision Concrete Formwork Detail' },
   { type: 'image', src: '/images/gallery/5c7e3f06-c5d5-4305-943c-21da6bd90e65.JPG', alt: 'Finished Reinforced Concrete Slab' },
   { type: 'video', src: '/images/gallery/1355c929-7170-4657-976e-dc071c72978f.MOV', alt: 'Active Concrete Pouring and Distribution' },
-  { type: 'video', src: '/images/gallery/e72b06a0-2677-4b84-a035-bb064c9061eb.MOV', alt: 'Precision Leveling and Broom Finishing' },
+  { type: 'video', src: '/images/gallery/e72b06a0-2677-4b84-a035-bb064c9061eb.MOV', alt: '' },
   { type: 'image', src: '/images/gallery/bef9dd32-cf08-404f-8424-f8407dd97bd7.JPG', alt: 'Slab Foundation Rebar Reinforcement' }
 ]
 
@@ -41,9 +41,9 @@ function Gallery() {
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (!lightbox.isOpen) return
+      if (e.key === 'Escape') closeLightbox()
       if (e.key === 'ArrowRight') nextImage(e)
       if (e.key === 'ArrowLeft') prevImage(e)
-      if (e.key === 'Escape') closeLightbox()
     }
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
@@ -52,28 +52,17 @@ function Gallery() {
   return (
     <section className="gallery-section" id="gallery">
       <div className="container">
-        <h2 className="section-title">Our Work in Action</h2>
-        <p className="section-subtitle">Real photos and videos from our recent job sites in Leander and North Austin. Quality craftsmanship you can see.</p>
+        <h2 className="section-title">Job Site Showcase</h2>
+        <p className="section-subtitle">Real project photos and site videos from recent residential and commercial work.</p>
+        
         <div className="gallery-grid">
-          {media.map((item, index) => (
-            <div 
-              className="gallery-item" 
-              key={index}
-              onClick={() => openLightbox(index)}
-            >
+          {media.map((item, idx) => (
+            <div key={idx} className="gallery-item" onClick={() => openLightbox(idx)}>
               {item.type === 'video' ? (
-                <div className="video-thumbnail-container">
-                  <video 
-                    src={item.src} 
-                    muted 
-                    playsInline 
-                    loop 
-                    className="gallery-video-preview"
-                    preload="metadata"
-                  />
-                  <div className="video-badge">
-                    <Video size={16} className="video-icon" />
-                    <span>VIDEO</span>
+                <div className="gallery-video-thumbnail">
+                  <video src={item.src} preload="metadata" />
+                  <div className="play-badge">
+                    <Play size={20} />
                   </div>
                 </div>
               ) : (
@@ -115,7 +104,7 @@ function Gallery() {
               />
             )}
             <div className="lightbox-caption">
-              {media[lightbox.index].alt} ({lightbox.index + 1} / {media.length})
+              {media[lightbox.index].alt ? `${media[lightbox.index].alt} ` : ''}({lightbox.index + 1} / {media.length})
             </div>
           </div>
           

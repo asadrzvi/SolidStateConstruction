@@ -1,27 +1,29 @@
 .hero {
   position: relative;
-  min-height: 85vh; /* More compact */
+  min-height: 85vh;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #ffffff !important;
-  text-align: center;
-  padding-top: 100px;
+  padding: 110px 0 60px 0;
   overflow: hidden;
 }
 
-.hero-bg-video {
+.hero-bg-img {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  transform: translate(-50%, -50%);
-  object-fit: cover;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
   z-index: 0;
-  filter: brightness(0.85);
+  animation: kenBurnsZoom 30s infinite alternate ease-in-out;
+}
+
+@keyframes kenBurnsZoom {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.08); }
 }
 
 .hero-overlay {
@@ -30,8 +32,127 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.75) 100%);
+  background: linear-gradient(135deg, rgba(12, 14, 11, 0.82) 0%, rgba(12, 14, 11, 0.65) 100%);
   z-index: 1;
+}
+
+.hero-container {
+  position: relative;
+  z-index: 2;
+  text-align: left !important;
+}
+
+.hero-split-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.hero-content-col {
+  text-align: left;
+}
+
+.hero-content-col h1 {
+  font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+  font-weight: 900;
+  margin-bottom: 1.25rem;
+  color: #ffffff !important;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+  line-height: 1.15;
+}
+
+.hero-content-col .hero-subtitle {
+  font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+  margin-bottom: 2.25rem;
+  color: #e2e8df !important;
+  font-weight: 600;
+  line-height: 1.6;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+}
+
+.hero-content-col .hero-cta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.hero-video-col {
+  display: flex;
+  justify-content: center;
+}
+
+.hero-video-card {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  background: rgba(24, 30, 23, 0.85);
+  backdrop-filter: blur(12px);
+  border: 2px solid var(--primary);
+  border-radius: 20px;
+  padding: 0.8rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  animation: floatCard 4s ease-in-out infinite alternate;
+}
+
+@keyframes floatCard {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-10px); }
+}
+
+.video-card-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--primary);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 0.4rem 0.8rem;
+  border-radius: 30px;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+}
+
+.video-wrapper {
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  aspect-ratio: 9 / 16;
+  background-color: #000000;
+}
+
+.hero-card-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-card-footer {
+  margin-top: 0.75rem;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+@media (max-width: 900px) {
+  .hero-split-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .hero-content-col {
+    text-align: center;
+  }
+  .hero-content-col .hero-cta {
+    justify-content: center;
+  }
+  .hero-video-card {
+    max-width: 280px;
+    margin-top: 1rem;
+  }
 }
 
 .hero-content {

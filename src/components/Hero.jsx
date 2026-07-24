@@ -8,10 +8,18 @@ function Hero({ onOpenQuote }) {
   const { t } = useLanguage();
 
   return (
-    <section 
-      className="hero"
-      style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${heroBg})` }}
-    >
+    <section className="hero">
+      <video 
+        autoPlay 
+        loop 
+        muted 
+        playsInline 
+        poster={heroBg}
+        className="hero-bg-video"
+      >
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-heavy-machinery-and-workers-at-a-construction-site-41551-large.mp4" type="video/mp4" />
+        <source src="/images/gallery/1355c929-7170-4657-976e-dc071c72978f.MOV" type="video/mp4" />
+      </video>
       <div className="hero-overlay"></div>
       <div className="container">
         <div className="hero-content">

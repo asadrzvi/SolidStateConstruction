@@ -1,13 +1,15 @@
 .map-section {
   padding: 6rem 0;
-  background-color: #f7fafc;
+  background-color: var(--bg-alt);
+  border-top: 1px solid var(--card-border);
 }
 
 .map-container {
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  box-shadow: var(--shadow);
   border-radius: 12px;
   overflow: hidden;
   margin-top: 3rem;
+  border: 1px solid var(--card-border);
 }
 
 .map-info {
@@ -20,7 +22,7 @@
 
 .map-info p {
   font-size: 1.1rem;
-  color: var(--text-dark);
+  color: var(--text-dark) !important;
 }
 
 .map-info .btn {

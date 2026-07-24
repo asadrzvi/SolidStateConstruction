@@ -6,12 +6,12 @@ import { useLanguage } from '../context/LanguageContext'
 import './Navbar.css'
 
 function Navbar({ onOpenQuote, currentPage, onPageChange }) {
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { language, toggleLanguage, t } = useLanguage();
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') || 'dark';
+    const savedTheme = localStorage.getItem('theme') || 'light';
     setIsDark(savedTheme === 'dark');
     document.documentElement.setAttribute('data-theme', savedTheme);
   }, []);
@@ -53,7 +53,7 @@ function Navbar({ onOpenQuote, currentPage, onPageChange }) {
       <div className="container">
         <div className="nav-brand" onClick={handleBrandClick} style={{ cursor: 'pointer' }}>
           <img 
-            src={isDark ? logoDark : logoLight} 
+            src={logoLight} 
             alt="Solid State Construction Logo" 
             className="logo" 
           />

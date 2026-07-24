@@ -78,8 +78,8 @@
   display: flex;
   align-items: center;
   text-align: center;
-  margin: 2rem 0;
-  color: var(--text-light, #5c5c5c);
+  margin: 2.5rem 0 1.5rem 0;
+  color: var(--text-light);
   font-weight: bold;
 }
 
@@ -87,7 +87,7 @@
 .scheduler-separator::after {
   content: '';
   flex: 1;
-  border-bottom: 1px solid var(--secondary, #e5e5e0);
+  border-bottom: 1px solid var(--card-border);
 }
 
 .scheduler-separator:not(:empty)::before {
@@ -100,21 +100,31 @@
 
 .scheduler-cta {
   text-align: center;
-  background: var(--bg-alt, #fafaf9);
-  padding: 2rem;
+  background: var(--bg-alt);
+  padding: 2.5rem;
   border-radius: 12px;
-  border: 1px solid var(--modal-border, #e5e5e0);
+  border: 1px solid var(--card-border);
 }
 
 .scheduler-cta p {
-  margin: 0 0 1.25rem 0;
-  font-size: 0.95rem;
-  color: var(--text-light, #5c5c5c);
+  margin: 0 0 1.5rem 0;
+  font-size: 1.05rem;
+  color: var(--text-dark) !important;
   font-weight: 600;
 }
 
 .scheduler-cta .btn {
   display: inline-block;
   width: auto;
-  padding: 0.8rem 2rem;
+  padding: 0.9rem 2.2rem;
+  background-color: var(--primary) !important;
+  color: #ffffff !important;
+  border: none !important;
+  font-weight: 700;
+}
+
+.scheduler-cta .btn:hover {
+  background-color: var(--accent) !important;
+  color: #ffffff !important;
+  transform: translateY(-2px);
 }

@@ -8,33 +8,37 @@
 }
 
 :root {
-  --primary: #3c4735; /* Deep Metallic Olive */
-  --accent: #708269; /* Muted Sage Green / Concrete Sage */
-  --text-dark: #ebedea; /* Light concrete gray */
-  --text-light: #959e92; /* Medium concrete gray */
-  --white: #1a1f18;
-  --bg-color: #111410; /* Dark background */
-  --card-bg: #1a1f18; /* Surface card */
-  --secondary: #262d24; /* Border/secondary color */
-  --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
-
-  /* Theme variables from original site */
-  --bg-base: #111410;
-  --bg-surface: #1a1f18;
-  --brand-color: #708269; /* Muted Sage Green */
+  /* Default: LIGHT MODE */
+  --primary: #2d3827; /* Deep Solid Olive */
+  --accent: #485942; /* Slate Muted Green */
+  --text-dark: #192017; /* Deep Crisp Charcoal - 100% visible on light bg */
+  --text-light: #444e42; /* Crisp Dark Slate - 100% visible on light bg */
+  --white: #ffffff;
+  --bg-color: #ffffff; /* Clean white background */
+  --bg-alt: #f6f8f5; /* Subtle soft off-white section background */
+  --card-bg: #ffffff; /* White card surface */
+  --card-border: #dcdfd8; /* Clean card border */
+  --secondary: #edf0eb; /* Soft silver mist */
+  --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+  --brand-color: #485942;
   
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   line-height: 1.6;
 }
 
-[data-theme='light'] {
-  --text-dark: #1c201a; /* Slate Dark Olive */
-  --text-light: #515a4f; /* Slate Medium Olive */
-  --white: #ffffff;
-  --bg-color: #ffffff;
-  --card-bg: #ffffff;
-  --secondary: #f1f3f1; /* Soft Silver Mist with a touch of sage */
-  --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+[data-theme='dark'] {
+  --primary: #708269; /* Muted Sage Green */
+  --accent: #869b7f; /* Bright Sage Accent */
+  --text-dark: #f5f7f4; /* Pure Crisp Light Gray - 100% visible on dark bg */
+  --text-light: #b4beaf; /* Bright Readable Sage Gray - 100% visible on dark bg */
+  --white: #1a1f18;
+  --bg-color: #111410; /* Rich Dark background */
+  --bg-alt: #181d17; /* Dark surface section background */
+  --card-bg: #1d231c; /* Surface card */
+  --card-border: #2e372c; /* Dark card border */
+  --secondary: #262d24; /* Border/secondary color */
+  --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  --brand-color: #708269;
 }
 
 * {
@@ -50,12 +54,12 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Slider Styling Fix - Ensuring it's visible and doesn't glitch */
+/* Slider Styling Fix */
 input[type="range"] {
   -webkit-appearance: none;
   width: 100%;
   height: 8px;
-  background: #334155; /* slate-700 */
+  background: var(--card-border);
   border-radius: 5px;
   outline: none;
   margin: 10px 0;
@@ -69,7 +73,7 @@ input[type="range"]::-webkit-slider-thumb {
   background: var(--brand-color);
   cursor: pointer;
   border-radius: 50%;
-  border: 4px solid #1e293b; /* slate-800 */
+  border: 4px solid var(--card-bg);
   box-shadow: 0 0 10px rgba(112, 130, 105, 0.4);
 }
 
@@ -79,7 +83,7 @@ input[type="range"]::-moz-range-thumb {
   background: var(--brand-color);
   cursor: pointer;
   border-radius: 50%;
-  border: 4px solid #1e293b;
+  border: 4px solid var(--card-bg);
   box-shadow: 0 0 10px rgba(112, 130, 105, 0.4);
 }
 
@@ -88,12 +92,17 @@ input[type="range"]::-moz-range-thumb {
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 1.5rem;
-  text-align: center; /* Ensures content is centered by default */
+  text-align: center;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4, h5, h6 {
   line-height: 1.2;
   margin-bottom: 1rem;
+  color: var(--text-dark);
+}
+
+p {
+  color: var(--text-light);
 }
 
 .btn {
@@ -118,39 +127,39 @@ h1, h2, h3 {
 
 .btn-primary {
   background-color: var(--primary);
-  color: var(--white);
-  box-shadow: 0 4px 6px rgba(60, 71, 53, 0.2);
+  color: #ffffff !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
 }
 
 .btn-primary:hover {
   transform: translateY(-3px);
-  background-color: #2b3326; /* Darker metallic olive */
-  box-shadow: 0 0 15px 4px rgba(255, 255, 255, 0.4);
+  background-color: var(--accent);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
 .btn-secondary {
-  background-color: var(--white);
-  color: var(--primary);
+  background-color: var(--card-bg);
+  color: var(--text-dark) !important;
   border: 2px solid var(--primary);
 }
 
 .btn-secondary:hover {
   background-color: var(--primary);
-  color: var(--white);
+  color: #ffffff !important;
   transform: translateY(-3px);
-  box-shadow: 0 0 15px 4px rgba(255, 255, 255, 0.4);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
 .section-title {
   font-size: 2.5rem;
   font-weight: 800;
   margin-bottom: 1.5rem;
-  color: var(--text-dark);
+  color: var(--text-dark) !important;
 }
 
 .section-subtitle {
   font-size: 1.1rem;
-  color: var(--text-light);
+  color: var(--text-light) !important;
   max-width: 700px;
   margin: 0 auto 3rem auto;
 }

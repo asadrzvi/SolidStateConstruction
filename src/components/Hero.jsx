@@ -9,10 +9,18 @@ function Hero({ onOpenQuote }) {
 
   return (
     <section className="hero">
-      <div 
-        className="hero-bg-img"
-        style={{ backgroundImage: `url(${heroBg})` }}
-      ></div>
+      <video 
+        autoPlay 
+        loop 
+        muted 
+        playsInline 
+        poster={heroBg}
+        className="hero-bg-video"
+      >
+        <source src="https://cdn.coverr.co/videos/coverr-construction-workers-at-work-2357/1080p.mp4" type="video/mp4" />
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-heavy-machinery-and-workers-at-a-construction-site-41551-large.mp4" type="video/mp4" />
+        <source src="/images/gallery/1355c929-7170-4657-976e-dc071c72978f.MOV" type="video/mp4" />
+      </video>
       <div className="hero-overlay"></div>
       <div className="container">
         <div className="hero-content">

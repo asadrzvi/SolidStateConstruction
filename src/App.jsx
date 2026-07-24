@@ -23,20 +23,25 @@ function App() {
   const [submittedName, setSubmittedName] = useState('')
 
   useEffect(() => {
-    const handleHashChange = () => {
+    const handleRoute = () => {
+      const path = window.location.pathname;
       const hash = window.location.hash;
-      if (hash.includes('thank-you')) {
+      if (path.includes('thank-you') || hash.includes('thank-you')) {
         setCurrentPage('thank-you');
-      } else if (hash.includes('gallery')) {
+      } else if (path.includes('gallery') || hash.includes('gallery')) {
         setCurrentPage('gallery');
-      } else if (hash.includes('home') || hash === '' || hash === '#') {
+      } else {
         setCurrentPage('home');
       }
     };
 
-    handleHashChange();
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    handleRoute();
+    window.addEventListener('hashchange', handleRoute);
+    window.addEventListener('popstate', handleRoute);
+    return () => {
+      window.removeEventListener('hashchange', handleRoute);
+      window.removeEventListener('popstate', handleRoute);
+    };
   }, []);
 
   const handleInquirySubmitted = (service, name) => {
@@ -44,21 +49,28 @@ function App() {
     setSubmittedName(name || '');
     setIsQuoteModalOpen(false);
     setCurrentPage('thank-you');
-    window.location.hash = '#/thank-you';
+    try {
+      window.history.pushState({}, '', '/thank-you');
+    } catch (e) {
+      window.location.hash = '#/thank-you';
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
-    if (page === 'thank-you') {
-      window.location.hash = '#/thank-you';
-    } else if (page === 'gallery') {
-      window.location.hash = '#/gallery';
-    } else {
-      if (window.location.hash.includes('thank-you') || window.location.hash.includes('gallery')) {
-        window.location.hash = '#/';
+    try {
+      if (page === 'thank-you') {
+        window.history.pushState({}, '', '/thank-you');
+      } else if (page === 'gallery') {
+        window.history.pushState({}, '', '/gallery');
+      } else {
+        window.history.pushState({}, '', '/');
       }
+    } catch (e) {
+      window.location.hash = page === 'home' ? '#/' : `#/${page}`;
     }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (

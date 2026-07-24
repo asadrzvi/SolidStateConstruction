@@ -12,10 +12,10 @@
   --primary: #2d3827; /* Deep Solid Olive */
   --accent: #485942; /* Slate Muted Green */
   --text-dark: #192017; /* Deep Crisp Charcoal - 100% visible on light bg */
-  --text-light: #444e42; /* Crisp Dark Slate - 100% visible on light bg */
+  --text-light: #3f4a3d; /* Crisp Dark Slate - 100% visible on light bg */
   --white: #ffffff;
   --bg-color: #ffffff; /* Clean white background */
-  --bg-alt: #f6f8f5; /* Subtle soft off-white section background */
+  --bg-alt: #f6f8f5; /* Soft off-white section background */
   --card-bg: #ffffff; /* White card surface */
   --card-border: #dcdfd8; /* Clean card border */
   --secondary: #edf0eb; /* Soft silver mist */
@@ -27,18 +27,79 @@
 }
 
 [data-theme='dark'] {
-  --primary: #708269; /* Muted Sage Green */
-  --accent: #869b7f; /* Bright Sage Accent */
-  --text-dark: #f5f7f4; /* Pure Crisp Light Gray - 100% visible on dark bg */
-  --text-light: #b4beaf; /* Bright Readable Sage Gray - 100% visible on dark bg */
-  --white: #1a1f18;
-  --bg-color: #111410; /* Rich Dark background */
-  --bg-alt: #181d17; /* Dark surface section background */
-  --card-bg: #1d231c; /* Surface card */
-  --card-border: #2e372c; /* Dark card border */
-  --secondary: #262d24; /* Border/secondary color */
-  --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  --primary: #708269;
+  --accent: #89a182;
+  --text-dark: #ffffff; /* 100% Pure White for all text in dark mode */
+  --text-light: #e2e8df; /* High contrast light sage/white for secondary text */
+  --white: #141812;
+  --bg-color: #0c0e0b; /* Uniform deep dark background for the ENTIRE site */
+  --bg-alt: #121611; /* Dark section background */
+  --card-bg: #181e17; /* Surface card background */
+  --card-border: #2c3629; /* Dark card border */
+  --secondary: #222920;
+  --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
   --brand-color: #708269;
+}
+
+/* Global Dark Mode Enforcement across ALL sections & text elements */
+[data-theme='dark'] body,
+[data-theme='dark'] main,
+[data-theme='dark'] section,
+[data-theme='dark'] .about,
+[data-theme='dark'] .services,
+[data-theme='dark'] .process-timeline,
+[data-theme='dark'] .service-areas-section,
+[data-theme='dark'] .testimonials,
+[data-theme='dark'] .faq-section,
+[data-theme='dark'] .contact,
+[data-theme='dark'] .map-section,
+[data-theme='dark'] .gallery-section,
+[data-theme='dark'] footer {
+  background-color: #0c0e0b !important;
+  color: #ffffff !important;
+}
+
+[data-theme='dark'] h1,
+[data-theme='dark'] h2,
+[data-theme='dark'] h3,
+[data-theme='dark'] h4,
+[data-theme='dark'] h5,
+[data-theme='dark'] h6,
+[data-theme='dark'] p,
+[data-theme='dark'] span,
+[data-theme='dark'] li,
+[data-theme='dark'] label,
+[data-theme='dark'] div,
+[data-theme='dark'] .section-title,
+[data-theme='dark'] .section-subtitle,
+[data-theme='dark'] .area-info h3,
+[data-theme='dark'] .area-tag,
+[data-theme='dark'] .faq-accordion-header h3,
+[data-theme='dark'] .faq-accordion-body p,
+[data-theme='dark'] .testimonial-text,
+[data-theme='dark'] .author-name,
+[data-theme='dark'] .author-location,
+[data-theme='dark'] .scheduler-cta p {
+  color: #ffffff !important;
+}
+
+[data-theme='dark'] .section-subtitle,
+[data-theme='dark'] .area-tag,
+[data-theme='dark'] .author-location {
+  color: #dbe4d8 !important;
+}
+
+[data-theme='dark'] .card-bg,
+[data-theme='dark'] .area-card,
+[data-theme='dark'] .service-card,
+[data-theme='dark'] .testimonial-card,
+[data-theme='dark'] .contact-card,
+[data-theme='dark'] .faq-accordion-item,
+[data-theme='dark'] .founder-spotlight,
+[data-theme='dark'] .scheduler-cta,
+[data-theme='dark'] .work-summary {
+  background-color: #181e17 !important;
+  border-color: #2c3629 !important;
 }
 
 * {
@@ -154,12 +215,12 @@ p {
   font-size: 2.5rem;
   font-weight: 800;
   margin-bottom: 1.5rem;
-  color: var(--text-dark) !important;
+  color: var(--text-dark);
 }
 
 .section-subtitle {
   font-size: 1.1rem;
-  color: var(--text-light) !important;
+  color: var(--text-light);
   max-width: 700px;
   margin: 0 auto 3rem auto;
 }

@@ -44,6 +44,46 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    let canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (!canonicalLink) {
+      canonicalLink = document.createElement('link');
+      canonicalLink.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonicalLink);
+    }
+
+    let robotsMeta = document.querySelector('meta[name="robots"]');
+    if (!robotsMeta) {
+      robotsMeta = document.createElement('meta');
+      robotsMeta.setAttribute('name', 'robots');
+      document.head.appendChild(robotsMeta);
+    }
+
+    let ogUrlMeta = document.querySelector('meta[property="og:url"]');
+    let twitterUrlMeta = document.querySelector('meta[property="twitter:url"]');
+
+    if (currentPage === 'gallery') {
+      const galleryUrl = 'https://solidstatesconstruction.com/gallery';
+      canonicalLink.setAttribute('href', galleryUrl);
+      if (ogUrlMeta) ogUrlMeta.setAttribute('content', galleryUrl);
+      if (twitterUrlMeta) twitterUrlMeta.setAttribute('content', galleryUrl);
+      robotsMeta.setAttribute('content', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
+      document.title = 'Project Gallery | Solid State Construction - Leander & Austin TX';
+    } else if (currentPage === 'thank-you') {
+      const thankYouUrl = 'https://solidstatesconstruction.com/thank-you';
+      canonicalLink.setAttribute('href', thankYouUrl);
+      robotsMeta.setAttribute('content', 'noindex, follow');
+      document.title = 'Thank You | Solid State Construction';
+    } else {
+      const homeUrl = 'https://solidstatesconstruction.com/';
+      canonicalLink.setAttribute('href', homeUrl);
+      if (ogUrlMeta) ogUrlMeta.setAttribute('content', homeUrl);
+      if (twitterUrlMeta) twitterUrlMeta.setAttribute('content', homeUrl);
+      robotsMeta.setAttribute('content', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
+      document.title = 'Solid State Construction | #1 General Contractor, Plumber & Ready Mix Concrete in Leander & Austin TX';
+    }
+  }, [currentPage]);
+
   const handleInquirySubmitted = (service, name) => {
     setSubmittedService(service || '');
     setSubmittedName(name || '');

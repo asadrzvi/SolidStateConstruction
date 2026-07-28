@@ -1,0 +1,13 @@
+# Solid State Construction - Robots.txt
+User-agent: *
+Allow: /
+Allow: /gallery
+
+# Exclude non-indexable utility & fallback pages
+Disallow: /thank-you
+Disallow: /404.html
+Disallow: /*?*
+Disallow: /*#*
+
+# Sitemap Location
+Sitemap: https://solidstatesconstruction.com/sitemap.xml

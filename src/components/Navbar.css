@@ -28,7 +28,7 @@
 }
 
 [data-theme='dark'] .logo {
-  filter: brightness(0) invert(1);
+  filter: none;
 }
 
 .nav-right {

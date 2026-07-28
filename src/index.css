@@ -106,6 +106,24 @@
   color: #dbe4d8 !important;
 }
 
+[data-theme='dark'] input,
+[data-theme='dark'] select,
+[data-theme='dark'] textarea {
+  background-color: #121711 !important;
+  color: #ffffff !important;
+  border-color: #2c3629 !important;
+}
+
+[data-theme='dark'] select option {
+  background-color: #181e17 !important;
+  color: #ffffff !important;
+}
+
+[data-theme='dark'] input::placeholder,
+[data-theme='dark'] textarea::placeholder {
+  color: #9ba899 !important;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;

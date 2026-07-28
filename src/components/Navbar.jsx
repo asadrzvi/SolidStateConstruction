@@ -53,7 +53,7 @@ function Navbar({ onOpenQuote, currentPage, onPageChange }) {
       <div className="container">
         <div className="nav-brand" onClick={handleBrandClick} style={{ cursor: 'pointer' }}>
           <img 
-            src={logoLight} 
+            src={isDark ? logoDark : logoLight} 
             alt="Solid State Construction Logo" 
             className="logo" 
           />

@@ -140,7 +140,11 @@ function App() {
             onPrefillMessage={setPrefilledMessage}
             onOpenQuote={() => setIsQuoteModalOpen(true)}
           />
-          <ProcessTimeline />
+          <ProcessTimeline 
+            onServiceSelect={setSelectedService} 
+            onPrefillMessage={setPrefilledMessage}
+            onOpenQuote={() => setIsQuoteModalOpen(true)}
+          />
           <ServiceAreas />
           <Testimonials />
           <FAQSection />

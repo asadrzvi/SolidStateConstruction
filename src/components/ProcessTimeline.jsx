@@ -3,12 +3,27 @@ import { PhoneCall, ShieldAlert, FileSearch, HardHat, Sparkles, RefreshCw, Arrow
 import { useLanguage } from '../context/LanguageContext';
 import './ProcessTimeline.css';
 
-export default function ProcessTimeline() {
+export default function ProcessTimeline({ onServiceSelect, onPrefillMessage, onOpenQuote }) {
   const { t } = useLanguage();
   const [flippedCards, setFlippedCards] = useState({});
 
   const toggleFlip = (idx) => {
     setFlippedCards((prev) => ({ ...prev, [idx]: !prev[idx] }));
+  };
+
+  const handleCtaClick = (e, step) => {
+    e.stopPropagation();
+    if (onServiceSelect) onServiceSelect(step.serviceKey);
+    if (onPrefillMessage) onPrefillMessage(`Inquiry for ${step.title}: ${step.subtitle}`);
+    
+    if (onOpenQuote) {
+      onOpenQuote();
+    } else {
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
   };
 
   const steps = [
@@ -23,7 +38,8 @@ export default function ProcessTimeline() {
         "📞 Direct Line to Master Contractor Shaan",
         "🛡️ Instant Safety & Water Containment"
       ],
-      ctaText: "Call Dispatch Now"
+      ctaText: "Call Dispatch Now",
+      serviceKey: "Water Remediation"
     },
     {
       icon: <ShieldAlert size={24} />,
@@ -36,7 +52,8 @@ export default function ProcessTimeline() {
         "🌪️ Industrial Air Scrubbing & Dehumidification",
         "🏗️ Temporary Roof Tarping & Enclosure"
       ],
-      ctaText: "Get Emergency Help"
+      ctaText: "Get Emergency Help",
+      serviceKey: "Emergency Services"
     },
     {
       icon: <FileSearch size={24} />,
@@ -49,7 +66,8 @@ export default function ProcessTimeline() {
         "🔍 FLIR Thermal Moisture Scanning",
         "📋 Direct Adjuster & Insurance Documentation"
       ],
-      ctaText: "Request Inspection"
+      ctaText: "Request Inspection",
+      serviceKey: "Foundation Repair"
     },
     {
       icon: <HardHat size={24} />,
@@ -62,7 +80,8 @@ export default function ProcessTimeline() {
         "🔨 Master Carpentry & Drywall Finishing",
         "⚖️ Structural Steel Pier Installation"
       ],
-      ctaText: "View Project Specs"
+      ctaText: "View Project Specs",
+      serviceKey: "Concrete & Foundation"
     },
     {
       icon: <Sparkles size={24} />,
@@ -75,7 +94,8 @@ export default function ProcessTimeline() {
         "📜 Transferable Structural Warranty",
         "🤝 Final Client Walkthrough Sign-Off"
       ],
-      ctaText: "Start Your Project"
+      ctaText: "Start Your Project",
+      serviceKey: "General Contracting"
     }
   ];
 
@@ -121,9 +141,13 @@ export default function ProcessTimeline() {
                         ))}
                       </ul>
                       <div className="flip-back-action">
-                        <span className="btn btn-primary cta-flip-btn">
+                        <button 
+                          type="button"
+                          className="btn btn-primary cta-flip-btn"
+                          onClick={(e) => handleCtaClick(e, step)}
+                        >
                           {step.ctaText} <ArrowRight size={16} />
-                        </span>
+                        </button>
                       </div>
                     </div>
                   </div>

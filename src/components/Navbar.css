@@ -20,11 +20,52 @@
   align-items: center;
 }
 
+.nav-logo-container {
+  position: relative;
+  height: 60px;
+  width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 800px;
+}
+
 .logo {
-  height: 60px; /* Reduced for mobile-first, can go back to 80 on desktop */
-  width: auto;
-  display: block;
-  transition: filter 0.3s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+              filter 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, filter;
+}
+
+.logo-left-half {
+  clip-path: inset(0 50% 0 0);
+}
+
+.logo-right-half {
+  clip-path: inset(0 0 0 50%);
+}
+
+/* Split animation during active scroll */
+.nav-logo-container.is-split .logo-left-half {
+  transform: translateX(-16px) rotateY(-18deg) scale(0.94);
+  filter: blur(2px) drop-shadow(0 0 10px rgba(56, 189, 248, 0.5));
+}
+
+.nav-logo-container.is-split .logo-right-half {
+  transform: translateX(16px) rotateY(18deg) scale(0.94);
+  filter: blur(2px) drop-shadow(0 0 10px rgba(56, 189, 248, 0.5));
+}
+
+/* Merged state when scroll rests */
+.nav-logo-container.is-merged .logo-left-half,
+.nav-logo-container.is-merged .logo-right-half {
+  transform: translateX(0) rotateY(0deg) scale(1);
+  filter: blur(0) drop-shadow(0 4px 12px rgba(2, 132, 199, 0.25));
 }
 
 [data-theme='dark'] .logo {

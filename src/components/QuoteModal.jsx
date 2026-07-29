@@ -200,12 +200,12 @@ export default function QuoteModal({ isOpen, onClose, initialService, onDetailed
         Accept: "application/json"
       },
       body: JSON.stringify({
-        access_key: "700a045a-9c7d-409d-ba90-8133f2c3b3a1",
-        name: clientName,
-        phone: phone,
-        email: email,
+        access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "700a045a-9c7d-409d-ba90-8133f2c3b3a1",
+        name: clientName.trim(),
+        phone: phone.trim(),
+        email: email.trim(),
         service: serviceName,
-        message: `Calculator Estimate: $${activeEstimate.toLocaleString()}\nNotes: ${notes}`,
+        message: `Calculator Estimate: $${activeEstimate.toLocaleString()}\nNotes: ${notes.trim()}`,
         subject: `New Lead: ${serviceName} ($${activeEstimate.toLocaleString()})`
       })
     }).catch(() => {});

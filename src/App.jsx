@@ -13,6 +13,7 @@ import MapSection from './components/MapSection'
 import Footer from './components/Footer'
 import QuoteModal from './components/QuoteModal'
 import ThankYouPage from './components/ThankYouPage'
+import SplitLogoSection from './components/SplitLogoSection'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home')
@@ -132,6 +133,7 @@ function App() {
       {currentPage === 'home' ? (
         <>
           <Hero onOpenQuote={() => setIsQuoteModalOpen(true)} />
+          <SplitLogoSection />
           <About />
           <Services 
             onServiceSelect={setSelectedService} 

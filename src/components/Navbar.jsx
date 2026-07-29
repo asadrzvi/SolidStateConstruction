@@ -8,12 +8,30 @@ import './Navbar.css'
 function Navbar({ onOpenQuote, currentPage, onPageChange }) {
   const [isDark, setIsDark] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLogoPulse, setIsLogoPulse] = useState(true);
   const { language, toggleLanguage, t } = useLanguage();
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') || 'light';
     setIsDark(savedTheme === 'dark');
     document.documentElement.setAttribute('data-theme', savedTheme);
+  }, []);
+
+  useEffect(() => {
+    let timer;
+    const handleScroll = () => {
+      setIsLogoPulse(false);
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        setIsLogoPulse(true);
+      }, 180);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(timer);
+    };
   }, []);
 
   const toggleTheme = () => {
@@ -52,11 +70,18 @@ function Navbar({ onOpenQuote, currentPage, onPageChange }) {
     <nav className="navbar">
       <div className="container">
         <div className="nav-brand" onClick={handleBrandClick} style={{ cursor: 'pointer' }}>
-          <img 
-            src={isDark ? logoDark : logoLight} 
-            alt="Solid State Construction Logo" 
-            className="logo" 
-          />
+          <div className={`nav-logo-container ${isLogoPulse ? 'is-merged' : 'is-split'}`}>
+            <img 
+              src={isDark ? logoDark : logoLight} 
+              alt="Solid State Construction Logo Left" 
+              className="logo logo-left-half" 
+            />
+            <img 
+              src={isDark ? logoDark : logoLight} 
+              alt="Solid State Construction Logo Right" 
+              className="logo logo-right-half" 
+            />
+          </div>
         </div>
         
         <div className="nav-right">

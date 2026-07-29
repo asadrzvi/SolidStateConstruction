@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useLanguage } from '../context/LanguageContext'
 import './Contact.css'
 
-const WEB3FORMS_ACCESS_KEY = "700a045a-9c7d-409d-ba90-8133f2c3b3a1";
+const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "700a045a-9c7d-409d-ba90-8133f2c3b3a1";
 
 function Contact({ initialService, initialMessage, onInquirySubmitted }) {
   const { t } = useLanguage();
@@ -12,7 +12,8 @@ function Contact({ initialService, initialMessage, onInquirySubmitted }) {
     email: '',
     address: '',
     service: 'Concrete & Foundation',
-    message: ''
+    message: '',
+    botcheck: '' // Honeypot anti-spam field
   })
   const [status, setStatus] = useState('')
 
@@ -42,6 +43,13 @@ function Contact({ initialService, initialMessage, onInquirySubmitted }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    // Honeypot check: If bot filled out hidden field, block silently
+    if (formData.botcheck) {
+      setStatus('success');
+      return;
+    }
+
     setStatus('sending');
 
     fetch("https://api.web3forms.com/submit", {
@@ -52,12 +60,12 @@ function Contact({ initialService, initialMessage, onInquirySubmitted }) {
       },
       body: JSON.stringify({
         access_key: WEB3FORMS_ACCESS_KEY,
-        name: formData.name,
-        phone: formData.phone,
-        email: formData.email,
-        address: formData.address,
+        name: formData.name.trim(),
+        phone: formData.phone.trim(),
+        email: formData.email.trim(),
+        address: formData.address.trim(),
         service: formData.service,
-        message: formData.message,
+        message: formData.message.trim(),
         subject: `New Lead: ${formData.service} from Shaans Website`
       })
     })
@@ -92,6 +100,14 @@ function Contact({ initialService, initialMessage, onInquirySubmitted }) {
             </div>
           ) : (
             <form className="contact-form" onSubmit={handleSubmit}>
+              {/* Honeypot field for anti-spam */}
+              <input 
+                type="checkbox" 
+                name="botcheck" 
+                className="hidden" 
+                style={{ display: 'none' }} 
+                onChange={(e) => setFormData(prev => ({ ...prev, botcheck: e.target.checked }))}
+              />
               <div className="form-group">
                 <label>{t('formName')}</label>
                 <input 

@@ -176,20 +176,23 @@
   border-radius: 20px;
 }
 
-.service-tag-label {
+.service-tag-label,
+[data-theme='dark'] .testimonial-card .service-tag-label {
   font-size: 0.82rem;
   font-weight: 800;
-  color: #7c5235;
+  color: #3d2b1f !important;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 0.85rem;
 }
 
-.testimonial-text {
+.testimonial-text,
+[data-theme='dark'] .testimonial-card .testimonial-text {
   font-style: italic;
   font-size: 1rem;
   line-height: 1.6;
-  color: var(--text-dark);
+  color: #2b1e16 !important;
+  font-weight: 600;
   margin-bottom: 1.25rem;
 }
 
@@ -232,24 +235,27 @@
   gap: 0.1rem;
 }
 
-.author-name {
+.author-name,
+[data-theme='dark'] .testimonial-card .author-name {
   font-weight: 800;
   font-size: 1.05rem;
-  color: var(--text-dark);
+  color: #1c1917 !important;
   line-height: 1.2;
 }
 
-.author-location {
+.author-location,
+[data-theme='dark'] .testimonial-card .author-location {
   font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-light);
+  font-weight: 700;
+  color: #5c4033 !important;
   line-height: 1.2;
 }
 
-.review-date {
+.review-date,
+[data-theme='dark'] .testimonial-card .review-date {
   font-size: 0.75rem;
-  font-weight: 500;
-  color: #78716c;
+  font-weight: 600;
+  color: #7c5235 !important;
   line-height: 1.2;
 }
 

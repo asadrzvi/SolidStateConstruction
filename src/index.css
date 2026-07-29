@@ -92,10 +92,7 @@
 [data-theme='dark'] .timeline-card p,
 [data-theme='dark'] .area-info h3,
 [data-theme='dark'] .faq-accordion-header h3,
-[data-theme='dark'] .faq-accordion-body p,
-[data-theme='dark'] .testimonial-text,
-[data-theme='dark'] .author-name,
-[data-theme='dark'] .scheduler-cta p {
+[data-theme='dark'] .faq-accordion-body p {
   color: #ffffff !important;
 }
 

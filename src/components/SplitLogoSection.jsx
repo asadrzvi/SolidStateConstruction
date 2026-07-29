@@ -71,19 +71,19 @@ function SplitLogoSection() {
           </h2>
         </div>
 
-        {/* Animated Split Logo Showcase */}
+        {/* Animated Horizontal Split Logo Showcase */}
         <div className={`split-logo-wrapper ${isMerged ? 'is-merged' : ''}`}>
-          {/* Left Split Half */}
-          <div className="split-logo-half split-logo-left">
-            <img src={logoSrc} alt="Solid State Construction Left" className="split-logo-img" />
+          {/* Top Split Half */}
+          <div className="split-logo-half split-logo-top">
+            <img src={logoSrc} alt="Solid State Construction Top Half" className="split-logo-img" />
           </div>
 
-          {/* Right Split Half */}
-          <div className="split-logo-half split-logo-right">
-            <img src={logoSrc} alt="Solid State Construction Right" className="split-logo-img" />
+          {/* Bottom Split Half */}
+          <div className="split-logo-half split-logo-bottom">
+            <img src={logoSrc} alt="Solid State Construction Bottom Half" className="split-logo-img" />
           </div>
 
-          {/* Radial Energy Glow Backdrop */}
+          {/* Black & Dark Monochrome Backdrop Glow */}
           <div className="split-logo-glow"></div>
         </div>
 

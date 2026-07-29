@@ -1,33 +1,45 @@
 /* ==========================================================================
-   SPLIT LOGO SHOWCASE ANIMATION - CAREMEDBILL SYNTHESIS STYLE
+   HORIZONTAL SPLIT LOGO SHOWCASE (SLEEK BLACK MONOCHROME EDITION)
    ========================================================================== */
 
 .split-logo-section {
   position: relative;
-  padding: 5.5rem 0;
-  background: var(--bg-card, #ffffff);
+  padding: 6rem 0;
+  background: #0a0a0a !important;
+  color: #ffffff !important;
   overflow: hidden;
   text-align: center;
-  border-top: 1px solid rgba(2, 132, 199, 0.12);
-  border-bottom: 1px solid rgba(2, 132, 199, 0.12);
-  box-shadow: inset 0 0 60px rgba(2, 132, 199, 0.05);
-  transition: background-color 0.35s ease;
-}
-
-[data-theme="dark"] .split-logo-section {
-  background: linear-gradient(180deg, #0b1329 0%, #0f172a 50%, #0b1329 100%);
-  border-color: rgba(56, 189, 248, 0.15);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.95);
 }
 
 .split-logo-header {
   margin-bottom: 2rem;
 }
 
+.split-logo-header .subtitle {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #e5e5e5 !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
+}
+
+.split-logo-header .section-title {
+  color: #ffffff !important;
+}
+
+.split-logo-header .gradient-text {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.4) !important;
+}
+
 .split-logo-wrapper {
   position: relative;
-  width: min(420px, 90vw);
-  height: 220px;
-  margin: 2.5rem auto;
+  width: min(440px, 92vw);
+  height: 230px;
+  margin: 3rem auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -40,37 +52,37 @@
   left: 0;
   width: 100%;
   height: 100%;
-  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
-              opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
-              filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 1.25s cubic-bezier(0.16, 1, 0.3, 1), 
+              opacity 1.25s cubic-bezier(0.16, 1, 0.3, 1), 
+              filter 1.25s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity, filter;
 }
 
-/* Left Half Split Initial State */
-.split-logo-left {
-  clip-path: inset(0 50% 0 0);
-  transform: translateX(-240px) rotateY(-25deg) scale(0.72);
+/* Horizontal Top Half Split Initial State */
+.split-logo-top {
+  clip-path: inset(0 0 50% 0);
+  transform: translateY(-160px) rotateX(25deg) scale(0.72);
   opacity: 0;
   filter: blur(14px);
 }
 
-/* Right Half Split Initial State */
-.split-logo-right {
-  clip-path: inset(0 0 0 50%);
-  transform: translateX(240px) rotateY(25deg) scale(0.72);
+/* Horizontal Bottom Half Split Initial State */
+.split-logo-bottom {
+  clip-path: inset(50% 0 0 0);
+  transform: translateY(160px) rotateX(-25deg) scale(0.72);
   opacity: 0;
   filter: blur(14px);
 }
 
 /* Merged State when Scrolled into View */
-.split-logo-wrapper.is-merged .split-logo-left {
-  transform: translateX(0) rotateY(0deg) scale(1);
+.split-logo-wrapper.is-merged .split-logo-top {
+  transform: translateY(0) rotateX(0deg) scale(1);
   opacity: 1;
   filter: blur(0);
 }
 
-.split-logo-wrapper.is-merged .split-logo-right {
-  transform: translateX(0) rotateY(0deg) scale(1);
+.split-logo-wrapper.is-merged .split-logo-bottom {
+  transform: translateY(0) rotateX(0deg) scale(1);
   opacity: 1;
   filter: blur(0);
 }
@@ -79,38 +91,30 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter: drop-shadow(0 10px 25px rgba(2, 132, 199, 0.3));
+  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.9)) brightness(1.1);
   transition: filter 0.4s ease;
 }
 
-[data-theme="dark"] .split-logo-img {
-  filter: drop-shadow(0 10px 30px rgba(56, 189, 248, 0.45));
-}
-
-/* Radial Energy Backdrop Glow */
+/* Deep Black Radial Halo Backdrop */
 .split-logo-glow {
   position: absolute;
-  inset: -25px;
+  inset: -30px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(2, 132, 199, 0.25) 0%, rgba(6, 182, 212, 0.08) 45%, rgba(0, 0, 0, 0) 70%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 40%, rgba(0, 0, 0, 0) 70%);
   opacity: 0;
   transform: scale(0.6);
   transition: opacity 0.9s ease 0.4s, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.4s;
   pointer-events: none;
 }
 
-[data-theme="dark"] .split-logo-glow {
-  background: radial-gradient(circle, rgba(56, 189, 248, 0.35) 0%, rgba(34, 211, 238, 0.12) 45%, rgba(0, 0, 0, 0) 70%);
-}
-
 .split-logo-wrapper.is-merged .split-logo-glow {
   opacity: 1;
-  transform: scale(1.1);
+  transform: scale(1.15);
 }
 
 .split-logo-caption {
   font-size: 1.05rem;
-  color: var(--text-secondary, #475569);
+  color: #a3a3a3 !important;
   max-width: 580px;
   margin: 0 auto;
   font-weight: 500;
@@ -118,12 +122,12 @@
 
 @media (max-width: 768px) {
   .split-logo-wrapper {
-    height: 170px;
+    height: 180px;
   }
-  .split-logo-left {
-    transform: translateX(-140px) rotateY(-20deg) scale(0.8);
+  .split-logo-top {
+    transform: translateY(-100px) rotateX(20deg) scale(0.78);
   }
-  .split-logo-right {
-    transform: translateX(140px) rotateY(20deg) scale(0.8);
+  .split-logo-bottom {
+    transform: translateY(100px) rotateX(-20deg) scale(0.78);
   }
 }

@@ -12,14 +12,20 @@
 }
 
 .service-card {
-  background: var(--card-bg);
-  border-radius: 12px;
-  box-shadow: var(--shadow);
-  transition: all 0.3s ease;
+  background: var(--card-bg, #fcfbfa);
+  border: 2px solid #3d2b1f !important;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(43, 30, 22, 0.15);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.5s ease, 
+              border-color 0.4s ease !important;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   width: 100%;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  will-change: transform, box-shadow;
 }
 
 @media (min-width: 640px) {
@@ -34,9 +40,11 @@
   }
 }
 
+/* 3D FLIP TILT EFFECT ON HOVER */
 .service-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  transform: translateY(-10px) rotateY(-4deg) rotateX(4deg) scale(1.02) !important;
+  border-color: #7c5235 !important;
+  box-shadow: 0 24px 50px rgba(43, 30, 22, 0.35) !important;
 }
 
 .service-image {
@@ -49,18 +57,18 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .service-card:hover .service-image img {
-  transform: scale(1.1);
+  transform: scale(1.08);
 }
 
 .service-icon-overlay {
   position: absolute;
   bottom: -20px;
   right: 20px;
-  background-color: var(--primary);
+  background: linear-gradient(135deg, #09090b 0%, #2b1e16 50%, #5c4033 100%) !important;
   color: white;
   width: 50px;
   height: 50px;
@@ -68,7 +76,8 @@
   align-items: center;
   justify-content: center;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 74, 173, 0.3);
+  border: 1.5px solid #7c5235 !important;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
 }
 
 .service-card-content {
@@ -90,18 +99,35 @@
   margin-bottom: 1.5rem;
 }
 
+/* Brown & Black Ombre Inquire Button */
 .service-link {
-  color: var(--primary);
-  font-weight: 700;
-  font-size: 0.9rem;
+  background: linear-gradient(90deg, #09090b 0%, #2b1e16 35%, #5c4033 70%, #09090b 100%) !important;
+  background-size: 250% 100% !important;
+  background-position: 0% 0% !important;
+  color: #ffffff !important;
+  border: 1.5px solid #7c5235 !important;
+  padding: 0.65rem 1.4rem !important;
+  border-radius: 8px !important;
+  font-weight: 800;
+  font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  display: inline-block;
-  transition: transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+  transition: background-position 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.3s ease, 
+              box-shadow 0.3s ease, 
+              border-color 0.3s ease !important;
 }
 
-.service-card:hover .service-link {
-  transform: translateX(5px);
+.service-card:hover .service-link,
+.service-link:hover {
+  background-position: 100% 0% !important;
+  border-color: #a06d44 !important;
+  transform: translateX(4px) scale(1.03) !important;
+  box-shadow: 0 8px 20px rgba(124, 82, 53, 0.45) !important;
 }
 
 .services-tabs {
@@ -113,27 +139,30 @@
   flex-wrap: wrap;
 }
 
+/* Services Category Tab Switcher with Brown & Black Ombre */
 .services-tab-btn {
-  background: var(--card-bg, #ffffff);
-  border: 2px solid var(--secondary, #f1f3f1);
-  color: var(--text-dark, #1c201a);
-  padding: 0.8rem 2rem;
+  background: linear-gradient(90deg, #09090b 0%, #2b1e16 35%, #5c4033 70%, #09090b 100%) !important;
+  background-size: 250% 100% !important;
+  background-position: 0% 0% !important;
+  color: #ffffff !important;
+  border: 2px solid #7c5235 !important;
+  padding: 0.85rem 2.2rem;
   font-size: 1.05rem;
-  font-weight: 700;
-  border-radius: 30px;
+  font-weight: 800;
+  border-radius: 9999px !important;
   cursor: pointer;
-  transition: all 0.3s ease;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3) !important;
+  transition: background-position 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.3s ease, 
+              border-color 0.3s ease, 
+              box-shadow 0.3s ease !important;
   outline: none;
 }
 
-.services-tab-btn:hover {
-  border-color: var(--accent, #708269);
-  background-color: var(--secondary, #f1f3f1);
-}
-
-.services-tab-btn.active {
-  background-color: var(--accent, #708269);
-  color: white;
-  border-color: var(--accent, #708269);
-  box-shadow: 0 4px 15px rgba(112, 130, 105, 0.25);
+.services-tab-btn:hover, .services-tab-btn.active {
+  background-position: 100% 0% !important;
+  border-color: #a06d44 !important;
+  transform: translateY(-3px) scale(1.03) !important;
+  box-shadow: 0 12px 30px rgba(124, 82, 53, 0.5) !important;
+  color: #ffffff !important;
 }

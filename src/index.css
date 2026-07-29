@@ -73,9 +73,12 @@
   color: #ffffff !important;
 }
 
-[data-theme='dark'] .timeline-card,
-[data-theme='dark'] .area-card,
+/* Card Backgrounds in Dark Mode (matching button color scheme) */
 [data-theme='dark'] .service-card,
+[data-theme='dark'] .timeline-card-face,
+[data-theme='dark'] .timeline-card-front,
+[data-theme='dark'] .timeline-card-back,
+[data-theme='dark'] .area-card,
 [data-theme='dark'] .testimonial-card,
 [data-theme='dark'] .contact-card,
 [data-theme='dark'] .faq-accordion-item,
@@ -83,35 +86,90 @@
 [data-theme='dark'] .scheduler-cta,
 [data-theme='dark'] .work-summary,
 [data-theme='dark'] .quote-modal-container {
-  background-color: #1f1712 !important;
-  border-color: #4a3427 !important;
+  background: linear-gradient(135deg, #1f1712 0%, #2b1e16 50%, #16100c 100%) !important;
+  border: 2px solid #5c4033 !important;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.6) !important;
   color: #ffffff !important;
 }
 
-[data-theme='dark'] .timeline-card h3,
-[data-theme='dark'] .timeline-card p,
-[data-theme='dark'] .area-info h3,
+/* All Text inside Cards in Dark Mode is Crisp Pure White */
+[data-theme='dark'] .service-card h3,
+[data-theme='dark'] .service-card p,
+[data-theme='dark'] .timeline-card-face h3,
+[data-theme='dark'] .timeline-card-face h4,
+[data-theme='dark'] .timeline-card-face p,
+[data-theme='dark'] .timeline-card-face li,
+[data-theme='dark'] .area-card h3,
+[data-theme='dark'] .area-card p,
+[data-theme='dark'] .testimonial-card *,
+[data-theme='dark'] .testimonial-text,
+[data-theme='dark'] .author-name,
+[data-theme='dark'] .author-location,
+[data-theme='dark'] .review-date,
+[data-theme='dark'] .service-tag-label,
+[data-theme='dark'] .contact-card label,
+[data-theme='dark'] .contact-card p,
 [data-theme='dark'] .faq-accordion-header h3,
-[data-theme='dark'] .faq-accordion-body p {
+[data-theme='dark'] .faq-accordion-body p,
+[data-theme='dark'] .founder-spotlight *,
+[data-theme='dark'] .scheduler-cta p,
+[data-theme='dark'] .work-summary p {
   color: #ffffff !important;
 }
 
-[data-theme='dark'] .timeline-card h4 {
-  color: #c88a58 !important;
+/* White Glow Effect for ALL Interactive Buttons & Badges in Dark Mode */
+[data-theme='dark'] .btn,
+[data-theme='dark'] .btn-primary,
+[data-theme='dark'] .btn-secondary,
+[data-theme='dark'] .quote-btn,
+[data-theme='dark'] .nav-phone,
+[data-theme='dark'] .lang-toggle-btn,
+[data-theme='dark'] .theme-toggle,
+[data-theme='dark'] .menu-toggle,
+[data-theme='dark'] .contact-form button[type="submit"],
+[data-theme='dark'] .scheduler-cta .btn,
+[data-theme='dark'] .cta-flip-btn,
+[data-theme='dark'] .inquire-btn,
+[data-theme='dark'] .services-tab-btn,
+[data-theme='dark'] .area-tag,
+[data-theme='dark'] .service-link,
+[data-theme='dark'] .quote-modal-next-btn,
+[data-theme='dark'] .quote-modal-save-btn,
+[data-theme='dark'] .flip-hint-pill {
+  background: linear-gradient(90deg, #09090b 0%, #2b1e16 35%, #5c4033 70%, #000000 100%) !important;
+  color: #ffffff !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.7) !important;
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.45), inset 0 1px 2px rgba(255, 255, 255, 0.6) !important;
 }
 
-[data-theme='dark'] .section-subtitle,
-[data-theme='dark'] .area-tag,
-[data-theme='dark'] .author-location {
-  color: #f5e6d8 !important;
+[data-theme='dark'] .btn:hover,
+[data-theme='dark'] .btn-primary:hover,
+[data-theme='dark'] .btn-secondary:hover,
+[data-theme='dark'] .quote-btn:hover,
+[data-theme='dark'] .nav-phone:hover,
+[data-theme='dark'] .lang-toggle-btn:hover,
+[data-theme='dark'] .theme-toggle:hover,
+[data-theme='dark'] .menu-toggle:hover,
+[data-theme='dark'] .contact-form button[type="submit"]:hover,
+[data-theme='dark'] .scheduler-cta .btn:hover,
+[data-theme='dark'] .cta-flip-btn:hover,
+[data-theme='dark'] .inquire-btn:hover,
+[data-theme='dark'] .services-tab-btn:hover,
+[data-theme='dark'] .area-tag:hover,
+[data-theme='dark'] .service-link:hover {
+  border-color: #ffffff !important;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.85), inset 0 1px 3px rgba(255, 255, 255, 0.9) !important;
+  transform: translateY(-2px) scale(1.03) !important;
+  color: #ffffff !important;
 }
 
 [data-theme='dark'] input,
 [data-theme='dark'] select,
 [data-theme='dark'] textarea {
-  background-color: #16100c !important;
+  background-color: #120d0a !important;
   color: #ffffff !important;
-  border-color: #4a3427 !important;
+  border: 2px solid #5c4033 !important;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.15) !important;
 }
 
 [data-theme='dark'] select option {

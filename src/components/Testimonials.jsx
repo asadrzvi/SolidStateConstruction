@@ -43,26 +43,6 @@ const googleReviewsData = [
     rating: 5,
     avatarColor: "#e53935",
     initials: "A"
-  },
-  {
-    name: "Sarah M.",
-    location: "Leander, TX",
-    date: "Verified Google Review • 2 weeks ago",
-    service: "Emergency Water Remediation & Drywall",
-    text: "Shaan's team saved our home when our water heater ruptured in the middle of the night. They arrived in under 40 minutes, extracted all standing water, and handled the full restoration beautifully.",
-    rating: 5,
-    avatarColor: "#8e24aa",
-    initials: "SM"
-  },
-  {
-    name: "James R.",
-    location: "Crystal Falls, Leander, TX",
-    date: "Verified Google Review • 1 month ago",
-    service: "Commercial Concrete & Driveway Formwork",
-    text: "We hired Solid State Construction for a custom curved driveway and heavy-duty slab expansion. Excellent coordination, highly reinforced rebar layout, and mirror-smooth finishing.",
-    rating: 5,
-    avatarColor: "#fb8c00",
-    initials: "JR"
   }
 ];
 

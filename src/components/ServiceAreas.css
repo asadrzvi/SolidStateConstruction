@@ -12,46 +12,75 @@
 }
 
 .area-card {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  padding: 1.5rem 2rem;
-  border-radius: 12px;
+  background: linear-gradient(135deg, #fcfbfa 0%, #f7f3ed 50%, #eee6dc 100%) !important;
+  border: 2px solid #3d2b1f !important;
+  padding: 1.6rem 2rem;
+  border-radius: 20px !important;
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  box-shadow: var(--shadow);
-  transition: transform 0.3s ease, border-color 0.3s ease;
+  box-shadow: 0 10px 30px rgba(43, 30, 22, 0.15);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.3s ease, 
+              box-shadow 0.3s ease !important;
 }
 
 .area-card:hover {
-  transform: translateY(-3px);
-  border-color: var(--primary);
+  transform: translateY(-5px) scale(1.02) !important;
+  border-color: #7c5235 !important;
+  box-shadow: 0 18px 40px rgba(43, 30, 22, 0.28) !important;
 }
 
 .area-icon-wrapper {
-  background: rgba(112, 130, 105, 0.15);
-  color: var(--primary);
+  background: linear-gradient(135deg, #09090b 0%, #2b1e16 50%, #5c4033 100%) !important;
+  color: #ffffff !important;
+  border: 1.5px solid #7c5235 !important;
   width: 50px;
   height: 50px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.area-card:hover .area-icon-wrapper {
+  transform: scale(1.1);
+  border-color: #a06d44 !important;
 }
 
 .area-info h3 {
   font-size: 1.2rem;
   font-weight: 800;
-  margin: 0 0 0.25rem 0;
+  margin: 0 0 0.4rem 0;
   color: var(--text-dark) !important;
 }
 
 .area-tag {
-  font-size: 0.8rem;
-  color: var(--text-light) !important;
+  font-size: 0.78rem;
+  color: #ffffff !important;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  font-weight: 600;
+  font-weight: 800;
+  padding: 0.35rem 0.9rem;
+  border-radius: 9999px !important;
+  display: inline-block;
+  background: linear-gradient(90deg, #09090b 0%, #2b1e16 35%, #5c4033 70%, #09090b 100%) !important;
+  background-size: 250% 100% !important;
+  background-position: 0% 0% !important;
+  border: 1.5px solid #7c5235 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+  transition: background-position 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.3s ease, 
+              border-color 0.3s ease !important;
+}
+
+.area-card:hover .area-tag,
+.area-tag:hover {
+  background-position: 100% 0% !important;
+  border-color: #a06d44 !important;
+  transform: translateY(-1px) scale(1.03) !important;
 }
 
 /* Explicit Dark Mode Overrides */

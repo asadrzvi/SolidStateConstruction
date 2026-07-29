@@ -211,6 +211,7 @@ p {
 .video-card-badge,
 .area-tag,
 .service-link {
+  border-radius: 9999px !important; /* Fully rounded pill buttons & badges */
   background: linear-gradient(90deg, #09090b 0%, #2b1e16 25%, #5c4033 50%, #3d2b1f 75%, #000000 100%) !important;
   background-size: 250% 100% !important;
   background-position: 0% 0% !important;
@@ -240,13 +241,13 @@ p {
 .area-tag:hover,
 .service-link:hover {
   background-position: 100% 0% !important;
-  transform: translateY(-3px) scale(1.02) !important;
+  transform: translateY(-3px) scale(1.03) !important;
   border-color: #a06d44 !important;
   box-shadow: 0 14px 35px rgba(124, 82, 53, 0.45), inset 0 1px 2px rgba(255, 255, 255, 0.4) !important;
   color: #ffffff !important;
 }
 
-/* Crisp Dark Espresso Card Outlines */
+/* Crisp Warm Amber Tint & Rounded Edges for ALL Cards & Containers */
 .timeline-card,
 .service-card,
 .contact-card,
@@ -256,9 +257,11 @@ p {
 .founder-spotlight,
 .scheduler-cta,
 .quote-modal-container {
+  border-radius: 20px !important; /* Smooth rounded corners on all card containers */
+  background: linear-gradient(135deg, #fcfbfa 0%, #f7f3ed 50%, #eee6dc 100%) !important;
   border: 2px solid #3d2b1f !important;
-  box-shadow: 0 8px 25px rgba(43, 30, 22, 0.15) !important;
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
+  box-shadow: 0 12px 35px rgba(43, 30, 22, 0.16) !important;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease !important;
 }
 
 .timeline-card:hover,
@@ -269,7 +272,7 @@ p {
 .area-card:hover {
   transform: translateY(-6px) scale(1.01) !important;
   border-color: #7c5235 !important;
-  box-shadow: 0 16px 40px rgba(43, 30, 22, 0.25) !important;
+  box-shadow: 0 20px 45px rgba(43, 30, 22, 0.28) !important;
 }
 
 .section-title {

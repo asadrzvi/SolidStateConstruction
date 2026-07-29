@@ -100,31 +100,26 @@
 
 .scheduler-cta {
   text-align: center;
-  background: var(--bg-alt);
+  background: linear-gradient(135deg, #fcfbfa 0%, #f7f3ed 50%, #eee6dc 100%) !important;
   padding: 2.5rem;
-  border-radius: 12px;
-  border: 1px solid var(--card-border);
+  border-radius: 20px !important;
+  border: 2px solid #3d2b1f !important;
+  box-shadow: 0 12px 35px rgba(43, 30, 22, 0.16) !important;
 }
 
 .scheduler-cta p {
   margin: 0 0 1.5rem 0;
   font-size: 1.05rem;
-  color: var(--text-dark) !important;
-  font-weight: 600;
+  color: #1c1917 !important;
+  font-weight: 700;
+  line-height: 1.6;
 }
 
 .scheduler-cta .btn {
-  display: inline-block;
-  width: auto;
-  padding: 0.9rem 2.2rem;
-  background-color: var(--primary) !important;
-  color: #ffffff !important;
-  border: none !important;
-  font-weight: 700;
-}
-
-.scheduler-cta .btn:hover {
-  background-color: var(--accent) !important;
-  color: #ffffff !important;
-  transform: translateY(-2px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.8rem !important;
+  font-size: 0.95rem !important;
+  font-weight: 800 !important;
 }

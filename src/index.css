@@ -292,11 +292,22 @@ p {
   box-shadow: 0 20px 45px rgba(43, 30, 22, 0.28) !important;
 }
 
+/* Section Titles & Ombre Text Gradient Styling */
 .section-title {
-  font-size: 2.5rem;
-  font-weight: 800;
-  margin-bottom: 1.5rem;
-  color: var(--text-dark);
+  background: linear-gradient(90deg, #1c1917 0%, #3d2b1f 35%, #7c5235 70%, #1c1917 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 900;
+  display: inline-block;
+  margin-bottom: 0.75rem;
+}
+
+[data-theme='dark'] .section-title {
+  background: linear-gradient(90deg, #ffffff 0%, #f5e6d8 45%, #c88a58 80%, #ffffff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .section-subtitle {

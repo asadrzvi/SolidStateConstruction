@@ -86,7 +86,7 @@
 .timeline-card-inner {
   position: relative;
   width: 100%;
-  min-height: 240px;
+  min-height: 280px;
   text-align: left;
   transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
   transform-style: preserve-3d;
@@ -108,12 +108,13 @@
   backface-visibility: hidden;
   border-radius: 20px !important;
   border: 2px solid #3d2b1f !important;
-  padding: 1.8rem;
+  padding: 1.5rem 1.6rem;
   box-shadow: 0 12px 35px rgba(43, 30, 22, 0.16) !important;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 /* Front Face */
@@ -124,33 +125,33 @@
 }
 
 .timeline-card-front h3 {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 800;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.35rem;
   color: var(--text-dark);
 }
 
 .timeline-card-front h4 {
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   font-weight: 700;
   color: var(--accent-light, #7c5235);
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.65rem;
 }
 
 .timeline-card-front p {
-  font-size: 0.95rem;
-  line-height: 1.6;
+  font-size: 0.92rem;
+  line-height: 1.55;
   color: var(--text-light);
-  margin-bottom: 1rem;
+  margin-bottom: 0.85rem;
 }
 
 .flip-hint-pill {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  font-size: 0.76rem;
+  font-size: 0.74rem;
   font-weight: 800;
   color: #7c5235;
   background: rgba(124, 82, 53, 0.12);
@@ -178,30 +179,37 @@
 }
 
 .timeline-card-back h3 {
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: 800;
   color: #ffffff !important;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.6rem;
 }
 
 .back-specs-list {
   list-style: none;
   padding: 0;
-  margin: 0 0 1.2rem 0;
+  margin: 0 0 0.8rem 0;
 }
 
 .back-specs-list li {
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   font-weight: 600;
   color: #f5e6d8;
-  margin-bottom: 0.5rem;
-  line-height: 1.4;
+  margin-bottom: 0.4rem;
+  line-height: 1.35;
+}
+
+.flip-back-action {
+  margin-top: auto;
 }
 
 .cta-flip-btn {
-  font-size: 0.85rem !important;
-  padding: 0.6rem 1.4rem !important;
+  font-size: 0.82rem !important;
+  padding: 0.55rem 1.3rem !important;
   border-radius: 9999px !important;
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.4rem;
 }
 
 /* Explicit Dark Mode Overrides */

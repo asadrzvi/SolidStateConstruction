@@ -4,14 +4,13 @@
 
 .split-logo-section {
   position: relative;
-  padding: 6rem 0;
-  background: #0a0a0a !important;
-  color: #ffffff !important;
+  padding: 5.5rem 0;
+  background: #ffffff !important;
+  color: #1c1917 !important;
   overflow: hidden;
   text-align: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.95);
+  border-top: 2px solid #eae3d9;
+  border-bottom: 2px solid #eae3d9;
 }
 
 .split-logo-header {
@@ -19,31 +18,34 @@
 }
 
 .split-logo-header .subtitle {
-  background: rgba(255, 255, 255, 0.08) !important;
-  color: #e5e5e5 !important;
-  border: 1px solid rgba(255, 255, 255, 0.25) !important;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
+  background: linear-gradient(90deg, #09090b 0%, #2b1e16 35%, #5c4033 70%, #000000 100%) !important;
+  color: #ffffff !important;
+  border: 1.5px solid #7c5235 !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+  padding: 0.45rem 1.4rem !important;
+  border-radius: 50px !important;
 }
 
 .split-logo-header .section-title {
-  color: #ffffff !important;
+  color: #1c1917 !important;
+  font-weight: 900;
 }
 
 .split-logo-header .gradient-text {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.4) !important;
+  color: #7c5235 !important;
+  -webkit-text-fill-color: #7c5235 !important;
 }
 
 .split-logo-wrapper {
   position: relative;
   width: min(440px, 92vw);
   height: 230px;
-  margin: 3rem auto;
+  margin: 2.5rem auto;
   display: flex;
   justify-content: center;
   align-items: center;
   perspective: 1200px;
+  background: #ffffff !important;
 }
 
 .split-logo-half {
@@ -56,6 +58,7 @@
               opacity 1.25s cubic-bezier(0.16, 1, 0.3, 1), 
               filter 1.25s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity, filter;
+  background: #ffffff !important;
 }
 
 /* Horizontal Top Half Split Initial State */
@@ -91,16 +94,17 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.9)) brightness(1.1);
+  filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.08));
   transition: filter 0.4s ease;
+  background: #ffffff !important;
 }
 
-/* Deep Black Radial Halo Backdrop */
+/* Soft Warm Amber Glow Backdrop */
 .split-logo-glow {
   position: absolute;
   inset: -30px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 40%, rgba(0, 0, 0, 0) 70%);
+  background: radial-gradient(circle, rgba(124, 82, 53, 0.1) 0%, rgba(124, 82, 53, 0.02) 40%, rgba(255, 255, 255, 0) 70%);
   opacity: 0;
   transform: scale(0.6);
   transition: opacity 0.9s ease 0.4s, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.4s;
@@ -114,10 +118,10 @@
 
 .split-logo-caption {
   font-size: 1.05rem;
-  color: #a3a3a3 !important;
+  color: #44403c !important;
   max-width: 580px;
   margin: 0 auto;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 @media (max-width: 768px) {

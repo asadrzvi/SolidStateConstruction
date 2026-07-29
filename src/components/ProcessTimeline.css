@@ -76,51 +76,132 @@
   left: -27px;
 }
 
-/* Timeline card with 3D Flip Tilt & Ombre Shift */
-.timeline-card {
-  background: var(--card-bg, #fcfbfa);
-  background-size: 250% 100% !important;
-  background-position: 0% 0% !important;
-  border: 2px solid #3d2b1f !important;
-  padding: 2rem;
-  border-radius: 14px;
-  box-shadow: 0 10px 30px rgba(43, 30, 22, 0.15);
-  transition: background-position 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
-              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
-              box-shadow 0.4s ease, 
-              border-color 0.4s ease !important;
-  perspective: 1000px;
+/* 3D FLIP CARD PERSPECTIVE SYSTEM */
+.timeline-card-wrapper {
+  perspective: 1200px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.timeline-card-inner {
+  position: relative;
+  width: 100%;
+  min-height: 240px;
+  text-align: left;
+  transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
   transform-style: preserve-3d;
-  will-change: transform, box-shadow;
 }
 
-.timeline-card:hover {
-  transform: translateY(-8px) rotateY(4deg) rotateX(-2deg) scale(1.02) !important;
-  border-color: #7c5235 !important;
-  box-shadow: 0 22px 50px rgba(43, 30, 22, 0.35) !important;
+/* Hover or Click triggers 180-degree Y-axis flip */
+.timeline-card-wrapper:hover .timeline-card-inner,
+.timeline-card-wrapper.flipped .timeline-card-inner {
+  transform: rotateY(180deg);
 }
 
-.timeline-card h3 {
+.timeline-card-face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 20px !important;
+  border: 2px solid #3d2b1f !important;
+  padding: 1.8rem;
+  box-shadow: 0 12px 35px rgba(43, 30, 22, 0.16) !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+/* Front Face */
+.timeline-card-front {
+  background: linear-gradient(135deg, #fcfbfa 0%, #f7f3ed 50%, #eee6dc 100%) !important;
+  z-index: 2;
+  transform: rotateY(0deg);
+}
+
+.timeline-card-front h3 {
   font-size: 1.25rem;
   font-weight: 800;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
   color: var(--text-dark);
 }
 
-.timeline-card h4 {
-  font-size: 0.9rem;
+.timeline-card-front h4 {
+  font-size: 0.88rem;
   font-weight: 700;
   color: var(--accent-light, #7c5235);
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
 }
 
-.timeline-card p {
+.timeline-card-front p {
   font-size: 0.95rem;
   line-height: 1.6;
   color: var(--text-light);
-  margin: 0;
+  margin-bottom: 1rem;
+}
+
+.flip-hint-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: #7c5235;
+  background: rgba(124, 82, 53, 0.12);
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  align-self: flex-start;
+}
+
+.spin-icon {
+  animation: spinSlow 8s linear infinite;
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Back Face */
+.timeline-card-back {
+  background: linear-gradient(135deg, #09090b 0%, #2b1e16 50%, #3d2b1f 100%) !important;
+  color: #ffffff !important;
+  border-color: #7c5235 !important;
+  transform: rotateY(180deg);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5) !important;
+}
+
+.timeline-card-back h3 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #ffffff !important;
+  margin-bottom: 0.8rem;
+}
+
+.back-specs-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.2rem 0;
+}
+
+.back-specs-list li {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #f5e6d8;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.cta-flip-btn {
+  font-size: 0.85rem !important;
+  padding: 0.6rem 1.4rem !important;
+  border-radius: 9999px !important;
 }
 
 /* Explicit Dark Mode Overrides */

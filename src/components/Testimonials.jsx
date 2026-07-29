@@ -5,58 +5,64 @@ import './Testimonials.css'
 
 const googleReviewsData = [
   {
+    name: "Haider",
+    location: "Leander, TX",
+    date: "Verified Google Review • 5 hours ago",
+    service: "24/7 Emergency Plumbing Repair",
+    text: "Fantastic plumbing repair service!! Had a plumbing emergency here in Leander and called Solid State. They responded quickly, diagnosed the issue right away, and got the repair done fast. The plumber was incredibly professional, left the area clean.",
+    rating: 5,
+    avatarColor: "#4285F4",
+    initials: "H"
+  },
+  {
+    name: "Abbas Hussain",
+    location: "Austin, TX Metro",
+    date: "Verified Google Review • 5 days ago",
+    service: "Foundation Repair & Structural Engineering",
+    text: "These guys did my foundation, great working with them, they got it done quickly and did a great job. Would recommend to any homeowners in the Austin area.",
+    rating: 5,
+    avatarColor: "#7cb342",
+    initials: "A"
+  },
+  {
+    name: "Kuza Bandzz",
+    location: "Leander & Central TX",
+    date: "Verified Google Review • 1 week ago",
+    service: "Custom Construction & General Contracting",
+    text: "Had a really good experience with Solid State Construction. They communicated well and made the whole process way less stressful than I expected. Everything came out clean and solid, and you can tell they actually care about what they’re doing.",
+    rating: 5,
+    avatarColor: "#1e88e5",
+    initials: "KB"
+  },
+  {
+    name: "Asad",
+    location: "Leander, TX",
+    date: "Verified Google Review • 3 weeks ago",
+    service: "Foundation Inspection & Crack Repair",
+    text: "I recently hired Solid State Construction to inspect and repair some cracking along my home's foundation, and I couldn't be happier with the results. They were prompt, professional, and walked me through the entire repair process so I knew exactly what to expect.",
+    rating: 5,
+    avatarColor: "#e53935",
+    initials: "A"
+  },
+  {
     name: "Sarah M.",
     location: "Leander, TX",
     date: "Verified Google Review • 2 weeks ago",
-    service: "Emergency Water Remediation & Drywall Repair",
-    text: "Shaan's team saved our home when our water heater ruptured in the middle of the night. They arrived in under 40 minutes, extracted all standing water, and handled the full restoration beautifully. Flawless drywall and matching baseboards!",
+    service: "Emergency Water Remediation & Drywall",
+    text: "Shaan's team saved our home when our water heater ruptured in the middle of the night. They arrived in under 40 minutes, extracted all standing water, and handled the full restoration beautifully.",
     rating: 5,
-    image: "/images/sarah.jpg"
+    avatarColor: "#8e24aa",
+    initials: "SM"
   },
   {
     name: "James R.",
     location: "Crystal Falls, Leander, TX",
     date: "Verified Google Review • 1 month ago",
     service: "Commercial Concrete & Driveway Formwork",
-    text: "We hired Solid State Construction for a custom curved driveway and heavy-duty slab expansion. Excellent coordination, highly reinforced rebar layout, and mirror-smooth finishing. Absolute structural perfection.",
+    text: "We hired Solid State Construction for a custom curved driveway and heavy-duty slab expansion. Excellent coordination, highly reinforced rebar layout, and mirror-smooth finishing.",
     rating: 5,
-    image: "/images/james.jpg"
-  },
-  {
-    name: "Elena G.",
-    location: "Cedar Park, TX",
-    date: "Verified Google Review • 1 month ago",
-    service: "Residential Roofing & Insurance Claim",
-    text: "Super responsive customer service. Shaan worked directly with my insurance adjuster for a storm damage roof replacement, making the whole process completely stress-free. Quality work and very respectful crew!",
-    rating: 5,
-    image: "/images/elena.jpg"
-  },
-  {
-    name: "Michael & Karen P.",
-    location: "Leander, TX",
-    date: "Verified Google Review • 3 weeks ago",
-    service: "Full Home & Kitchen Remodel",
-    text: "Solid State turned our outdated kitchen into a modern luxury showcase with custom cabinetry, quartz countertops, and precision tile installation. Delivered right on schedule, on budget, and with master craftsmanship.",
-    rating: 5,
-    image: "/images/sarah.jpg"
-  },
-  {
-    name: "David L.",
-    location: "Liberty Hill, TX",
-    date: "Verified Google Review • 2 months ago",
-    service: "Foundation Stabilization & French Drain",
-    text: "After noticing stair-step masonry cracks, Shaan conducted a thorough structural audit and installed steel piers with a perimeter French drain. Zero settling since. Honest pricing and outstanding communication.",
-    rating: 5,
-    image: "/images/james.jpg"
-  },
-  {
-    name: "Robert H.",
-    location: "Round Rock, TX",
-    date: "Verified Google Review • 1 month ago",
-    service: "24/7 Emergency Plumbing & Slab Repair",
-    text: "Top-tier emergency dispatch! Had an underground slab leak in our commercial property. Their team pinpointed the leak quickly, bypassed the pipe cleanly, and repaired the concrete foundation seamlessly.",
-    rating: 5,
-    image: "/images/elena.jpg"
+    avatarColor: "#fb8c00",
+    initials: "JR"
   }
 ];
 
@@ -165,7 +171,12 @@ function Testimonials() {
                 </div>
 
                 <div className="testimonial-author-wrapper">
-                  <img src={rev.image} alt={rev.name} className="testimonial-avatar" />
+                  <div 
+                    className="testimonial-avatar-circle"
+                    style={{ backgroundColor: rev.avatarColor }}
+                  >
+                    {rev.initials}
+                  </div>
                   <div className="testimonial-author">
                     <span className="author-name">{rev.name}</span>
                     <span className="author-location">{rev.location}</span>

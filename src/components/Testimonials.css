@@ -200,6 +200,21 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
+.testimonial-avatar-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 1.1rem;
+  border: 2px solid #7c5235;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  flex-shrink: 0;
+}
+
 .testimonial-author {
   display: flex;
   flex-direction: column;

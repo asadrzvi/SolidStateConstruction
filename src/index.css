@@ -8,24 +8,24 @@
 }
 
 :root {
-  /* Default: LIGHT MODE */
-  --primary: #2d3827; /* Deep Solid Olive */
-  --accent: #485942; /* Slate Muted Green */
-  --text-dark: #192017; /* Deep Crisp Charcoal */
-  --text-light: #3f4a3d; /* Crisp Dark Slate */
+  /* Default: TINTED LIGHT MODE WITH DARKER ACCENTS */
+  --primary: #18181b; /* Dark Executive Charcoal */
+  --accent: #27272a; /* Obsidian Accent */
+  --text-dark: #0f172a; /* Deep Crisp Charcoal */
+  --text-light: #334155; /* Crisp Dark Slate */
   --white: #ffffff;
-  --bg-color: #ffffff; /* Clean white background */
-  --bg-alt: #f6f8f5; /* Soft off-white section background */
-  --card-bg: #ffffff; /* White card surface */
-  --card-border: #dcdfd8; /* Clean card border */
-  --secondary: #edf0eb;
-  --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
-  --brand-color: #485942;
+  --bg-color: #ede7e1; /* Tinted warm charcoal-stone light background */
+  --bg-alt: #ded6cc; /* Richer tinted section backdrop */
+  --card-bg: #f9f8f6; /* Off-white card surface */
+  --card-border: #18181b; /* Crisp 2px Dark Border for Light Mode Cards */
+  --secondary: #d6cebf;
+  --shadow: 0 12px 32px -5px rgba(0, 0, 0, 0.18), 0 4px 12px -2px rgba(0, 0, 0, 0.1);
+  --brand-color: #18181b;
   
   /* Mappings for legacy component styles */
-  --bg-card: #ffffff;
-  --modal-border: #dcdfd8;
-  --text-color: #192017;
+  --bg-card: #f9f8f6;
+  --modal-border: #18181b;
+  --text-color: #0f172a;
   
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   line-height: 1.6;
@@ -188,6 +188,7 @@ p {
   color: var(--text-light);
 }
 
+/* CAREMEDBILL EXECUTIVE OMBRE BUTTONS & CARDS */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -197,7 +198,7 @@ p {
   border-radius: 8px;
   font-weight: 700;
   text-decoration: none;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
   border: none;
   position: relative;
@@ -205,32 +206,67 @@ p {
 }
 
 .btn:active {
-  transform: scale(0.95);
+  transform: scale(0.96);
 }
 
-.btn-primary {
-  background-color: var(--primary);
+.btn-primary, .quote-btn {
+  background: linear-gradient(90deg, #18181b 0%, #27272a 40%, #3f3f46 70%, #18181b 100%) !important;
+  background-size: 250% 100% !important;
+  background-position: 0% 0% !important;
   color: #ffffff !important;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+  border: 1.5px solid #000000 !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25) !important;
+  transition: background-position 0.6s ease, transform 0.3s ease, box-shadow 0.3s ease !important;
 }
 
-.btn-primary:hover {
-  transform: translateY(-3px);
-  background-color: var(--accent);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+.btn-primary:hover, .quote-btn:hover {
+  background-position: 100% 0% !important;
+  transform: translateY(-3px) scale(1.02) !important;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.38) !important;
 }
 
 .btn-secondary {
-  background-color: var(--card-bg);
-  color: var(--text-dark) !important;
-  border: 2px solid var(--primary);
+  background: linear-gradient(90deg, rgba(24, 24, 27, 0.08) 0%, rgba(24, 24, 27, 0.25) 50%, rgba(24, 24, 27, 0.5) 100%) !important;
+  background-size: 250% 100% !important;
+  background-position: 0% 0% !important;
+  color: #18181b !important;
+  border: 2px solid #18181b !important;
+  transition: background-position 0.6s ease, transform 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
 }
 
 .btn-secondary:hover {
-  background-color: var(--primary);
+  background-position: 100% 0% !important;
   color: #ffffff !important;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  background: #18181b !important;
+  border-color: #000000 !important;
+  transform: translateY(-3px) scale(1.02) !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Prominent Dark Outlines for Light Mode Cards */
+.timeline-card,
+.service-card,
+.contact-card,
+.faq-accordion-item,
+.testimonial-card,
+.area-card,
+.founder-spotlight,
+.scheduler-cta,
+.quote-modal-container {
+  border: 2px solid #18181b !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12) !important;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.timeline-card:hover,
+.service-card:hover,
+.contact-card:hover,
+.faq-accordion-item:hover,
+.testimonial-card:hover,
+.area-card:hover {
+  transform: translateY(-6px) scale(1.01) !important;
+  border-color: #000000 !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22) !important;
 }
 
 .section-title {

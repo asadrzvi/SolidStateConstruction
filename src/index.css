@@ -188,14 +188,14 @@ p {
   color: var(--text-light);
 }
 
-/* CAREMEDBILL EXECUTIVE OMBRE BUTTONS & CARDS */
+/* CAREMEDBILL GREEN & BLACK OMBRE GLASS PILL BUTTON SYSTEM */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
-  padding: 1rem 2rem;
-  border-radius: 8px;
+  padding: 1.05rem 2.4rem;
+  border-radius: 9999px !important; /* Full pill shape from CareMedBill */
   font-weight: 700;
   text-decoration: none;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -203,44 +203,83 @@ p {
   border: none;
   position: relative;
   overflow: hidden;
+  font-family: inherit;
 }
 
 .btn:active {
   transform: scale(0.96);
 }
 
-.btn-primary, .quote-btn {
-  background: linear-gradient(90deg, #18181b 0%, #27272a 40%, #3f3f46 70%, #18181b 100%) !important;
-  background-size: 250% 100% !important;
-  background-position: 0% 0% !important;
+.btn-primary, .quote-btn, .nav-phone {
+  border-radius: 9999px !important;
+  background: linear-gradient(135deg, #050505 0%, #0d2818 25%, #15803d 50%, #04150c 75%, #000000 100%) !important;
+  background-size: 250% 250% !important;
+  background-position: 0% 50% !important;
   color: #ffffff !important;
-  border: 1.5px solid #000000 !important;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25) !important;
-  transition: background-position 0.6s ease, transform 0.3s ease, box-shadow 0.3s ease !important;
+  border: 2px solid #22c55e !important;
+  box-shadow: 0 6px 20px rgba(34, 197, 94, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.4) !important;
+  transition: background-position 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.3s ease, 
+              border-color 0.3s ease !important;
 }
 
-.btn-primary:hover, .quote-btn:hover {
-  background-position: 100% 0% !important;
-  transform: translateY(-3px) scale(1.02) !important;
-  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.38) !important;
+.btn-primary:hover, .quote-btn:hover, .nav-phone:hover {
+  background-position: 100% 50% !important;
+  transform: translateY(-3px) scale(1.03) !important;
+  border-color: #4ade80 !important;
+  box-shadow: 0 14px 35px rgba(34, 197, 94, 0.55), inset 0 1px 2px rgba(255, 255, 255, 0.6) !important;
 }
 
 .btn-secondary {
-  background: linear-gradient(90deg, rgba(24, 24, 27, 0.08) 0%, rgba(24, 24, 27, 0.25) 50%, rgba(24, 24, 27, 0.5) 100%) !important;
-  background-size: 250% 100% !important;
-  background-position: 0% 0% !important;
-  color: #18181b !important;
-  border: 2px solid #18181b !important;
-  transition: background-position 0.6s ease, transform 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
+  border-radius: 9999px !important;
+  background: linear-gradient(135deg, #09090b 0%, #14532d 40%, #16a34a 75%, #09090b 100%) !important;
+  background-size: 250% 250% !important;
+  background-position: 0% 50% !important;
+  color: #ffffff !important;
+  border: 2px solid #16a34a !important;
+  box-shadow: 0 6px 20px rgba(22, 163, 74, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.3) !important;
+  transition: background-position 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.3s ease, 
+              box-shadow 0.3s ease !important;
 }
 
 .btn-secondary:hover {
-  background-position: 100% 0% !important;
+  background-position: 100% 50% !important;
   color: #ffffff !important;
-  background: #18181b !important;
-  border-color: #000000 !important;
-  transform: translateY(-3px) scale(1.02) !important;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25) !important;
+  border-color: #4ade80 !important;
+  transform: translateY(-3px) scale(1.03) !important;
+  box-shadow: 0 14px 35px rgba(74, 222, 128, 0.5) !important;
+}
+
+/* Green & Black Ombre Pills for Badges, Subtitles & Tags */
+.subtitle, 
+.emergency-badge, 
+.video-card-badge, 
+.area-tag, 
+.lang-toggle-btn {
+  border-radius: 9999px !important;
+  background: linear-gradient(135deg, #050505 0%, #0d2818 40%, #15803d 75%, #050505 100%) !important;
+  background-size: 250% 250% !important;
+  background-position: 0% 50% !important;
+  color: #ffffff !important;
+  border: 1.5px solid #22c55e !important;
+  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3) !important;
+  transition: background-position 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.3s ease, 
+              border-color 0.3s ease, 
+              box-shadow 0.3s ease !important;
+}
+
+.subtitle:hover, 
+.emergency-badge:hover, 
+.video-card-badge:hover, 
+.area-tag:hover {
+  background-position: 100% 50% !important;
+  transform: translateY(-2px) scale(1.04) !important;
+  border-color: #4ade80 !important;
+  box-shadow: 0 8px 25px rgba(74, 222, 128, 0.45) !important;
 }
 
 /* Prominent Dark Outlines for Light Mode Cards */

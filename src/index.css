@@ -188,17 +188,17 @@ p {
   color: var(--text-light);
 }
 
-/* CAREMEDBILL BROWN & BLACK OMBRE GRADIENT SHIFT SYSTEM */
+/* ORIGINAL BUTTON LOOK WITH CAREMEDBILL OMBRE SHIFT */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
-  padding: 1rem 2.2rem;
-  border-radius: 8px !important; /* Reverted to original 8px rounded rectangle button shape */
+  padding: 1rem 2rem;
+  border-radius: 8px !important;
   font-weight: 700;
   text-decoration: none;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   border: none;
   position: relative;
@@ -207,65 +207,62 @@ p {
 }
 
 .btn:active {
-  transform: scale(0.96);
+  transform: scale(0.95);
 }
 
 .btn-primary, .quote-btn, .nav-phone {
   border-radius: 8px !important;
-  background: linear-gradient(90deg, #09090b 0%, #2b1e16 25%, #5c4033 50%, #3d2b1f 75%, #000000 100%) !important;
+  background: linear-gradient(90deg, #18181b 0%, #27272a 30%, #3f3f46 65%, #18181b 100%) !important;
   background-size: 250% 100% !important;
   background-position: 0% 0% !important;
   color: #ffffff !important;
-  border: 1.5px solid #7c5235 !important;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
   transition: background-position 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
-              transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
-              box-shadow 0.3s ease, 
-              border-color 0.3s ease !important;
+              transform 0.3s ease, 
+              box-shadow 0.3s ease !important;
 }
 
 .btn-primary:hover, .quote-btn:hover, .nav-phone:hover {
   background-position: 100% 0% !important;
   transform: translateY(-3px) scale(1.02) !important;
-  border-color: #a06d44 !important;
-  box-shadow: 0 14px 35px rgba(124, 82, 53, 0.45), inset 0 1px 2px rgba(255, 255, 255, 0.35) !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35) !important;
 }
 
 .btn-secondary {
   border-radius: 8px !important;
-  background: linear-gradient(90deg, rgba(9, 9, 11, 0.9) 0%, rgba(43, 30, 22, 0.95) 40%, rgba(92, 64, 51, 0.95) 75%, rgba(9, 9, 11, 0.9) 100%) !important;
+  background: linear-gradient(90deg, var(--card-bg) 0%, rgba(24, 24, 27, 0.06) 40%, rgba(24, 24, 27, 0.15) 75%, var(--card-bg) 100%) !important;
   background-size: 250% 100% !important;
   background-position: 0% 0% !important;
-  color: #ffffff !important;
-  border: 2px solid #5c4033 !important;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.15) !important;
+  color: var(--text-dark) !important;
+  border: 2px solid var(--primary) !important;
   transition: background-position 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
-              transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
-              border-color 0.3s ease, 
-              box-shadow 0.3s ease !important;
+              transform 0.3s ease, 
+              color 0.3s ease, 
+              background 0.3s ease !important;
 }
 
 .btn-secondary:hover {
   background-position: 100% 0% !important;
+  background: #18181b !important;
   color: #ffffff !important;
-  border-color: #a06d44 !important;
   transform: translateY(-3px) scale(1.02) !important;
-  box-shadow: 0 14px 35px rgba(124, 82, 53, 0.4) !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25) !important;
 }
 
-/* Subtitles, Badges & Interactive Tags with Brown & Black Ombre */
+/* Subtitles, Badges & Interactive Tags */
 .subtitle, 
 .emergency-badge, 
 .video-card-badge, 
 .area-tag, 
 .lang-toggle-btn {
   border-radius: 9999px !important;
-  background: linear-gradient(90deg, #09090b 0%, #2b1e16 40%, #5c4033 75%, #09090b 100%) !important;
+  background: linear-gradient(90deg, #18181b 0%, #27272a 40%, #3f3f46 75%, #18181b 100%) !important;
   background-size: 250% 100% !important;
   background-position: 0% 0% !important;
   color: #ffffff !important;
-  border: 1.5px solid #7c5235 !important;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
   transition: background-position 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
               transform 0.3s ease, 
               border-color 0.3s ease, 
@@ -278,8 +275,7 @@ p {
 .area-tag:hover {
   background-position: 100% 0% !important;
   transform: translateY(-2px) scale(1.04) !important;
-  border-color: #a06d44 !important;
-  box-shadow: 0 8px 25px rgba(124, 82, 53, 0.45) !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3) !important;
 }
 
 /* Prominent Dark Outlines for Light Mode Cards */

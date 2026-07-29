@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Star, ChevronLeft, ChevronRight, CheckCircle, ExternalLink } from 'lucide-react'
+import { Star, ChevronLeft, ChevronRight, CheckCircle, ExternalLink, Quote } from 'lucide-react'
 import { useLanguage } from '../context/LanguageContext'
 import './Testimonials.css'
 
@@ -70,29 +70,43 @@ function Testimonials() {
   const { t } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [cardsPerPage, setCardsPerPage] = useState(2);
   const autoRotateTimer = useRef(null);
 
-  const cardsPerPage = 3;
-  const maxIndex = Math.ceil(googleReviewsData.length / cardsPerPage) - 1;
+  // Responsive cards per page (2 on desktop matching CareMedBill layout, 1 on mobile)
+  useEffect(() => {
+    const updateCardsPerPage = () => {
+      if (window.innerWidth < 768) {
+        setCardsPerPage(1);
+      } else {
+        setCardsPerPage(2);
+      }
+    };
+    updateCardsPerPage();
+    window.addEventListener('resize', updateCardsPerPage);
+    return () => window.removeEventListener('resize', updateCardsPerPage);
+  }, []);
 
-  // Auto-rotate effect with hover pause
+  const totalPages = Math.ceil(googleReviewsData.length / cardsPerPage);
+
+  // Auto-rotate animation every 4 seconds
   useEffect(() => {
     if (!isPaused) {
       autoRotateTimer.current = setInterval(() => {
-        setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
-      }, 4500);
+        setCurrentIndex((prev) => (prev + 1) % totalPages);
+      }, 4000);
     }
     return () => {
       if (autoRotateTimer.current) clearInterval(autoRotateTimer.current);
     };
-  }, [isPaused, maxIndex]);
+  }, [isPaused, totalPages]);
 
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+    setCurrentIndex((prev) => (prev + 1) % totalPages);
   };
 
   const handlePrev = () => {
-    setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
+    setCurrentIndex((prev) => (prev - 1 + totalPages) % totalPages);
   };
 
   const visibleReviews = googleReviewsData.slice(
@@ -114,7 +128,7 @@ function Testimonials() {
             <span>Verified Google Customer Reviews</span>
           </div>
 
-          <h2 className="section-title">{t('testTitle')}</h2>
+          <h2 className="section-title">Client Testimonials</h2>
           
           <div className="overall-rating">
             <div className="stars">
@@ -136,7 +150,7 @@ function Testimonials() {
           </div>
         </div>
         
-        {/* Auto-Rotating Slider Container */}
+        {/* CareMedBill Auto-Rotating Slider Container */}
         <div 
           className="testimonials-carousel-wrapper"
           onMouseEnter={() => setIsPaused(true)}
@@ -151,9 +165,9 @@ function Testimonials() {
             <ChevronLeft size={24} />
           </button>
 
-          <div className="testimonials-grid carousel-track">
+          <div className="testimonials-grid carousel-track-2col">
             {visibleReviews.map((rev, index) => (
-              <div className="testimonial-card 3d-card-tilt" key={`${currentIndex}-${index}`}>
+              <div className="testimonial-card 3d-card-tilt caremed-style-card" key={`${currentIndex}-${index}`}>
                 <div>
                   <div className="card-top-row">
                     <div className="card-stars">
@@ -171,16 +185,23 @@ function Testimonials() {
                 </div>
 
                 <div className="testimonial-author-wrapper">
-                  <div 
-                    className="testimonial-avatar-circle"
-                    style={{ backgroundColor: rev.avatarColor }}
-                  >
-                    {rev.initials}
+                  <div className="author-left">
+                    <div 
+                      className="testimonial-avatar-circle"
+                      style={{ backgroundColor: rev.avatarColor }}
+                    >
+                      {rev.initials}
+                    </div>
+                    <div className="testimonial-author">
+                      <span className="author-name">{rev.name}</span>
+                      <span className="author-location">{rev.location}</span>
+                      <span className="review-date">{rev.date}</span>
+                    </div>
                   </div>
-                  <div className="testimonial-author">
-                    <span className="author-name">{rev.name}</span>
-                    <span className="author-location">{rev.location}</span>
-                    <span className="review-date">{rev.date}</span>
+
+                  {/* CareMedBill Decorative Quote Mark */}
+                  <div className="quote-mark-icon">
+                    <Quote size={32} />
                   </div>
                 </div>
               </div>
@@ -197,9 +218,9 @@ function Testimonials() {
           </button>
         </div>
 
-        {/* Carousel Indicator Dots */}
+        {/* CareMedBill Indicator Dots */}
         <div className="carousel-indicators">
-          {[...Array(maxIndex + 1)].map((_, idx) => (
+          {[...Array(totalPages)].map((_, idx) => (
             <button
               key={idx}
               type="button"

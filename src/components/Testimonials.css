@@ -111,157 +111,96 @@
   box-shadow: 0 10px 25px rgba(124, 82, 53, 0.5) !important;
 }
 
-.testimonials-grid {
+.testimonials-grid.carousel-track-2col {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.2rem;
   width: 100%;
   transition: opacity 0.5s ease;
 }
 
-/* 3D TINTED TESTIMONIAL CARD */
-.testimonial-card {
+@media (max-width: 850px) {
+  .testimonials-grid.carousel-track-2col {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* CAREMEDBILL TINTED TESTIMONIAL CARD */
+.testimonial-card.caremed-style-card {
   background: linear-gradient(135deg, #fcfbfa 0%, #f7f3ed 50%, #eee6dc 100%) !important;
   border: 2px solid #3d2b1f !important;
-  padding: 2.2rem;
-  border-radius: 20px !important;
+  padding: 2.5rem;
+  border-radius: 22px !important;
   text-align: left;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: 0 12px 35px rgba(43, 30, 22, 0.16) !important;
+  box-shadow: 0 14px 40px rgba(43, 30, 22, 0.16) !important;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
               border-color 0.3s ease, 
               box-shadow 0.3s ease !important;
-  perspective: 1000px;
+  min-height: 280px;
 }
 
-.testimonial-card:hover {
-  transform: translateY(-8px) scale(1.02) !important;
+.testimonial-card.caremed-style-card:hover {
+  transform: translateY(-8px) scale(1.01) !important;
   border-color: #7c5235 !important;
-  box-shadow: 0 22px 50px rgba(43, 30, 22, 0.3) !important;
-}
-
-.card-top-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-}
-
-.card-stars {
-  display: flex;
-  gap: 0.2rem;
-}
-
-.verified-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #2e7d32;
-  background: rgba(46, 125, 50, 0.1);
-  padding: 0.25rem 0.6rem;
-  border-radius: 20px;
-}
-
-.service-tag-label {
-  font-size: 0.8rem;
-  font-weight: 800;
-  color: #7c5235;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 0.75rem;
-}
-
-.testimonial-text {
-  font-style: italic;
-  font-size: 1.02rem;
-  line-height: 1.6;
-  color: var(--text-dark);
-  margin-bottom: 1.5rem;
+  box-shadow: 0 22px 55px rgba(43, 30, 22, 0.3) !important;
 }
 
 .testimonial-author-wrapper {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  justify-content: space-between;
   border-top: 1.5px solid #dcd3c5;
-  padding-top: 1.2rem;
+  padding-top: 1.25rem;
+  margin-top: 1.5rem;
 }
 
-.testimonial-avatar {
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #7c5235;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.testimonial-avatar-circle {
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
+.author-left {
   display: flex;
   align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  font-weight: 800;
-  font-size: 1.1rem;
-  border: 2px solid #7c5235;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-  flex-shrink: 0;
+  gap: 1rem;
 }
 
-.testimonial-author {
-  display: flex;
-  flex-direction: column;
+/* CareMedBill Decorative Green/Amber Double Quote Icon */
+.quote-mark-icon {
+  color: #7c5235;
+  opacity: 0.35;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.author-name {
-  font-weight: 800;
-  font-size: 1.05rem;
-  color: var(--text-dark);
+.testimonial-card:hover .quote-mark-icon {
+  opacity: 0.9;
+  color: #a06d44;
+  transform: scale(1.15) rotate(-5deg);
 }
 
-.author-location {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-light);
-}
-
-.review-date {
-  font-size: 0.75rem;
-  color: #78716c;
-  margin-top: 0.15rem;
-}
-
-/* CAROUSEL INDICATOR DOTS */
+/* CAREMEDBILL INDICATOR DOTS WITH ACTIVE RING */
 .carousel-indicators {
   display: flex;
   justify-content: center;
-  gap: 0.6rem;
-  margin-top: 2.25rem;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 2.5rem;
 }
 
 .indicator-dot {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background-color: #dcd3c5;
-  border: 2px solid #3d2b1f;
+  border: none;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0;
 }
 
 .indicator-dot.active {
-  background: #7c5235;
-  width: 32px;
-  border-radius: 20px;
-  border-color: #7c5235;
-  box-shadow: 0 0 10px rgba(124, 82, 53, 0.5);
+  background-color: #7c5235;
+  width: 14px;
+  height: 14px;
+  box-shadow: 0 0 0 4px rgba(124, 82, 53, 0.3);
 }
 
 @media (max-width: 768px) {

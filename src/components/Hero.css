@@ -213,8 +213,8 @@
 }
 
 .hero-cta .btn {
-  font-size: 1.05rem !important;
-  padding: 1.1rem 2.2rem !important;
+  font-size: 0.95rem !important;
+  padding: 0.75rem 1.6rem !important;
 }
 
 @media (max-width: 600px) {

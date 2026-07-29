@@ -8,46 +8,49 @@
 }
 
 :root {
-  /* Default: TINTED LIGHT MODE WITH DARKER ACCENTS */
-  --primary: #18181b; /* Dark Executive Charcoal */
-  --accent: #27272a; /* Obsidian Accent */
-  --text-dark: #0f172a; /* Deep Crisp Charcoal */
-  --text-light: #334155; /* Crisp Dark Slate */
+  /* WARM ESPRESSO, AMBER EARTH & OBSIDIAN BLACK THEME SYSTEM */
+  --primary: #3d2b1f; /* Deep Warm Espresso */
+  --accent: #5c4033; /* Amber Earth Brown */
+  --accent-light: #7c5235; /* Terracotta Amber */
+  --accent-glow: rgba(124, 82, 53, 0.45);
+  
+  --text-dark: #1c1917; /* Deep Warm Obsidian Charcoal */
+  --text-light: #44403c; /* Warm Slate Stone */
   --white: #ffffff;
-  --bg-color: #ede7e1; /* Tinted warm charcoal-stone light background */
-  --bg-alt: #ded6cc; /* Richer tinted section backdrop */
-  --card-bg: #f9f8f6; /* Off-white card surface */
-  --card-border: #18181b; /* Crisp 2px Dark Border for Light Mode Cards */
-  --secondary: #d6cebf;
-  --shadow: 0 12px 32px -5px rgba(0, 0, 0, 0.18), 0 4px 12px -2px rgba(0, 0, 0, 0.1);
-  --brand-color: #18181b;
+  --bg-color: #f7f4ef; /* Warm Linen Sand Light Background */
+  --bg-alt: #eae3d9; /* Tinted Amber-Stone Section Backdrop */
+  --card-bg: #fcfbfa; /* Warm Off-White Card Surface */
+  --card-border: #3d2b1f; /* Crisp Dark Espresso 2px Border */
+  --secondary: #dcd3c5;
+  --shadow: 0 12px 32px -5px rgba(43, 30, 22, 0.2), 0 4px 12px -2px rgba(43, 30, 22, 0.12);
+  --brand-color: #5c4033;
   
-  /* Mappings for legacy component styles */
-  --bg-card: #f9f8f6;
-  --modal-border: #18181b;
-  --text-color: #0f172a;
-  
+  /* Legacy mappings */
+  --bg-card: #fcfbfa;
+  --modal-border: #3d2b1f;
+  --text-color: #1c1917;
+
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   line-height: 1.6;
 }
 
 [data-theme='dark'] {
-  --primary: #708269;
-  --accent: #89a182;
-  --text-dark: #ffffff; /* 100% Pure White for text in dark mode */
-  --text-light: #e2e8df; /* High contrast light sage/white */
-  --white: #141812;
-  --bg-color: #0c0e0b; /* Deep dark background */
-  --bg-alt: #121611;
-  --card-bg: #181e17; /* Surface card background */
-  --card-border: #2c3629;
-  --secondary: #222920;
-  --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
-  --brand-color: #708269;
+  --primary: #a06d44;
+  --accent: #c88a58;
+  --accent-light: #d99b68;
+  --text-dark: #ffffff;
+  --text-light: #f5e6d8;
+  --white: #16100c;
+  --bg-color: #0e0b08; /* Deep Obsidian Espresso Background */
+  --bg-alt: #17110c;
+  --card-bg: #1f1712; /* Dark Surface Card */
+  --card-border: #4a3427;
+  --secondary: #2b1d16;
+  --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.8), 0 4px 6px -2px rgba(0, 0, 0, 0.6);
+  --brand-color: #a06d44;
 
-  /* Legacy component dark mode mappings */
-  --bg-card: #181e17;
-  --modal-border: #2c3629;
+  --bg-card: #1f1712;
+  --modal-border: #4a3427;
   --text-color: #ffffff;
 }
 
@@ -66,7 +69,7 @@
 [data-theme='dark'] .map-section,
 [data-theme='dark'] .gallery-section,
 [data-theme='dark'] footer {
-  background-color: #0c0e0b !important;
+  background-color: #0e0b08 !important;
   color: #ffffff !important;
 }
 
@@ -80,8 +83,8 @@
 [data-theme='dark'] .scheduler-cta,
 [data-theme='dark'] .work-summary,
 [data-theme='dark'] .quote-modal-container {
-  background-color: #181e17 !important;
-  border-color: #2c3629 !important;
+  background-color: #1f1712 !important;
+  border-color: #4a3427 !important;
   color: #ffffff !important;
 }
 
@@ -97,31 +100,31 @@
 }
 
 [data-theme='dark'] .timeline-card h4 {
-  color: #89a182 !important;
+  color: #c88a58 !important;
 }
 
 [data-theme='dark'] .section-subtitle,
 [data-theme='dark'] .area-tag,
 [data-theme='dark'] .author-location {
-  color: #dbe4d8 !important;
+  color: #f5e6d8 !important;
 }
 
 [data-theme='dark'] input,
 [data-theme='dark'] select,
 [data-theme='dark'] textarea {
-  background-color: #121711 !important;
+  background-color: #16100c !important;
   color: #ffffff !important;
-  border-color: #2c3629 !important;
+  border-color: #4a3427 !important;
 }
 
 [data-theme='dark'] select option {
-  background-color: #181e17 !important;
+  background-color: #1f1712 !important;
   color: #ffffff !important;
 }
 
 [data-theme='dark'] input::placeholder,
 [data-theme='dark'] textarea::placeholder {
-  color: #9ba899 !important;
+  color: #c4b5a5 !important;
 }
 
 * {
@@ -153,21 +156,21 @@ input[type="range"]::-webkit-slider-thumb {
   appearance: none;
   width: 24px;
   height: 24px;
-  background: var(--brand-color);
+  background: #7c5235;
   cursor: pointer;
   border-radius: 50%;
   border: 4px solid var(--card-bg);
-  box-shadow: 0 0 10px rgba(112, 130, 105, 0.4);
+  box-shadow: 0 0 10px rgba(124, 82, 53, 0.4);
 }
 
 input[type="range"]::-moz-range-thumb {
   width: 24px;
   height: 24px;
-  background: var(--brand-color);
+  background: #7c5235;
   cursor: pointer;
   border-radius: 50%;
   border: 4px solid var(--card-bg);
-  box-shadow: 0 0 10px rgba(112, 130, 105, 0.4);
+  box-shadow: 0 0 10px rgba(124, 82, 53, 0.4);
 }
 
 .container {
@@ -188,97 +191,62 @@ p {
   color: var(--text-light);
 }
 
-/* ORIGINAL BUTTON LOOK WITH CAREMEDBILL OMBRE SHIFT */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  padding: 1rem 2rem;
-  border-radius: 8px !important;
-  font-weight: 700;
-  text-decoration: none;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
-  border: none;
-  position: relative;
-  overflow: hidden;
-  font-family: inherit;
-}
-
-.btn:active {
-  transform: scale(0.95);
-}
-
-.btn-primary, .quote-btn, .nav-phone {
-  border-radius: 8px !important;
-  background: linear-gradient(90deg, #18181b 0%, #27272a 30%, #3f3f46 65%, #18181b 100%) !important;
+/* BROWN & BLACK OMBRE GRADIENT SHIFT FOR ALL INTERACTIVE BUTTONS & BADGES */
+.btn,
+.btn-primary,
+.btn-secondary,
+.quote-btn,
+.nav-phone,
+.lang-toggle-btn,
+.theme-toggle,
+.menu-toggle,
+.contact-form button[type="submit"],
+.scheduler-cta .btn,
+.success-message button,
+.quote-modal-next-btn,
+.quote-modal-back-btn,
+.quote-modal-save-btn,
+.subtitle,
+.emergency-badge,
+.video-card-badge,
+.area-tag,
+.service-link {
+  background: linear-gradient(90deg, #09090b 0%, #2b1e16 25%, #5c4033 50%, #3d2b1f 75%, #000000 100%) !important;
   background-size: 250% 100% !important;
   background-position: 0% 0% !important;
   color: #ffffff !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+  border: 1.5px solid #7c5235 !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.25) !important;
   transition: background-position 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
-              transform 0.3s ease, 
-              box-shadow 0.3s ease !important;
+              transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.3s ease, 
+              border-color 0.3s ease !important;
 }
 
-.btn-primary:hover, .quote-btn:hover, .nav-phone:hover {
+.btn:hover,
+.btn-primary:hover,
+.btn-secondary:hover,
+.quote-btn:hover,
+.nav-phone:hover,
+.lang-toggle-btn:hover,
+.theme-toggle:hover,
+.menu-toggle:hover,
+.contact-form button[type="submit"]:hover,
+.scheduler-cta .btn:hover,
+.success-message button:hover,
+.subtitle:hover,
+.emergency-badge:hover,
+.video-card-badge:hover,
+.area-tag:hover,
+.service-link:hover {
   background-position: 100% 0% !important;
   transform: translateY(-3px) scale(1.02) !important;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35) !important;
-}
-
-.btn-secondary {
-  border-radius: 8px !important;
-  background: linear-gradient(90deg, var(--card-bg) 0%, rgba(24, 24, 27, 0.06) 40%, rgba(24, 24, 27, 0.15) 75%, var(--card-bg) 100%) !important;
-  background-size: 250% 100% !important;
-  background-position: 0% 0% !important;
-  color: var(--text-dark) !important;
-  border: 2px solid var(--primary) !important;
-  transition: background-position 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
-              transform 0.3s ease, 
-              color 0.3s ease, 
-              background 0.3s ease !important;
-}
-
-.btn-secondary:hover {
-  background-position: 100% 0% !important;
-  background: #18181b !important;
+  border-color: #a06d44 !important;
+  box-shadow: 0 14px 35px rgba(124, 82, 53, 0.45), inset 0 1px 2px rgba(255, 255, 255, 0.4) !important;
   color: #ffffff !important;
-  transform: translateY(-3px) scale(1.02) !important;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25) !important;
 }
 
-/* Subtitles, Badges & Interactive Tags */
-.subtitle, 
-.emergency-badge, 
-.video-card-badge, 
-.area-tag, 
-.lang-toggle-btn {
-  border-radius: 9999px !important;
-  background: linear-gradient(90deg, #18181b 0%, #27272a 40%, #3f3f46 75%, #18181b 100%) !important;
-  background-size: 250% 100% !important;
-  background-position: 0% 0% !important;
-  color: #ffffff !important;
-  border: 1.5px solid rgba(255, 255, 255, 0.2) !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
-  transition: background-position 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
-              transform 0.3s ease, 
-              border-color 0.3s ease, 
-              box-shadow 0.3s ease !important;
-}
-
-.subtitle:hover, 
-.emergency-badge:hover, 
-.video-card-badge:hover, 
-.area-tag:hover {
-  background-position: 100% 0% !important;
-  transform: translateY(-2px) scale(1.04) !important;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3) !important;
-}
-
-/* Prominent Dark Outlines for Light Mode Cards */
+/* Crisp Dark Espresso Card Outlines */
 .timeline-card,
 .service-card,
 .contact-card,
@@ -288,8 +256,8 @@ p {
 .founder-spotlight,
 .scheduler-cta,
 .quote-modal-container {
-  border: 2px solid #18181b !important;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12) !important;
+  border: 2px solid #3d2b1f !important;
+  box-shadow: 0 8px 25px rgba(43, 30, 22, 0.15) !important;
   transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
 }
 
@@ -300,8 +268,8 @@ p {
 .testimonial-card:hover,
 .area-card:hover {
   transform: translateY(-6px) scale(1.01) !important;
-  border-color: #000000 !important;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22) !important;
+  border-color: #7c5235 !important;
+  box-shadow: 0 16px 40px rgba(43, 30, 22, 0.25) !important;
 }
 
 .section-title {

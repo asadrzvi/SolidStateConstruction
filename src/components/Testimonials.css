@@ -176,22 +176,20 @@
   border-radius: 20px;
 }
 
-.service-tag-label,
-[data-theme='dark'] .testimonial-card .service-tag-label {
+.service-tag-label {
   font-size: 0.82rem;
   font-weight: 800;
-  color: #3d2b1f !important;
+  color: #3d2b1f;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 0.85rem;
 }
 
-.testimonial-text,
-[data-theme='dark'] .testimonial-card .testimonial-text {
+.testimonial-text {
   font-style: italic;
   font-size: 1rem;
   line-height: 1.6;
-  color: #2b1e16 !important;
+  color: #2b1e16;
   font-weight: 600;
   margin-bottom: 1.25rem;
 }
@@ -235,28 +233,43 @@
   gap: 0.1rem;
 }
 
-.author-name,
-[data-theme='dark'] .testimonial-card .author-name {
+.author-name {
   font-weight: 800;
   font-size: 1.05rem;
-  color: #1c1917 !important;
+  color: #1c1917;
   line-height: 1.2;
 }
 
-.author-location,
-[data-theme='dark'] .testimonial-card .author-location {
+.author-location {
   font-size: 0.85rem;
   font-weight: 700;
-  color: #5c4033 !important;
+  color: #5c4033;
   line-height: 1.2;
 }
 
-.review-date,
-[data-theme='dark'] .testimonial-card .review-date {
+.review-date {
   font-size: 0.75rem;
   font-weight: 600;
-  color: #7c5235 !important;
+  color: #7c5235;
   line-height: 1.2;
+}
+
+/* DARK MODE ENFORCED PURE WHITE TEXT & ACCENTS */
+[data-theme='dark'] .testimonial-card .testimonial-text,
+[data-theme='dark'] .testimonial-card .author-name,
+[data-theme='dark'] .testimonial-card .service-tag-label,
+[data-theme='dark'] .testimonial-card .author-location,
+[data-theme='dark'] .testimonial-card .review-date {
+  color: #ffffff !important;
+}
+
+[data-theme='dark'] .testimonial-card .quote-mark-icon {
+  color: #ffffff !important;
+  opacity: 0.7 !important;
+}
+
+[data-theme='dark'] .testimonial-author-wrapper {
+  border-top-color: rgba(255, 255, 255, 0.2) !important;
 }
 
 /* CareMedBill Decorative Green/Amber Double Quote Icon */

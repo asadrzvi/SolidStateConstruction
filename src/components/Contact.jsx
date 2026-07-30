@@ -190,7 +190,7 @@ function Contact({ initialService, initialMessage, onInquirySubmitted }) {
               </div>
               <div className="scheduler-cta">
                 <p>{t('schedCtaText')}</p>
-                <a href="https://calendly.com" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
+                <a href="https://calendly.com/solidstatesconstruction-info" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
                   {t('schedCtaBtn')}
                 </a>
               </div>

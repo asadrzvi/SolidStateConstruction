@@ -7,7 +7,7 @@ const googleReviewsData = [
   {
     name: "Haider",
     location: "Leander, TX",
-    date: "Verified Google Review • 5 hours ago",
+    date: "Verified Google Review",
     service: "24/7 Emergency Plumbing Repair",
     text: "Fantastic plumbing repair service!! Had a plumbing emergency here in Leander and called Solid State. They responded quickly, diagnosed the issue right away, and got the repair done fast. The plumber was incredibly professional, left the area clean.",
     rating: 5,
@@ -17,7 +17,7 @@ const googleReviewsData = [
   {
     name: "Abbas Hussain",
     location: "Austin, TX Metro",
-    date: "Verified Google Review • 5 days ago",
+    date: "Verified Google Review",
     service: "Foundation Repair & Structural Engineering",
     text: "These guys did my foundation, great working with them, they got it done quickly and did a great job. Would recommend to any homeowners in the Austin area.",
     rating: 5,
@@ -27,7 +27,7 @@ const googleReviewsData = [
   {
     name: "Kuza Bandzz",
     location: "Leander & Central TX",
-    date: "Verified Google Review • 1 week ago",
+    date: "Verified Google Review",
     service: "Custom Construction & General Contracting",
     text: "Had a really good experience with Solid State Construction. They communicated well and made the whole process way less stressful than I expected. Everything came out clean and solid, and you can tell they actually care about what they’re doing.",
     rating: 5,
@@ -37,7 +37,7 @@ const googleReviewsData = [
   {
     name: "Asad",
     location: "Leander, TX",
-    date: "Verified Google Review • 3 weeks ago",
+    date: "Verified Google Review",
     service: "Foundation Inspection & Crack Repair",
     text: "I recently hired Solid State Construction to inspect and repair some cracking along my home's foundation, and I couldn't be happier with the results. They were prompt, professional, and walked me through the entire repair process so I knew exactly what to expect.",
     rating: 5,

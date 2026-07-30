@@ -6,14 +6,15 @@
   <!-- Homepage -->
   <url>
     <loc>https://solidstatesconstruction.com/</loc>
-    <lastmod>2026-07-28</lastmod>
+    <lastmod>2026-07-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.00</priority>
   </url>
-  <!-- Gallery Page -->
+  <!-- Gallery Page (emitted as dist/gallery/index.html by the build so it
+       returns HTTP 200, not the 404.html SPA fallback) -->
   <url>
     <loc>https://solidstatesconstruction.com/gallery</loc>
-    <lastmod>2026-07-28</lastmod>
+    <lastmod>2026-07-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>

@@ -91,11 +91,11 @@ function App() {
     setIsQuoteModalOpen(false);
     setCurrentPage('thank-you');
     
-    // Trigger Google Ads Conversion Event
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('event', 'conversion', {
-        'send_to': 'AW-18245643754'
-      });
+    // Trigger Google Ads Conversion Event.
+    // Uses the shared helper in index.html so the conversion ID and action
+    // label stay in one place. Sending the ID without a label records nothing.
+    if (typeof window !== 'undefined' && window.sscTrackConversion) {
+      window.sscTrackConversion('form');
     }
 
     try {

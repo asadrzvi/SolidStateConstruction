@@ -2,17 +2,30 @@ import React, { useState, useEffect, useRef } from 'react'
 import { X, ChevronLeft, ChevronRight, Play, Video } from 'lucide-react'
 import './Gallery.css'
 
+// WebP throughout, except job2 where WebP came out larger than the source JPEG.
+// Videos are H.264 MP4 with faststart (were QuickTime .MOV, 6.0MB and 4.2MB)
+// and carry a poster so the grid paints before any video byte is fetched.
 const media = [
-  { type: 'image', src: '/images/gallery/job1.jpg', alt: 'Kitchen Remodeling Project' },
+  { type: 'image', src: '/images/gallery/job1.webp', alt: 'Kitchen Remodeling Project' },
   { type: 'image', src: '/images/gallery/job2.jpg', alt: 'Bathroom Tiling Detail' },
-  { type: 'image', src: '/images/gallery/job3.jpg', alt: 'Custom Remodel In Progress' },
-  { type: 'image', src: '/images/gallery/job4.jpg', alt: 'Professional Paint & Trim' },
-  { type: 'image', src: '/images/gallery/job5.jpg', alt: 'Exterior Painting Project' },
-  { type: 'image', src: '/images/gallery/7e6da58d-6958-47f1-a51b-eacbdb61c97b.JPG', alt: 'Precision Concrete Formwork Detail' },
-  { type: 'image', src: '/images/gallery/5c7e3f06-c5d5-4305-943c-21da6bd90e65.JPG', alt: 'Finished Reinforced Concrete Slab' },
-  { type: 'video', src: '/images/gallery/1355c929-7170-4657-976e-dc071c72978f.MOV', alt: 'Active Concrete Pouring and Distribution' },
-  { type: 'video', src: '/images/gallery/e72b06a0-2677-4b84-a035-bb064c9061eb.MOV', alt: '' },
-  { type: 'image', src: '/images/gallery/bef9dd32-cf08-404f-8424-f8407dd97bd7.JPG', alt: 'Slab Foundation Rebar Reinforcement' }
+  { type: 'image', src: '/images/gallery/job3.webp', alt: 'Custom Remodel In Progress' },
+  { type: 'image', src: '/images/gallery/job4.webp', alt: 'Professional Paint & Trim' },
+  { type: 'image', src: '/images/gallery/job5.webp', alt: 'Exterior Painting Project' },
+  { type: 'image', src: '/images/gallery/7e6da58d-6958-47f1-a51b-eacbdb61c97b.webp', alt: 'Precision Concrete Formwork Detail' },
+  { type: 'image', src: '/images/gallery/5c7e3f06-c5d5-4305-943c-21da6bd90e65.webp', alt: 'Finished Reinforced Concrete Slab' },
+  {
+    type: 'video',
+    src: '/images/gallery/1355c929-7170-4657-976e-dc071c72978f.mp4',
+    poster: '/images/gallery/1355c929-7170-4657-976e-dc071c72978f-poster.webp',
+    alt: 'Active Concrete Pouring and Distribution'
+  },
+  {
+    type: 'video',
+    src: '/images/gallery/e72b06a0-2677-4b84-a035-bb064c9061eb.mp4',
+    poster: '/images/gallery/e72b06a0-2677-4b84-a035-bb064c9061eb-poster.webp',
+    alt: 'Curved Driveway Formwork'
+  },
+  { type: 'image', src: '/images/gallery/bef9dd32-cf08-404f-8424-f8407dd97bd7.webp', alt: 'Slab Foundation Rebar Reinforcement' }
 ]
 
 function Gallery() {
@@ -105,7 +118,9 @@ function Gallery() {
             >
               {item.type === 'video' ? (
                 <div className="gallery-video-thumbnail">
-                  <video src={item.src} preload="metadata" />
+                  {/* poster + preload="none": the grid paints from a 20-55KB
+                      still and fetches no video bytes until the tile is opened */}
+                  <video src={item.src} poster={item.poster} preload="none" muted playsInline />
                   <div className="play-badge">
                     <Play size={20} />
                   </div>
@@ -136,10 +151,12 @@ function Gallery() {
           
           <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
             {media[lightbox.index].type === 'video' ? (
-              <video 
-                src={media[lightbox.index].src} 
-                controls 
-                autoPlay 
+              <video
+                src={media[lightbox.index].src}
+                poster={media[lightbox.index].poster}
+                controls
+                autoPlay
+                playsInline
                 className="lightbox-video"
               />
             ) : (

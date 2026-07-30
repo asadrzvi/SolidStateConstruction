@@ -2,17 +2,21 @@ import React, { useState } from 'react'
 import { Hammer, Wrench, Shovel, Droplets, Home } from 'lucide-react'
 import { useLanguage } from '../context/LanguageContext'
 
+// Referenced by URL from public/ rather than imported — importing from public/
+// made Vite ship a second hashed copy of each file alongside the one it already
+// copies verbatim. All now WebP.
+
 // Residential service images
-import foundationImg from '../../public/images/foundation_service.png'
-import plumbingImg from '../../public/images/plumbing_service.png'
-import waterImg from '../../public/images/water_service.png'
-import roofImg from '../../public/images/roofing_service.png'
+const foundationImg = '/images/foundation_service.webp'
+const plumbingImg = '/images/plumbing_service.webp'
+const waterImg = '/images/water_service.webp'
+const roofImg = '/images/roofing_service.webp'
 
 // Commercial service images
-import commWaterImg from '../../public/images/comm_water_service.jpg'
-import commConcreteImg from '../../public/images/comm_concrete_service.jpg'
-import commRoofImg from '../../public/images/comm_roofing_service.jpg'
-import commExcavationImg from '../../public/images/comm_excavation_service.jpg'
+const commWaterImg = '/images/comm_water_service.webp'
+const commConcreteImg = '/images/comm_concrete_service.webp'
+const commRoofImg = '/images/comm_roofing_service.webp'
+const commExcavationImg = '/images/comm_excavation_service.webp'
 
 import './Services.css'
 

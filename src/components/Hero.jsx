@@ -1,7 +1,11 @@
 import React, { useRef, useEffect } from 'react'
 import { Phone, Droplets, Video } from 'lucide-react'
-import heroBg from '../../public/images/hero_bg.jpg'
-import headerVid from '../../public/images/gallery/e72b06a0-2677-4b84-a035-bb064c9061eb.MOV'
+// Served from public/ by URL — see note in BeforeAfterSlider: importing from
+// public/ double-ships each asset. The hero video is now H.264 MP4 with
+// faststart (was a 4.2MB QuickTime .MOV that aborted in some browsers).
+const heroBg = '/images/hero_bg.webp'
+const headerVid = '/images/gallery/e72b06a0-2677-4b84-a035-bb064c9061eb.mp4'
+const headerVidPoster = '/images/gallery/e72b06a0-2677-4b84-a035-bb064c9061eb-poster.webp'
 import { useLanguage } from '../context/LanguageContext'
 import './Hero.css'
 
@@ -52,13 +56,15 @@ function Hero({ onOpenQuote }) {
                 <span>LIVE FIELD WORK &bull; LEANDER TX</span>
               </div>
               <div className="video-wrapper">
-                <video 
+                <video
                   ref={videoRef}
                   src={headerVid}
-                  autoPlay 
-                  loop 
-                  muted 
-                  playsInline 
+                  poster={headerVidPoster}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="metadata"
                   className="hero-card-video"
                 />
               </div>

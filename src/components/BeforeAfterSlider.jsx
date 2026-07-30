@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import beforeBg from '../../public/images/before_water.jpg';
-import afterBg from '../../public/images/after_remodel.jpg';
+// Referenced by URL rather than imported. Files under public/ are already
+// copied verbatim into dist; importing them made Vite emit a SECOND hashed
+// copy, so every one of these assets was shipping twice.
+const beforeBg = '/images/before_water.webp';
+const afterBg = '/images/after_remodel.webp';
 import './BeforeAfterSlider.css';
 
 export default function BeforeAfterSlider({ 

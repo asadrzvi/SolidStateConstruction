@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Sun, Moon, Menu, X, Phone, Globe } from 'lucide-react'
-import logoLight from '../../public/logo.png'
-import logoDark from '../../public/logo_dark.png'
+const logoLight = '/logo.png?v=2'
+const logoDark = '/logo_dark.png?v=2'
 import { useLanguage } from '../context/LanguageContext'
 import './Navbar.css'
 

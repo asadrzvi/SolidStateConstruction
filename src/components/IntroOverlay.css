@@ -1,0 +1,76 @@
+/* ==========================================================================
+   OPENING REVEAL — brand-dark ground lifts to expose the page beneath.
+   Animates transform/opacity only, so the whole sequence stays on the
+   compositor and never triggers layout.
+   ========================================================================== */
+
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0e0b08;
+  /* Faint warm depth so the ground is not a flat void */
+  background-image:
+    radial-gradient(120% 80% at 50% 42%, rgba(124, 82, 53, 0.20) 0%, rgba(124, 82, 53, 0.05) 42%, rgba(0, 0, 0, 0) 72%);
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  transition: transform 780ms cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+/* The lift: ground slides up and off, revealing the hero already painted below */
+.intro-overlay.is-lifting {
+  transform: translate3d(0, -101%, 0);
+}
+
+.intro-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.35rem;
+}
+
+.intro-mark {
+  width: clamp(112px, 17vw, 168px);
+  height: auto;
+  opacity: 0;
+  transform: translate3d(0, 14px, 0) scale(0.94);
+  animation: intro-mark-in 780ms cubic-bezier(0.16, 1, 0.3, 1) 90ms forwards;
+}
+
+/* Surveyor's level line — a construction-shop motif, drawn out from centre */
+.intro-rule {
+  display: block;
+  width: clamp(120px, 20vw, 190px);
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg,
+    rgba(217, 155, 104, 0) 0%,
+    rgba(217, 155, 104, 0.95) 50%,
+    rgba(217, 155, 104, 0) 100%);
+  opacity: 0;
+  transform: scaleX(0.15);
+  animation: intro-rule-in 720ms cubic-bezier(0.16, 1, 0.3, 1) 340ms forwards;
+}
+
+@keyframes intro-mark-in {
+  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+@keyframes intro-rule-in {
+  to { opacity: 1; transform: scaleX(1); }
+}
+
+/* While the ground covers the page, keep what's underneath from scrolling
+   or from being read out of order by assistive tech. */
+html[data-intro='active'] body {
+  overflow: hidden;
+}
+
+/* Anyone who asked for less motion gets no intro at all — the component
+   already bails, this is belt-and-braces for the paint. */
+@media (prefers-reduced-motion: reduce) {
+  .intro-overlay { display: none; }
+}

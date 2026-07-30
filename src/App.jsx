@@ -14,6 +14,7 @@ import Footer from './components/Footer'
 import QuoteModal from './components/QuoteModal'
 import ThankYouPage from './components/ThankYouPage'
 import SplitLogoSection from './components/SplitLogoSection'
+import IntroOverlay from './components/IntroOverlay'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home')
@@ -124,7 +125,9 @@ function App() {
 
   return (
     <div className="app">
-      <Navbar 
+      <IntroOverlay />
+
+      <Navbar
         onOpenQuote={() => setIsQuoteModalOpen(true)} 
         currentPage={currentPage}
         onPageChange={handlePageChange}

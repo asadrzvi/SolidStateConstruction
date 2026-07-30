@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import logoLight from '../../public/logo.png';
-import logoDark from '../../public/logo_dark.png';
+const logoLight = '/logo.png?v=2';
+const logoDark = '/logo_dark.png?v=2';
 import { useLanguage } from '../context/LanguageContext';
 import './SplitLogoSection.css';
 
@@ -25,18 +25,27 @@ function SplitLogoSection() {
   }, []);
 
   useEffect(() => {
-    // IntersectionObserver that re-triggers split/merge EVERY time user scrolls through
+    // Merge once, then stay merged. Previously this reset to the split state
+    // whenever the section left the viewport, which left the logo sitting at
+    // opacity:0 at rest and meant any screenshot mid-scroll caught it in
+    // fragments. The reveal should be a first-impression, not a loop.
     const element = sectionRef.current;
     if (!element) return;
 
+    // No IntersectionObserver support, or reduced motion: show it immediately.
+    const reduced = window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (typeof IntersectionObserver === 'undefined' || reduced) {
+      setIsMerged(true);
+      return;
+    }
+
     const intersectionObserver = new IntersectionObserver(
-      (entries) => {
+      (entries, observer) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setIsMerged(true);
-          } else {
-            // Reset state when scrolled out of view so it re-triggers every scroll
-            setIsMerged(false);
+            observer.unobserve(entry.target); // one-shot
           }
         });
       },
@@ -48,8 +57,13 @@ function SplitLogoSection() {
 
     intersectionObserver.observe(element);
 
+    // Safety net: if the section is already past/above the fold on load and the
+    // observer never fires, don't leave the logo permanently invisible.
+    const failsafe = setTimeout(() => setIsMerged(true), 2500);
+
     return () => {
-      if (element) intersectionObserver.unobserve(element);
+      clearTimeout(failsafe);
+      intersectionObserver.disconnect();
     };
   }, []);
 

@@ -37,6 +37,11 @@
   z-index: 0;
 }
 
+[data-theme='dark'] .thank-you-card-logo-bg {
+  background-image: url('/logo_dark.png') !important;
+  opacity: 0.12 !important;
+}
+
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }

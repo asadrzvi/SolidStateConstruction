@@ -1,16 +1,24 @@
 /* ==========================================================================
-   HORIZONTAL SPLIT LOGO SHOWCASE (SLEEK BLACK MONOCHROME EDITION)
+   HORIZONTAL SPLIT LOGO SHOWCASE (THEME-AWARE MODERN EDITION)
    ========================================================================== */
 
 .split-logo-section {
   position: relative;
   padding: 5.5rem 0;
-  background: #ffffff !important;
-  color: #1c1917 !important;
+  background: var(--bg-color);
+  color: var(--text-dark);
   overflow: hidden;
   text-align: center;
-  border-top: 2px solid #eae3d9;
-  border-bottom: 2px solid #eae3d9;
+  border-top: 2px solid var(--bg-alt);
+  border-bottom: 2px solid var(--bg-alt);
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+[data-theme='dark'] .split-logo-section {
+  background: #0e0b08 !important;
+  color: #ffffff !important;
+  border-top: 2px solid #3d2b1f !important;
+  border-bottom: 2px solid #3d2b1f !important;
 }
 
 .split-logo-header {
@@ -23,29 +31,57 @@
 }
 
 .split-logo-header .subtitle {
-  display: inline-block !important;
-  background: linear-gradient(90deg, #09090b 0%, #2b1e16 35%, #5c4033 70%, #000000 100%) !important;
+  display: inline-block;
+  background: linear-gradient(90deg, #09090b 0%, #2b1e16 35%, #5c4033 70%, #000000 100%);
   color: #ffffff !important;
-  border: 1.5px solid #7c5235 !important;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
-  padding: 0.45rem 1.4rem !important;
-  border-radius: 50px !important;
-  font-size: 0.8rem !important;
-  font-weight: 800 !important;
-  letter-spacing: 1.5px !important;
+  border: 1.5px solid #7c5235;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  padding: 0.45rem 1.4rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+[data-theme='dark'] .split-logo-header .subtitle {
+  background: linear-gradient(90deg, #1f1712 0%, #3d2b1f 50%, #1f1712 100%);
+  border-color: #5c4033;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .split-logo-header .section-title {
-  display: block !important;
-  font-size: clamp(2rem, 4.5vw, 2.75rem) !important;
-  font-weight: 900 !important;
-  color: #1c1917 !important;
-  margin: 0 !important;
+  display: block;
+  font-size: clamp(2rem, 4.5vw, 2.75rem);
+  font-weight: 900;
+  color: var(--text-dark);
+  margin: 0;
+}
+
+[data-theme='dark'] .split-logo-header .section-title {
+  color: #ffffff !important;
 }
 
 .split-logo-header .gradient-text {
-  color: #7c5235 !important;
-  -webkit-text-fill-color: #7c5235 !important;
+  color: var(--accent-light, #7c5235);
+  -webkit-text-fill-color: var(--accent-light, #7c5235);
+}
+
+[data-theme='dark'] .split-logo-header .gradient-text {
+  color: #d99b68 !important;
+  -webkit-text-fill-color: #d99b68 !important;
+}
+
+.split-logo-wrapper,
+.split-logo-wrapper *,
+.split-logo-half,
+.split-logo-half *,
+.split-logo-top,
+.split-logo-bottom,
+.split-logo-img {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
 }
 
 .split-logo-wrapper {
@@ -57,7 +93,6 @@
   justify-content: center;
   align-items: center;
   perspective: 1200px;
-  background: #ffffff !important;
 }
 
 .split-logo-half {
@@ -66,40 +101,40 @@
   left: 0;
   width: 100%;
   height: 100%;
-  transition: transform 1.25s cubic-bezier(0.16, 1, 0.3, 1), 
-              opacity 1.25s cubic-bezier(0.16, 1, 0.3, 1), 
-              filter 1.25s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform, opacity, filter;
-  background: #ffffff !important;
+  /* transform + opacity only: both run on the compositor, so the merge holds
+     60fps. Animating filter: blur() here forced a re-rasterise every frame on
+     two full-size layers and was the main source of jank in this section. */
+  transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.72s cubic-bezier(0.33, 1, 0.68, 1);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
 }
 
 /* Horizontal Top Half Split Initial State */
 .split-logo-top {
   clip-path: inset(0 0 50% 0);
-  transform: translateY(-160px) rotateX(25deg) scale(0.72);
+  transform: translate3d(0, -120px, 0) rotateX(22deg) scale(0.78);
   opacity: 0;
-  filter: blur(14px);
 }
 
 /* Horizontal Bottom Half Split Initial State */
 .split-logo-bottom {
   clip-path: inset(50% 0 0 0);
-  transform: translateY(160px) rotateX(-25deg) scale(0.72);
+  transform: translate3d(0, 120px, 0) rotateX(-22deg) scale(0.78);
   opacity: 0;
-  filter: blur(14px);
 }
 
 /* Merged State when Scrolled into View */
-.split-logo-wrapper.is-merged .split-logo-top {
-  transform: translateY(0) rotateX(0deg) scale(1);
+.split-logo-wrapper.is-merged .split-logo-top,
+.split-logo-wrapper.is-merged .split-logo-bottom {
+  transform: translate3d(0, 0, 0) rotateX(0deg) scale(1);
   opacity: 1;
-  filter: blur(0);
 }
 
-.split-logo-wrapper.is-merged .split-logo-bottom {
-  transform: translateY(0) rotateX(0deg) scale(1);
-  opacity: 1;
-  filter: blur(0);
+/* The reveal is one-shot, so release the compositor layers once it has run
+   rather than leaving will-change pinned for the life of the page. */
+.split-logo-wrapper.is-merged .split-logo-half {
+  will-change: auto;
 }
 
 .split-logo-img {
@@ -108,7 +143,10 @@
   object-fit: contain;
   filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.08));
   transition: filter 0.4s ease;
-  background: #ffffff !important;
+}
+
+[data-theme='dark'] .split-logo-img {
+  filter: drop-shadow(0 10px 30px rgba(200, 138, 88, 0.25)) drop-shadow(0 0 15px rgba(255, 255, 255, 0.1));
 }
 
 /* Soft Warm Amber Glow Backdrop */
@@ -116,11 +154,15 @@
   position: absolute;
   inset: -30px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(124, 82, 53, 0.1) 0%, rgba(124, 82, 53, 0.02) 40%, rgba(255, 255, 255, 0) 70%);
+  background: radial-gradient(circle, rgba(124, 82, 53, 0.12) 0%, rgba(124, 82, 53, 0.02) 40%, rgba(0, 0, 0, 0) 70%);
   opacity: 0;
   transform: scale(0.6);
   transition: opacity 0.9s ease 0.4s, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.4s;
   pointer-events: none;
+}
+
+[data-theme='dark'] .split-logo-glow {
+  background: radial-gradient(circle, rgba(217, 155, 104, 0.25) 0%, rgba(160, 109, 68, 0.08) 50%, rgba(0, 0, 0, 0) 75%);
 }
 
 .split-logo-wrapper.is-merged .split-logo-glow {
@@ -130,10 +172,14 @@
 
 .split-logo-caption {
   font-size: 1.05rem;
-  color: #44403c !important;
+  color: var(--text-light);
   max-width: 580px;
   margin: 0 auto;
   font-weight: 600;
+}
+
+[data-theme='dark'] .split-logo-caption {
+  color: #f5e6d8 !important;
 }
 
 @media (max-width: 768px) {
@@ -141,9 +187,18 @@
     height: 180px;
   }
   .split-logo-top {
-    transform: translateY(-100px) rotateX(20deg) scale(0.78);
+    transform: translate3d(0, -84px, 0) rotateX(18deg) scale(0.82);
   }
   .split-logo-bottom {
-    transform: translateY(100px) rotateX(-20deg) scale(0.78);
+    transform: translate3d(0, 84px, 0) rotateX(-18deg) scale(0.82);
+  }
+}
+
+/* Reduced motion: no travel, just present the mark. */
+@media (prefers-reduced-motion: reduce) {
+  .split-logo-top,
+  .split-logo-bottom {
+    transform: none;
+    opacity: 1;
   }
 }

@@ -17,6 +17,28 @@
   border-radius: 12px;
   box-shadow: var(--shadow);
   cursor: zoom-in;
+
+  /* Opening reveal: each tile settles into place like a course being laid.
+     transform + opacity only, staggered by --stagger set in Gallery.jsx. */
+  opacity: 0;
+  transform: translate3d(0, 26px, 0) scale(0.965);
+  transition:
+    opacity 0.62s cubic-bezier(0.33, 1, 0.68, 1) calc(var(--stagger, 0) * 90ms),
+    transform 0.78s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--stagger, 0) * 90ms);
+  will-change: transform, opacity;
+}
+
+.gallery-item.is-revealed {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+  will-change: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-item {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* Create a collage effect with some items larger than others */

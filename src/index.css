@@ -375,3 +375,42 @@ p {
 section {
   padding: 4rem 0;
 }
+
+/* ==========================================================================
+   GLOBAL SCROLL & MOTION BEHAVIOUR
+   ========================================================================== */
+
+/* The navbar is position:fixed at 106px tall, so anchor jumps were landing
+   with the section heading ~38px underneath it. Reserve the nav height on
+   every scroll target instead of offsetting each section by hand. */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 122px;
+}
+
+section[id],
+[id] {
+  scroll-margin-top: 122px;
+}
+
+@media (max-width: 768px) {
+  html { scroll-padding-top: 96px; }
+  section[id],
+  [id] { scroll-margin-top: 96px; }
+}
+
+/* Honour the OS-level motion preference across the whole site. Transitions
+   collapse to near-zero rather than 0s so transitionend still fires and any
+   state machine waiting on it does not stall. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

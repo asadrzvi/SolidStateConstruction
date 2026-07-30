@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { X, ChevronLeft, ChevronRight, Play, Video } from 'lucide-react'
 import './Gallery.css'
 
@@ -17,6 +17,46 @@ const media = [
 
 function Gallery() {
   const [lightbox, setLightbox] = useState({ isOpen: false, index: 0 })
+  const gridRef = useRef(null)
+
+  // Staggered "set in place" reveal for the grid — each tile settles as it
+  // enters view, then is left alone. One-shot, so scrolling back never
+  // re-animates and nothing sits at opacity:0 at rest.
+  useEffect(() => {
+    const grid = gridRef.current
+    if (!grid) return
+
+    const items = Array.from(grid.querySelectorAll('.gallery-item'))
+    const revealAll = () => items.forEach((el) => el.classList.add('is-revealed'))
+
+    const reduced = window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (typeof IntersectionObserver === 'undefined' || reduced) {
+      revealAll()
+      return
+    }
+
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed')
+            obs.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+    )
+    items.forEach((el) => observer.observe(el))
+
+    // Never leave tiles invisible if the observer never fires.
+    const failsafe = setTimeout(revealAll, 2500)
+
+    return () => {
+      clearTimeout(failsafe)
+      observer.disconnect()
+    }
+  }, [])
 
   const openLightbox = (index) => {
     setLightbox({ isOpen: true, index })
@@ -55,9 +95,14 @@ function Gallery() {
         <h2 className="section-title">Job Site Showcase</h2>
         <p className="section-subtitle">Real project photos and site videos from recent residential and commercial work.</p>
         
-        <div className="gallery-grid">
+        <div className="gallery-grid" ref={gridRef}>
           {media.map((item, idx) => (
-            <div key={idx} className="gallery-item" onClick={() => openLightbox(idx)}>
+            <div
+              key={idx}
+              className="gallery-item"
+              style={{ '--stagger': idx % 4 }}
+              onClick={() => openLightbox(idx)}
+            >
               {item.type === 'video' ? (
                 <div className="gallery-video-thumbnail">
                   <video src={item.src} preload="metadata" />

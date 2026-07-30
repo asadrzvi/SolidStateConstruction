@@ -11,40 +11,61 @@
       gtag('config', 'AW-18245643754');
 
       /* ------------------------------------------------------------------
-         GOOGLE ADS CONVERSION CONFIG
+         GOOGLE ADS CONVERSION TRACKING
 
-         A conversion needs the conversion ID *and* the action label:
-             send_to: 'AW-18245643754/AbC-D_efGhIjKlMnOp'
-                       └── id ─────┘ └──── label ──────┘
+         The live conversion action is DESTINATION-based:
+             "Purchase (Page load https://solidstatesconstruction.com/thank-you)"
+             trigger: "Someone visits a page starting with .../thank-you"
 
-         Sending the ID alone records NOTHING in Google Ads. That is why the
-         campaign showed 200+ clicks and 0 conversions.
+         Destination conversions fire on a page_view whose page_location
+         matches. They do NOT listen for gtag('event','conversion') at all.
 
-         Get each label from:
-           Google Ads > Goals > Conversions > (click action)
-                      > Tag setup > Use Google tag > View event snippet
-         The label is everything after the "/".
+         This site is an SPA: reaching the thank-you page is a
+         history.pushState() call, which does NOT emit a page_view. So Google
+         never saw the thank-you page and never counted a conversion. That is
+         the 200-clicks / 0-conversions gap.
 
-         Paste the labels below. Events stay inert until they are filled in,
-         so a blank label can never send a malformed conversion.
+         sscTrackConversion('form') below fires the page_view explicitly, after
+         the URL has been swapped. No conversion label is needed for this.
+
+         The label slots are only for EVENT-based conversion actions (needed
+         for phone clicks, which have no destination URL to match). They stay
+         inert while blank, so a malformed conversion can never be sent.
       ------------------------------------------------------------------ */
       window.SSC_ADS = {
         id: 'AW-18245643754',
-        formLabel: '',   // <-- paste "Submit lead form" label here
-        callLabel: ''    // <-- paste "Phone call clicks" label here
+        formLabel: '',   // optional: only if a separate EVENT action is made
+        callLabel: ''    // <-- paste "Phone call clicks" event label here
       };
 
       window.sscTrackConversion = function (which) {
         var cfg = window.SSC_ADS || {};
-        var label = which === 'call' ? cfg.callLabel : cfg.formLabel;
-        if (!label) return false;                      // not configured yet
         if (typeof gtag !== 'function') return false;
-        gtag('event', 'conversion', { send_to: cfg.id + '/' + label });
-        return true;
+        var sent = false;
+
+        // Destination conversion: Google Ads matches on page_location.
+        // Only meaningful for the form path, which lands on /thank-you.
+        if (which === 'form') {
+          gtag('event', 'page_view', {
+            send_to: cfg.id,
+            page_location: window.location.href,
+            page_title: document.title
+          });
+          sent = true;
+        }
+
+        // Event conversion: used if/when a labelled action exists.
+        var label = which === 'call' ? cfg.callLabel : cfg.formLabel;
+        if (label) {
+          gtag('event', 'conversion', { send_to: cfg.id + '/' + label });
+          sent = true;
+        }
+        return sent;
       };
 
       /* Phone clicks are the primary conversion path for 24/7 emergency work.
-         Delegated listener catches every tel: link without touching React. */
+         Delegated listener catches every tel: link without touching React.
+         Requires callLabel above - a phone click has no destination URL. */
       document.addEventListener('click', function (e) {
         var a = e.target && e.target.closest && e.target.closest('a[href^="tel:"]');
         if (a) window.sscTrackConversion('call');
@@ -258,7 +279,7 @@
       ]
     }
     </script>
-    <script type="module" crossorigin src="/assets/index-CS2yapiO.js"></script>
+    <script type="module" crossorigin src="/assets/index-DuyVPG5X.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-CDOexB4a.css">
   </head>
   <body>

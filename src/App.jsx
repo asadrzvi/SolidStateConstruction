@@ -92,18 +92,21 @@ function App() {
     setIsQuoteModalOpen(false);
     setCurrentPage('thank-you');
     
-    // Trigger Google Ads Conversion Event.
-    // Uses the shared helper in index.html so the conversion ID and action
-    // label stay in one place. Sending the ID without a label records nothing.
-    if (typeof window !== 'undefined' && window.sscTrackConversion) {
-      window.sscTrackConversion('form');
-    }
-
+    // Swap the URL FIRST. The Google Ads conversion action is destination-based
+    // ("Page load .../thank-you"), so it matches on page_location - the
+    // page_view must be sent after location.href already reads /thank-you.
     try {
       window.history.pushState({}, '', '/thank-you');
     } catch (e) {
       window.location.hash = '#/thank-you';
     }
+
+    // Now report the virtual pageview. pushState alone emits nothing, which is
+    // why the destination conversion never fired. See index.html for details.
+    if (typeof window !== 'undefined' && window.sscTrackConversion) {
+      window.sscTrackConversion('form');
+    }
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 

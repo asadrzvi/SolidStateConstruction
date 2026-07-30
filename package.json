@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "postbuild": "cp dist/index.html dist/404.html && mkdir -p dist/gallery && cp dist/index.html dist/gallery/index.html",
+    "postbuild": "cp dist/index.html dist/404.html && mkdir -p dist/gallery dist/thank-you && cp dist/index.html dist/gallery/index.html && cp dist/index.html dist/thank-you/index.html",
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"

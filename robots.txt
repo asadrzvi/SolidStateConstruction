@@ -3,11 +3,14 @@ User-agent: *
 Allow: /
 Allow: /gallery
 
-# Exclude non-indexable utility & fallback pages
+# Exclude non-indexable utility pages
 Disallow: /thank-you
-Disallow: /404.html
-Disallow: /*?*
-Disallow: /*#*
+
+# NOTE: do NOT re-add "Disallow: /*?*". Every Google Ads click arrives carrying a
+# ?gclid= parameter, so that rule blocks Google from crawling the exact landing
+# page the campaign is paying to send traffic to.
+# "Disallow: /*#*" was also removed - URL fragments are never sent to a server,
+# so the rule did nothing.
 
 # Sitemap Location
 Sitemap: https://solidstatesconstruction.com/sitemap.xml

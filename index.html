@@ -9,6 +9,46 @@
       gtag('js', new Date());
 
       gtag('config', 'AW-18245643754');
+
+      /* ------------------------------------------------------------------
+         GOOGLE ADS CONVERSION CONFIG
+
+         A conversion needs the conversion ID *and* the action label:
+             send_to: 'AW-18245643754/AbC-D_efGhIjKlMnOp'
+                       └── id ─────┘ └──── label ──────┘
+
+         Sending the ID alone records NOTHING in Google Ads. That is why the
+         campaign showed 200+ clicks and 0 conversions.
+
+         Get each label from:
+           Google Ads > Goals > Conversions > (click action)
+                      > Tag setup > Use Google tag > View event snippet
+         The label is everything after the "/".
+
+         Paste the labels below. Events stay inert until they are filled in,
+         so a blank label can never send a malformed conversion.
+      ------------------------------------------------------------------ */
+      window.SSC_ADS = {
+        id: 'AW-18245643754',
+        formLabel: '',   // <-- paste "Submit lead form" label here
+        callLabel: ''    // <-- paste "Phone call clicks" label here
+      };
+
+      window.sscTrackConversion = function (which) {
+        var cfg = window.SSC_ADS || {};
+        var label = which === 'call' ? cfg.callLabel : cfg.formLabel;
+        if (!label) return false;                      // not configured yet
+        if (typeof gtag !== 'function') return false;
+        gtag('event', 'conversion', { send_to: cfg.id + '/' + label });
+        return true;
+      };
+
+      /* Phone clicks are the primary conversion path for 24/7 emergency work.
+         Delegated listener catches every tel: link without touching React. */
+      document.addEventListener('click', function (e) {
+        var a = e.target && e.target.closest && e.target.closest('a[href^="tel:"]');
+        if (a) window.sscTrackConversion('call');
+      }, true);
     </script>
 
     <meta charset="UTF-8" />
@@ -16,7 +56,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <!-- Content Security Policy for Security Hardening -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://api.web3forms.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; connect-src 'self' https://api.web3forms.com https://www.google-analytics.com https://analytics.google.com https://*.g.doubleclick.net https://*.google.com; frame-src 'self' https://www.google.com https://maps.google.com;" />
+    <!-- NOTE: googleadservices.com and ad.doubleclick.net must be listed EXPLICITLY.
+         https://*.google.com does NOT match www.googleadservices.com (different domain),
+         and https://*.g.doubleclick.net does NOT match ad.doubleclick.net.
+         Omitting them silently blocks all Google Ads conversion tracking. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com https://static.cloudflareinsights.com https://api.web3forms.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; connect-src 'self' https://api.web3forms.com https://www.google-analytics.com https://analytics.google.com https://*.g.doubleclick.net https://ad.doubleclick.net https://*.google.com https://www.googleadservices.com https://*.cloudflareinsights.com; frame-src 'self' https://www.google.com https://maps.google.com https://td.doubleclick.net;" />
 
     <!-- Primary Meta Tags -->
     <title>Solid State Construction | #1 General Contractor, Plumber &amp; Ready Mix Concrete in Leander &amp; Austin TX</title>
@@ -61,13 +105,7 @@
           "telephone": "+1-512-595-2332",
           "email": "contact@solidstatesconstruction.com",
           "priceRange": "$$",
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.9",
-            "reviewCount": "128",
-            "bestRating": "5",
-            "worstRating": "1"
-          },
+          "sameAs": ["https://maps.app.goo.gl/xzScx29yJNoVXDi1A"],
           "address": {
             "@type": "PostalAddress",
             "streetAddress": "1101 Halsey Drive",
@@ -220,7 +258,7 @@
       ]
     }
     </script>
-    <script type="module" crossorigin src="/assets/index-CefnLA6z.js"></script>
+    <script type="module" crossorigin src="/assets/index-D5AtOmKF.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-B44aHdFm.css">
   </head>
   <body>

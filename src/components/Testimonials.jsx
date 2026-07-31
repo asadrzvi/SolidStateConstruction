@@ -3,6 +3,12 @@ import { Star, ChevronLeft, ChevronRight, CheckCircle, ExternalLink, Quote } fro
 import { useLanguage } from '../context/LanguageContext'
 import './Testimonials.css'
 
+// Avatar tints are drawn from the espresso/amber palette in index.css. They
+// were previously Google's brand blue/green/red, which is correct for a Google
+// review widget but reads as four foreign accent colours inside a warm brown
+// page. Initials are kept rather than stock portraits: these are real named
+// reviewers, and pairing a stock face with a real person's review invents a
+// likeness for someone who never sat for it.
 const googleReviewsData = [
   {
     name: "Haider",
@@ -11,7 +17,7 @@ const googleReviewsData = [
     service: "24/7 Emergency Plumbing Repair",
     text: "Fantastic plumbing repair service!! Had a plumbing emergency here in Leander and called Solid State. They responded quickly, diagnosed the issue right away, and got the repair done fast. The plumber was incredibly professional, left the area clean.",
     rating: 5,
-    avatarColor: "#4285F4",
+    avatarColor: "#6b4423",
     initials: "H"
   },
   {
@@ -21,7 +27,7 @@ const googleReviewsData = [
     service: "Foundation Repair & Structural Engineering",
     text: "These guys did my foundation, great working with them, they got it done quickly and did a great job. Would recommend to any homeowners in the Austin area.",
     rating: 5,
-    avatarColor: "#7cb342",
+    avatarColor: "#8a5a3b",
     initials: "A"
   },
   {
@@ -31,7 +37,7 @@ const googleReviewsData = [
     service: "Custom Construction & General Contracting",
     text: "Had a really good experience with Solid State Construction. They communicated well and made the whole process way less stressful than I expected. Everything came out clean and solid, and you can tell they actually care about what they’re doing.",
     rating: 5,
-    avatarColor: "#1e88e5",
+    avatarColor: "#4a3427",
     initials: "KB"
   },
   {
@@ -41,7 +47,7 @@ const googleReviewsData = [
     service: "Foundation Inspection & Crack Repair",
     text: "I recently hired Solid State Construction to inspect and repair some cracking along my home's foundation, and I couldn't be happier with the results. They were prompt, professional, and walked me through the entire repair process so I knew exactly what to expect.",
     rating: 5,
-    avatarColor: "#e53935",
+    avatarColor: "#9c6f47",
     initials: "A"
   }
 ];

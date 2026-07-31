@@ -30,7 +30,10 @@
   --modal-border: #3d2b1f;
   --text-color: #1c1917;
 
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  /* Was 'Inter' — a font this site never loads, so every surface outside the
+     quote modal silently fell back to system-ui and the two webfonts we do
+     pay to download went unused. Point at the real stack instead. */
+  font-family: var(--font-sans);
   line-height: 1.6;
 }
 
@@ -138,8 +141,11 @@
 [data-theme='dark'] .flip-hint-pill {
   background: linear-gradient(90deg, #09090b 0%, #2b1e16 35%, #5c4033 70%, #000000 100%) !important;
   color: #ffffff !important;
-  border: 1.5px solid rgba(255, 255, 255, 0.7) !important;
-  box-shadow: 0 0 18px rgba(255, 255, 255, 0.45), inset 0 1px 2px rgba(255, 255, 255, 0.6) !important;
+  /* Was a pure-white 45% halo on every button, which read as neon against a
+     warm espresso palette. Tint the edge and glow amber so the buttons sit in
+     the theme instead of floating on top of it. */
+  border: 1.5px solid rgba(200, 138, 88, 0.55) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 236, 214, 0.22) !important;
 }
 
 [data-theme='dark'] .btn:hover,
@@ -157,9 +163,12 @@
 [data-theme='dark'] .services-tab-btn:hover,
 [data-theme='dark'] .area-tag:hover,
 [data-theme='dark'] .service-link:hover {
-  border-color: #ffffff !important;
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.85), inset 0 1px 3px rgba(255, 255, 255, 0.9) !important;
-  transform: translateY(-2px) scale(1.03) !important;
+  border-color: #c88a58 !important;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.55), 0 0 16px rgba(200, 138, 88, 0.3),
+              inset 0 1px 1px rgba(255, 236, 214, 0.3) !important;
+  /* One gesture, not two — the old translate+scale(1.03) pair made buttons
+     jump and grow at once, which is what made the site feel restless. */
+  transform: translateY(-2px) !important;
   color: #ffffff !important;
 }
 
@@ -237,13 +246,28 @@ input[type="range"]::-moz-range-thumb {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  line-height: 1.2;
+  font-family: var(--font-display);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
   margin-bottom: 1rem;
   color: var(--text-dark);
+  /* Stops the one-word orphan on the last line of a heading. */
+  text-wrap: balance;
+}
+
+/* Large display type needs tighter tracking than small headings — at h4 and
+   below the negative tracking starts closing up the counters instead. The
+   small headings also carry the two-line eyebrow labels in the process
+   timeline, where 1.12 leading collides; give those rows their air back. */
+h1 { letter-spacing: -0.035em; }
+h4, h5, h6 {
+  letter-spacing: -0.01em;
+  line-height: 1.35;
 }
 
 p {
   color: var(--text-light);
+  text-wrap: pretty;
 }
 
 .btn {
@@ -313,7 +337,7 @@ p {
 .area-tag:hover,
 .service-link:hover {
   background-position: 100% 0% !important;
-  transform: translateY(-2px) scale(1.02) !important;
+  transform: translateY(-2px) !important;
   border-color: #a06d44 !important;
   box-shadow: 0 10px 25px rgba(124, 82, 53, 0.45), inset 0 1px 2px rgba(255, 255, 255, 0.4) !important;
   color: #ffffff !important;
@@ -342,9 +366,43 @@ p {
 .faq-accordion-item:hover,
 .testimonial-card:hover,
 .area-card:hover {
-  transform: translateY(-6px) scale(1.01) !important;
+  transform: translateY(-4px) !important;
   border-color: #7c5235 !important;
   box-shadow: 0 20px 45px rgba(43, 30, 22, 0.28) !important;
+}
+
+/* ==========================================================================
+   MISSING INTERACTION STATES
+   Hover was the only state defined. Pressed feedback and a keyboard focus
+   ring were both absent, so the site felt unresponsive on click and was
+   unusable by keyboard.
+   ========================================================================== */
+
+.btn:active,
+.btn-primary:active,
+.btn-secondary:active,
+.quote-btn:active,
+.nav-phone:active,
+.contact-form button[type="submit"]:active {
+  transform: translateY(0) !important;
+  transition-duration: 0.06s !important;
+}
+
+.timeline-card:active,
+.service-card:active,
+.area-card:active {
+  transform: translateY(-1px) !important;
+  transition-duration: 0.08s !important;
+}
+
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent-light);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+[data-theme='dark'] :where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline-color: #d99b68;
 }
 
 /* Section Titles & Ombre Text Gradient Styling */
@@ -374,6 +432,63 @@ p {
 
 section {
   padding: 4rem 0;
+}
+
+/* ==========================================================================
+   AMBIENT SECTION IMAGERY
+   The process and service-area sections were text on a flat fill, which is
+   what made the page read as unfinished between the image-led hero and the
+   services grid. These use photos already sitting unused in public/images/
+   rather than new stock, and sit on a ::before layer so the dark-mode
+   background-color overrides keep working untouched.
+   ========================================================================== */
+
+.process-section,
+.service-areas-section {
+  position: relative;
+  isolation: isolate;
+}
+
+.process-section::before,
+.service-areas-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.05;
+  /* Pushes the photo toward the page's espresso hue so it reads as texture
+     under the type rather than as a competing picture. */
+  filter: grayscale(0.4) sepia(0.35);
+  pointer-events: none;
+}
+
+.process-section::before {
+  background-image: url('/images/foundation.webp');
+}
+
+.service-areas-section::before {
+  background-image: url('/images/floor.webp');
+}
+
+/* A light photo on a dark ground reads far louder than the same photo on a
+   light one — at 0.08 the furniture and windows were still legible enough to
+   look like a rendering fault. Knock both the opacity and the luminance down
+   until it is texture only. */
+[data-theme='dark'] .process-section::before,
+[data-theme='dark'] .service-areas-section::before {
+  opacity: 0.045;
+  filter: grayscale(0.75) sepia(0.4) brightness(0.5);
+}
+
+/* Fade the imagery out at the section seams so neighbouring sections don't
+   meet on a hard horizontal edge. */
+.process-section::before,
+.service-areas-section::before {
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
 }
 
 /* ==========================================================================

@@ -40,6 +40,11 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* Both frames share an identical camera position, so shifting the crop up
+     applies to both equally and the wipe stays registered. Biasing away from
+     the floor keeps the repaired wall as the subject and drops the packing
+     boxes and stained slab that were undercutting the "after". */
+  object-position: center 38%;
   pointer-events: none;
 }
 

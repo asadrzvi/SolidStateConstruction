@@ -11,9 +11,11 @@
     <priority>1.00</priority>
   </url>
   <!-- Gallery Page (emitted as dist/gallery/index.html by the build so it
-       returns HTTP 200, not the 404.html SPA fallback) -->
+       returns HTTP 200, not the 404.html SPA fallback). Trailing slash is
+       required: Pages 301s /gallery -> /gallery/, and listing the redirecting
+       form here costs a hop and muddies the canonical signal. -->
   <url>
-    <loc>https://solidstatesconstruction.com/gallery</loc>
+    <loc>https://solidstatesconstruction.com/gallery/</loc>
     <lastmod>2026-07-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>

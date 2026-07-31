@@ -65,7 +65,9 @@ function App() {
     let twitterUrlMeta = document.querySelector('meta[property="twitter:url"]');
 
     if (currentPage === 'gallery') {
-      const galleryUrl = 'https://solidstatesconstruction.com/gallery';
+      // Trailing slash: Pages serves the gallery from a directory index and
+      // 301s the slashless form, so that is the URL that actually returns 200.
+      const galleryUrl = 'https://solidstatesconstruction.com/gallery/';
       canonicalLink.setAttribute('href', galleryUrl);
       if (ogUrlMeta) ogUrlMeta.setAttribute('content', galleryUrl);
       if (twitterUrlMeta) twitterUrlMeta.setAttribute('content', galleryUrl);
@@ -116,7 +118,7 @@ function App() {
       if (page === 'thank-you') {
         window.history.pushState({}, '', '/thank-you');
       } else if (page === 'gallery') {
-        window.history.pushState({}, '', '/gallery');
+        window.history.pushState({}, '', '/gallery/');
       } else {
         window.history.pushState({}, '', '/');
       }

@@ -14,8 +14,8 @@ const translations = {
 
     // Hero
     heroBadge: "24/7 Water Remediation Service",
-    heroTitle: "Solid State Construction",
-    heroSubtitle: "Leander's Choice for Quality Remodeling, Foundation Repair & Emergency Services",
+    heroTitle: "Plumbing, Foundation Repair & Concrete in Leander, TX",
+    heroSubtitle: "Solid State Construction — 24/7 emergency service across Leander, Austin, Cedar Park & Georgetown.",
     heroCallCta: "Call Now: (512) 595-2332",
     heroQuoteCta: "Get a Quote Online",
 
@@ -38,8 +38,8 @@ const translations = {
     aboutStat3Num: "Quality",
     aboutStat3Lbl: "Guaranteed",
     aboutFounderTitle: "Meet Our Founder, Shaan",
-    aboutFounderQuote: "Solid State Construction was founded with a single mission: to provide Austin families with premium, legacy-grade contracting they can trust unconditionally. Under Shaan's leadership, we bring absolute engineering perfection to every project—ensuring structural integrity and master-class craftsmanship on every single job.",
-    aboutFounderSignature: "— Shaan, Founder & Chief Engineer",
+    aboutFounderQuote: "Solid State Construction was founded with a single mission: to provide Austin families with premium, legacy-grade contracting they can trust unconditionally. Under Shaan's leadership, we bring absolute precision to every project—ensuring structural integrity and master-class craftsmanship on every single job.",
+    aboutFounderSignature: "— Shaan, Founder & Lead Contractor",
 
     // Services General
     servicesTitle: "Our Specialized Services",
@@ -62,7 +62,7 @@ const translations = {
     commWaterTitle: "Commercial Water Restoration",
     commWaterDesc: "Large-scale drying, sanitization, and moisture extraction for offices, retail, and warehouses. Minimal downtime guaranteed.",
     commConcreteTitle: "Commercial Concrete & Foundations",
-    commConcreteDesc: "Heavy-duty slab pouring, commercial foundation reinforcement, site engineering, and structural concrete repair.",
+    commConcreteDesc: "Heavy-duty slab pouring, commercial foundation reinforcement, site preparation, and structural concrete repair.",
     commRoofingTitle: "Commercial Roofing",
     commRoofingDesc: "Flat roof coatings, premium TPO replacement, commercial metal roofing, and industrial preventative roof maintenance.",
     commExcavationTitle: "Site Prep & Heavy Excavation",
@@ -78,8 +78,8 @@ const translations = {
     processStep2Sub: "Mitigate Loss & Prevent Secondary Damage",
     processStep2Desc: "We perform fast water extraction, set up commercial air dehumidifiers, and apply temporary board-up or roof tarps to secure the envelope.",
     processStep3Title: "3. Structural Inspection & Planning",
-    processStep3Sub: "Precision Engineering Evaluation",
-    processStep3Desc: "Under Shaan's engineering leadership, we perform assessments, map moisture deep in drywall, check foundation leveling, and issue a clear roadmap.",
+    processStep3Sub: "Precision Structural Evaluation",
+    processStep3Desc: "Under Shaan's leadership, we perform assessments, map moisture deep in drywall, check foundation leveling, and issue a clear roadmap.",
     processStep4Title: "4. Legacy-Grade Rebuilding",
     processStep4Sub: "Structural Reconstruction & Master Tiling",
     processStep4Desc: "Our craftsmen rebuild framing, install flawless drywall and trim, replace roofing, run professional plumbing, and complete luxury custom remodeling.",
@@ -112,7 +112,7 @@ const translations = {
     faq2Q: "What is your emergency response time in Leander and North Austin?",
     faq2A: "For emergency services like water remediation, pipe bursts, and storm-damage tarping, our team is dispatched immediately. We aim to be on-site within 1 hour for locations in Leander, Cedar Park, Liberty Hill, Georgetown, Round Rock and the north of Austin.",
     faq3Q: "Are your foundation repair and concrete slabs warrantied?",
-    faq3A: "Absolutely. All of our concrete slab installations and foundation leveling repairs come with a comprehensive structural warranty. Under Shaan's engineering leadership, we utilize soil-adapted designs and premium rebar reinforcement to ensure lifetime durability on Texas clay soil.",
+    faq3A: "Absolutely. All of our concrete slab installations and foundation leveling repairs come with a comprehensive structural warranty. Under Shaan's leadership, we utilize soil-adapted designs and premium rebar reinforcement to ensure lifetime durability on Texas clay soil.",
     faq4Q: "Are you licensed and certified for restoration work?",
     faq4A: "Yes, Solid State Construction is fully licensed, insured, and bonded. Our technicians are trained in accordance with IICRC standards for water mitigation, sewage cleanup, structural drying, and safety protocols.",
     faq5Q: "Can you help with full reconstruction after water mitigation is finished?",
@@ -191,8 +191,8 @@ const translations = {
 
     // Hero
     heroBadge: "Servicio de Restauración de Agua 24/7",
-    heroTitle: "Solid State Construction",
-    heroSubtitle: "La elección de Leander para remodelación de calidad, reparación de cimientos y servicios de emergencia",
+    heroTitle: "Plomería, Reparación de Cimientos y Concreto en Leander, TX",
+    heroSubtitle: "Solid State Construction — Servicio de emergencia 24/7 en Leander, Austin, Cedar Park y Georgetown.",
     heroCallCta: "Llamar ahora: (512) 595-2332",
     heroQuoteCta: "Obtenga un presupuesto en línea",
 
@@ -215,8 +215,8 @@ const translations = {
     aboutStat3Num: "Calidad",
     aboutStat3Lbl: "Garantizada",
     aboutFounderTitle: "Conozca a nuestro fundador, Shaan",
-    aboutFounderQuote: "Solid State Construction se fundó con una única misión: proporcionar a las familias de Austin una contratación premium de grado de legado en la que puedan confiar incondicionalmente. Bajo el liderazgo de Shaan, brindamos una perfección absoluta de ingeniería en cada proyecto, lo que garantiza la integridad estructural y una artesanía de clase maestra en cada trabajo.",
-    aboutFounderSignature: "— Shaan, Fundador e Ingeniero Jefe",
+    aboutFounderQuote: "Solid State Construction se fundó con una única misión: proporcionar a las familias de Austin una contratación premium de grado de legado en la que puedan confiar incondicionalmente. Bajo el liderazgo de Shaan, brindamos una precisión absoluta en cada proyecto, lo que garantiza la integridad estructural y una artesanía de clase maestra en cada trabajo.",
+    aboutFounderSignature: "— Shaan, Fundador y Contratista Principal",
 
     // Services General
     servicesTitle: "Nuestros Servicios Especializados",
@@ -239,7 +239,7 @@ const translations = {
     commWaterTitle: "Restauración de Agua Comercial",
     commWaterDesc: "Secado, desinfección y extracción de humedad a gran escala para oficinas, locales comerciales y almacenes. Pérdida mínima de tiempo garantizada.",
     commConcreteTitle: "Concreto y Cimientos Comerciales",
-    commConcreteDesc: "Vertido de losas de alta resistencia, refuerzo de cimientos comerciales, ingeniería de sitio y reparación de concreto estructural.",
+    commConcreteDesc: "Vertido de losas de alta resistencia, refuerzo de cimientos comerciales, preparación de sitio y reparación de concreto estructural.",
     commRoofingTitle: "Techos Comerciales",
     commRoofingDesc: "Revestimientos para techos planos, reemplazo de techos TPO premium, techos metálicos comerciales y mantenimiento preventivo de techos industriales.",
     commExcavationTitle: "Preparación de Sitio y Excavación Pesada",
@@ -255,8 +255,8 @@ const translations = {
     processStep2Sub: "Mitigar Pérdidas y Prevenir Daños Secundarios",
     processStep2Desc: "Realizamos una extracción rápida de agua, instalamos deshumidificadores de aire comerciales y aplicamos tablas temporales o lonas en el techo para asegurar la estructura.",
     processStep3Title: "3. Inspección Estructural y Planificación",
-    processStep3Sub: "Evaluación de Ingeniería de Precisión",
-    processStep3Desc: "Bajo el liderazgo de ingeniería de Shaan, realizamos evaluaciones, mapeamos la humedad en las paredes, verificamos la nivelación de cimientos y emitimos una hoja de ruta clara.",
+    processStep3Sub: "Evaluación Estructural de Precisión",
+    processStep3Desc: "Bajo el liderazgo de Shaan, realizamos evaluaciones, mapeamos la humedad en las paredes, verificamos la nivelación de cimientos y emitimos una hoja de ruta clara.",
     processStep4Title: "4. Reconstrucción de Grado de Legado",
     processStep4Sub: "Reconstrucción Estructural y Colocación de Azulejos",
     processStep4Desc: "Nuestros artesanos reconstruyen estructuras, instalan paneles de yeso y molduras impecables, reemplazan techos, realizan plomería profesional y completan remodelaciones personalizadas de lujo.",
@@ -289,7 +289,7 @@ const translations = {
     faq2Q: "¿Cuál es su tiempo de respuesta de emergencia en Leander y el norte de Austin?",
     faq2A: "Para servicios de emergencia como mitigación de agua, rotura de tuberías y colocación de lonas en techos por tormentas, nuestro equipo se despacha de inmediato. Nuestro objetivo es estar en el sitio dentro de 1 hora para ubicaciones en Leander, Cedar Park, Liberty Hill, Georgetown, Round Rock y el norte de Austin.",
     faq3Q: "¿Tienen garantía sus reparaciones de cimientos y losas de concreto?",
-    faq3A: "Absolutamente. Todas nuestras instalaciones de losas de concreto y reparaciones de nivelación de cimientos vienen con una garantía estructural integral. Bajo el liderazgo de ingeniería de Shaan, utilizamos diseños adaptados al suelo y refuerzo de armaduras de primera calidad para garantizar una durabilidad de por vida en el suelo arcilloso de Texas.",
+    faq3A: "Absolutamente. Todas nuestras instalaciones de losas de concreto y reparaciones de nivelación de cimientos vienen con una garantía estructural integral. Bajo el liderazgo de Shaan, utilizamos diseños adaptados al suelo y refuerzo de armaduras de primera calidad para garantizar una durabilidad de por vida en el suelo arcilloso de Texas.",
     faq4Q: "¿Están autorizados y certificados para trabajos de restauración?",
     faq4A: "Sí, Solid State Construction está completamente licenciada, asegurada y consolidada. Nuestros técnicos están capacitados de acuerdo con las normas IICRC para mitigación de agua, limpieza de aguas residuales, secado estructural y protocolos de seguridad.",
     faq5Q: "¿Pueden ayudar con la reconstrucción completa después de terminar la mitigación del agua?",

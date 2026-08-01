@@ -74,7 +74,7 @@ function SplitLogoSection() {
       <div className="container">
         <div className="split-logo-header">
           <span className="subtitle">
-            {t('navAbout') === 'About' ? 'LEGACY ENGINEERING' : 'INGENIERÍA DE LEGADO'}
+            {t('navAbout') === 'About' ? 'LEGACY CRAFTSMANSHIP' : 'ARTESANÍA DE LEGADO'}
           </span>
           <h2 className="section-title">
             {t('navAbout') === 'About' ? (

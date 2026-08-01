@@ -46,7 +46,7 @@ export default function ProcessTimeline({ onServiceSelect, onPrefillMessage, onO
       title: t('processStep2Title') || "2. Immediate Damage Containment",
       subtitle: t('processStep2Sub') || "Mitigate Loss & Prevent Secondary Damage",
       desc: t('processStep2Desc') || "We perform fast water extraction, set up commercial air dehumidifiers, and apply temporary board-up or roof tarps to secure the building envelope.",
-      backTitle: "Containment Engineering",
+      backTitle: "Containment Systems",
       backSpecs: [
         "💧 Commercial Heavy-Duty Water Extraction",
         "🌪️ Industrial Air Scrubbing & Dehumidification",
@@ -58,9 +58,9 @@ export default function ProcessTimeline({ onServiceSelect, onPrefillMessage, onO
     {
       icon: <FileSearch size={24} />,
       title: t('processStep3Title') || "3. Structural Inspection & Planning",
-      subtitle: t('processStep3Sub') || "Precision Engineering Evaluation",
-      desc: t('processStep3Desc') || "Under Shaan's engineering leadership, we assess moisture deep in drywall, check foundation leveling, and issue a clear repair roadmap.",
-      backTitle: "Engineering Diagnostics",
+      subtitle: t('processStep3Sub') || "Precision Structural Evaluation",
+      desc: t('processStep3Desc') || "Under Shaan's leadership, we assess moisture deep in drywall, check foundation leveling, and issue a clear repair roadmap.",
+      backTitle: "Structural Diagnostics",
       backSpecs: [
         "📐 Laser Level Foundation Mapping",
         "🔍 FLIR Thermal Moisture Scanning",

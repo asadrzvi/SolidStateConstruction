@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# SSR bundle emitted by prerender.mjs, deleted on success
+.ssr-build

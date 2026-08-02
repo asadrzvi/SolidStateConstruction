@@ -88,8 +88,13 @@
     <!-- NOTE: googleadservices.com and ad.doubleclick.net must be listed EXPLICITLY.
          https://*.google.com does NOT match www.googleadservices.com (different domain),
          and https://*.g.doubleclick.net does NOT match ad.doubleclick.net.
-         Omitting them silently blocks all Google Ads conversion tracking. -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com https://static.cloudflareinsights.com https://api.web3forms.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; connect-src 'self' https://api.web3forms.com https://www.google-analytics.com https://analytics.google.com https://*.g.doubleclick.net https://ad.doubleclick.net https://*.google.com https://www.googleadservices.com https://*.cloudflareinsights.com; frame-src 'self' https://www.google.com https://maps.google.com https://td.doubleclick.net;" />
+         Omitting them silently blocks all Google Ads conversion tracking.
+
+         GA4 is wildcarded (https://*.google-analytics.com) on purpose: gtag
+         sends hits to a regional endpoint such as region1.google-analytics.com,
+         which www.google-analytics.com alone does NOT match. Pinning the www
+         host blocks every GA4 hit the moment SSC_GA4_ID is filled in. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com https://static.cloudflareinsights.com https://api.web3forms.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; connect-src 'self' https://api.web3forms.com https://*.google-analytics.com https://analytics.google.com https://*.g.doubleclick.net https://ad.doubleclick.net https://*.google.com https://www.googleadservices.com https://*.cloudflareinsights.com; frame-src 'self' https://www.google.com https://maps.google.com https://td.doubleclick.net;" />
 
     <!-- Primary Meta Tags -->
     <title>Plumber &amp; Foundation Repair in Leander &amp; Austin TX | Solid State Construction</title>

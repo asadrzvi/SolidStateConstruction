@@ -170,19 +170,52 @@
 }
 
 .emergency-badge {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background-color: var(--accent);
+  background: linear-gradient(135deg, rgba(22, 16, 12, 0.92) 0%, rgba(31, 23, 18, 0.96) 100%) !important;
   color: #ffffff !important;
-  padding: 0.6rem 1.2rem;
+  padding: 0.6rem 1.4rem;
   border-radius: 50px;
   font-weight: 800;
   font-size: 0.85rem;
   letter-spacing: 1px;
   text-transform: uppercase;
   margin-bottom: 2rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  isolation: isolate;
+  border: 1.5px solid transparent !important;
+  background-clip: padding-box;
+}
+
+.emergency-badge::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50px;
+  padding: 2px;
+  background: linear-gradient(90deg, #7c5235 0%, #c88a58 30%, #ffffff 50%, #c88a58 70%, #7c5235 100%);
+  background-size: 300% 100%;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: -1;
+  animation: headerBorderShift 4s linear infinite;
+}
+
+.emergency-badge::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50px;
+  background: linear-gradient(90deg, rgba(124, 82, 53, 0.4), rgba(200, 138, 88, 0.6), rgba(124, 82, 53, 0.4));
+  background-size: 200% 100%;
+  filter: blur(8px);
+  z-index: -2;
+  opacity: 0.8;
+  animation: headerGlowPulse 3s ease-in-out infinite alternate;
 }
 
 .hero h1 {

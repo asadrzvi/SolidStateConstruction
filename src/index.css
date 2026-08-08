@@ -405,22 +405,70 @@ p {
   outline-color: #d99b68;
 }
 
-/* Section Titles & Ombre Text Gradient Styling */
+/* Section Titles & Animated Border Frame System */
 .section-title {
-  background: linear-gradient(90deg, #1c1917 0%, #3d2b1f 35%, #7c5235 70%, #1c1917 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: 900;
+  position: relative;
   display: inline-block;
-  margin-bottom: 0.75rem;
+  padding: 0.65rem 2rem;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #fcfbfa 0%, #f7f3ed 100%);
+  color: #1c1917 !important;
+  -webkit-text-fill-color: #1c1917 !important;
+  font-weight: 900;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 6px 22px rgba(43, 30, 22, 0.12);
+  isolation: isolate;
+  z-index: 1;
+  border: 2px solid transparent !important;
+  background-clip: padding-box;
+  text-align: center;
 }
 
 [data-theme='dark'] .section-title {
-  background: linear-gradient(90deg, #ffffff 0%, #f5e6d8 45%, #c88a58 80%, #ffffff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  background: linear-gradient(135deg, #16100c 0%, #241a14 100%) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+.section-title::before {
+  content: '';
+  position: absolute;
+  inset: -2.5px;
+  border-radius: 20.5px;
+  padding: 2.5px;
+  background: linear-gradient(90deg, #7c5235 0%, #c88a58 25%, #ffffff 50%, #c88a58 75%, #7c5235 100%);
+  background-size: 300% 100%;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: -1;
+  animation: headerBorderShift 4s linear infinite;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: 23px;
+  background: linear-gradient(90deg, rgba(124, 82, 53, 0.35), rgba(200, 138, 88, 0.6), rgba(124, 82, 53, 0.35));
+  background-size: 200% 100%;
+  filter: blur(8px);
+  z-index: -2;
+  opacity: 0.75;
+  animation: headerGlowPulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes headerBorderShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes headerGlowPulse {
+  0% { opacity: 0.4; filter: blur(6px); }
+  100% { opacity: 0.85; filter: blur(10px); }
 }
 
 .section-subtitle {

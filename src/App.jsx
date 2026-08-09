@@ -16,8 +16,11 @@ import ThankYouPage from './components/ThankYouPage'
 import SplitLogoSection from './components/SplitLogoSection'
 import IntroOverlay from './components/IntroOverlay'
 
-function App() {
-  const [currentPage, setCurrentPage] = useState('home')
+// `initialPage` is supplied by the prerenderer (entry-server.jsx), which has no
+// window to read a route from. In the browser it stays undefined and the
+// useEffect below resolves the real route on mount, exactly as before.
+function App({ initialPage = 'home' }) {
+  const [currentPage, setCurrentPage] = useState(initialPage)
   const [selectedService, setSelectedService] = useState('')
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false)
   const [prefilledMessage, setPrefilledMessage] = useState('')
@@ -84,7 +87,7 @@ function App() {
       if (ogUrlMeta) ogUrlMeta.setAttribute('content', homeUrl);
       if (twitterUrlMeta) twitterUrlMeta.setAttribute('content', homeUrl);
       robotsMeta.setAttribute('content', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
-      document.title = 'Solid State Construction | #1 General Contractor, Plumber & Ready Mix Concrete in Leander & Austin TX';
+      document.title = 'Plumber & Foundation Repair in Leander & Austin TX | Solid State Construction';
     }
   }, [currentPage]);
 

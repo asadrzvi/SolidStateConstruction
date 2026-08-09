@@ -24,7 +24,7 @@ const googleReviewsData = [
     name: "Abbas Hussain",
     location: "Austin, TX Metro",
     date: "Verified Google Review",
-    service: "Foundation Repair & Structural Engineering",
+    service: "Foundation Repair & Structural Leveling",
     text: "These guys did my foundation, great working with them, they got it done quickly and did a great job. Would recommend to any homeowners in the Austin area.",
     rating: 5,
     avatarColor: "#8a5a3b",

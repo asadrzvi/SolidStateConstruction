@@ -26,7 +26,7 @@ function ThankYouPage({ submittedService, submittedName, onReturnHome, onGoGalle
           </h1>
 
           <p className="thank-you-subtitle">
-            Our engineering &amp; estimation team at <strong>Solid State Construction</strong> has logged your request. 
+            Our estimation team at <strong>Solid State Construction</strong> has logged your request. 
             Shaan or a senior project manager will reach out within 24 hours to discuss your project details and schedule a walkthrough.
           </p>
 

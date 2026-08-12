@@ -51,6 +51,29 @@
   grid-row: span 2;
 }
 
+/* The video sits inside this wrapper, so the wrapper has to carry the tile's
+   height for the preview's height:100% to resolve against something. */
+.gallery-video-thumbnail {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.play-badge {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(12, 9, 7, 0.72);
+  color: #ffffff;
+  pointer-events: none;
+}
+
 .gallery-item img,
 .gallery-item .gallery-video-preview {
   width: 100%;

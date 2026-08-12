@@ -16,11 +16,11 @@
 .gallery-hero-logo-bg {
   position: absolute;
   inset: 0;
-  margin: auto;
-  width: min(720px, 92vw);
-  height: min(720px, 92vw);
   background-image: url('/logo_dark.png?v=2');
-  background-size: contain;
+  /* Sized against the hero's own height rather than a fixed 720px box: at
+     720px the square mark was taller than the band, so it overflowed and its
+     wordmark ran straight through the heading and subtitle. */
+  background-size: auto min(60%, 230px);
   background-repeat: no-repeat;
   background-position: center center;
   opacity: 0.06;

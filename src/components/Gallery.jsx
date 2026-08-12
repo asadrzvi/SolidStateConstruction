@@ -25,7 +25,31 @@ const media = [
     poster: '/images/gallery/e72b06a0-2677-4b84-a035-bb064c9061eb-poster.webp',
     alt: 'Curved Driveway Formwork'
   },
-  { type: 'image', src: '/images/gallery/bef9dd32-cf08-404f-8424-f8407dd97bd7.webp', alt: 'Slab Foundation Rebar Reinforcement' }
+  { type: 'image', src: '/images/gallery/bef9dd32-cf08-404f-8424-f8407dd97bd7.webp', alt: 'Slab Foundation Rebar Reinforcement' },
+  {
+    type: 'video',
+    src: '/images/gallery/work-tunnel-shoring.mp4',
+    poster: '/images/gallery/work-tunnel-shoring-poster.webp',
+    alt: 'Timber-Shored Access Tunnel With Forced-Air Ventilation'
+  },
+  {
+    type: 'video',
+    src: '/images/gallery/work-crew-material-chain.mp4',
+    poster: '/images/gallery/work-crew-material-chain-poster.webp',
+    alt: 'Crew Moving Material Bags Across A Driveway Job Site'
+  },
+  {
+    type: 'video',
+    src: '/images/gallery/work-bedding-sand.mp4',
+    poster: '/images/gallery/work-bedding-sand-poster.webp',
+    alt: 'Bedding Sand Moved By Bucket And Screeded By Hand'
+  },
+  {
+    type: 'video',
+    src: '/images/gallery/work-driveway-rebuild.mp4',
+    poster: '/images/gallery/work-driveway-rebuild-poster.webp',
+    alt: 'Full Driveway Rebuild With Prepared Sand Bed'
+  }
 ]
 
 function Gallery() {
@@ -120,7 +144,17 @@ function Gallery() {
                 <div className="gallery-video-thumbnail">
                   {/* poster + preload="none": the grid paints from a 20-55KB
                       still and fetches no video bytes until the tile is opened */}
-                  <video src={item.src} poster={item.poster} preload="none" muted playsInline />
+                  {/* gallery-video-preview is what Gallery.css sizes to fill the
+                      tile; without it the video kept its intrinsic ratio and
+                      either letterboxed or overflowed its 250px row */}
+                  <video
+                    className="gallery-video-preview"
+                    src={item.src}
+                    poster={item.poster}
+                    preload="none"
+                    muted
+                    playsInline
+                  />
                   <div className="play-badge">
                     <Play size={20} />
                   </div>

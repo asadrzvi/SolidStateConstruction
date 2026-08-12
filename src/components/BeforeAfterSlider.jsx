@@ -2,15 +2,17 @@ import React, { useState } from 'react';
 // Referenced by URL rather than imported. Files under public/ are already
 // copied verbatim into dist; importing them made Vite emit a SECOND hashed
 // copy, so every one of these assets was shipping twice.
-const beforeBg = '/images/before_water.webp';
-const afterBg = '/images/after_remodel.webp';
+// Same property, shot before the sod went in and after it was finished. The
+// framing differs between the two, so the wipe does not line up edge to edge.
+const beforeBg = '/images/before_lawn.webp';
+const afterBg = '/images/after_lawn.webp';
 import './BeforeAfterSlider.css';
 
-export default function BeforeAfterSlider({ 
-  beforeImage = beforeBg, 
-  afterImage = afterBg, 
-  beforeLabel = 'Before: Water Damage', 
-  afterLabel = 'After: Solid State Restoration' 
+export default function BeforeAfterSlider({
+  beforeImage = beforeBg,
+  afterImage = afterBg,
+  beforeLabel = 'Before: Yard Stripped & Graded',
+  afterLabel = 'After: Full Sod Install'
 }) {
   const [sliderPosition, setSliderPosition] = useState(50);
 

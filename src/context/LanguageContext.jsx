@@ -176,9 +176,9 @@ const translations = {
     galPageTitle: "Our Project Gallery",
     galPageSub: "Explore our legacy-grade craftsmanship across Leander and North Austin—from emergency restoration to luxury custom remodeling.",
     galSliderTitle: "Interactive Before & After Showcase",
-    galSliderSub: "Drag the slider handle to see the transition from water damage to structural perfection.",
-    galBeforeLabel: "Before: Water Damage & Mold",
-    galAfterLabel: "After: Rebuilt & Drywall Restored"
+    galSliderSub: "Drag the slider handle to see the same yard go from stripped and graded to a finished lawn.",
+    galBeforeLabel: "Before: Yard Stripped & Graded",
+    galAfterLabel: "After: Full Sod Install"
   },
   es: {
     // Navbar
@@ -353,9 +353,9 @@ const translations = {
     galPageTitle: "Nuestra Galería de Proyectos",
     galPageSub: "Explore nuestra artesanía de grado legado en Leander y el norte de Austin, desde restauración de emergencia hasta remodelaciones personalizadas de lujo.",
     galSliderTitle: "Presentación Interactiva de Antes y Después",
-    galSliderSub: "Arrastre el controlador para ver la transición desde el daño por agua hasta la perfección estructural.",
-    galBeforeLabel: "Antes: Daño de Agua y Moho",
-    galAfterLabel: "Después: Reconstruido y Panel Restaurado"
+    galSliderSub: "Arrastre el controlador para ver el mismo jardín pasar de terreno nivelado a césped terminado.",
+    galBeforeLabel: "Antes: Terreno Nivelado y Preparado",
+    galAfterLabel: "Después: Césped Instalado"
   }
 };
 

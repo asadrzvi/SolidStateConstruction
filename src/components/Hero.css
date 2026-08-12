@@ -118,11 +118,36 @@
 }
 
 .video-wrapper {
+  position: relative;
   width: 100%;
   border-radius: 14px;
   overflow: hidden;
   aspect-ratio: 9 / 16;
   background-color: #000000;
+}
+
+/* Which clip of the rotation is showing. */
+.video-progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  pointer-events: none;
+}
+
+.video-progress-dot {
+  width: 18px;
+  height: 3px;
+  border-radius: 2px;
+  background-color: rgba(255, 255, 255, 0.35);
+  transition: background-color 300ms ease;
+}
+
+.video-progress-dot.is-active {
+  background-color: #c88a58;
 }
 
 .hero-card-video {

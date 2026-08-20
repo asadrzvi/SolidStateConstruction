@@ -3,7 +3,13 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
 import GalleryPage from './components/GalleryPage'
-import Testimonials from './components/Testimonials'
+// Testimonials removed 2026-08-20: the section badged itself as "Verified
+// Google Customer Reviews" (Google logo, "5.0/5.0 verified" claim) but every
+// reviewer was the agency's own team (Haider, Abbas Hussain, Asad) or an
+// implausible name — none exist on the real Google Business Profile. That is
+// squarely inside the FTC's 2024 rule against fake/insider reviews (16 CFR
+// 465). Do not re-add until real, consented, attributable customer reviews
+// exist — see src/components/Testimonials.jsx, kept but unused.
 import Services from './components/Services'
 import ProcessTimeline from './components/ProcessTimeline'
 import ServiceAreas from './components/ServiceAreas'
@@ -157,7 +163,6 @@ function App({ initialPage = 'home' }) {
             onOpenQuote={() => setIsQuoteModalOpen(true)}
           />
           <ServiceAreas />
-          <Testimonials />
           <FAQSection />
           <Contact 
             initialService={selectedService} 

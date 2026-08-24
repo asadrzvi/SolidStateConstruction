@@ -15,6 +15,21 @@ export default function GalleryPage() {
   return (
     <div className="gallery-page">
       <div className="gallery-page-hero">
+        {/* AI-generated (Google Flow) concrete-pour time-lapse — decorative
+            background texture only, no on-page disclosure (removed
+            2026-08-23 per explicit direction). Never presented as one of
+            the real job photos in the grid below it. */}
+        <video
+          className="gallery-hero-bg-video"
+          src="/images/gallery-bg-video/concrete-pour.mp4"
+          poster="/images/gallery-bg-video/concrete-pour-poster.jpg"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+        />
+        <div className="gallery-hero-scrim"></div>
         <div className="gallery-hero-logo-bg"></div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <span className="gallery-hero-badge">Verified Construction Showcase &bull; Leander &amp; Austin TX</span>

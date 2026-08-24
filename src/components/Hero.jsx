@@ -3,7 +3,17 @@ import { Phone, Droplets, Video } from 'lucide-react'
 // Served from public/ by URL — see note in BeforeAfterSlider: importing from
 // public/ double-ships each asset. The hero video is now H.264 MP4 with
 // faststart (was a 4.2MB QuickTime .MOV that aborted in some browsers).
-const heroBg = '/images/hero_bg.webp'
+//
+// Background is an AI-generated (Google Flow) house-building time-lapse,
+// autoplaying/looping on its own — NOT scroll-scrubbed, deliberately, per
+// explicit direction. It sits behind the real "LIVE FIELD WORK" card below
+// rather than replacing or competing with it (see the roast/reshape
+// discussion, 2026-08-23): real footage stays the loudest trust signal,
+// this is ambient background texture, no on-page disclosure badge (removed
+// 2026-08-23 per explicit direction — it's decorative motion, not a claim
+// being made about the work).
+const heroBgVideo = '/images/hero-bg-video/build-timelapse.mp4'
+const heroBgPoster = '/images/hero-bg-video/build-timelapse-poster.jpg'
 
 // Short segments cut from the full job videos, each already sped up at encode
 // time (cheaper than a high playbackRate, and it keeps the files small). The
@@ -52,12 +62,18 @@ function Hero({ onOpenQuote }) {
 
   return (
     <section className="hero">
-      <div 
-        className="hero-bg-img"
-        style={{ backgroundImage: `url(${heroBg})` }}
-      ></div>
+      <video
+        className="hero-bg-video"
+        src={heroBgVideo}
+        poster={heroBgPoster}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+      />
       <div className="hero-overlay"></div>
-      
+
       <div className="container hero-container">
         <div className="hero-split-grid">
           {/* Left Column: Headlines & CTAs */}

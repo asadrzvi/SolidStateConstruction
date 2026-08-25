@@ -21,6 +21,7 @@ import QuoteModal from './components/QuoteModal'
 import ThankYouPage from './components/ThankYouPage'
 import SplitLogoSection from './components/SplitLogoSection'
 import IntroOverlay from './components/IntroOverlay'
+import PrivacyPolicy from './components/PrivacyPolicy'
 
 // `initialPage` is supplied by the prerenderer (entry-server.jsx), which has no
 // window to read a route from. In the browser it stays undefined and the
@@ -41,6 +42,8 @@ function App({ initialPage = 'home' }) {
         setCurrentPage('thank-you');
       } else if (path.includes('gallery') || hash.includes('gallery')) {
         setCurrentPage('gallery');
+      } else if (path.includes('privacy-policy') || hash.includes('privacy-policy')) {
+        setCurrentPage('privacy-policy');
       } else {
         setCurrentPage('home');
       }
@@ -87,6 +90,13 @@ function App({ initialPage = 'home' }) {
       canonicalLink.setAttribute('href', thankYouUrl);
       robotsMeta.setAttribute('content', 'noindex, follow');
       document.title = 'Thank You | Solid State Construction';
+    } else if (currentPage === 'privacy-policy') {
+      const privacyUrl = 'https://solidstatesconstruction.com/privacy-policy/';
+      canonicalLink.setAttribute('href', privacyUrl);
+      if (ogUrlMeta) ogUrlMeta.setAttribute('content', privacyUrl);
+      if (twitterUrlMeta) twitterUrlMeta.setAttribute('content', privacyUrl);
+      robotsMeta.setAttribute('content', 'index, follow');
+      document.title = 'Privacy Policy | Solid State Construction';
     } else {
       const homeUrl = 'https://solidstatesconstruction.com/';
       canonicalLink.setAttribute('href', homeUrl);
@@ -128,6 +138,8 @@ function App({ initialPage = 'home' }) {
         window.history.pushState({}, '', '/thank-you');
       } else if (page === 'gallery') {
         window.history.pushState({}, '', '/gallery/');
+      } else if (page === 'privacy-policy') {
+        window.history.pushState({}, '', '/privacy-policy/');
       } else {
         window.history.pushState({}, '', '/');
       }
@@ -174,16 +186,18 @@ function App({ initialPage = 'home' }) {
         </>
       ) : currentPage === 'gallery' ? (
         <GalleryPage />
+      ) : currentPage === 'privacy-policy' ? (
+        <PrivacyPolicy onReturnHome={() => handlePageChange('home')} />
       ) : (
-        <ThankYouPage 
+        <ThankYouPage
           submittedService={submittedService}
           submittedName={submittedName}
           onReturnHome={() => handlePageChange('home')}
           onGoGallery={() => handlePageChange('gallery')}
         />
       )}
-      
-      <Footer />
+
+      <Footer onPageChange={handlePageChange} />
       
       <QuoteModal 
         isOpen={isQuoteModalOpen} 

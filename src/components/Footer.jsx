@@ -3,8 +3,15 @@ import { MapPin, Phone, Mail } from 'lucide-react'
 import { useLanguage } from '../context/LanguageContext'
 import './Footer.css'
 
-function Footer() {
+function Footer({ onPageChange }) {
   const { t } = useLanguage();
+
+  const handlePrivacyClick = (e) => {
+    if (onPageChange) {
+      e.preventDefault();
+      onPageChange('privacy-policy');
+    }
+  };
 
   return (
     <footer className="footer">
@@ -33,6 +40,9 @@ function Footer() {
         </div>
         <div className="footer-bottom">
           <p>&copy; {new Date().getFullYear()} Solid State Construction. {t('footRights')}</p>
+          <p className="footer-legal-links">
+            <a href="/privacy-policy/" onClick={handlePrivacyClick}>Privacy Policy</a>
+          </p>
         </div>
       </div>
     </footer>

@@ -55,6 +55,13 @@ const ROUTES = [
     title: 'Thank You | Solid State Construction',
     robots: 'noindex, follow',
   },
+  {
+    page: 'privacy-policy',
+    file: 'dist/privacy-policy/index.html',
+    canonical: `${ORIGIN}/privacy-policy/`,
+    title: 'Privacy Policy | Solid State Construction',
+    robots: INDEXABLE,
+  },
   // GitHub Pages serves 404.html for unmatched paths with a 404 status, so it is
   // never indexed. It still needs the home markup to work as the SPA fallback.
   {

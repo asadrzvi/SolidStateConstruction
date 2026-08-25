@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "postbuild": "cp dist/index.html dist/404.html && mkdir -p dist/gallery dist/thank-you && cp dist/index.html dist/gallery/index.html && cp dist/index.html dist/thank-you/index.html && node prerender.mjs",
+    "postbuild": "cp dist/index.html dist/404.html && mkdir -p dist/gallery dist/thank-you dist/privacy-policy && cp dist/index.html dist/gallery/index.html && cp dist/index.html dist/thank-you/index.html && cp dist/index.html dist/privacy-policy/index.html && node prerender.mjs",
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"

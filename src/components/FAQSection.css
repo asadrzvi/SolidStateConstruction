@@ -1,103 +1,81 @@
-/* ==========================================================================
-   FAQ
-   Hairline-separated list, no boxes. The plus rotates to a cross when open.
-   The panel uses the `hidden` attribute for accessibility and a short
-   fade/rise on the inner content.
-   ========================================================================== */
-.faq-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2.5rem;
-  align-items: start;
+.faq-section {
+  padding: 5rem 0;
+  background-color: var(--bg-alt);
+  border-top: 1px solid var(--card-border);
+  border-bottom: 1px solid var(--card-border);
 }
 
-.faq-intro .lede { margin: 0; }
-
-.faq-list {
-  border-top: 1px solid var(--hairline-strong);
-}
-
-.faq-item {
-  border-bottom: 1px solid var(--hairline-strong);
-}
-
-.faq-q {
-  margin: 0;
-  font-size: inherit;
-}
-
-.faq-trigger {
+.faq-accordion-container {
+  max-width: 800px;
+  margin: 3rem auto 0;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.faq-accordion-item {
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  background: var(--card-bg);
+}
+
+.faq-accordion-item:hover {
+  box-shadow: var(--shadow);
+  border-color: var(--primary);
+}
+
+.faq-accordion-header {
   width: 100%;
-  min-height: 64px;
-  padding: 1.1rem 0;
-  border: 0;
+  padding: 1.5rem;
   background: none;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   text-align: left;
   cursor: pointer;
-  font-family: var(--font-sans);
-  font-size: 1.0625rem;
-  font-weight: 600;
-  line-height: 1.4;
-  color: var(--text);
-  transition: color var(--dur-fast) ease;
+  color: var(--text-dark);
+  outline: none;
+  gap: 1rem;
 }
 
-.faq-trigger:hover { color: var(--accent); }
-
-.faq-trigger:focus-visible {
-  outline-offset: -2px;
-}
-
-.faq-icon {
-  flex: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border: 1px solid var(--hairline-strong);
-  border-radius: 50%;
-  color: var(--text-2);
-  transition: transform var(--dur-slow) var(--ease-spring), background-color var(--dur) ease, color var(--dur) ease, border-color var(--dur) ease;
-}
-
-.faq-item.is-open .faq-icon {
-  transform: rotate(45deg);
-  background: var(--navy-900);
-  border-color: var(--navy-900);
-  color: #ffffff;
-}
-
-.faq-panel-inner {
-  padding: 0 0 1.4rem;
-  max-width: 64ch;
-  animation: faq-in 0.45s var(--ease-out);
-}
-
-.faq-panel-inner p {
+.faq-accordion-header h3 {
+  font-size: 1.1rem;
+  font-weight: 800;
   margin: 0;
-  font-size: 0.9875rem;
-  line-height: 1.65;
-  color: var(--text-2);
+  color: var(--text-dark) !important;
+  line-height: 1.4;
 }
 
-@keyframes faq-in {
-  from { opacity: 0; transform: translate3d(0, -6px, 0); }
-  to { opacity: 1; transform: none; }
+.faq-accordion-icon {
+  color: var(--primary);
+  flex-shrink: 0;
 }
 
-@media (min-width: 960px) {
-  .faq-grid {
-    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
-    gap: clamp(3rem, 6vw, 6rem);
-  }
-  .faq-intro {
-    position: sticky;
-    top: calc(var(--nav-h) + 2rem);
-  }
-  .faq-trigger { font-size: 1.125rem; }
+.faq-accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  padding: 0 1.5rem;
+  background-color: var(--bg-alt);
+}
+
+.faq-accordion-item.open {
+  border-color: var(--primary);
+  box-shadow: var(--shadow);
+}
+
+.faq-accordion-item.open .faq-accordion-body {
+  max-height: 300px;
+  padding: 1.5rem;
+  border-top: 1px solid var(--card-border);
+}
+
+.faq-accordion-body p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-dark) !important;
 }

@@ -1,8 +1,8 @@
 import React from 'react'
 import { renderToString } from 'react-dom/server'
-import './index.css'
 import App from './App.jsx'
 import { LanguageProvider } from './context/LanguageContext.jsx'
+import './index.css'
 
 // Build-time only. prerender.mjs calls this once per route and bakes the result
 // into the shipped HTML, so Googlebot receives real body copy on the first fetch

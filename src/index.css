@@ -1,477 +1,576 @@
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&family=Sora:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
 @import "tailwindcss";
 
-/* Fonts are loaded from index.html with preconnect hints so the request
-   starts before this stylesheet is parsed. */
 @theme {
-  --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-display: "Barlow Condensed", "Arial Narrow", ui-sans-serif, sans-serif;
+  --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Sora", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 }
 
-/* ==========================================================================
-   DESIGN TOKENS
-   Palette is pulled straight from the logo: the navy of the wordmark and the
-   rust of the building mark. Neutrals are warm concrete greys so photography
-   of slabs and formwork sits naturally on the page.
-   ========================================================================== */
 :root {
-  /* Brand */
-  --navy-950: #0a1829;
-  --navy-900: #0f2238;
-  --navy-800: #16314f;
-  --navy-700: #1e3f63;
-  --navy-600: #2a5280;
-  --rust-700: #9c3f1a;
-  --rust-600: #b84c22;
-  --rust-500: #c4582a;
-  --rust-400: #d9744a;
-  --rust-100: #f8e6dc;
-  --rust-050: #fcf3ee;
-
-  /* Neutrals (warm, single family) */
-  --bone: #f5f2ed;
-  --limestone: #ebe6de;
-  --sand: #ddd6cb;
+  /* WARM ESPRESSO, AMBER EARTH & OBSIDIAN BLACK THEME SYSTEM */
+  --primary: #3d2b1f; /* Deep Warm Espresso */
+  --accent: #5c4033; /* Amber Earth Brown */
+  --accent-light: #7c5235; /* Terracotta Amber */
+  --accent-glow: rgba(124, 82, 53, 0.45);
+  
+  --text-dark: #1c1917; /* Deep Warm Obsidian Charcoal */
+  --text-light: #44403c; /* Warm Slate Stone */
   --white: #ffffff;
-  --ink: #141f2c;
-  --ink-2: #3f4b59;
-  --ink-3: #6b7684;
-  --ink-4: #98a1ad;
+  --bg-color: #f7f4ef; /* Warm Linen Sand Light Background */
+  --bg-alt: #eae3d9; /* Tinted Amber-Stone Section Backdrop */
+  --card-bg: #fcfbfa; /* Warm Off-White Card Surface */
+  --card-border: #3d2b1f; /* Crisp Dark Espresso 2px Border */
+  --secondary: #dcd3c5;
+  --shadow: 0 12px 32px -5px rgba(43, 30, 22, 0.2), 0 4px 12px -2px rgba(43, 30, 22, 0.12);
+  --brand-color: #5c4033;
+  
+  /* Legacy mappings */
+  --bg-card: #fcfbfa;
+  --modal-border: #3d2b1f;
+  --text-color: #1c1917;
 
-  /* Semantic */
-  --bg: var(--bone);
-  --bg-2: var(--limestone);
-  --surface: var(--white);
-  --hairline: rgba(15, 34, 56, 0.11);
-  --hairline-strong: rgba(15, 34, 56, 0.2);
-  --hairline-on-dark: rgba(255, 255, 255, 0.14);
-  --text: var(--ink);
-  --text-2: var(--ink-2);
-  --text-3: var(--ink-3);
-  --accent: var(--rust-500);
-  --accent-hover: var(--rust-600);
-  --accent-press: var(--rust-700);
-  --focus: var(--rust-500);
-
-  /* Depth: base (page) / elevated (cards) / floating (nav, modal, lightbox) */
-  --shadow-1: 0 1px 2px rgba(15, 34, 56, 0.05), 0 10px 28px -14px rgba(15, 34, 56, 0.18);
-  --shadow-2: 0 2px 4px rgba(15, 34, 56, 0.05), 0 28px 56px -20px rgba(15, 34, 56, 0.3);
-  --shadow-3: 0 8px 16px -8px rgba(10, 24, 41, 0.3), 0 48px 96px -24px rgba(10, 24, 41, 0.45);
-  --shadow-rust: 0 10px 24px -10px rgba(196, 88, 42, 0.55);
-
-  /* Radii: tighter inside, softer outside */
-  --r-sm: 6px;
-  --r-md: 10px;
-  --r-lg: 14px;
-  --r-xl: 20px;
-
-  /* Motion */
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-spring: cubic-bezier(0.22, 1.2, 0.36, 1);
-  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-  --dur-fast: 160ms;
-  --dur: 320ms;
-  --dur-slow: 720ms;
-
-  /* Layout */
-  --container: 1200px;
-  --gutter: 1.25rem;
-  --nav-h: 72px;
-  --section-y: clamp(4.5rem, 9vw, 8rem);
-
-  /* Legacy names still referenced by QuoteModal.css */
-  --primary: var(--navy-800);
-  --accent-light: var(--rust-400);
-  --text-dark: var(--ink);
-  --text-light: var(--ink-2);
-  --bg-color: var(--bone);
-  --bg-alt: var(--limestone);
-  --card-bg: var(--white);
-  --card-border: var(--hairline);
-  --secondary: var(--limestone);
-  --shadow: var(--shadow-1);
-  --bg-card: var(--white);
-  --text-color: var(--ink);
-
+  /* Was 'Inter' — a font this site never loads, so every surface outside the
+     quote modal silently fell back to system-ui and the two webfonts we do
+     pay to download went unused. Point at the real stack instead. */
   font-family: var(--font-sans);
-  line-height: 1.65;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color-scheme: light;
+  line-height: 1.6;
 }
 
-@media (min-width: 768px) {
-  :root { --gutter: 2rem; }
-}
-@media (min-width: 1200px) {
-  :root { --gutter: 2.5rem; }
+[data-theme='dark'] {
+  --primary: #a06d44;
+  --accent: #c88a58;
+  --accent-light: #d99b68;
+  --text-dark: #ffffff;
+  --text-light: #f5e6d8;
+  --white: #16100c;
+  --bg-color: #0e0b08; /* Deep Obsidian Espresso Background */
+  --bg-alt: #17110c;
+  --card-bg: #1f1712; /* Dark Surface Card */
+  --card-border: #4a3427;
+  --secondary: #2b1d16;
+  --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.8), 0 4px 6px -2px rgba(0, 0, 0, 0.6);
+  --brand-color: #a06d44;
+
+  --bg-card: #1f1712;
+  --modal-border: #4a3427;
+  --text-color: #ffffff;
 }
 
-/* ==========================================================================
-   BASE
-   ========================================================================== */
-*, *::before, *::after { box-sizing: border-box; }
+/* Global Dark Mode Enforcement across ALL sections & text elements */
+[data-theme='dark'] body,
+[data-theme='dark'] main,
+[data-theme='dark'] section,
+[data-theme='dark'] .about,
+[data-theme='dark'] .services,
+[data-theme='dark'] .process-section,
+[data-theme='dark'] .process-timeline,
+[data-theme='dark'] .service-areas-section,
+[data-theme='dark'] .testimonials,
+[data-theme='dark'] .faq-section,
+[data-theme='dark'] .contact,
+[data-theme='dark'] .map-section,
+[data-theme='dark'] .gallery-section,
+[data-theme='dark'] footer {
+  background-color: #0e0b08 !important;
+  color: #ffffff !important;
+}
 
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: calc(var(--nav-h) + 16px);
-  background: var(--bg);
+/* Card Backgrounds in Dark Mode (matching button color scheme) */
+[data-theme='dark'] .service-card,
+[data-theme='dark'] .timeline-card-face,
+[data-theme='dark'] .timeline-card-front,
+[data-theme='dark'] .timeline-card-back,
+[data-theme='dark'] .area-card,
+[data-theme='dark'] .testimonial-card,
+[data-theme='dark'] .contact-card,
+[data-theme='dark'] .faq-accordion-item,
+[data-theme='dark'] .founder-spotlight,
+[data-theme='dark'] .scheduler-cta,
+[data-theme='dark'] .work-summary,
+[data-theme='dark'] .quote-modal-container {
+  background: linear-gradient(135deg, #1f1712 0%, #2b1e16 50%, #16100c 100%) !important;
+  border: 2px solid #5c4033 !important;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.6) !important;
+  color: #ffffff !important;
+}
+
+/* All Text inside Cards in Dark Mode is Crisp Pure White */
+[data-theme='dark'] .service-card h3,
+[data-theme='dark'] .service-card p,
+[data-theme='dark'] .timeline-card-face h3,
+[data-theme='dark'] .timeline-card-face h4,
+[data-theme='dark'] .timeline-card-face p,
+[data-theme='dark'] .timeline-card-face li,
+[data-theme='dark'] .area-card h3,
+[data-theme='dark'] .area-card p,
+[data-theme='dark'] .testimonial-card *,
+[data-theme='dark'] .testimonial-text,
+[data-theme='dark'] .author-name,
+[data-theme='dark'] .author-location,
+[data-theme='dark'] .review-date,
+[data-theme='dark'] .service-tag-label,
+[data-theme='dark'] .contact-card label,
+[data-theme='dark'] .contact-card p,
+[data-theme='dark'] .faq-accordion-header h3,
+[data-theme='dark'] .faq-accordion-body p,
+[data-theme='dark'] .founder-spotlight *,
+[data-theme='dark'] .scheduler-cta p,
+[data-theme='dark'] .work-summary p {
+  color: #ffffff !important;
+}
+
+/* White Glow Effect for ALL Interactive Buttons & Badges in Dark Mode */
+[data-theme='dark'] .btn,
+[data-theme='dark'] .btn-primary,
+[data-theme='dark'] .btn-secondary,
+[data-theme='dark'] .quote-btn,
+[data-theme='dark'] .nav-phone,
+[data-theme='dark'] .lang-toggle-btn,
+[data-theme='dark'] .theme-toggle,
+[data-theme='dark'] .menu-toggle,
+[data-theme='dark'] .contact-form button[type="submit"],
+[data-theme='dark'] .scheduler-cta .btn,
+[data-theme='dark'] .cta-flip-btn,
+[data-theme='dark'] .inquire-btn,
+[data-theme='dark'] .services-tab-btn,
+[data-theme='dark'] .area-tag,
+[data-theme='dark'] .service-link,
+[data-theme='dark'] .quote-modal-next-btn,
+[data-theme='dark'] .quote-modal-save-btn,
+[data-theme='dark'] .flip-hint-pill {
+  background: linear-gradient(90deg, #09090b 0%, #2b1e16 35%, #5c4033 70%, #000000 100%) !important;
+  color: #ffffff !important;
+  /* Was a pure-white 45% halo on every button, which read as neon against a
+     warm espresso palette. Tint the edge and glow amber so the buttons sit in
+     the theme instead of floating on top of it. */
+  border: 1.5px solid rgba(200, 138, 88, 0.55) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 236, 214, 0.22) !important;
+}
+
+[data-theme='dark'] .btn:hover,
+[data-theme='dark'] .btn-primary:hover,
+[data-theme='dark'] .btn-secondary:hover,
+[data-theme='dark'] .quote-btn:hover,
+[data-theme='dark'] .nav-phone:hover,
+[data-theme='dark'] .lang-toggle-btn:hover,
+[data-theme='dark'] .theme-toggle:hover,
+[data-theme='dark'] .menu-toggle:hover,
+[data-theme='dark'] .contact-form button[type="submit"]:hover,
+[data-theme='dark'] .scheduler-cta .btn:hover,
+[data-theme='dark'] .cta-flip-btn:hover,
+[data-theme='dark'] .inquire-btn:hover,
+[data-theme='dark'] .services-tab-btn:hover,
+[data-theme='dark'] .area-tag:hover,
+[data-theme='dark'] .service-link:hover {
+  border-color: #c88a58 !important;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.55), 0 0 16px rgba(200, 138, 88, 0.3),
+              inset 0 1px 1px rgba(255, 236, 214, 0.3) !important;
+  /* One gesture, not two — the old translate+scale(1.03) pair made buttons
+     jump and grow at once, which is what made the site feel restless. */
+  transform: translateY(-2px) !important;
+  color: #ffffff !important;
+}
+
+[data-theme='dark'] input,
+[data-theme='dark'] select,
+[data-theme='dark'] textarea {
+  background-color: #120d0a !important;
+  color: #ffffff !important;
+  border: 2px solid #5c4033 !important;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.15) !important;
+}
+
+[data-theme='dark'] select option {
+  background-color: #1f1712 !important;
+  color: #ffffff !important;
+}
+
+[data-theme='dark'] input::placeholder,
+[data-theme='dark'] textarea::placeholder {
+  color: #c4b5a5 !important;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
-  background-color: var(--bg);
-  color: var(--text);
-  font-family: var(--font-sans);
-  font-size: 1rem;
-  overflow-x: clip;
-  text-rendering: optimizeLegibility;
+  background-color: var(--bg-color);
+  color: var(--text-dark);
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-[id] { scroll-margin-top: calc(var(--nav-h) + 16px); }
-
-img, video { max-width: 100%; display: block; }
-
-a { color: inherit; }
-
-button { font: inherit; color: inherit; }
-
-/* Headings: condensed display face, tight leading, weight 600 so the
-   counters stay open. Tracking is only slightly negative because condensed
-   faces already sit close. */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display);
-  font-weight: 600;
-  color: var(--text);
-  margin: 0 0 1rem;
-  text-wrap: balance;
+/* Slider Styling Fix */
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 8px;
+  background: var(--card-border);
+  border-radius: 5px;
+  outline: none;
+  margin: 10px 0;
 }
 
-h1 {
-  font-size: clamp(2.75rem, 6.6vw, 5.5rem);
-  line-height: 0.96;
-  letter-spacing: -0.02em;
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  background: #7c5235;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 4px solid var(--card-bg);
+  box-shadow: 0 0 10px rgba(124, 82, 53, 0.4);
 }
 
-h2 {
-  font-size: clamp(2.125rem, 4.6vw, 3.5rem);
-  line-height: 1.0;
-  letter-spacing: -0.018em;
-}
-
-h3 {
-  font-size: clamp(1.375rem, 2.2vw, 1.75rem);
-  line-height: 1.12;
-  letter-spacing: -0.01em;
-}
-
-h4 { font-size: 1.125rem; line-height: 1.3; letter-spacing: 0; }
-
-p {
-  margin: 0 0 1rem;
-  color: var(--text-2);
-  text-wrap: pretty;
-}
-
-.lede {
-  font-size: clamp(1.0625rem, 1.4vw, 1.25rem);
-  line-height: 1.6;
-  color: var(--text-2);
-  max-width: 58ch;
+input[type="range"]::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  background: #7c5235;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 4px solid var(--card-bg);
+  box-shadow: 0 0 10px rgba(124, 82, 53, 0.4);
 }
 
 .container {
   width: 100%;
-  max-width: var(--container);
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 0 var(--gutter);
+  padding: 0 1.5rem;
+  text-align: center;
 }
 
-section { padding: var(--section-y) 0; }
-
-/* Section header: eyebrow with a short rust rule, then a left-aligned H2 and
-   an optional lede. Headers are left-aligned on purpose; nothing here is
-   centered by default. */
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin: 0 0 1.25rem;
+h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--accent);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  margin-bottom: 1rem;
+  color: var(--text-dark);
+  /* Stops the one-word orphan on the last line of a heading. */
+  text-wrap: balance;
 }
 
-.eyebrow::before {
-  content: '';
-  width: 28px;
-  height: 2px;
-  background: var(--accent);
-  border-radius: 2px;
+/* Large display type needs tighter tracking than small headings — at h4 and
+   below the negative tracking starts closing up the counters instead. The
+   small headings also carry the two-line eyebrow labels in the process
+   timeline, where 1.12 leading collides; give those rows their air back. */
+h1 { letter-spacing: -0.035em; }
+h4, h5, h6 {
+  letter-spacing: -0.01em;
+  line-height: 1.35;
 }
 
-.eyebrow.on-dark { color: var(--rust-400); }
-.eyebrow.on-dark::before { background: var(--rust-400); }
-
-.section-head {
-  max-width: 760px;
-  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+p {
+  color: var(--text-light);
+  text-wrap: pretty;
 }
 
-.section-head h2 { margin-bottom: 1rem; }
-.section-head .lede { margin-bottom: 0; }
-
-/* ==========================================================================
-   BUTTONS
-   One primary (rust), one outline, one quiet text link. 48px tall so every
-   one is a comfortable tap target. Hover lifts 1px, press settles back.
-   ========================================================================== */
 .btn {
-  --btn-bg: var(--accent);
-  --btn-fg: #ffffff;
-  --btn-bd: transparent;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  min-height: 48px;
-  padding: 0 1.375rem;
-  border-radius: var(--r-sm);
-  border: 1px solid var(--btn-bd);
-  background: var(--btn-bg);
-  color: var(--btn-fg);
-  font-family: var(--font-sans);
-  font-size: 0.9375rem;
-  font-weight: 600;
-  letter-spacing: 0.005em;
-  line-height: 1;
+  padding: 0.7rem 1.6rem !important;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border-radius: 50px !important;
   text-decoration: none;
-  white-space: nowrap;
   cursor: pointer;
-  user-select: none;
-  transition:
-    transform var(--dur) var(--ease-out),
-    background-color var(--dur-fast) ease,
-    border-color var(--dur-fast) ease,
-    color var(--dur-fast) ease,
-    box-shadow var(--dur) var(--ease-out);
+  border: none;
+  position: relative;
+  overflow: hidden;
+  font-family: inherit;
 }
 
-.btn svg { flex: none; }
-
-.btn:hover { transform: translateY(-1px); }
-.btn:active { transform: translateY(0) scale(0.985); transition-duration: 60ms; }
-
-.btn-primary {
-  box-shadow: var(--shadow-rust);
-}
-.btn-primary:hover { --btn-bg: var(--accent-hover); }
-.btn-primary:active { --btn-bg: var(--accent-press); }
-
-.btn-dark {
-  --btn-bg: var(--navy-900);
-}
-.btn-dark:hover { --btn-bg: var(--navy-800); }
-
-.btn-outline {
-  --btn-bg: transparent;
-  --btn-fg: var(--text);
-  --btn-bd: var(--hairline-strong);
-}
-.btn-outline:hover { --btn-bd: var(--text); }
-
-.btn-outline.on-dark {
-  --btn-fg: #ffffff;
-  --btn-bd: rgba(255, 255, 255, 0.38);
-}
-.btn-outline.on-dark:hover {
-  --btn-bg: rgba(255, 255, 255, 0.08);
-  --btn-bd: rgba(255, 255, 255, 0.8);
-}
-
-.btn-lg { min-height: 54px; padding: 0 1.75rem; font-size: 1rem; }
-.btn-block { width: 100%; }
-
-.btn[disabled], .btn[aria-disabled="true"] {
-  opacity: 0.6;
-  cursor: progress;
-  transform: none;
+/* BROWN & BLACK OMBRE GRADIENT SHIFT FOR ALL INTERACTIVE BUTTONS & BADGES */
+.btn,
+.btn-primary,
+.btn-secondary,
+.quote-btn,
+.nav-phone,
+.lang-toggle-btn,
+.theme-toggle,
+.menu-toggle,
+.contact-form button[type="submit"],
+.scheduler-cta .btn,
+.success-message button,
+.quote-modal-next-btn,
+.quote-modal-back-btn,
+.quote-modal-save-btn,
+.subtitle,
+.emergency-badge,
+.video-card-badge,
+.area-tag,
+.service-link {
+  border-radius: 50px !important; /* Sleek, proportioned pill buttons & badges */
+  background: linear-gradient(90deg, #09090b 0%, #2b1e16 25%, #5c4033 50%, #3d2b1f 75%, #000000 100%) !important;
+  background-size: 250% 100% !important;
+  background-position: 0% 0% !important;
+  color: #ffffff !important;
+  border: 1.5px solid #7c5235 !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.25) !important;
+  transition: background-position 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.3s ease, 
+              border-color 0.3s ease !important;
 }
 
-/* Quiet inline link with an arrow that nudges on hover */
-.link-arrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-weight: 600;
-  color: var(--text);
-  text-decoration: none;
-  min-height: 44px;
+.btn:hover,
+.btn-primary:hover,
+.btn-secondary:hover,
+.quote-btn:hover,
+.nav-phone:hover,
+.lang-toggle-btn:hover,
+.theme-toggle:hover,
+.menu-toggle:hover,
+.contact-form button[type="submit"]:hover,
+.scheduler-cta .btn:hover,
+.success-message button:hover,
+.subtitle:hover,
+.emergency-badge:hover,
+.video-card-badge:hover,
+.area-tag:hover,
+.service-link:hover {
+  background-position: 100% 0% !important;
+  transform: translateY(-2px) !important;
+  border-color: #a06d44 !important;
+  box-shadow: 0 10px 25px rgba(124, 82, 53, 0.45), inset 0 1px 2px rgba(255, 255, 255, 0.4) !important;
+  color: #ffffff !important;
 }
-.link-arrow svg {
-  transition: transform var(--dur) var(--ease-out);
-}
-.link-arrow:hover svg { transform: translateX(4px); }
-.link-arrow:hover { color: var(--accent); }
 
-/* Focus: one ring style for everything interactive */
-:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
-  outline: 2px solid var(--focus);
-  outline-offset: 3px;
-  border-radius: var(--r-sm);
+/* Crisp Warm Amber Tint & Rounded Edges for ALL Cards & Containers */
+.timeline-card,
+.service-card,
+.contact-card,
+.faq-accordion-item,
+.testimonial-card,
+.area-card,
+.founder-spotlight,
+.scheduler-cta,
+.quote-modal-container {
+  border-radius: 20px !important; /* Smooth rounded corners on all card containers */
+  background: linear-gradient(135deg, #fcfbfa 0%, #f7f3ed 50%, #eee6dc 100%) !important;
+  border: 2px solid #3d2b1f !important;
+  box-shadow: 0 12px 35px rgba(43, 30, 22, 0.16) !important;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.timeline-card:hover,
+.service-card:hover,
+.contact-card:hover,
+.faq-accordion-item:hover,
+.testimonial-card:hover,
+.area-card:hover {
+  transform: translateY(-4px) !important;
+  border-color: #7c5235 !important;
+  box-shadow: 0 20px 45px rgba(43, 30, 22, 0.28) !important;
 }
 
 /* ==========================================================================
-   SURFACES
+   MISSING INTERACTION STATES
+   Hover was the only state defined. Pressed feedback and a keyboard focus
+   ring were both absent, so the site felt unresponsive on click and was
+   unusable by keyboard.
    ========================================================================== */
-.card {
-  background: var(--surface);
-  border: 1px solid var(--hairline);
-  border-radius: var(--r-lg);
-  box-shadow: var(--shadow-1);
+
+.btn:active,
+.btn-primary:active,
+.btn-secondary:active,
+.quote-btn:active,
+.nav-phone:active,
+.contact-form button[type="submit"]:active {
+  transform: translateY(0) !important;
+  transition-duration: 0.06s !important;
 }
 
-.band-dark {
-  background: var(--navy-900);
-  color: #ffffff;
+.timeline-card:active,
+.service-card:active,
+.area-card:active {
+  transform: translateY(-1px) !important;
+  transition-duration: 0.08s !important;
 }
-.band-dark h1, .band-dark h2, .band-dark h3, .band-dark h4 { color: #ffffff; }
-.band-dark p { color: rgba(255, 255, 255, 0.74); }
 
-.band-alt { background: var(--bg-2); }
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent-light);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
 
-/* Subtle paper grain on light bands so large flat fills do not read as
-   vector. Fixed layer, pointer-events none, only a few percent opacity. */
-.grain::after {
+[data-theme='dark'] :where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline-color: #d99b68;
+}
+
+/* Section Titles & Animated Border Frame System */
+.section-title {
+  position: relative;
+  display: inline-block;
+  padding: 0.65rem 2rem;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #fcfbfa 0%, #f7f3ed 100%);
+  color: #1c1917 !important;
+  -webkit-text-fill-color: #1c1917 !important;
+  font-weight: 900;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 6px 22px rgba(43, 30, 22, 0.12);
+  isolation: isolate;
+  z-index: 1;
+  border: 2px solid transparent !important;
+  background-clip: padding-box;
+  text-align: center;
+}
+
+[data-theme='dark'] .section-title {
+  background: linear-gradient(135deg, #16100c 0%, #241a14 100%) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+.section-title::before {
+  content: '';
+  position: absolute;
+  inset: -2.5px;
+  border-radius: 20.5px;
+  padding: 2.5px;
+  background: linear-gradient(90deg, #7c5235 0%, #c88a58 25%, #ffffff 50%, #c88a58 75%, #7c5235 100%);
+  background-size: 300% 100%;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: -1;
+  animation: headerBorderShift 4s linear infinite;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: 23px;
+  background: linear-gradient(90deg, rgba(124, 82, 53, 0.35), rgba(200, 138, 88, 0.6), rgba(124, 82, 53, 0.35));
+  background-size: 200% 100%;
+  filter: blur(8px);
+  z-index: -2;
+  opacity: 0.75;
+  animation: headerGlowPulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes headerBorderShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes headerGlowPulse {
+  0% { opacity: 0.4; filter: blur(6px); }
+  100% { opacity: 0.85; filter: blur(10px); }
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  max-width: 700px;
+  margin: 0 auto 3rem auto;
+}
+
+section {
+  padding: 4rem 0;
+}
+
+/* ==========================================================================
+   AMBIENT SECTION IMAGERY
+   The process and service-area sections were text on a flat fill, which is
+   what made the page read as unfinished between the image-led hero and the
+   services grid. These use photos already sitting unused in public/images/
+   rather than new stock, and sit on a ::before layer so the dark-mode
+   background-color overrides keep working untouched.
+   ========================================================================== */
+
+.process-section,
+.service-areas-section {
+  position: relative;
+  isolation: isolate;
+}
+
+.process-section::before,
+.service-areas-section::before {
   content: '';
   position: absolute;
   inset: 0;
-  pointer-events: none;
-  opacity: 0.045;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  mix-blend-mode: multiply;
-}
-
-/* ==========================================================================
-   FORMS
-   ========================================================================== */
-.field { display: flex; flex-direction: column; gap: 0.45rem; }
-
-.field label {
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--text);
-  letter-spacing: 0.01em;
-}
-
-.field input,
-.field select,
-.field textarea {
-  width: 100%;
-  min-height: 48px;
-  padding: 0.75rem 0.9rem;
-  border: 1px solid var(--hairline-strong);
-  border-radius: var(--r-sm);
-  background: var(--surface);
-  color: var(--text);
-  font: inherit;
-  font-size: 1rem;
-  line-height: 1.4;
-  transition: border-color var(--dur-fast) ease, box-shadow var(--dur-fast) ease;
-}
-
-.field textarea { min-height: 140px; resize: vertical; }
-
-.field input::placeholder,
-.field textarea::placeholder { color: var(--ink-4); }
-
-.field input:focus,
-.field select:focus,
-.field textarea:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(196, 88, 42, 0.18);
-}
-
-.field select {
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%233f4b59' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E");
+  z-index: -1;
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
-  background-position: right 0.9rem center;
-  padding-right: 2.5rem;
+  opacity: 0.05;
+  /* Pushes the photo toward the page's espresso hue so it reads as texture
+     under the type rather than as a competing picture. */
+  filter: grayscale(0.4) sepia(0.35);
+  pointer-events: none;
+}
+
+.process-section::before {
+  background-image: url('/images/foundation.webp');
+}
+
+.service-areas-section::before {
+  background-image: url('/images/floor.webp');
+}
+
+/* A light photo on a dark ground reads far louder than the same photo on a
+   light one — at 0.08 the furniture and windows were still legible enough to
+   look like a rendering fault. Knock both the opacity and the luminance down
+   until it is texture only. */
+[data-theme='dark'] .process-section::before,
+[data-theme='dark'] .service-areas-section::before {
+  opacity: 0.045;
+  filter: grayscale(0.75) sepia(0.4) brightness(0.5);
+}
+
+/* Fade the imagery out at the section seams so neighbouring sections don't
+   meet on a hard horizontal edge. */
+.process-section::before,
+.service-areas-section::before {
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
 }
 
 /* ==========================================================================
-   SCROLL REVEAL
-   Elements carry data-reveal. They are only hidden once the app has booted
-   (html.js is added in main.jsx), so the prerendered page is fully visible
-   with no JavaScript, and reduced-motion users never see a transform.
+   GLOBAL SCROLL & MOTION BEHAVIOUR
    ========================================================================== */
-html.js [data-reveal] {
-  opacity: 0;
-  transform: translate3d(0, 18px, 0);
-  transition:
-    opacity 0.7s var(--ease-out) var(--d, 0ms),
-    transform 0.9s var(--ease-out) var(--d, 0ms);
-  will-change: opacity, transform;
+
+/* The navbar is position:fixed at 106px tall, so anchor jumps were landing
+   with the section heading ~38px underneath it. Reserve the nav height on
+   every scroll target instead of offsetting each section by hand. */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 122px;
 }
 
-html.js [data-reveal].is-in {
-  opacity: 1;
-  transform: none;
-  will-change: auto;
+section[id],
+[id] {
+  scroll-margin-top: 122px;
 }
 
-/* ==========================================================================
-   UTILITIES
-   ========================================================================== */
-.skip-link {
-  position: fixed;
-  top: 8px;
-  left: 8px;
-  z-index: 1000;
-  padding: 0.75rem 1rem;
-  background: var(--navy-900);
-  color: #ffffff;
-  border-radius: var(--r-sm);
-  font-weight: 600;
-  text-decoration: none;
-  transform: translateY(-200%);
-  transition: transform var(--dur) var(--ease-out);
-}
-.skip-link:focus-visible { transform: none; outline-offset: 2px; }
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+@media (max-width: 768px) {
+  html { scroll-padding-top: 96px; }
+  section[id],
+  [id] { scroll-margin-top: 96px; }
 }
 
-.num {
-  font-variant-numeric: tabular-nums;
-}
-
-/* ==========================================================================
-   REDUCED MOTION
-   ========================================================================== */
+/* Honour the OS-level motion preference across the whole site. Transitions
+   collapse to near-zero rather than 0s so transitionend still fires and any
+   state machine waiting on it does not stall. */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 
-  html.js [data-reveal] {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;

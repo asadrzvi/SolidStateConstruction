@@ -1,23 +1,18 @@
-/* ==========================================================================
-   BEFORE / AFTER SLIDER
-   The clipped "after" layer is moved with the range input underneath. The
-   handle is a rust disc on a white rule.
-   ========================================================================== */
 .ba-slider-section {
   width: 100%;
-  margin: 0;
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
 }
 
 .ba-slider-container {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 10;
-  border-radius: var(--r-lg);
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
   overflow: hidden;
-  background: var(--limestone);
-  box-shadow: var(--shadow-2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   user-select: none;
-  touch-action: pan-y;
 }
 
 .ba-image-wrapper {
@@ -29,11 +24,13 @@
   overflow: hidden;
 }
 
-.before-image-wrapper { z-index: 1; }
+.before-image-wrapper {
+  z-index: 1;
+}
 
 .after-image-wrapper {
   z-index: 2;
-  border-right: 1px solid rgba(255, 255, 255, 0.25);
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .ba-image {
@@ -43,52 +40,60 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* Both frames share an identical camera position, so shifting the crop up
+     applies to both equally and the wipe stays registered. Biasing away from
+     the floor keeps the repaired wall as the subject and drops the packing
+     boxes and stained slab that were undercutting the "after". */
   object-position: center 38%;
   pointer-events: none;
 }
 
-/* The overlay image is sized to the full container, not its clipped width,
-   so the wipe reveals rather than squashes. */
+/* Ensure the overlay image is sized relative to the parent container, not the clipped width */
 .after-image-wrapper .ba-image {
-  width: 100cqw;
+  width: 100vw;
+  max-width: 900px;
 }
 
-.ba-slider-container { container-type: inline-size; }
+@media (max-width: 932px) {
+  .after-image-wrapper .ba-image {
+    width: calc(100vw - 2rem);
+  }
+}
 
 .ba-label {
   position: absolute;
-  bottom: 1rem;
-  padding: 0.4rem 0.7rem;
-  background: rgba(10, 24, 41, 0.78);
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
-  color: #ffffff;
-  font-family: var(--font-display);
-  font-size: 0.75rem;
+  bottom: 1.5rem;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
   text-transform: uppercase;
-  border-radius: var(--r-sm);
+  letter-spacing: 1px;
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
   pointer-events: none;
   z-index: 4;
-  max-width: calc(50% - 1.5rem);
-  line-height: 1.3;
 }
 
-/* Opposite corners so the two labels can never collide at narrow widths. */
-.ba-label-before { top: 1rem; right: 1rem; bottom: auto; }
-.ba-label-after { left: 1rem; }
+.ba-label-before {
+  left: 1.5rem;
+}
+
+.ba-label-after {
+  right: 1.5rem;
+}
 
 .ba-slider-handle-line {
   position: absolute;
   top: 0;
   bottom: 0;
   width: 2px;
-  background-color: #ffffff;
+  background-color: #fff;
   z-index: 3;
   pointer-events: none;
   transform: translateX(-50%);
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .ba-slider-handle {
@@ -98,20 +103,20 @@
   transform: translate(-50%, -50%);
   width: 48px;
   height: 48px;
-  background-color: var(--rust-500);
-  color: #ffffff;
-  border: 3px solid #ffffff;
+  background-color: var(--accent, #708269);
+  color: #fff;
+  border: 3px solid #fff;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 20px -6px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   pointer-events: none;
 }
 
 .ba-handle-arrows {
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: 1.1rem;
+  font-weight: 800;
   letter-spacing: -2px;
 }
 
@@ -131,13 +136,6 @@ input[type="range"].ba-slider-input {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
-}
-
-input[type="range"].ba-slider-input:focus-visible {
-  opacity: 1 !important;
-  outline: 3px solid var(--focus);
-  outline-offset: -3px;
-  background: transparent !important;
 }
 
 input[type="range"].ba-slider-input::-webkit-slider-runnable-track {
@@ -165,29 +163,4 @@ input[type="range"].ba-slider-input::-moz-range-thumb {
   border: none !important;
   cursor: ew-resize !important;
   box-shadow: none !important;
-}
-
-.ba-legend {
-  display: none;
-  flex-wrap: wrap;
-  gap: 0.5rem 1.25rem;
-  padding: 0.85rem 0.25rem 0;
-  font-size: 0.8125rem;
-  font-weight: 500;
-  color: var(--text-2);
-}
-
-.ba-legend span { display: inline-flex; align-items: center; gap: 0.45rem; }
-
-.ba-legend-swatch {
-  width: 10px;
-  height: 10px;
-  border-radius: 2px;
-}
-.ba-legend-after { background: var(--rust-500); }
-.ba-legend-before { background: var(--navy-900); }
-
-@media (max-width: 560px) {
-  .ba-label { display: none; }
-  .ba-legend { display: flex; }
 }

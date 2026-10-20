@@ -59,12 +59,6 @@ export default function BeforeAfterSlider({
           aria-label="Before and After comparison slider"
         />
       </div>
-      {/* On narrow screens the overlay labels have no room, so the legend
-          moves under the image. */}
-      <div className="ba-legend" aria-hidden="true">
-        <span><i className="ba-legend-swatch ba-legend-after" />{afterLabel}</span>
-        <span><i className="ba-legend-swatch ba-legend-before" />{beforeLabel}</span>
-      </div>
     </div>
   );
 }

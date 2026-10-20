@@ -1,168 +1,165 @@
-.services {
-  background-color: var(--secondary);
-  padding: 4rem 0;
+/* ==========================================================================
+   SERVICES
+   Segmented control for residential / commercial, then an asymmetric
+   two-column grid (7/5 then 5/7) of image-led cards. The whole card is one
+   button so the tap target is the full tile.
+   ========================================================================== */
+.services { position: relative; }
+
+.services-head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.services-head .section-head { margin-bottom: 1.5rem; }
+
+.services-tabs {
+  display: inline-flex;
+  padding: 4px;
+  gap: 4px;
+  background: var(--sand);
+  border-radius: calc(var(--r-sm) + 4px);
+}
+
+.services-tab {
+  min-height: 44px;
+  padding: 0 1.25rem;
+  border: 0;
+  border-radius: var(--r-sm);
+  background: transparent;
+  color: var(--text-2);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--dur) var(--ease-out), color var(--dur-fast) ease, box-shadow var(--dur) var(--ease-out);
+}
+
+.services-tab:hover { color: var(--text); }
+
+.services-tab.is-active {
+  background: var(--navy-900);
+  color: #ffffff;
+  box-shadow: 0 6px 16px -8px rgba(10, 24, 41, 0.6);
 }
 
 .services-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
-  margin-top: 2.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
 }
 
 .service-card {
-  background: var(--card-bg, #fcfbfa);
-  border: 2px solid #3d2b1f !important;
-  border-radius: 14px;
-  box-shadow: 0 10px 30px rgba(43, 30, 22, 0.15);
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
-              box-shadow 0.5s ease, 
-              border-color 0.4s ease !important;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1);
   overflow: hidden;
+  transition: transform var(--dur-slow) var(--ease-out), box-shadow var(--dur-slow) var(--ease-out);
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-2);
+}
+
+.service-card-hit {
   display: flex;
   flex-direction: column;
   width: 100%;
-  perspective: 1000px;
-  transform-style: preserve-3d;
-  will-change: transform, box-shadow;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
 }
 
-@media (min-width: 640px) {
-  .service-card {
-    width: calc(50% - 1rem);
-  }
-}
-
-@media (min-width: 1024px) {
-  .service-card {
-    width: calc(33.333% - 1.34rem);
-  }
-}
-
-/* 3D FLIP TILT EFFECT ON HOVER */
-.service-card:hover {
-  transform: translateY(-10px) rotateY(-4deg) rotateX(4deg) scale(1.02) !important;
-  border-color: #7c5235 !important;
-  box-shadow: 0 24px 50px rgba(43, 30, 22, 0.35) !important;
+.service-card-hit:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: -2px;
+  border-radius: var(--r-lg);
 }
 
 .service-image {
   position: relative;
-  height: 220px;
+  aspect-ratio: 16 / 10;
   overflow: hidden;
+  background: var(--limestone);
 }
 
 .service-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 1.1s var(--ease-out);
 }
 
-.service-card:hover .service-image img {
-  transform: scale(1.08);
-}
-
-.service-icon-overlay {
+.service-image::after {
+  content: '';
   position: absolute;
-  bottom: -20px;
-  right: 20px;
-  background: linear-gradient(135deg, #09090b 0%, #2b1e16 50%, #5c4033 100%) !important;
-  color: white;
-  width: 50px;
-  height: 50px;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(15, 34, 56, 0) 60%, rgba(15, 34, 56, 0.28) 100%);
+  pointer-events: none;
+}
+
+.service-card:hover .service-image img { transform: scale(1.04); }
+
+.service-body {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 12px;
-  border: 1.5px solid #7c5235 !important;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+  flex-direction: column;
+  flex: 1;
+  padding: 1.5rem 1.5rem 1.4rem;
 }
 
-.service-card-content {
-  padding: 2.5rem 2rem;
-  text-align: left;
+.service-body h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.6rem;
 }
 
-.service-card h3 {
-  font-size: 1.4rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: var(--text-dark);
-}
-
-.service-card p {
-  color: var(--text-light);
-  font-size: 0.95rem;
+.service-body p {
+  font-size: 0.9875rem;
   line-height: 1.6;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 
-/* Brown & Black Ombre Inquire Button */
 .service-link {
-  background: linear-gradient(90deg, #09090b 0%, #2b1e16 35%, #5c4033 70%, #09090b 100%) !important;
-  background-size: 250% 100% !important;
-  background-position: 0% 0% !important;
-  color: #ffffff !important;
-  border: 1.5px solid #7c5235 !important;
-  padding: 0.65rem 1.4rem !important;
-  border-radius: 8px !important;
-  font-weight: 800;
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
-  transition: background-position 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
-              transform 0.3s ease, 
-              box-shadow 0.3s ease, 
-              border-color 0.3s ease !important;
+  gap: 0.35rem;
+  margin-top: auto;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--accent);
 }
 
-.service-card:hover .service-link,
-.service-link:hover {
-  background-position: 100% 0% !important;
-  border-color: #a06d44 !important;
-  transform: translateX(4px) scale(1.03) !important;
-  box-shadow: 0 8px 20px rgba(124, 82, 53, 0.45) !important;
+.service-link svg {
+  transition: transform var(--dur) var(--ease-out);
 }
 
-.services-tabs {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 2rem;
-  margin-bottom: 3rem;
-  flex-wrap: wrap;
+.service-card:hover .service-link svg { transform: translate(3px, -3px); }
+
+@media (min-width: 720px) {
+  .services-grid {
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1.5rem;
+  }
+  .service-card:nth-child(4n + 1),
+  .service-card:nth-child(4n + 4) { grid-column: span 7; }
+  .service-card:nth-child(4n + 2),
+  .service-card:nth-child(4n + 3) { grid-column: span 5; }
+  .service-body { padding: 1.75rem 1.75rem 1.6rem; }
 }
 
-/* Services Category Tab Switcher with Brown & Black Ombre */
-.services-tab-btn {
-  background: linear-gradient(90deg, #09090b 0%, #2b1e16 35%, #5c4033 70%, #09090b 100%) !important;
-  background-size: 250% 100% !important;
-  background-position: 0% 0% !important;
-  color: #ffffff !important;
-  border: 2px solid #7c5235 !important;
-  padding: 0.85rem 2.2rem;
-  font-size: 1.05rem;
-  font-weight: 800;
-  border-radius: 9999px !important;
-  cursor: pointer;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3) !important;
-  transition: background-position 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
-              transform 0.3s ease, 
-              border-color 0.3s ease, 
-              box-shadow 0.3s ease !important;
-  outline: none;
-}
-
-.services-tab-btn:hover, .services-tab-btn.active {
-  background-position: 100% 0% !important;
-  border-color: #a06d44 !important;
-  transform: translateY(-3px) scale(1.03) !important;
-  box-shadow: 0 12px 30px rgba(124, 82, 53, 0.5) !important;
-  color: #ffffff !important;
+@media (min-width: 960px) {
+  .services-head {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  .services-head .section-head { margin-bottom: 0; }
+  .services-tabs { margin-bottom: 0.35rem; }
 }

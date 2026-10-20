@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { CheckCircle2, Phone, Home, Image as ImageIcon } from 'lucide-react'
+import { Check, Phone, ArrowRight } from 'lucide-react'
 import { useLanguage } from '../context/LanguageContext'
 import './ThankYouPage.css'
 
@@ -10,58 +10,51 @@ function ThankYouPage({ submittedService, submittedName, onReturnHome, onGoGalle
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
+  const title = submittedName
+    ? t('tyTitleNamed').replace('{name}', submittedName)
+    : t('tyTitle');
+
   return (
-    <div className="thank-you-page">
-      <div className="container">
+    <main className="thank-you">
+      <div className="container thank-you-inner">
         <div className="thank-you-card">
-          <div className="thank-you-card-logo-bg"></div>
-          <div className="thank-you-icon-wrapper">
-            <CheckCircle2 size={72} className="check-icon" />
-          </div>
-
-          <span className="thank-you-badge">Inquiry Submitted Successfully</span>
-
-          <h1 className="thank-you-title">
-            {submittedName ? `Thank You, ${submittedName}!` : 'Thank You! Your Request Has Been Received.'}
-          </h1>
-
-          <p className="thank-you-subtitle">
-            Our estimation team at <strong>Solid State Construction</strong> has logged your request. 
-            Shaan or a senior project manager will reach out within 24 hours to discuss your project details and schedule a walkthrough.
-          </p>
+          <span className="thank-you-check" aria-hidden="true">
+            <Check size={26} strokeWidth={2.25} />
+          </span>
+          <p className="eyebrow">{t('tyBadge')}</p>
+          <h1>{title}</h1>
+          <p className="lede">{t('tyBody')}</p>
 
           {submittedService && (
-            <div className="submitted-details-box">
-              <span className="details-label">Requested Service Category:</span>
-              <span className="details-value">{submittedService}</span>
-            </div>
+            <dl className="thank-you-service">
+              <dt>{t('tyServiceLabel')}</dt>
+              <dd>{submittedService}</dd>
+            </dl>
           )}
 
-          <div className="emergency-callout-box">
-            <div className="callout-header">
-              <Phone size={22} className="phone-icon" />
-              <h3>Need Immediate Assistance or 24/7 Emergency Response?</h3>
+          <div className="thank-you-emergency">
+            <div>
+              <h2>{t('tyEmergencyTitle')}</h2>
+              <p>{t('tyEmergencyBody')}</p>
             </div>
-            <p>Skip the wait and speak directly to our team right now:</p>
-            <a href="tel:512-595-2332" className="btn btn-emergency-call">
-              <Phone size={18} />
-              Call Now: (512) 595-2332
+            <a href="tel:512-595-2332" className="btn btn-primary">
+              <Phone size={18} strokeWidth={1.75} />
+              {t('tyCall')}
             </a>
           </div>
 
           <div className="thank-you-actions">
-            <button onClick={onReturnHome} className="btn btn-primary">
-              <Home size={18} />
-              Return to Home Page
+            <button type="button" onClick={onReturnHome} className="btn btn-outline">
+              {t('tyHome')}
             </button>
-            <button onClick={onGoGallery} className="btn btn-secondary">
-              <ImageIcon size={18} />
-              View Project Gallery
+            <button type="button" onClick={onGoGallery} className="link-arrow">
+              {t('tyGallery')}
+              <ArrowRight size={18} strokeWidth={1.75} />
             </button>
           </div>
         </div>
       </div>
-    </div>
+    </main>
   )
 }
 

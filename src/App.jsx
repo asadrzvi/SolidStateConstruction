@@ -15,12 +15,9 @@ import ProcessTimeline from './components/ProcessTimeline'
 import ServiceAreas from './components/ServiceAreas'
 import FAQSection from './components/FAQSection'
 import Contact from './components/Contact'
-import MapSection from './components/MapSection'
 import Footer from './components/Footer'
 import QuoteModal from './components/QuoteModal'
 import ThankYouPage from './components/ThankYouPage'
-import SplitLogoSection from './components/SplitLogoSection'
-import IntroOverlay from './components/IntroOverlay'
 import PrivacyPolicy from './components/PrivacyPolicy'
 
 // `initialPage` is supplied by the prerenderer (entry-server.jsx), which has no
@@ -112,7 +109,7 @@ function App({ initialPage = 'home' }) {
     setSubmittedName(name || '');
     setIsQuoteModalOpen(false);
     setCurrentPage('thank-you');
-    
+
     // Swap the URL FIRST. The Google Ads conversion action is destination-based
     // ("Page load .../thank-you"), so it matches on page_location - the
     // page_view must be sent after location.href already reads /thank-you.
@@ -151,57 +148,56 @@ function App({ initialPage = 'home' }) {
 
   return (
     <div className="app">
-      <IntroOverlay />
+      <a href="#main" className="skip-link">Skip to content</a>
 
       <Navbar
-        onOpenQuote={() => setIsQuoteModalOpen(true)} 
+        onOpenQuote={() => setIsQuoteModalOpen(true)}
         currentPage={currentPage}
         onPageChange={handlePageChange}
       />
-      
-      {currentPage === 'home' ? (
-        <>
-          <Hero onOpenQuote={() => setIsQuoteModalOpen(true)} />
-          <SplitLogoSection />
-          <About />
-          <Services 
-            onServiceSelect={setSelectedService} 
-            onPrefillMessage={setPrefilledMessage}
-            onOpenQuote={() => setIsQuoteModalOpen(true)}
+
+      <div id="main">
+        {currentPage === 'home' ? (
+          <>
+            <Hero onOpenQuote={() => setIsQuoteModalOpen(true)} />
+            <About />
+            <Services
+              onServiceSelect={setSelectedService}
+              onPrefillMessage={setPrefilledMessage}
+              onOpenQuote={() => setIsQuoteModalOpen(true)}
+            />
+            <ProcessTimeline
+              onServiceSelect={setSelectedService}
+              onPrefillMessage={setPrefilledMessage}
+              onOpenQuote={() => setIsQuoteModalOpen(true)}
+            />
+            <ServiceAreas />
+            <FAQSection />
+            <Contact
+              initialService={selectedService}
+              initialMessage={prefilledMessage}
+              onInquirySubmitted={handleInquirySubmitted}
+            />
+          </>
+        ) : currentPage === 'gallery' ? (
+          <GalleryPage />
+        ) : currentPage === 'privacy-policy' ? (
+          <PrivacyPolicy onReturnHome={() => handlePageChange('home')} />
+        ) : (
+          <ThankYouPage
+            submittedService={submittedService}
+            submittedName={submittedName}
+            onReturnHome={() => handlePageChange('home')}
+            onGoGallery={() => handlePageChange('gallery')}
           />
-          <ProcessTimeline 
-            onServiceSelect={setSelectedService} 
-            onPrefillMessage={setPrefilledMessage}
-            onOpenQuote={() => setIsQuoteModalOpen(true)}
-          />
-          <ServiceAreas />
-          <FAQSection />
-          <Contact 
-            initialService={selectedService} 
-            initialMessage={prefilledMessage} 
-            onInquirySubmitted={handleInquirySubmitted}
-          />
-          {/* MapSection moved to the end per user request */}
-          <MapSection />
-        </>
-      ) : currentPage === 'gallery' ? (
-        <GalleryPage />
-      ) : currentPage === 'privacy-policy' ? (
-        <PrivacyPolicy onReturnHome={() => handlePageChange('home')} />
-      ) : (
-        <ThankYouPage
-          submittedService={submittedService}
-          submittedName={submittedName}
-          onReturnHome={() => handlePageChange('home')}
-          onGoGallery={() => handlePageChange('gallery')}
-        />
-      )}
+        )}
+      </div>
 
       <Footer onPageChange={handlePageChange} />
-      
-      <QuoteModal 
-        isOpen={isQuoteModalOpen} 
-        onClose={() => setIsQuoteModalOpen(false)} 
+
+      <QuoteModal
+        isOpen={isQuoteModalOpen}
+        onClose={() => setIsQuoteModalOpen(false)}
         initialService={selectedService}
         onInquirySubmitted={handleInquirySubmitted}
         onDetailedEstimate={(service, message) => {
@@ -209,7 +205,6 @@ function App({ initialPage = 'home' }) {
           setPrefilledMessage(message);
           setIsQuoteModalOpen(false);
           setCurrentPage('home');
-          // Scroll to contact form
           setTimeout(() => {
             const contactSection = document.getElementById('contact');
             if (contactSection) {

@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react'
+import { useLanguage } from '../context/LanguageContext'
 import './PrivacyPolicy.css'
 
 function PrivacyPolicy({ onReturnHome }) {
+  const { t } = useLanguage();
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' })
   }, [])
 
   return (
-    <div className="privacy-page">
+    <main className="privacy-page">
       <div className="container privacy-container">
         <h1>Privacy Policy</h1>
         <p className="privacy-updated">Last updated: August 25, 2026</p>
@@ -57,7 +60,7 @@ function PrivacyPolicy({ onReturnHome }) {
           services use cookies and similar technologies to collect
           information such as pages visited, general location, device type,
           and whether a form was submitted. This data is aggregated and used
-          for analytics and ad performance measurement — it is not used to
+          for analytics and ad performance measurement. It is not used to
           personally identify you outside of these platforms. You can opt out
           of Google Analytics tracking using Google's{' '}
           <a
@@ -113,12 +116,12 @@ function PrivacyPolicy({ onReturnHome }) {
         </p>
 
         {onReturnHome && (
-          <button className="btn btn-primary privacy-back-btn" onClick={onReturnHome}>
-            Return to Home Page
+          <button type="button" className="btn btn-outline privacy-back-btn" onClick={onReturnHome}>
+            {t('privacyBack')}
           </button>
         )}
       </div>
-    </div>
+    </main>
   )
 }
 

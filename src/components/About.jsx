@@ -1,62 +1,57 @@
 import React from 'react'
 import { useLanguage } from '../context/LanguageContext'
+import Reveal from './Reveal'
 import './About.css'
 
 function About() {
   const { t } = useLanguage();
+  const items = ['aboutCoreItem1', 'aboutCoreItem2', 'aboutCoreItem3', 'aboutCoreItem4', 'aboutCoreItem5', 'aboutCoreItem6'];
 
   return (
-    <section className="about" id="about">
-      <div className="container">
-        <h2 className="section-title">{t('aboutTitle')}</h2>
-        <div className="about-content">
-          <div className="about-text">
-            <h3>{t('aboutSubtitle')}</h3>
-            <p>{t('aboutP1')}</p>
-            
-            <div className="work-summary">
-              <h4>{t('aboutCoreTitle')}</h4>
-              <ul className="work-list">
-                <li>{t('aboutCoreItem1')}</li>
-                <li>{t('aboutCoreItem2')}</li>
-                <li>{t('aboutCoreItem3')}</li>
-                <li>{t('aboutCoreItem4')}</li>
-                <li>{t('aboutCoreItem5')}</li>
-                <li>{t('aboutCoreItem6')}</li>
-              </ul>
-            </div>
+    <section className="about" id="about" aria-labelledby="about-title">
+      <div className="container about-grid">
+        <div className="about-copy">
+          <Reveal>
+            <p className="eyebrow">{t('aboutEyebrow')}</p>
+            <h2 id="about-title">{t('aboutTitle')}</h2>
+            <p className="lede">{t('aboutP1')}</p>
+          </Reveal>
 
-            <p>{t('aboutLocation')}</p>
-          </div>
-          
-          <div className="about-stats">
-            <div className="stat-item">
-              <span className="stat-number">{t('aboutStat1Num')}</span>
-              <span className="stat-label">{t('aboutStat1Lbl')}</span>
-            </div>
-            <div className="stat-item">
-              <span className="stat-number">{t('aboutStat2Num')}</span>
-              <span className="stat-label">{t('aboutStat2Lbl')}</span>
-            </div>
-            <div className="stat-item">
-              <span className="stat-number">{t('aboutStat3Num')}</span>
-              <span className="stat-label">{t('aboutStat3Lbl')}</span>
-            </div>
-          </div>
+          <Reveal className="about-list-wrap" delay={80}>
+            <h3 className="about-list-title">{t('aboutCoreTitle')}</h3>
+            <ul className="about-list">
+              {items.map((k) => (
+                <li key={k}>{t(k)}</li>
+              ))}
+            </ul>
+          </Reveal>
+
+          <Reveal delay={120}>
+            <p className="about-location">{t('aboutLocation')}</p>
+          </Reveal>
         </div>
 
-        <div className="founder-spotlight">
-          <div className="founder-image-container">
-            <img src="/images/shaan_the_dawn.webp" alt="Shaan - Founder of Solid State Construction" className="founder-image" loading="lazy" decoding="async" />
+        <Reveal as="figure" className="about-founder" delay={160}>
+          <div className="about-founder-photo">
+            <img
+              src="/images/shaan_the_dawn.webp"
+              alt={`${t('aboutFounderName')}, ${t('aboutFounderRole')}`}
+              loading="lazy"
+              decoding="async"
+              width="800"
+              height="1000"
+            />
           </div>
-          <div className="founder-info">
-            <h3>{t('aboutFounderTitle')}</h3>
-            <p>
-              "{t('aboutFounderQuote')}"
-            </p>
-            <p className="founder-signature">{t('aboutFounderSignature')}</p>
-          </div>
-        </div>
+          <figcaption className="about-founder-caption">
+            <blockquote>
+              <p>{t('aboutFounderQuote')}</p>
+            </blockquote>
+            <div className="about-founder-name">
+              <strong>{t('aboutFounderName')}</strong>
+              <span>{t('aboutFounderRole')}</span>
+            </div>
+          </figcaption>
+        </Reveal>
       </div>
     </section>
   )

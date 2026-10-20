@@ -1,103 +1,89 @@
-.service-areas-section {
-  padding: 5rem 0;
-  background-color: var(--bg-alt);
-  border-top: 1px solid var(--card-border);
-}
+/* ==========================================================================
+   SERVICE AREAS
+   Typographic city list on the left, the Google Map in a framed panel on
+   the right. Replaces the six identical pin cards and the separate map
+   section at the foot of the page.
+   ========================================================================== */
+.areas { background: var(--bg); }
 
 .areas-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  margin-top: 3rem;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: start;
 }
 
-.area-card {
-  background: linear-gradient(135deg, #fcfbfa 0%, #f7f3ed 50%, #eee6dc 100%) !important;
-  border: 2px solid #3d2b1f !important;
-  padding: 1.6rem 2rem;
-  border-radius: 20px !important;
+.areas-copy .lede { margin-bottom: 2rem; }
+
+.areas-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--hairline);
+}
+
+.areas-list li {
   display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  box-shadow: 0 10px 30px rgba(43, 30, 22, 0.15);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-              border-color 0.3s ease, 
-              box-shadow 0.3s ease !important;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--hairline);
 }
 
-.area-card:hover {
-  transform: translateY(-5px) scale(1.02) !important;
-  border-color: #7c5235 !important;
-  box-shadow: 0 18px 40px rgba(43, 30, 22, 0.28) !important;
+.areas-city {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--text);
 }
 
-.area-icon-wrapper {
-  background: linear-gradient(135deg, #09090b 0%, #2b1e16 50%, #5c4033 100%) !important;
-  color: #ffffff !important;
-  border: 1.5px solid #7c5235 !important;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
+.areas-note {
+  font-size: 0.875rem;
+  color: var(--text-3);
+}
+
+.areas-map-frame {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  border: 1px solid var(--hairline);
+  background: var(--limestone);
+  box-shadow: var(--shadow-1);
+}
+
+.areas-map-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: saturate(0.85) contrast(1.02);
+}
+
+.areas-map-foot {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease, border-color 0.3s ease;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  padding: 0.9rem 0.25rem 0;
 }
 
-.area-card:hover .area-icon-wrapper {
-  transform: scale(1.1);
-  border-color: #a06d44 !important;
+.areas-map-address {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-2);
 }
 
-.area-info h3 {
-  font-size: 1.2rem;
-  font-weight: 800;
-  margin: 0 0 0.4rem 0;
-  color: var(--text-dark) !important;
-}
-
-.area-tag {
-  font-size: 0.78rem;
-  color: #ffffff !important;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  font-weight: 800;
-  padding: 0.35rem 0.9rem;
-  border-radius: 9999px !important;
-  display: inline-block;
-  background: linear-gradient(90deg, #09090b 0%, #2b1e16 35%, #5c4033 70%, #09090b 100%) !important;
-  background-size: 250% 100% !important;
-  background-position: 0% 0% !important;
-  border: 1.5px solid #7c5235 !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
-  transition: background-position 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
-              transform 0.3s ease, 
-              border-color 0.3s ease !important;
-}
-
-.area-card:hover .area-tag,
-.area-tag:hover {
-  background-position: 100% 0% !important;
-  border-color: #a06d44 !important;
-  transform: translateY(-1px) scale(1.03) !important;
-}
-
-/* Explicit Dark Mode Overrides */
-[data-theme='dark'] .service-areas-section {
-  background-color: #0c0e0b !important;
-  border-color: #2c3629 !important;
-}
-
-[data-theme='dark'] .area-card {
-  background-color: #181e17 !important;
-  border-color: #2c3629 !important;
-}
-
-[data-theme='dark'] .area-info h3 {
-  color: #ffffff !important;
-}
-
-[data-theme='dark'] .area-tag {
-  color: #e2e8df !important;
+@media (min-width: 960px) {
+  .areas-grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(3rem, 6vw, 6rem);
+  }
+  .areas-map-frame { aspect-ratio: 16 / 11; }
 }

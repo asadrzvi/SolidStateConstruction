@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from 'react'
+import { Phone, Mail, MapPin, Clock, ArrowUpRight } from 'lucide-react'
 import { useLanguage } from '../context/LanguageContext'
+import Reveal from './Reveal'
 import './Contact.css'
 
 const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "700a045a-9c7d-409d-ba90-8133f2c3b3a1";
+
+const STANDARD_SERVICES = [
+  "Water Remediation", "Concrete & Foundation", "Roofing Services", "Plumbing Services", "Excavation Services",
+  "Residential Water Mitigation", "Home Plumbing Services", "Residential Roofing", "Driveways & Patios",
+  "Commercial Water Restoration", "Commercial Concrete & Foundations", "Commercial Roofing", "Site Prep & Heavy Excavation"
+];
 
 function Contact({ initialService, initialMessage, onInquirySubmitted }) {
   const { t } = useLanguage();
@@ -18,15 +26,8 @@ function Contact({ initialService, initialMessage, onInquirySubmitted }) {
   const [status, setStatus] = useState('')
 
   useEffect(() => {
-    if (initialService) {
-      const standardServices = [
-        "Water Remediation", "Concrete & Foundation", "Roofing Services", "Plumbing Services", "Excavation Services",
-        "Residential Water Mitigation", "Home Plumbing Services", "Residential Roofing", "Driveways & Patios",
-        "Commercial Water Restoration", "Commercial Concrete & Foundations", "Commercial Roofing", "Site Prep & Heavy Excavation"
-      ];
-      if (standardServices.includes(initialService)) {
-        setFormData(prev => ({ ...prev, service: initialService }));
-      }
+    if (initialService && STANDARD_SERVICES.includes(initialService)) {
+      setFormData(prev => ({ ...prev, service: initialService }));
     }
   }, [initialService]);
 
@@ -43,8 +44,8 @@ function Contact({ initialService, initialMessage, onInquirySubmitted }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    // Honeypot check: If bot filled out hidden field, block silently
+
+    // Honeypot check: if a bot filled the hidden field, pretend it worked.
     if (formData.botcheck) {
       setStatus('success');
       return;
@@ -76,7 +77,7 @@ function Contact({ initialService, initialMessage, onInquirySubmitted }) {
         if (onInquirySubmitted) {
           onInquirySubmitted(formData.service, formData.name);
         }
-        setFormData({ name: '', phone: '', email: '', address: '', service: 'Concrete & Foundation', message: '' });
+        setFormData({ name: '', phone: '', email: '', address: '', service: 'Concrete & Foundation', message: '', botcheck: '' });
       } else {
         setStatus('error');
       }
@@ -87,74 +88,119 @@ function Contact({ initialService, initialMessage, onInquirySubmitted }) {
   };
 
   return (
-    <section className="contact" id="contact">
-      <div className="container">
-        <h2 className="section-title">{t('contactTitle')}</h2>
-        <p className="section-subtitle">{t('contactSubtitle')}</p>
-        <div className="contact-card">
+    <section className="contact" id="contact" aria-labelledby="contact-title">
+      <div className="container contact-grid">
+        <div className="contact-copy">
+          <Reveal>
+            <p className="eyebrow">{t('contactEyebrow')}</p>
+            <h2 id="contact-title">{t('contactTitle')}</h2>
+            <p className="lede">{t('contactSubtitle')}</p>
+          </Reveal>
+
+          <Reveal as="dl" className="contact-details" delay={80}>
+            <div className="contact-detail">
+              <dt><Phone size={18} strokeWidth={1.75} />{t('contactPhoneLabel')}</dt>
+              <dd><a href="tel:512-595-2332" className="contact-phone num">(512) 595-2332</a></dd>
+            </div>
+            <div className="contact-detail">
+              <dt><Mail size={18} strokeWidth={1.75} />{t('contactEmailLabel')}</dt>
+              <dd><a href="mailto:contact@solidstatesconstruction.com">contact@solidstatesconstruction.com</a></dd>
+            </div>
+            <div className="contact-detail">
+              <dt><MapPin size={18} strokeWidth={1.75} />{t('contactAddressLabel')}</dt>
+              <dd>1101 Halsey Drive, Leander, TX 78641</dd>
+            </div>
+            <div className="contact-detail">
+              <dt><Clock size={18} strokeWidth={1.75} />{t('contactHoursLabel')}</dt>
+              <dd>{t('contactHours')}</dd>
+            </div>
+          </Reveal>
+
+          <Reveal className="contact-sched" delay={120}>
+            <span>{t('schedCtaText')}</span>
+            <a href="https://calendly.com/solidstatesconstruction-info" target="_blank" rel="noopener noreferrer" className="link-arrow">
+              {t('schedCtaBtn')}
+              <ArrowUpRight size={18} strokeWidth={1.75} />
+            </a>
+          </Reveal>
+        </div>
+
+        <Reveal className="contact-card" delay={100}>
           {status === 'success' ? (
-            <div className="success-message">
+            <div className="contact-success" role="status">
               <h3>{t('formSuccessTitle')}</h3>
               <p>{t('formSuccessMsg')}</p>
-              <button className="btn btn-primary" onClick={() => setStatus('')}>{t('formSuccessBtn')}</button>
+              <button type="button" className="btn btn-outline" onClick={() => setStatus('')}>{t('formSuccessBtn')}</button>
             </div>
           ) : (
-            <form className="contact-form" onSubmit={handleSubmit}>
-              {/* Honeypot field for anti-spam */}
-              <input 
-                type="checkbox" 
-                name="botcheck" 
-                className="hidden" 
-                style={{ display: 'none' }} 
+            <form className="contact-form" onSubmit={handleSubmit} noValidate={false}>
+              {/* Honeypot field for anti-spam. Must stay a checkbox named botcheck. */}
+              <input
+                type="checkbox"
+                name="botcheck"
+                className="hidden"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                style={{ display: 'none' }}
                 onChange={(e) => setFormData(prev => ({ ...prev, botcheck: e.target.checked }))}
               />
-              <div className="form-group">
-                <label>{t('formName')}</label>
-                <input 
-                  type="text" 
+              <div className="field">
+                <label htmlFor="c-name">{t('formName')}</label>
+                <input
+                  id="c-name"
+                  type="text"
                   name="name"
+                  autoComplete="name"
                   value={formData.name}
                   onChange={handleChange}
-                  placeholder="John Doe" 
+                  placeholder={t('formNamePh')}
                   required
                 />
               </div>
-              <div className="form-group">
-                <label>{t('formPhone')}</label>
-                <input 
-                  type="tel" 
+              <div className="field">
+                <label htmlFor="c-phone">{t('formPhone')}</label>
+                <input
+                  id="c-phone"
+                  type="tel"
                   name="phone"
+                  autoComplete="tel"
                   value={formData.phone}
                   onChange={handleChange}
-                  placeholder="(512) 000-0000" 
+                  placeholder={t('formPhonePh')}
                   required
                 />
               </div>
-              <div className="form-group">
-                <label>{t('formEmail')}</label>
-                <input 
-                  type="email" 
+              <div className="field">
+                <label htmlFor="c-email">{t('formEmail')}</label>
+                <input
+                  id="c-email"
+                  type="email"
                   name="email"
+                  autoComplete="email"
                   value={formData.email}
                   onChange={handleChange}
-                  placeholder="name@email.com" 
+                  placeholder={t('formEmailPh')}
                   required
                 />
               </div>
-              <div className="form-group">
-                <label>{t('formAddress')}</label>
-                <input 
-                  type="text" 
+              <div className="field">
+                <label htmlFor="c-address">{t('formAddress')}</label>
+                <input
+                  id="c-address"
+                  type="text"
                   name="address"
+                  autoComplete="street-address"
                   value={formData.address}
                   onChange={handleChange}
-                  placeholder="123 Main St, Austin, TX" 
+                  placeholder={t('formAddressPh')}
                   required
                 />
               </div>
-              <div className="form-group full-width">
-                <label>{t('formService')}</label>
-                <select 
+              <div className="field full-width">
+                <label htmlFor="c-service">{t('formService')}</label>
+                <select
+                  id="c-service"
                   name="service"
                   value={formData.service}
                   onChange={handleChange}
@@ -166,9 +212,10 @@ function Contact({ initialService, initialMessage, onInquirySubmitted }) {
                   <option>Excavation Services</option>
                 </select>
               </div>
-              <div className="form-group full-width">
-                <label>{t('formMsg')}</label>
-                <textarea 
+              <div className="field full-width">
+                <label htmlFor="c-message">{t('formMsg')}</label>
+                <textarea
+                  id="c-message"
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
@@ -176,27 +223,16 @@ function Contact({ initialService, initialMessage, onInquirySubmitted }) {
                   required
                 ></textarea>
               </div>
-              <button type="submit" className="btn btn-primary" disabled={status === 'sending'}>
-                {status === 'sending' ? t('formSending') : t('formSubmit')}
-              </button>
-              {status === 'error' && <p className="error-text">{t('formError')}</p>}
+              <div className="contact-actions full-width">
+                <button type="submit" className="btn btn-primary btn-lg" disabled={status === 'sending'}>
+                  {status === 'sending' ? t('formSending') : t('formSubmit')}
+                </button>
+                <span className="contact-privacy">{t('formPrivacy')}</span>
+              </div>
+              {status === 'error' && <p className="contact-error full-width" role="alert">{t('formError')}</p>}
             </form>
           )}
-
-          {status !== 'success' && (
-            <>
-              <div className="scheduler-separator">
-                <span>{t('schedSeparator')}</span>
-              </div>
-              <div className="scheduler-cta">
-                <p>{t('schedCtaText')}</p>
-                <a href="https://calendly.com/solidstatesconstruction-info" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
-                  {t('schedCtaBtn')}
-                </a>
-              </div>
-            </>
-          )}
-        </div>
+        </Reveal>
       </div>
     </section>
   )

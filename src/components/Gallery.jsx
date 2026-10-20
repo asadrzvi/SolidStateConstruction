@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { X, ChevronLeft, ChevronRight, Play, Video } from 'lucide-react'
+import { X, ChevronLeft, ChevronRight, Play } from 'lucide-react'
+import { useLanguage } from '../context/LanguageContext'
 import './Gallery.css'
 
 // WebP throughout, except job2 where WebP came out larger than the source JPEG.
@@ -53,6 +54,7 @@ const media = [
 ]
 
 function Gallery() {
+  const { t } = useLanguage()
   const [lightbox, setLightbox] = useState({ isOpen: false, index: 0 })
   const gridRef = useRef(null)
 
@@ -129,9 +131,9 @@ function Gallery() {
   return (
     <section className="gallery-section" id="gallery">
       <div className="container">
-        <h2 className="section-title">Job Site Showcase</h2>
-        <p className="section-subtitle">Real project photos and site videos from recent residential and commercial work.</p>
-        
+        <h2 className="section-title">{t('galGridTitle')}</h2>
+        <p className="section-subtitle">{t('galGridSub')}</p>
+
         <div className="gallery-grid" ref={gridRef}>
           {media.map((item, idx) => (
             <div
@@ -139,6 +141,10 @@ function Gallery() {
               className="gallery-item"
               style={{ '--stagger': idx % 4 }}
               onClick={() => openLightbox(idx)}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(idx) } }}
+              role="button"
+              tabIndex={0}
+              aria-label={`${item.type === 'video' ? t('galPlayVideo') : t('galViewImage')}: ${item.alt}`}
             >
               {item.type === 'video' ? (
                 <div className="gallery-video-thumbnail">
@@ -160,12 +166,12 @@ function Gallery() {
                   </div>
                 </div>
               ) : (
-                <img src={item.src} alt={item.alt} loading="lazy" />
+                <img src={item.src} alt={item.alt} loading="lazy" decoding="async" />
               )}
-              <div className="gallery-overlay">
+              <div className="gallery-overlay" aria-hidden="true">
                 <div className="overlay-content">
                   {item.type === 'video' && <Play size={24} className="play-icon-overlay" />}
-                  <span>{item.type === 'video' ? 'Play Video' : 'View Image'}</span>
+                  <span>{item.type === 'video' ? t('galPlayVideo') : t('galViewImage')}</span>
                 </div>
               </div>
             </div>
@@ -174,13 +180,13 @@ function Gallery() {
       </div>
 
       {lightbox.isOpen && (
-        <div className="lightbox" onClick={closeLightbox}>
-          <button className="lightbox-close" onClick={closeLightbox}>
-            <X size={32} />
+        <div className="lightbox" onClick={closeLightbox} role="dialog" aria-modal="true" aria-label={media[lightbox.index].alt}>
+          <button className="lightbox-close" onClick={closeLightbox} aria-label="Close">
+            <X size={32} aria-hidden="true" />
           </button>
-          
-          <button className="lightbox-prev" onClick={prevImage}>
-            <ChevronLeft size={48} />
+
+          <button className="lightbox-prev" onClick={prevImage} aria-label="Previous">
+            <ChevronLeft size={48} aria-hidden="true" />
           </button>
           
           <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
@@ -204,8 +210,8 @@ function Gallery() {
             </div>
           </div>
           
-          <button className="lightbox-next" onClick={nextImage}>
-            <ChevronRight size={48} />
+          <button className="lightbox-next" onClick={nextImage} aria-label="Next">
+            <ChevronRight size={48} aria-hidden="true" />
           </button>
         </div>
       )}

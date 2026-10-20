@@ -19,15 +19,15 @@ function ThankYouPage({ submittedService, submittedName, onReturnHome, onGoGalle
             <CheckCircle2 size={72} className="check-icon" />
           </div>
 
-          <span className="thank-you-badge">Inquiry Submitted Successfully</span>
+          <span className="thank-you-badge">Request Received</span>
 
           <h1 className="thank-you-title">
-            {submittedName ? `Thank You, ${submittedName}!` : 'Thank You! Your Request Has Been Received.'}
+            {submittedName ? `Thank You, ${submittedName}!` : 'Thank You! We Have Your Request.'}
           </h1>
 
           <p className="thank-you-subtitle">
-            Our estimation team at <strong>Solid State Construction</strong> has logged your request. 
-            Shaan or a senior project manager will reach out within 24 hours to discuss your project details and schedule a walkthrough.
+            Your request has reached <strong>Solid State Construction</strong>.
+            Shaan or someone from our team will reach out within 24 hours to go over your project and schedule a walkthrough.
           </p>
 
           {submittedService && (
@@ -40,9 +40,9 @@ function ThankYouPage({ submittedService, submittedName, onReturnHome, onGoGalle
           <div className="emergency-callout-box">
             <div className="callout-header">
               <Phone size={22} className="phone-icon" />
-              <h3>Need Immediate Assistance or 24/7 Emergency Response?</h3>
+              <h3>Need Help Right Now?</h3>
             </div>
-            <p>Skip the wait and speak directly to our team right now:</p>
+            <p>For emergencies, skip the wait and call us directly:</p>
             <a href="tel:512-595-2332" className="btn btn-emergency-call">
               <Phone size={18} />
               Call Now: (512) 595-2332

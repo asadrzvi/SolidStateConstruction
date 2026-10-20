@@ -149,23 +149,29 @@ function Services({ onServiceSelect, onOpenQuote, onPrefillMessage }) {
 
         <div className="services-grid">
           {services.map((service, index) => (
-            <div 
-              className="service-card" 
+            <div
+              className="service-card"
               key={index}
               onClick={() => handleServiceClick(service)}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleServiceClick(service); } }}
+              role="button"
+              tabIndex={0}
               style={{ cursor: 'pointer' }}
             >
               <div className="service-image">
-                <img 
-                  src={service.image} 
+                <img
+                  src={service.image}
                   alt={t(service.titleKey)}
                   loading="lazy"
+                  decoding="async"
+                  width="940"
+                  height="619"
                   onError={(e) => {
-                    e.target.onerror = null; 
+                    e.target.onerror = null;
                     e.target.src="https://images.unsplash.com/photo-1503387762-592dea58ef23?auto=format&fit=crop&w=800&q=80"
                   }}
                 />
-                <div className="service-icon-overlay">{service.icon}</div>
+                <div className="service-icon-overlay" aria-hidden="true">{service.icon}</div>
               </div>
               <div className="service-card-content">
                 <h3>{t(service.titleKey)}</h3>

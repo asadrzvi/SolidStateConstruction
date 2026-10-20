@@ -70,7 +70,15 @@
     grid-column: span 1;
   }
   .contact-card {
-    padding: 2rem;
+    padding: 1.5rem 1.25rem;
+  }
+
+  .scheduler-cta {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .scheduler-cta .btn {
+    width: 100%;
   }
 }
 

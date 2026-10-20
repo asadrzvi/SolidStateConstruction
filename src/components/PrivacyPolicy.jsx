@@ -57,7 +57,7 @@ function PrivacyPolicy({ onReturnHome }) {
           services use cookies and similar technologies to collect
           information such as pages visited, general location, device type,
           and whether a form was submitted. This data is aggregated and used
-          for analytics and ad performance measurement — it is not used to
+          for analytics and ad performance measurement. It is not used to
           personally identify you outside of these platforms. You can opt out
           of Google Analytics tracking using Google's{' '}
           <a

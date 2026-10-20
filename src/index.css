@@ -471,6 +471,36 @@ p {
   100% { opacity: 0.85; filter: blur(10px); }
 }
 
+/* The pill titles and badges keep their gradient border and soft glow, but
+   the border no longer cycles and the glow no longer pulses forever. Eight
+   infinitely animating headings on one page read as busy, not premium, and
+   the blur() animation was repainting constantly. */
+.section-title::before,
+.section-title::after,
+.emergency-badge::before,
+.emergency-badge::after,
+.gallery-hero-badge::before,
+.gallery-hero-badge::after,
+.gallery-page-hero h1::before,
+.gallery-page-hero h1::after {
+  animation: none !important;
+}
+
+.section-title::before,
+.emergency-badge::before,
+.gallery-hero-badge::before,
+.gallery-page-hero h1::before {
+  background-position: 50% 50%;
+}
+
+.section-title::after,
+.emergency-badge::after,
+.gallery-hero-badge::after,
+.gallery-page-hero h1::after {
+  opacity: 0.55;
+  filter: blur(8px);
+}
+
 .section-subtitle {
   font-size: 1.1rem;
   color: var(--text-light);

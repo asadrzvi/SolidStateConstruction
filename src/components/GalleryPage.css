@@ -39,7 +39,8 @@
   background-size: auto min(60%, 230px);
   background-repeat: no-repeat;
   background-position: center center;
-  opacity: 0.06;
+  /* Was 0.06: the wordmark read through the subtitle text. */
+  opacity: 0.035;
   filter: none;
   pointer-events: none;
   z-index: 1;
@@ -174,11 +175,18 @@
 .gallery-page-hero .gallery-hero-subtitle { animation-delay: 340ms; }
 
 @keyframes gal-backdrop-in {
-  to { opacity: 0.06; transform: scale(1); }
+  to { opacity: 0.035; transform: scale(1); }
 }
 
 @keyframes gal-rise-in {
   to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+/* The watermark landed exactly under the subtitle at every width, so the
+   wordmark read through the copy. Hidden rather than faded further: at any
+   opacity where it was visible at all, it collided with the text. */
+.gallery-page-hero .gallery-hero-logo-bg {
+  display: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

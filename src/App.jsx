@@ -84,7 +84,7 @@ function App({ initialPage = 'home' }) {
       if (ogUrlMeta) ogUrlMeta.setAttribute('content', galleryUrl);
       if (twitterUrlMeta) twitterUrlMeta.setAttribute('content', galleryUrl);
       robotsMeta.setAttribute('content', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
-      document.title = 'Project Gallery | Solid State Construction - Leander & Austin TX';
+      document.title = 'Project Gallery | Solid State Construction, Leander TX';
     } else if (currentPage === 'thank-you') {
       const thankYouUrl = 'https://solidstatesconstruction.com/thank-you';
       canonicalLink.setAttribute('href', thankYouUrl);
@@ -95,7 +95,7 @@ function App({ initialPage = 'home' }) {
       canonicalLink.setAttribute('href', privacyUrl);
       if (ogUrlMeta) ogUrlMeta.setAttribute('content', privacyUrl);
       if (twitterUrlMeta) twitterUrlMeta.setAttribute('content', privacyUrl);
-      robotsMeta.setAttribute('content', 'index, follow');
+      robotsMeta.setAttribute('content', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
       document.title = 'Privacy Policy | Solid State Construction';
     } else {
       const homeUrl = 'https://solidstatesconstruction.com/';
@@ -103,7 +103,7 @@ function App({ initialPage = 'home' }) {
       if (ogUrlMeta) ogUrlMeta.setAttribute('content', homeUrl);
       if (twitterUrlMeta) twitterUrlMeta.setAttribute('content', homeUrl);
       robotsMeta.setAttribute('content', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
-      document.title = 'Plumber & Foundation Repair in Leander & Austin TX | Solid State Construction';
+      document.title = 'Solid State Construction | Plumbing & Concrete in Leander, TX';
     }
   }, [currentPage]);
 

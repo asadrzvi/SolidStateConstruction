@@ -27,6 +27,14 @@ function Navbar({ onOpenQuote, currentPage, onPageChange }) {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  // Escape closes the mobile drawer.
+  useEffect(() => {
+    if (!isMenuOpen) return;
+    const onKey = (e) => { if (e.key === 'Escape') setIsMenuOpen(false); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [isMenuOpen]);
+
   const handleBrandClick = () => {
     onPageChange('home');
     setIsMenuOpen(false);
@@ -51,17 +59,19 @@ function Navbar({ onOpenQuote, currentPage, onPageChange }) {
   return (
     <nav className="navbar">
       <div className="container">
-        <div className="nav-brand" onClick={handleBrandClick} style={{ cursor: 'pointer' }}>
-          <img 
-            src={isDark ? logoDark : logoLight} 
-            alt="Solid State Construction Logo" 
-            className="logo" 
+        <a href="/" className="nav-brand" onClick={(e) => { e.preventDefault(); handleBrandClick(); }} aria-label="Solid State Construction home">
+          <img
+            src={isDark ? logoDark : logoLight}
+            alt="Solid State Construction"
+            className="logo"
+            width="210"
+            height="211"
           />
-        </div>
-        
+        </a>
+
         <div className="nav-right">
-          <div className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
-            <a href="#about" onClick={(e) => handleLinkClick(e, 'home', 'about')} className={currentPage === 'home' ? 'active-tab' : ''}>
+          <div id="primary-nav" className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
+            <a href="#about" onClick={(e) => handleLinkClick(e, 'home', 'about')}>
               {t('navAbout')}
             </a>
             <a href="#services" onClick={(e) => handleLinkClick(e, 'home', 'services')}>
@@ -83,23 +93,40 @@ function Navbar({ onOpenQuote, currentPage, onPageChange }) {
               {t('navQuoteBtn')}
             </button>
             <a href="tel:512-595-2332" className="nav-phone">
-              <Phone size={18} />
+              <Phone size={18} aria-hidden="true" />
               {t('navPhone')}
             </a>
           </div>
-          
+
           <div className="nav-actions">
             {/* Language Switcher */}
-            <button className="lang-toggle-btn" onClick={toggleLanguage} title={language === 'en' ? 'Cambiar a Español' : 'Switch to English'}>
-              <Globe size={18} />
+            <button
+              className="lang-toggle-btn"
+              onClick={toggleLanguage}
+              title={language === 'en' ? 'Cambiar a Español' : 'Switch to English'}
+              aria-label={language === 'en' ? 'Cambiar a Español' : 'Switch to English'}
+            >
+              <Globe size={18} aria-hidden="true" />
               <span>{language === 'en' ? 'ESP' : 'ENG'}</span>
             </button>
-            
-            <button className="theme-toggle" onClick={toggleTheme} title="Toggle Dark Mode">
-              {isDark ? <Sun size={20} /> : <Moon size={20} />}
+
+            <button
+              className="theme-toggle"
+              onClick={toggleTheme}
+              title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+              aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+              aria-pressed={isDark}
+            >
+              {isDark ? <Sun size={20} aria-hidden="true" /> : <Moon size={20} aria-hidden="true" />}
             </button>
-            <button className="menu-toggle" onClick={toggleMenu}>
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            <button
+              className="menu-toggle"
+              onClick={toggleMenu}
+              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={isMenuOpen}
+              aria-controls="primary-nav"
+            >
+              {isMenuOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
             </button>
           </div>
         </div>

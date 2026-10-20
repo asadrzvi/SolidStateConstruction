@@ -62,7 +62,6 @@
 
 .ba-label {
   position: absolute;
-  bottom: 1.5rem;
   background: rgba(0, 0, 0, 0.7);
   color: #fff;
   padding: 0.5rem 1rem;
@@ -74,14 +73,29 @@
   backdrop-filter: blur(4px);
   pointer-events: none;
   z-index: 4;
+  max-width: 60%;
 }
 
+/* "After" is the clipped left half, so its label sits top-left; "Before" is
+   the full-width base, so its label sits bottom-right. Opposite corners keep
+   the two labels from colliding at the handle on narrow screens. */
 .ba-label-before {
-  left: 1.5rem;
+  right: 1rem;
+  bottom: 1rem;
+  text-align: right;
 }
 
 .ba-label-after {
-  right: 1.5rem;
+  left: 1rem;
+  top: 1rem;
+}
+
+@media (max-width: 600px) {
+  .ba-label {
+    font-size: 0.68rem;
+    padding: 0.35rem 0.6rem;
+    letter-spacing: 0.5px;
+  }
 }
 
 .ba-slider-handle-line {

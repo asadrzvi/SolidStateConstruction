@@ -12,7 +12,7 @@ function MapSection() {
     <section className="map-section" id="location">
       <div className="container">
         <h2 className="section-title">{t('mapTitle')}</h2>
-        <p className="section-subtitle">{t('navAbout') === 'About' ? 'Located in the heart of Leander, we serve the entire Cedar Park and North Austin metropolitan area.' : 'Ubicados en el corazón de Leander, servimos a toda el área metropolitana de Cedar Park y el norte de Austin.'}</p>
+        <p className="section-subtitle">{t('mapSubtitle')}</p>
         <div className="map-container">
           <iframe 
             src={standardEmbedUrl}
@@ -26,14 +26,14 @@ function MapSection() {
           ></iframe>
         </div>
         <div className="map-info">
-          <p><strong>{t('navAbout') === 'About' ? 'Location:' : 'Ubicación:'}</strong> Solid State Construction - Leander, TX</p>
-          <a 
-            href={mapsProfileUrl} 
-            target="_blank" 
-            rel="noopener noreferrer" 
+          <p><strong>{t('mapLocationLabel')}</strong> 1101 Halsey Drive, Leander, TX 78641</p>
+          <a
+            href={mapsProfileUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="btn btn-secondary"
           >
-            {t('navAbout') === 'About' ? 'View on Google Maps' : 'Ver en Google Maps'}
+            {t('mapViewBtn')}
           </a>
         </div>
       </div>

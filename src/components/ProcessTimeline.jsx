@@ -1,7 +1,23 @@
 import React, { useState } from 'react';
-import { PhoneCall, ShieldAlert, FileSearch, HardHat, Sparkles, RefreshCw, ArrowRight } from 'lucide-react';
+import { PhoneCall, ShieldAlert, FileSearch, HardHat, ClipboardCheck, RefreshCw, ArrowRight } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import './ProcessTimeline.css';
+
+const ICONS = [
+  <PhoneCall size={24} />,
+  <ShieldAlert size={24} />,
+  <FileSearch size={24} />,
+  <HardHat size={24} />,
+  <ClipboardCheck size={24} />
+];
+
+const SERVICE_KEYS = [
+  'Water Remediation',
+  'Emergency Services',
+  'Foundation Repair',
+  'Concrete & Foundation',
+  'General Contracting'
+];
 
 export default function ProcessTimeline({ onServiceSelect, onPrefillMessage, onOpenQuote }) {
   const { t } = useLanguage();
@@ -11,11 +27,18 @@ export default function ProcessTimeline({ onServiceSelect, onPrefillMessage, onO
     setFlippedCards((prev) => ({ ...prev, [idx]: !prev[idx] }));
   };
 
+  const handleCardKey = (e, idx) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleFlip(idx);
+    }
+  };
+
   const handleCtaClick = (e, step) => {
     e.stopPropagation();
     if (onServiceSelect) onServiceSelect(step.serviceKey);
     if (onPrefillMessage) onPrefillMessage(`Inquiry for ${step.title}: ${step.subtitle}`);
-    
+
     if (onOpenQuote) {
       onOpenQuote();
     } else {
@@ -26,99 +49,44 @@ export default function ProcessTimeline({ onServiceSelect, onPrefillMessage, onO
     }
   };
 
-  const steps = [
-    {
-      icon: <PhoneCall size={24} />,
-      title: t('processStep1Title') || "1. 24/7 Dispatch & Rapid Response",
-      subtitle: t('processStep1Sub') || "Emergency Callout within Leander & Austin Metro",
-      desc: t('processStep1Desc') || "When disaster strikes or emergency repair is needed, our technicians are on-site within 1 hour to immediately stabilize safety conditions.",
-      backTitle: "Rapid Emergency Protocols",
-      backSpecs: [
-        "⚡ 40-Minute Average On-Site Arrival",
-        "📞 Direct Line to Master Contractor Shaan",
-        "🛡️ Instant Safety & Water Containment"
-      ],
-      ctaText: "Call Dispatch Now",
-      serviceKey: "Water Remediation"
-    },
-    {
-      icon: <ShieldAlert size={24} />,
-      title: t('processStep2Title') || "2. Immediate Damage Containment",
-      subtitle: t('processStep2Sub') || "Mitigate Loss & Prevent Secondary Damage",
-      desc: t('processStep2Desc') || "We perform fast water extraction, set up commercial air dehumidifiers, and apply temporary board-up or roof tarps to secure the building envelope.",
-      backTitle: "Containment Systems",
-      backSpecs: [
-        "💧 Commercial Heavy-Duty Water Extraction",
-        "🌪️ Industrial Air Scrubbing & Dehumidification",
-        "🏗️ Temporary Roof Tarping & Enclosure"
-      ],
-      ctaText: "Get Emergency Help",
-      serviceKey: "Emergency Services"
-    },
-    {
-      icon: <FileSearch size={24} />,
-      title: t('processStep3Title') || "3. Structural Inspection & Planning",
-      subtitle: t('processStep3Sub') || "Precision Structural Evaluation",
-      desc: t('processStep3Desc') || "Under Shaan's leadership, we assess moisture deep in drywall, check foundation leveling, and issue a clear repair roadmap.",
-      backTitle: "Structural Diagnostics",
-      backSpecs: [
-        "📐 Laser Level Foundation Mapping",
-        "🔍 FLIR Thermal Moisture Scanning",
-        "📋 Direct Adjuster & Insurance Documentation"
-      ],
-      ctaText: "Request Inspection",
-      serviceKey: "Foundation Repair"
-    },
-    {
-      icon: <HardHat size={24} />,
-      title: t('processStep4Title') || "4. Precision Execution & Buildout",
-      subtitle: t('processStep4Sub') || "Certified Craftsmen & Legacy Materials",
-      desc: t('processStep4Desc') || "From pouring reinforced concrete slabs to installing custom trim and structural steel piers, our crew builds back stronger than before.",
-      backTitle: "Craftsmanship Guarantee",
-      backSpecs: [
-        "🧱 Grade-A Reinforced Rebar & Concrete",
-        "🔨 Master Carpentry & Drywall Finishing",
-        "⚖️ Structural Steel Pier Installation"
-      ],
-      ctaText: "View Project Specs",
-      serviceKey: "Concrete & Foundation"
-    },
-    {
-      icon: <Sparkles size={24} />,
-      title: t('processStep5Title') || "5. Final Walkthrough & Warranty",
-      subtitle: t('processStep5Sub') || "Complete Clean-Up & Warranty Handover",
-      desc: t('processStep5Desc') || "We conduct a room-by-room quality audit with you, ensure clean site turnover, and hand over your structural warranty documentation.",
-      backTitle: "Warranty & Guarantee",
-      backSpecs: [
-        "✨ 100% Spotless Site Cleanup",
-        "📜 Transferable Structural Warranty",
-        "🤝 Final Client Walkthrough Sign-Off"
-      ],
-      ctaText: "Start Your Project",
-      serviceKey: "General Contracting"
-    }
-  ];
+  // All copy comes from LanguageContext so the back of each card is translated
+  // along with the front. (Previously the back faces were English-only and used
+  // emoji as bullets.)
+  const steps = [1, 2, 3, 4, 5].map((n, i) => ({
+    icon: ICONS[i],
+    title: t(`processStep${n}Title`),
+    subtitle: t(`processStep${n}Sub`),
+    desc: t(`processStep${n}Desc`),
+    backTitle: t(`processBack${n}Title`),
+    backSpecs: [t(`processBack${n}Spec1`), t(`processBack${n}Spec2`), t(`processBack${n}Spec3`)],
+    ctaText: t(`processBack${n}Cta`),
+    serviceKey: SERVICE_KEYS[i]
+  }));
 
   return (
     <section className="process-section" id="process">
       <div className="container">
         <h2 className="section-title">{t('processTitle')}</h2>
         <p className="section-subtitle">{t('processSubtitle')}</p>
-        
+
         <div className="timeline-container">
           <div className="timeline-line"></div>
           {steps.map((step, idx) => {
             const isFlipped = !!flippedCards[idx];
             return (
               <div key={idx} className={`timeline-item ${idx % 2 === 0 ? 'left' : 'right'}`}>
-                <div className="timeline-dot">
+                <div className="timeline-dot" aria-hidden="true">
                   {step.icon}
                 </div>
 
-                {/* 3D Flip Card Container */}
-                <div 
+                {/* Flip card: front = the step, back = what it involves */}
+                <div
                   className={`timeline-card-wrapper ${isFlipped ? 'flipped' : ''}`}
                   onClick={() => toggleFlip(idx)}
+                  onKeyDown={(e) => handleCardKey(e, idx)}
+                  role="button"
+                  tabIndex={0}
+                  aria-pressed={isFlipped}
                 >
                   <div className="timeline-card-inner">
                     {/* Front Face */}
@@ -126,14 +94,14 @@ export default function ProcessTimeline({ onServiceSelect, onPrefillMessage, onO
                       <h3>{step.title}</h3>
                       <h4>{step.subtitle}</h4>
                       <p>{step.desc}</p>
-                      
+
                       <div className="flip-hint-pill">
-                        <RefreshCw size={14} className="spin-icon" /> Hover or Click to Flip ↷
+                        <RefreshCw size={14} aria-hidden="true" /> {t('processFlipHint')}
                       </div>
                     </div>
 
                     {/* Back Face */}
-                    <div className="timeline-card-face timeline-card-back">
+                    <div className="timeline-card-face timeline-card-back" aria-hidden={!isFlipped}>
                       <h3>{step.backTitle}</h3>
                       <ul className="back-specs-list">
                         {step.backSpecs.map((spec, sIdx) => (
@@ -141,12 +109,13 @@ export default function ProcessTimeline({ onServiceSelect, onPrefillMessage, onO
                         ))}
                       </ul>
                       <div className="flip-back-action">
-                        <button 
+                        <button
                           type="button"
                           className="btn btn-primary cta-flip-btn"
                           onClick={(e) => handleCtaClick(e, step)}
+                          tabIndex={isFlipped ? 0 : -1}
                         >
-                          {step.ctaText} <ArrowRight size={16} />
+                          {step.ctaText} <ArrowRight size={16} aria-hidden="true" />
                         </button>
                       </div>
                     </div>

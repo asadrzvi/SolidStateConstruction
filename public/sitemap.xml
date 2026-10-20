@@ -6,7 +6,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://solidstatesconstruction.com/</loc>
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.00</priority>
   </url>
@@ -16,8 +16,16 @@
        form here costs a hop and muddies the canonical signal. -->
   <url>
     <loc>https://solidstatesconstruction.com/gallery/</loc>
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
+  </url>
+  <!-- Privacy Policy (dist/privacy-policy/index.html). /thank-you is noindex
+       and deliberately left out. -->
+  <url>
+    <loc>https://solidstatesconstruction.com/privacy-policy/</loc>
+    <lastmod>2026-10-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.30</priority>
   </url>
 </urlset>

@@ -74,7 +74,7 @@ function SplitLogoSection() {
       <div className="container">
         <div className="split-logo-header">
           <span className="subtitle">
-            {t('navAbout') === 'About' ? 'LEGACY CRAFTSMANSHIP' : 'ARTESANÍA DE LEGADO'}
+            {t('splitEyebrow')}
           </span>
           <h2 className="section-title">
             {t('navAbout') === 'About' ? (
@@ -89,12 +89,12 @@ function SplitLogoSection() {
         <div className={`split-logo-wrapper ${isMerged ? 'is-merged' : ''}`}>
           {/* Top Split Half */}
           <div className="split-logo-half split-logo-top">
-            <img src={logoSrc} alt="Solid State Construction Top Half" className="split-logo-img" />
+            <img src={logoSrc} alt="Solid State Construction logo" className="split-logo-img" width="210" height="211" loading="lazy" />
           </div>
 
-          {/* Bottom Split Half */}
-          <div className="split-logo-half split-logo-bottom">
-            <img src={logoSrc} alt="Solid State Construction Bottom Half" className="split-logo-img" />
+          {/* Bottom Split Half (same image, clipped; hidden from assistive tech) */}
+          <div className="split-logo-half split-logo-bottom" aria-hidden="true">
+            <img src={logoSrc} alt="" className="split-logo-img" width="210" height="211" loading="lazy" />
           </div>
 
           {/* Black & Dark Monochrome Backdrop Glow */}
@@ -102,9 +102,7 @@ function SplitLogoSection() {
         </div>
 
         <p className="split-logo-caption">
-          {t('navAbout') === 'About' 
-            ? 'Serving Leander & Greater Austin with unyielding structural integrity.' 
-            : 'Sirviendo a Leander y al gran Austin con integridad estructural inquebrantable.'}
+          {t('splitCaption')}
         </p>
       </div>
     </section>

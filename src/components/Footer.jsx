@@ -6,10 +6,10 @@ import './Footer.css'
 function Footer({ onPageChange }) {
   const { t } = useLanguage();
 
-  const handlePrivacyClick = (e) => {
+  const handlePageLink = (e, page) => {
     if (onPageChange) {
       e.preventDefault();
-      onPageChange('privacy-policy');
+      onPageChange(page);
     }
   };
 
@@ -22,17 +22,17 @@ function Footer({ onPageChange }) {
             <p>{t('footTagline')}</p>
           </div>
           <div className="footer-contact">
-            <h4>{t('navAbout') === 'About' ? 'Contact Us' : 'Contáctenos'}</h4>
+            <h4>{t('footContactTitle')}</h4>
             <ul>
-              <li><MapPin size={18} /> 1101 Halsey Drive, Leander, TX 78641</li>
+              <li><MapPin size={18} aria-hidden="true" /> 1101 Halsey Drive, Leander, TX 78641</li>
               <li>
-                <a href="tel:512-595-2332" style={{ color: 'inherit', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
-                  <Phone size={18} /> (512) 595-2332
+                <a href="tel:512-595-2332" className="footer-link">
+                  <Phone size={18} aria-hidden="true" /> (512) 595-2332
                 </a>
               </li>
               <li>
-                <a href="mailto:contact@solidstatesconstruction.com" style={{ color: 'inherit', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
-                  <Mail size={18} /> contact@solidstatesconstruction.com
+                <a href="mailto:contact@solidstatesconstruction.com" className="footer-link">
+                  <Mail size={18} aria-hidden="true" /> contact@solidstatesconstruction.com
                 </a>
               </li>
             </ul>
@@ -41,7 +41,9 @@ function Footer({ onPageChange }) {
         <div className="footer-bottom">
           <p>&copy; {new Date().getFullYear()} Solid State Construction. {t('footRights')}</p>
           <p className="footer-legal-links">
-            <a href="/privacy-policy/" onClick={handlePrivacyClick}>Privacy Policy</a>
+            <a href="/gallery/" onClick={(e) => handlePageLink(e, 'gallery')}>{t('footGalleryLink')}</a>
+            <span aria-hidden="true"> &middot; </span>
+            <a href="/privacy-policy/" onClick={(e) => handlePageLink(e, 'privacy-policy')}>{t('footPrivacyLink')}</a>
           </p>
         </div>
       </div>

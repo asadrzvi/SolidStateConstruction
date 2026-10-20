@@ -1,6 +1,6 @@
 .footer {
   background-color: #1a1a1a;
-  color: white;
+  color: #ffffff;
   padding: 4rem 0 2rem 0;
 }
 
@@ -16,13 +16,24 @@
   margin-bottom: 3rem;
 }
 
+/* Headings inherit the page's dark text colour by default, which made them
+   invisible on the dark footer in light mode. */
+.footer h3,
+.footer h4 {
+  color: #ffffff;
+}
+
+.footer p {
+  color: rgba(255, 255, 255, 0.78);
+}
+
 .footer-info h3 {
   font-size: 1.5rem;
   margin-bottom: 1rem;
 }
 
 .footer-contact h4 {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 
 .footer-contact ul {
@@ -34,8 +45,27 @@
   display: flex;
   align-items: center;
   gap: 0.8rem;
-  margin-bottom: 1rem;
-  opacity: 0.8;
+  margin-bottom: 0.5rem;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.footer-contact li:first-child {
+  padding: 0.55rem 0;
+}
+
+/* 44px tap targets for the phone and email links. */
+.footer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  min-height: 44px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  color: #ffffff;
+  text-decoration: underline;
 }
 
 .footer-bottom {
@@ -43,7 +73,10 @@
   padding-top: 2rem;
   text-align: center;
   font-size: 0.9rem;
-  opacity: 0.6;
+}
+
+.footer-bottom p {
+  color: rgba(255, 255, 255, 0.72);
 }
 
 .footer-legal-links {
@@ -51,6 +84,29 @@
 }
 
 .footer-legal-links a {
-  color: inherit;
+  display: inline-block;
+  padding: 0.75rem 0.25rem;
+  color: rgba(255, 255, 255, 0.86);
   text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.footer-legal-links a:hover {
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 3rem 0 1.5rem 0;
+  }
+
+  .footer-grid {
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .footer-contact ul {
+    display: inline-block;
+    text-align: left;
+  }
 }

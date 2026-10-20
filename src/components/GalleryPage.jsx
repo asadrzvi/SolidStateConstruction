@@ -32,7 +32,7 @@ export default function GalleryPage() {
         <div className="gallery-hero-scrim"></div>
         <div className="gallery-hero-logo-bg"></div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <span className="gallery-hero-badge">Verified Construction Showcase &bull; Leander &amp; Austin TX</span>
+          <span className="gallery-hero-badge">{t('galHeroBadge')}</span>
           <h1>{t('galPageTitle')}</h1>
           <p className="gallery-hero-subtitle">{t('galPageSub')}</p>
         </div>

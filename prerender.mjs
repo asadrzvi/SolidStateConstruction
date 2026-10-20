@@ -32,20 +32,27 @@ const ORIGIN = 'https://solidstatesconstruction.com'
 
 const INDEXABLE = 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'
 
+const HOME_TITLE = 'Solid State Construction | Plumbing & Concrete in Leander, TX'
+const HOME_DESC = 'Leander, TX general contractor for 24/7 emergency plumbing, slab leak and foundation repair, concrete driveways and water damage restoration. Call (512) 595-2332.'
+
 // One entry per HTML file the build emits. `page` is what App.jsx switches on.
+// Keep `title` in step with the document.title values in App.jsx so the tab
+// title does not change when React hydrates.
 const ROUTES = [
   {
     page: 'home',
     file: 'dist/index.html',
     canonical: `${ORIGIN}/`,
-    title: 'Plumber & Foundation Repair in Leander & Austin TX | Solid State Construction',
+    title: HOME_TITLE,
+    description: HOME_DESC,
     robots: INDEXABLE,
   },
   {
     page: 'gallery',
     file: 'dist/gallery/index.html',
     canonical: `${ORIGIN}/gallery/`,
-    title: 'Project Gallery | Solid State Construction - Leander & Austin TX',
+    title: 'Project Gallery | Solid State Construction, Leander TX',
+    description: 'Photos and video from Solid State Construction jobs in Leander and North Austin: concrete driveways, slab formwork, remodels and a before-and-after yard.',
     robots: INDEXABLE,
   },
   {
@@ -53,6 +60,7 @@ const ROUTES = [
     file: 'dist/thank-you/index.html',
     canonical: `${ORIGIN}/thank-you`,
     title: 'Thank You | Solid State Construction',
+    description: 'Your request to Solid State Construction in Leander, TX has been received. We will be in touch within 24 hours.',
     robots: 'noindex, follow',
   },
   {
@@ -60,6 +68,7 @@ const ROUTES = [
     file: 'dist/privacy-policy/index.html',
     canonical: `${ORIGIN}/privacy-policy/`,
     title: 'Privacy Policy | Solid State Construction',
+    description: 'How Solid State Construction in Leander, TX collects and uses the information you submit through its contact and quote forms, and which analytics cookies it uses.',
     robots: INDEXABLE,
   },
   // GitHub Pages serves 404.html for unmatched paths with a 404 status, so it is
@@ -68,7 +77,8 @@ const ROUTES = [
     page: 'home',
     file: 'dist/404.html',
     canonical: `${ORIGIN}/`,
-    title: 'Plumber & Foundation Repair in Leander & Austin TX | Solid State Construction',
+    title: HOME_TITLE,
+    description: HOME_DESC,
     robots: 'noindex, follow',
   },
 ]
@@ -114,10 +124,15 @@ async function main() {
     html = html.replace('<div id="root"></div>', `<div id="root">${markup}</div>`)
     html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeHtml(route.title)}</title>`)
     html = setAttr(html, '<meta name="title"', 'content', route.title)
+    html = setAttr(html, '<meta name="description"', 'content', route.description)
     html = setAttr(html, '<meta name="robots"', 'content', route.robots)
     html = setAttr(html, '<link rel="canonical"', 'href', route.canonical)
     html = setAttr(html, '<meta property="og:url"', 'content', route.canonical)
+    html = setAttr(html, '<meta property="og:title"', 'content', route.title)
+    html = setAttr(html, '<meta property="og:description"', 'content', route.description)
     html = setAttr(html, '<meta property="twitter:url"', 'content', route.canonical)
+    html = setAttr(html, '<meta property="twitter:title"', 'content', route.title)
+    html = setAttr(html, '<meta property="twitter:description"', 'content', route.description)
 
     writeFileSync(file, html)
     console.log(`  ✓ ${route.file.padEnd(28)} ${(markup.length / 1024).toFixed(1)} KB of crawlable HTML`)

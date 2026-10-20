@@ -79,14 +79,14 @@ function Hero({ onOpenQuote }) {
           {/* Left Column: Headlines & CTAs */}
           <div className="hero-content-col">
             <div className="emergency-badge">
-              <Droplets className="emergency-icon" />
+              <Droplets className="emergency-icon" aria-hidden="true" />
               <span>{t('heroBadge')}</span>
             </div>
             <h1>{t('heroTitle')}</h1>
             <p className="hero-subtitle">{t('heroSubtitle')}</p>
             <div className="hero-cta">
               <a href="tel:512-595-2332" className="btn btn-primary">
-                <Phone size={20} />
+                <Phone size={20} aria-hidden="true" />
                 {t('heroCallCta')}
               </a>
               <button onClick={onOpenQuote} className="btn btn-secondary">
@@ -99,8 +99,8 @@ function Hero({ onOpenQuote }) {
           <div className="hero-video-col">
             <div className="hero-video-card">
               <div className="video-card-badge">
-                <Video size={16} />
-                <span>LIVE FIELD WORK &bull; LEANDER TX</span>
+                <Video size={16} aria-hidden="true" />
+                <span>{t('heroVideoBadge')}</span>
               </div>
               <div className="video-wrapper">
                 <video

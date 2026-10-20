@@ -18,13 +18,15 @@
 .nav-brand {
   display: flex;
   align-items: center;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .logo {
   height: 60px;
   width: auto;
   display: block;
-  transition: filter 0.3s ease, transform 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
 .logo:hover {
@@ -41,7 +43,11 @@
   gap: 1.5rem;
 }
 
+/* Sits above the mobile drawer (z-index 999) so the X button stays tappable
+   while the menu is open. Before this the open drawer covered the toggle. */
 .nav-actions {
+  position: relative;
+  z-index: 1001;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -95,6 +101,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
   padding: 10px;
   border-radius: 50%;
   transition: background 0.2s;
@@ -148,10 +156,15 @@
     border-bottom: 1px solid var(--secondary);
   }
 
+  .nav-links .quote-btn {
+    margin-top: 1.5rem;
+    width: 100%;
+  }
+
   .nav-phone {
     width: 100%;
     justify-content: center;
-    margin-top: 1.5rem;
+    margin-top: 0.75rem;
     font-size: 1.1rem;
   }
 }
@@ -165,7 +178,8 @@
   display: flex;
   align-items: center;
   gap: 0.35rem;
-  padding: 0.4rem 0.8rem;
+  min-height: 44px;
+  padding: 0.4rem 0.9rem;
   font-size: 0.8rem;
   font-weight: 700;
   transition: background 0.2s, border-color 0.2s;
